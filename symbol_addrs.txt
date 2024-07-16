@@ -1,0 +1,2 @@
+alCSPGetChlVol = 0x8006CFF0;
+alCSPGetChlFXMix = 0x8006D010;

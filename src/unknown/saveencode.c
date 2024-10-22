@@ -10,17 +10,17 @@ extern u8 D_800CD0C0[];
 
 void func_8004F83C_5043C(s32);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F290_4FE90);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F290_4FE90);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F504_50104);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F504_50104);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F524_50124);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F524_50124);
 
-INCLUDE_ASM(s32, "unknown/4FE90", SavePlayerStruct);
+INCLUDE_ASM(s32, "unknown/saveencode", SavePlayerStruct);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F564_50164);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F564_50164);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F584_50184);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F584_50184);
 
 s32 SaveFileEncode(s32 arg0, u8* arg1) {
     s32 phi_s0;
@@ -92,16 +92,16 @@ void func_8004F83C_5043C(s32 arg0) {
     }
 }
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F8BC_504BC);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F8BC_504BC);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F90C_5050C);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F90C_5050C);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F95C_5055C);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F95C_5055C);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F9AC_505AC);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F9AC_505AC);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004F9FC_505FC);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004F9FC_505FC);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004FA4C_5064C);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004FA4C_5064C);
 
-INCLUDE_ASM(s32, "unknown/4FE90", func_8004FC84_50884);
+INCLUDE_ASM(s32, "unknown/saveencode", func_8004FC84_50884);

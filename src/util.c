@@ -84,10 +84,10 @@ void func_8000B1A0_BDA0(s32 arg0, u8 sectionFlags) {
     bss_end = _modeovltbl[arg0].bssVramEnd;
     textStart = _modeovltbl[arg0].vramStart;
     if (sectionFlags & HAS_TEXT_SECTION) {
-        HuRomDmaCodeRead(romStart, textStart, textVramEnd - textVramStart);
+        dmaReadOvl(romStart, textStart, textVramEnd - textVramStart);
     }
     if (sectionFlags & HAS_DATA_SECTION) {
-        HuRomDmaCodeRead(romStart + (textVramEnd - textVramStart), dataVramStart, dataVramEnd - dataVramStart);
+        dmaReadOvl(romStart + (textVramEnd - textVramStart), dataVramStart, dataVramEnd - dataVramStart);
     }
     if (sectionFlags & HAS_BSS_SECTION) {
         curBssAddr = tmp = bss_start;
@@ -111,7 +111,7 @@ void OvlLoad(s32 overlayIndex) {
     bss_start = _ovltbl[overlayIndex].bssVramStart;
     bss_end = _ovltbl[overlayIndex].bssVramEnd;
 
-    HuRomDmaCodeRead(rom_start, _ovltbl[overlayIndex].vramStart, rom_end - rom_start);
+    dmaReadOvl(rom_start, _ovltbl[overlayIndex].vramStart, rom_end - rom_start);
 
     curBssAddr = bss_start;
     while (bss_start < bss_end) {

@@ -7,7 +7,7 @@ void func_801059D0_3D8AC0(void) {
     D_800CDD58 = 1;
     D_800D037C = 0;
     omPrcSetStatBit(HuPrcCurrentGet(), 0x80);
-    func_80100CEC(gPlayers[gCurrentPlayerIndex].controller);
+    func_80100CEC(GwPlayer[gCurrentPlayerIndex].controller);
     omPrcResetStatBit(HuPrcCurrentGet(), 0x80);
     D_800CDD58 = 0;
     D_800D037C = 1;
@@ -37,7 +37,7 @@ void func_80105B10_3D8C00(void) {
 }
 
 void func_80105B64_3D8C54(void) {
-    D_800CD058.current_board_index = 0;
+    GwSystem.current_board_index = 0;
     omInitObjMan(0xA, 0);
     omOvlGotoEx(0x5A, 0, 0x4190);
 }
@@ -53,10 +53,10 @@ void func_80105B9C_3D8C8C(void) {
     func_800ECD0C(0, sp10, sp11);
     func_800E9F4C(0x1B, &sp10, &sp11);
     func_800ECD0C(1, sp10, sp11);
-    gPlayers[0].unk1ChainIndex = -1;
-    gPlayers[0].unk1SpaceIndex = -1;
-    gPlayers[1].unk1ChainIndex = -1;
-    gPlayers[1].unk1SpaceIndex = -1;
+    GwPlayer[0].unk1ChainIndex = -1;
+    GwPlayer[0].unk1SpaceIndex = -1;
+    GwPlayer[1].unk1ChainIndex = -1;
+    GwPlayer[1].unk1SpaceIndex = -1;
     func_800E9D9C();
     func_800E9564();
     D_800CD0B0.unk_04 = 5;

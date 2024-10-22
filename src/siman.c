@@ -5,18 +5,18 @@
 
 
 // TODO: find SI thread stack size
-void func_80051750_52350(void) {
+void InitSI(void) {
     D_800BD7B0 = 0;
     D_800BD7B4 = 0;
     osCreateMesgQueue(&D_800CE1A0, &D_800BCD00, 32);
     osSetEventMesg(OS_EVENT_SI, &D_800CE1A0, (OSMesg)32);
     osCreateMesgQueue(&D_800D1220, &D_800BCD80, 32);
-    osCreateThread(&D_800BCE00, 0x14, func_80051A44_52644, NULL, &D_800BD7B0, HOS_PRIORITY_SIMGR);
+    osCreateThread(&D_800BCE00, 0x14, SIProc, NULL, &D_800BD7B0, HOS_PRIORITY_SIMGR);
     osStartThread(&D_800BCE00);
 }
 
 
-functionListEntry ** func_800517F4_523F4(functionListEntry* entry) {
+functionListEntry ** GetSIClientListTable(functionListEntry* entry) {
     switch (entry->type) {
     case 0:
         return &D_800BD7B0;
@@ -29,12 +29,12 @@ functionListEntry ** func_800517F4_523F4(functionListEntry* entry) {
 
 
 /* Function Linked List Insertion */
-s32 func_8005182C_5242C(functionListEntry* node) {
+s32 _AddSIClient(functionListEntry* node) {
     functionListEntry* pYoungest;
     functionListEntry* child;
 
     // Add node as youngest child of a linked list
-    pYoungest = (functionListEntry*) func_800517F4_523F4(node);
+    pYoungest = (functionListEntry*) GetSIClientListTable(node);
     child = pYoungest->child;
     if (child != NULL) {
         pYoungest = child;
@@ -50,12 +50,12 @@ s32 func_8005182C_5242C(functionListEntry* node) {
 }
 
 
-void func_8005188C_5248C(functionListEntry* entry, s16 type, void* func) {
+void AddSIClient(functionListEntry* entry, s16 type, void* func) {
     OSMesg msgBuffer;
     OSMesgQueue mq;
     unkMesg msgOut;
 
-    msgOut.func = (HuSiFunc)&func_8005182C_5242C;
+    msgOut.func = (HuSiFunc)&_AddSIClient;
     msgOut.arg = entry;
     msgOut.recvQueue = &mq;
     entry->func = func;
@@ -68,12 +68,12 @@ void func_8005188C_5248C(functionListEntry* entry, s16 type, void* func) {
 
 
 /* Function Linked List Deletion */
-s32 func_800518FC_524FC(functionListEntry* arg0) {
+s32 _RemoveSIClient(functionListEntry* arg0) {
     functionListEntry* var_v0;
     functionListEntry* var_v1;
     functionListEntry** root;
 
-    root = func_800517F4_523F4(arg0);
+    root = GetSIClientListTable(arg0);
     var_v0 = *root;
     var_v1 = NULL;
     // Search until the end of the list
@@ -96,12 +96,12 @@ s32 func_800518FC_524FC(functionListEntry* arg0) {
 }
 
 
-void func_80051968_52568(void *entry) {
+void RemoveSIClient(void *entry) {
     OSMesg msgBuffer;
     OSMesgQueue mq;
     unkMesg msgOut;
 
-    msgOut.func = (HuSiFunc)&func_800518FC_524FC;
+    msgOut.func = (HuSiFunc)&_RemoveSIClient;
     msgOut.arg = entry;
     msgOut.recvQueue = &mq;
     
@@ -112,7 +112,7 @@ void func_80051968_52568(void *entry) {
 
 
 /* Do all functions in functionList of type "type" */
-void func_800519D0_525D0(s16 type) {
+void CallSIClient(s16 type) {
     functionListEntry* funcList;
 
     funcList = NULL;
@@ -136,19 +136,19 @@ void func_800519D0_525D0(s16 type) {
 /* Wait for message to do all functions in a global function list
 * or to run custom functions?
  */
-void func_80051A44_52644(void* arg0) {
+void SIProc(void* arg0) {
     unkMesgWrapper msgWrapper;
 
-    func_800511C4_51DC4(&msgWrapper, &D_800D1220, 3);
+    AddSchedulerClient(&msgWrapper, &D_800D1220, 3);
 
     while (TRUE) {
         osRecvMesg(&D_800D1220, (OSMesg*) &msgWrapper.unkMsg, OS_MESG_BLOCK);       
         switch ((s32) msgWrapper.unkMsg) {
             case 1:
-                func_800519D0_525D0((s16) 0);
+                CallSIClient((s16) 0);
                 break;
             case 2:
-                func_800519D0_525D0((s16) 1);
+                CallSIClient((s16) 1);
                 break;
             default:
             {
@@ -164,7 +164,7 @@ void func_80051A44_52644(void* arg0) {
 }
 
 
-s32 func_80051B0C_5270C(unkMesg* siMessg, HuSiFunc func, void* arg, s32 type) 
+s32 RequestSIFunction(unkMesg* siMessg, HuSiFunc func, void* arg, s32 type) 
 {
     OSMesgQueue msgQueue;
     OSMesg tmpMsg;

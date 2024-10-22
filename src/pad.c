@@ -2,7 +2,7 @@
 #include "siman.h"
 #include "pad.h"
 
-s32 HuPadInit(u16* channel)
+s32 _InitController(u16* channel)
 {
     OSContStatus contStat[MAXCONTROLLERS];    // sp10
     u8 pattern;                               // sp20
@@ -41,18 +41,18 @@ s32 HuPadInit(u16* channel)
     return 0;
 }
 
-s16 func_80008F3C_9B3C(s16 ch, s32 arg1)
+s16 InitController(s16 ch, s32 arg1)
 {
     unkMesg siMesg;
-    func_80051B0C_5270C(&siMesg, (HuSiFunc)&HuPadInit, &ch, 1);
+    RequestSIFunction(&siMesg, (HuSiFunc)&_InitController, &ch, 1);
     
     D_800ABF9C = 0;
     
     if (arg1 & 1) {
-        func_800097D4_A3D4();
+        SetAutoReadController();
     }
     
-    func_8000914C_9D4C(0x46, 0x46);
+    SetStickValueLimit(0x46, 0x46);
     osCreateMesgQueue(&D_800ABFA0, &D_800ABFB8, 1);
     osSendMesg(&D_800ABFA0, 0, 1);
     
@@ -60,7 +60,7 @@ s16 func_80008F3C_9B3C(s16 ch, s32 arg1)
 }
 
 // arg0 never used?
-s32 func_80008FD4_9BD4(s32 arg0)
+s32 _ReadController(s32 arg0)
 {
     osRecvMesg(&D_800ABFA0, 0, 1);
     
@@ -83,14 +83,14 @@ s32 func_80008FD4_9BD4(s32 arg0)
     return 0;
 }
 
-INCLUDE_ASM(s32, "pad", func_800090D4_9CD4);
+INCLUDE_ASM(s32, "pad", ReadController);
 
-void func_8000914C_9D4C(s8 arg0, s8 arg1) {
+void SetStickValueLimit(s8 arg0, s8 arg1) {
     D_800ABF8E = arg0;
     D_800ABF8F = arg1;
 }
 
-s16 func_80009160_9D60(void)
+s16 UpdateController(void)
 {
     s16 i;
     s16 temp_s0;
@@ -156,27 +156,27 @@ s16 func_80009160_9D60(void)
     return temp_s0;
 }
 
-INCLUDE_ASM(s32, "pad", func_800094E4_A0E4);
+INCLUDE_ASM(s32, "pad", FlushController);
 
-void func_800097B8_A3B8(void) {
-    func_80008FD4_9BD4(0);
+void _AutoReadController(void) {
+    _ReadController(0);
 }
 
-void func_800097D4_A3D4(void) {
+void SetAutoReadController(void) {
     if (D_800ABF9C != 0) {
-        func_80009824_A424();
+        ResetAutoReadController();
     }
-    func_8005188C_5248C(&D_800ABF90, 0, &func_800097B8_A3B8);
+    AddSIClient(&D_800ABF90, 0, &_AutoReadController);
     D_800ABF9C = 1;
 }
 
-void func_80009824_A424(void) {
+void ResetAutoReadController(void) {
     if (D_800ABF9C != 0) {
-        func_80051968_52568(&D_800ABF90);
+        RemoveSIClient(&D_800ABF90);
     }
     D_800ABF9C = 0;
 }
 
-s32 HuGetPadInserted(s16 padNum) {
+s32 CheckControllerRead(s16 padNum) {
     return D_800ABF8A[padNum];
 }

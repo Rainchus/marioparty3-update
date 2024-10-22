@@ -38,14 +38,14 @@ extern s8 D_800ABF8F;
 
 extern s8 D_800ABF86[];
 
-s32 HuPadInit(u16* channel);
-s16 func_80008F3C_9B3C(s16 ch, s32 arg1);
-s32 func_80008FD4_9BD4(s32 arg0);
-void func_8000914C_9D4C(s8 arg0, s8 arg1);
-s16 func_80009160_9D60(void);
-void func_800097B8_A3B8(void);
-void func_800097D4_A3D4(void);
-void func_80009824_A424(void);
-s32 HuGetPadInserted(s16 padNum);
+s32 _InitController(u16* channel);
+s16 InitController(s16 ch, s32 arg1);
+s32 _ReadController(s32 arg0);
+void SetStickValueLimit(s8 arg0, s8 arg1);
+s16 UpdateController(void);
+void _AutoReadController(void);
+void SetAutoReadController(void);
+void ResetAutoReadController(void);
+s32 CheckControllerRead(s16 padNum);
 
 #endif

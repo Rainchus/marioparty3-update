@@ -1,10 +1,10 @@
 #include "common.h"
 #include "obj.h"
 
-void func_80035EF4_36AF4(s32);
-void func_80035F44_36B44(s32);
-s32 _CheckFlag(s32);
-void func_80035F44_36B44(s32);
+void _SetFlag(s32);
+void _ClearFlag(s32);
+s32 GWBoardFlagCheck(s32);
+void _ClearFlag(s32);
 void func_800ECF9C_100BBC(s8);
 void func_800F8610_10C230(s32, s32, s32);
 void func_800F8D84_10C9A4();
@@ -23,8 +23,8 @@ INCLUDE_ASM(s32, "overlays/shared_board/10C230", func_800F8610_10C230);
 void func_800F86B4_10C2D4(void) {
     D_800CD2A2 = 1;
     D_800D6B60 = 0;
-    if (_CheckFlag(1) == 0) {
-        if ((D_800CD058.current_board_index != 6) && (func_800F8610_10C230(-2, 4, 0x192), (D_800CD058.current_board_index != 6))) {
+    if (GWBoardFlagCheck(1) == 0) {
+        if ((GwSystem.current_board_index != 6) && (func_800F8610_10C230(-2, 4, 0x192), (GwSystem.current_board_index != 6))) {
             func_800F8610_10C230(0x53, 0, 0x192);
         } else {
             func_800F8610_10C230(0x54, 0, 0x192);
@@ -33,8 +33,8 @@ void func_800F86B4_10C2D4(void) {
         func_800F8610_10C230(-2, 1, 0x192);
     }
     func_800F8D84_10C9A4();
-    func_800ECF9C_100BBC(D_800CD058.unk14);
-    func_80035F44_36B44(0xC);
+    func_800ECF9C_100BBC(GwSystem.unk14);
+    _ClearFlag(0xC);
     D_800D6A48 = 0;
 }
 
@@ -49,13 +49,13 @@ void func_800F8774_10C394(void) {
     }
     if (D_800CD2A2 != 0) {
         D_800D4196 = 0;
-        omOvlCallEx(D_80101B40_115760[D_800CD058.current_board_index], 2, 0x192U);
+        omOvlCallEx(D_80101B40_115760[GwSystem.current_board_index], 2, 0x192U);
         return;
     }
     if (D_800D6A48 != 0) {
-        func_80035EF4_36AF4(0xC);
+        _SetFlag(0xC);
     } else {
-        func_80035F44_36B44(0xC);
+        _ClearFlag(0xC);
     }
     omOvlReturnEx(1);
 }
@@ -155,12 +155,12 @@ extern s16 gPrevStarBlockIndexes[];
 extern s16 gPrevItemBlockIndexes[];
 
 s16 func_800EBCD4_FF8F4(u8);
-s32 _CheckFlag(s32 input);
+s32 GWBoardFlagCheck(s32 input);
 
 void func_800FC594_1101B4(void) {
     s32 i;
 
-    if (_CheckFlag(0xF) != 0) {
+    if (GWBoardFlagCheck(0xF) != 0) {
         while (gCoinBlockSpaceIndex == -1 || gCoinBlockSpaceIndex == gStarBlockSpaceIndex || gCoinBlockSpaceIndex == gItemBlockSpaceIndex) {
             gCoinBlockSpaceIndex = func_800EBCD4_FF8F4(D_800D03FC);
             D_800D03FC += 1;

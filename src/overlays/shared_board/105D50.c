@@ -11,7 +11,7 @@ PlayerData* GetPlayerStruct(s32 playerIndex) {
     if (playerIndex < 0) {
         playerIndex = GetCurrentPlayerIndex();
     }
-    return &gPlayers[playerIndex];
+    return &GwPlayer[playerIndex];
 }
 
 s32 func_800F217C_105D9C(s16 arg0) {

@@ -161,7 +161,7 @@ typedef struct omOvlHisData { //Object Manager History Data
 /* 0x06 */ u16 stat;
 } omOvlHisData; //sizeof 0x08
 
-typedef struct GameStatus { //from partyplanner
+typedef struct GW_SYSTEM { //from partyplanner
     /* 0x00 - 800CD058 */ s8 unk0;
     /* 0x01 - 800CD059 */ s8 current_board_index;
     /* 0x02 - 800CD05A */ s8 total_turns;
@@ -179,8 +179,9 @@ typedef struct GameStatus { //from partyplanner
     /* 0x14 - 800CD06C */ s8 unk14;
     /* 0x15 - 800CD06D */ s8 unk15;
     /* 0x16 - 800CD06E */ s8 unk16;
+    /* 0x17 - 800CD06F */ char unk_17[0x4B];
     // 800cd09c flag for re-roll
-} GameStatus;
+} GW_SYSTEM;
 
 typedef struct RectF {
 /* 0x00 */ f32 x1;

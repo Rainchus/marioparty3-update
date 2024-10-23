@@ -3,7 +3,7 @@
 
 // -----------------------------------------------------------------
 
-void func_80009880_A480(void)
+void ContDataInit(void)
 {
     s16 i;
     for (i = 0; i < MAXCONTROLLERS; ++i) {
@@ -17,7 +17,7 @@ void func_80009880_A480(void)
 
 // -----------------------------------------------------------------
 
-void func_800098FC_A4FC(void)
+void ContDataUpdate(void)
 {
     s16 i;
     s32 temp_v0_3;

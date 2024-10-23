@@ -11,7 +11,7 @@ typedef struct unkfunc_8001AFD8 {
 } unkfunc_8001AFD8;
 
 typedef struct unkfunc_8007EE0C {
-    void* GetEepTypeFunc; //func pointer
+    void* _InitEepromFunc; //func pointer
     unkfunc_8001AFD8* unk4; //is this correct?
     s32 unk8;
     OSMesgQueue* mesgQueue;
@@ -31,12 +31,12 @@ extern u8 D_800AC7F0;
 extern u8 D_800AC7F1;
 s32 func_8000C9C8_D5C8(s8);
 extern u8 D_800D0E50[];
-void func_8000CA64_D664(void);
+void ClearCommonBuf(void);
 //some kind of osEepromLongWrite wrapper?
-s32 func_8000CB30_D730(OSMesgQueue* arg0, u8 arg1, u8* arg2, s32 arg3);
-s32 func_80051B0C_5270C(unkfunc_8007EE0C* arg0, void* GetEepType, UnkEep** arg2, s32 arg3);
+s32 WriteEeprom(OSMesgQueue* arg0, u8 arg1, u8* arg2, s32 arg3);
+s32 RequestSIFunction(unkfunc_8007EE0C* arg0, void* _InitEeprom, UnkEep** arg2, s32 arg3);
 
-s32 GetEepType(s8** arg0) {
+s32 _InitEeprom(s8** arg0) {
     s16 eepromProbeResult;
     s32 var_s1;
     s16 i;
@@ -76,8 +76,8 @@ s32 GetEepType(s8** arg0) {
                     D_800D0E50[i] = D_80097710_98310[i];
                 }
                 
-                func_8000CA64_D664();
-                func_8000CB30_D730(&D_800CE1A0, 1, D_800D0450, 0x18);
+                ClearCommonBuf();
+                WriteEeprom(&D_800CE1A0, 1, D_800D0450, 0x18);
                 
                 for (i = 0; i < 3; i++) {
                     if (func_8000C9C8_D5C8(i)) {
@@ -89,7 +89,7 @@ s32 GetEepType(s8** arg0) {
                     D_800D0E50[i] = D_80097710_98310[i];
                 }
                 
-                if (func_8000CB30_D730(&D_800CE1A0, 0, D_800D0E50, 8) == 0) {
+                if (WriteEeprom(&D_800CE1A0, 0, D_800D0E50, 8) == 0) {
                     **arg0 = var_s1;
                     return 0;
                 }
@@ -105,40 +105,40 @@ s32 GetEepType(s8** arg0) {
     return 0;
 }
 
-s32 func_8000C4AC_D0AC(unkfunc_8001AFD8* arg0) {
+s32 InitEeprom(unkfunc_8001AFD8* arg0) {
     unkfunc_8007EE0C sp10;
     unkfunc_8001AFD8* sp20 = arg0; //?
 
-    return func_80051B0C_5270C(&sp10, &GetEepType, &sp20, 1);
+    return RequestSIFunction(&sp10, &_InitEeprom, &sp20, 1);
 }
 
-INCLUDE_ASM(s32, "eeprom", func_8000C4DC_D0DC);
+INCLUDE_ASM(s32, "eeprom", _WriteEeprom);
 
-INCLUDE_ASM(s32, "eeprom", func_8000C538_D138);
+INCLUDE_ASM(s32, "eeprom", WriteEepromBox2);
 
-INCLUDE_ASM(s32, "eeprom", func_8000C638_D238);
+INCLUDE_ASM(s32, "eeprom", WriteEepromBox);
 
 INCLUDE_ASM(s32, "eeprom", func_8000C6C0_D2C0);
 
-INCLUDE_ASM(s32, "eeprom", func_8000C7A0_D3A0);
+INCLUDE_ASM(s32, "eeprom", _ReadEeprom);
 
-INCLUDE_ASM(s32, "eeprom", func_8000C7F4_D3F4);
+INCLUDE_ASM(s32, "eeprom", ReadEepromBox);
 
-INCLUDE_ASM(s32, "eeprom", func_8000C8F0_D4F0);
+INCLUDE_ASM(s32, "eeprom", WriteEepromCommonBuf);
 
-INCLUDE_ASM(s32, "eeprom", func_8000C954_D554);
+INCLUDE_ASM(s32, "eeprom", ReadEepromCommonBuf);
 
 INCLUDE_ASM(s32, "eeprom", func_8000C9C8_D5C8);
 
-INCLUDE_ASM(s32, "eeprom", func_8000CA3C_D63C);
+INCLUDE_ASM(s32, "eeprom", ClearBoxBuf);
 
-INCLUDE_ASM(s32, "eeprom", func_8000CA64_D664);
+INCLUDE_ASM(s32, "eeprom", ClearCommonBuf);
 
-INCLUDE_ASM(s32, "eeprom", func_8000CA8C_D68C);
+INCLUDE_ASM(s32, "eeprom", _DestroyEeprom);
 
-INCLUDE_ASM(s32, "eeprom", func_8000CAC0_D6C0);
+INCLUDE_ASM(s32, "eeprom", DestroyEeprom);
 
-u16 GetSaveFileChecksum(u8* data, u16 startIndex, u16 size) {
+u16 CalcChecksumEeprom(u8* data, u16 startIndex, u16 size) {
     u16 checksum = 0;
     u16 remainingBytes = size - 1;
 
@@ -151,7 +151,7 @@ u16 GetSaveFileChecksum(u8* data, u16 startIndex, u16 size) {
     return ~checksum;
 }
 
-s32 func_8000CB30_D730(OSMesgQueue* arg0, u8 arg1, u8* arg2, s32 arg3) {
+s32 WriteEeprom(OSMesgQueue* arg0, u8 arg1, u8* arg2, s32 arg3) {
     UnkEepStruct sp10;
 
     osEepromLongRead(arg0, (arg1 ^ 1), (u8*)&sp10, 8);

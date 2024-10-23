@@ -15,13 +15,13 @@ void HuInitArchive(u8* fsRomPtr)
     gArchiveRomAddr = fsRomPtr;
     archiveHeader = &gArchive;
 
-    HuRomDmaRead(fsRomPtr, (u8*)archiveHeader, 16);
+    dmaRead(fsRomPtr, (u8*)archiveHeader, 16);
 
     gArchiveDirCount = archiveHeader->count;
     dirTblSize = archiveHeader->count * 4;
     gArchiveTblAddr = (s32 *)HuMemMemoryAllocPerm(dirTblSize);
 
-    HuRomDmaRead((u8*)fsRomPtr + 4, (u8*)gArchiveTblAddr, dirTblSize);
+    dmaRead((u8*)fsRomPtr + 4, (u8*)gArchiveTblAddr, dirTblSize);
 
     gArchiveRomAddrCopy = gArchiveRomAddr;
     gArchiveDirCountCopy = gArchiveDirCount;
@@ -44,7 +44,7 @@ void HuInitFileInfo(EArchiveType type, s32 index, HuFileInfo* info)
             break;
     }
 
-    HuRomDmaRead(info->bytes, (u8*)archiveHeader, 16);
+    dmaRead(info->bytes, (u8*)archiveHeader, 16);
 
     info->bytes += 8;
     info->size = archiveHeader->count;
@@ -213,13 +213,13 @@ void HuInitDirectory(EArchiveType type, s32 dir)
         gArchiveRomAddrCopy = info.tablePtr;
         
         fsHeader = &gArchive;
-        HuRomDmaRead(gArchiveRomAddrCopy, (u8*)fsHeader, 16);
+        dmaRead(gArchiveRomAddrCopy, (u8*)fsHeader, 16);
         
         gArchiveDirCountCopy = gArchive.count;
         dirCount = gArchiveDirCountCopy * 4;
         gArchiveTblAddrCopy = HuMemMemoryAllocPerm(dirCount);
 
-        HuRomDmaRead((info.tablePtr + 4), (u8*)gArchiveTblAddrCopy, dirCount);
+        dmaRead((info.tablePtr + 4), (u8*)gArchiveTblAddrCopy, dirCount);
     }
 }
 
@@ -274,7 +274,7 @@ s32 func_8000A028_AC28(HuFileInfoD * info)
     
     if (info->unkC != 0) {
         info->unkC = 0;
-        HuRomDmaRead(info->bytesCopy, info->block, 0x400);
+        dmaRead(info->bytesCopy, info->block, 0x400);
     }
     
     return info->block[info->unkE++];

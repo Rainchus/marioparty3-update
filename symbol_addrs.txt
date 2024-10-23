@@ -48,11 +48,6 @@ omDestroyPrcObj = 0x80048054; //rom:0x48C54
 omPrcSetDestructor = 0x800480E4; //rom:0x48CE4
 omInsertObj = 0x80047898;
 
-SetCurrentBoardIndex = 0x80035C84; //rom:0x36884
-
-
-HuSaveSetPadIsInserted = 0x80036080;
-
 HuMemHeapInit = 0x800360D0;
 HuMemMemoryAlloc = 0x800360F0;
 HuMemMemoryFree = 0x80036188;
@@ -74,10 +69,6 @@ HuMemMemoryFreeTemp = 0x80035958;
 HuMemMemoryReallocTemp = 0x80035974;
 HuMemHeapAllocTempSizeGet = 0x800359A0;
 HuMemUsedMemoryBlockGetTemp = 0x800359C0;
-
-HuStartDma = 0x8004D9F8;
-HuRomDmaRead = 0x8004DA40;
-HuRomDmaCodeRead = 0x8004DB14;
 
 
 HuInitArchive = 0x80009AC0;
@@ -101,8 +92,6 @@ HuDecode = 0x8000B000;
 
 rand8 = 0x8000B16C;
 
-HuPadInit = 0x80008DD0;
-
 HuPrcSysInit = 0x8004EB20;
 HuPrcLink = 0x8004EB34;
 HuPrcUnlink = 0x8004EBC8;
@@ -124,8 +113,6 @@ HuPrcCurrentDtor = 0x8004F0A0;
 HuPrcCall = 0x8004F0D0;
 HuPrcAllocMem = 0x8004F23C;
 HuPrcFreeMem = 0x8004F26C;
-
-HuGetPadInserted = 0x8000985C;
 
 HuMathCos = 0x8008E3F0;
 HuMathSin = 0x8008EF20;
@@ -499,9 +486,6 @@ HuVecDistance = 0x80089D60;
 HuVecDot3F = 0x80089DB0;
 HuVecCross = 0x80089DE0;
 HuVecIsEqual = 0x80089E30;
-_CheckFlag = 0x80035F98;
-_SetFlag = 0x80035FDC;
-_ClearFlag = 0x8003602C;
 GetPlayerStruct = 0x800F213C; //rom:0x105D5C
 AdjustPlayerCoins = 0x800F21C0; //rom:0x105DE0
 PlayerHasCoins = 0x800F2230; //rom:0x105E50
@@ -542,8 +526,89 @@ gPrevCoinBlockIndexes = 0x800CE1E8; //type:s16 size:0x14
 gPrevStarBlockIndexes = 0x800D59E0; //type:s16 size:0x14
 gPrevItemBlockIndexes = 0x800CC378; //type:s16 size:0x14
 
-GetSaveFileChecksum = 0x8000CAEC; //rom:0xD6EC
-GetEepType = 0x8000C210; //rom:0xCE10
-
 gTotalTurns = 0x800CD05A;
 gCurrentTurn = 0x800CD05B;
+
+
+
+
+
+dmaInit = 0x8004D9A0; //rom:0x4E5A0
+
+dmaStart = 0x8004D9F8;
+dmaRead = 0x8004DA40;
+dmaReadOvl = 0x8004DB14;
+
+InitSchedulerEvent = 0x80050F50; //rom:0x51B50
+InitScheduler = 0x80050F90; //rom:0x51B90
+AddSchedulerClient = 0x800511C4; //rom:0x51DC4
+RemoveSchedulerClient = 0x80051250; //rom:0x51E50
+EventBroadcast = 0x800512CC; //rom:0x51ECC
+EventHandler = 0x80051328; //rom:0x51F28
+ScExecuteAudio = 0x8005144C; //rom:0x5204C
+ScExecuteGraphics = 0x800515CC; //rom:0x521CC
+InitSI = 0x80051750; //rom:0x52350
+GetSIClientListTable = 0x800517F4; //rom:0x523F4
+_AddSIClient = 0x8005182C; //rom:0x5242C
+AddSIClient = 0x8005188C; //rom:0x5248C
+_RemoveSIClient = 0x800518FC; //rom:0x524FC
+RemoveSIClient = 0x80051968; //rom:0x52568
+CallSIClient = 0x800519D0; //rom:0x525D0
+SIProc = 0x80051A44; //rom:0x52644
+RequestSIFunction = 0x80051B0C; //rom:0x5270C
+_InitController = 0x80008DD0;
+InitController = 0x80008F3C; //rom:0x9B3C
+_ReadController = 0x80008FD4; //rom:0x9BD4
+ReadController = 0x800090D4; //rom:0x9CD4
+SetStickValueLimit = 0x8000914C; //rom:0x9D4C
+UpdateController = 0x80009160; //rom:0x9D60
+FlushController = 0x800094E4; //rom:0xA0E4
+_AutoReadController = 0x800097B8; //rom:0xA3B8
+SetAutoReadController = 0x800097D4; //rom:0xA3D4
+ResetAutoReadController = 0x80009824; //rom:0xA424
+CheckControllerRead = 0x8000985C;
+_InitEeprom = 0x8000C210; //rom:0xCE10
+InitEeprom = 0x8000C4AC; //rom:0xD0AC
+_WriteEeprom = 0x8000C4DC; //rom:0xD0DC
+WriteEepromBox2 = 0x8000C538; //rom:0xD138
+WriteEepromBox = 0x8000C638; //rom:0xD238
+_ReadEeprom = 0x8000C7A0; //rom:0xD3A0
+ReadEepromBox = 0x8000C7F4; //rom:0xD3F4
+WriteEepromCommonBuf = 0x8000C8F0; //rom:0xD4F0
+ReadEepromCommonBuf = 0x8000C954; //rom:0xD554
+ClearBoxBuf = 0x8000CA3C; //rom:0xD63C
+ClearCommonBuf = 0x8000CA64; //rom:0xD664
+_DestroyEeprom = 0x8000CA8C; //rom:0xD68C
+DestroyEeprom = 0x8000CAC0; //rom:0xD6C0
+CalcChecksumEeprom = 0x8000CAEC; //rom:0xD6EC
+WriteEeprom = 0x8000CB30; //rom:0xD730
+ContDataInit = 0x80009880; //rom:0xA480
+ContDataUpdate = 0x800098FC; //rom:0xA4FC
+GWInit = 0x80035A50; //rom:0x36650
+GWMgNoSet = 0x80035AA8; //rom:0x366A8
+GWMgBitGet = 0x80035AB4; //rom:0x366B4
+GWMgUnlockSet = 0x80035B2C; //rom:0x3672C
+GWMgUnlockReset = 0x80035B80; //rom:0x36780
+GWMgUnlockCheck = 0x80035BD8; //rom:0x367D8
+GWMgRecordSet = 0x80035C20; //rom:0x36820
+GWMgRecordGet = 0x80035C6C; //rom:0x3686C
+GWBoardNoSet = 0x80035C84; //rom:0x36884
+GWBoardRecordGet = 0x80035C90; //rom:0x36890
+GWPlayNumGet = 0x80035CF8; //rom:0x368F8
+GWPlayNumInc = 0x80035D1C; //rom:0x3691C
+GWCharPlayNumInc = 0x80035DA4; //rom:0x369A4
+_CheckFlag = 0x80035EB0; //rom:0x36AB0
+_SetFlag = 0x80035EF4; //rom:0x36AF4
+_ClearFlag = 0x80035F44; //rom:0x36B44
+
+GWBoardFlagCheck = 0x80035F98;
+GWBoardFlagSet = 0x80035FDC;
+GWBoardFlagClear = 0x8003602C;
+
+GWContErrorSet = 0x80036080;
+GWContErrorGet = 0x800360B8; //rom:0x36CB8
+
+GwCommon = 0x800CC0C8; //size:0xA4
+GwStory = 0x800D0308; //size:0x74
+GwSystem = 0x800CD058; //size:0x62
+GwPlayer = 0x800D1108; //size:0xE0

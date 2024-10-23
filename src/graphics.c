@@ -114,9 +114,9 @@ void func_8000EBEC_F7EC(void* arg0) {
     var_s4 = 0;
 
     osCreateMesgQueue(&mesgQueue, (OSMesg*) &sp38, 8);
-    func_800511C4_51DC4(&sp10, &mesgQueue, 1);
+    AddSchedulerClient(&sp10, &mesgQueue, 1);
     osCreateMesgQueue(&mesgQueue2, (OSMesg*) &sp68, 8);
-    func_800511C4_51DC4(&sp58, &mesgQueue2, 2);
+    AddSchedulerClient(&sp58, &mesgQueue2, 2);
     
     while (TRUE) {
         do {

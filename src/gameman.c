@@ -34,7 +34,7 @@ struct str800D5298 {
 extern struct str800D5298 D_800D5298;
 
 
-extern PlayerData gPlayers[4];
+extern PlayerData GwPlayer[4];
 
 extern void *D_800CCF38;
 extern u8 D_800CCF78[];
@@ -73,8 +73,8 @@ extern void func_8001A070_1AC70(void *arg0, void *arg1, u16 arg2, u16 arg3, u16 
 extern void func_8001B0B4_1BCB4(void **arg0, u32 arg1); // hmfman.h
 extern void func_8001BF90_1CB90(u32 arg0, u32 arg1); // hmfman.h
 extern void func_800224BC_230BC();
-extern void func_80035A50_36650(); // save.h
-extern void func_80035C20_36820(s16 arg0, s16 arg1); // save.h
+extern void GWInit(); // save.h
+extern void GWMgRecordSet(s16 arg0, s16 arg1); // save.h
 extern void func_80036380_36F80(void **arg0);
 
 extern void func_8004DC00_4E800();
@@ -130,7 +130,7 @@ void func_8000E3C0_EFC0() {
     D_800D1F36 = 0;
 
     do {
-        if (HuGetPadInserted(D_800D1F36) != 0) {
+        if (CheckControllerRead(D_800D1F36) != 0) {
             break;
         }
     } while (++D_800D1F36 < 4);
@@ -148,7 +148,7 @@ void func_8000E3C0_EFC0() {
         s32 temp_s0;
 
         temp_s0 = func_8004FDC0_509C0();
-        func_80035A50_36650();
+        GWInit();
         func_8000E978_F578();
         func_80000EA8_1AA8(&D_800D5298);
         func_80050E78_51A78(0);
@@ -225,39 +225,39 @@ void func_8000E804_F404() {
     s32 i;
 
     for (i = 0; i < MAX_PLAYERS; i++) {
-        func_80087A40_88640(&gPlayers[i], 0, sizeof(PlayerData));
-        if (HuGetPadInserted(i) != PAD_NOT_INSERTED) {
+        func_80087A40_88640(&GwPlayer[i], 0, sizeof(PlayerData));
+        if (CheckControllerRead(i) != PAD_NOT_INSERTED) {
             D_800CCF78[i] = 0;
-            gPlayers[i].flags &= 0xFE;
+            GwPlayer[i].flags &= 0xFE;
         }
         else {
             D_800CCF78[i] = 1;
-            gPlayers[i].flags |= 0x01;
+            GwPlayer[i].flags |= 0x01;
         }
-        gPlayers[i].controller = i;
-        gPlayers[i].coins = 10;
-        gPlayers[i].bonusCoins = 0;
-        gPlayers[i].id = i;
-        gPlayers[i].cpuDifficulty = 0;
-        gPlayers[i].stars = 0;
-        gPlayers[i].minigameStar = 0;
-        gPlayers[i].blueSpaceCount = 0;
-        gPlayers[i].redSpaceCount = 0;
-        gPlayers[i].happeningSpaceCount = 0;
+        GwPlayer[i].controller = i;
+        GwPlayer[i].coins = 10;
+        GwPlayer[i].bonusCoins = 0;
+        GwPlayer[i].id = i;
+        GwPlayer[i].cpuDifficulty = 0;
+        GwPlayer[i].stars = 0;
+        GwPlayer[i].minigameStar = 0;
+        GwPlayer[i].blueSpaceCount = 0;
+        GwPlayer[i].redSpaceCount = 0;
+        GwPlayer[i].happeningSpaceCount = 0;
     }
 }
 
 /* Initialize Game Save Data */
 void func_8000E978_F578() {
     func_8000E804_F404();
-    func_80035C20_36820(0, 0x64);
-    func_80035C20_36820(1, 0xE10);
-    func_80035C20_36820(2, 0xE10);
-    func_80035C20_36820(3, 0x708);
-    func_80035C20_36820(4, 0x3E8);
-    func_80035C20_36820(5, 0xE10);
-    func_80035C20_36820(6, 0xE10);
-    func_80035C20_36820(7, 0xE10);
-    func_80035C20_36820(8, 0);
-    func_80035C20_36820(9, 0x1518);
+    GWMgRecordSet(0, 0x64);
+    GWMgRecordSet(1, 0xE10);
+    GWMgRecordSet(2, 0xE10);
+    GWMgRecordSet(3, 0x708);
+    GWMgRecordSet(4, 0x3E8);
+    GWMgRecordSet(5, 0xE10);
+    GWMgRecordSet(6, 0xE10);
+    GWMgRecordSet(7, 0xE10);
+    GWMgRecordSet(8, 0);
+    GWMgRecordSet(9, 0x1518);
 }

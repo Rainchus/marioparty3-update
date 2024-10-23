@@ -115,7 +115,7 @@ s32 PlayerHasItem(s32 arg0, s32 arg1) {
     }
 
     for (i = 0; i < 3; i++) {
-        if (gPlayers[arg0].items[i] == arg1) {
+        if (GwPlayer[arg0].items[i] == arg1) {
             break;
         }
     }

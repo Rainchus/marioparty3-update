@@ -77,8 +77,8 @@ void func_800F43FC_10801C(s32 arg0) {
     for (i = 0; i < 2; i++) {
         temp_s2->unk_02[i] = 0;
     }
-    temp_s2->unk_66 = gPlayers[arg0].coins;
-    temp_s2->unk_68 = gPlayers[arg0].stars;
+    temp_s2->unk_66 = GwPlayer[arg0].coins;
+    temp_s2->unk_68 = GwPlayer[arg0].stars;
     temp_s2->unk_05 = 0;
     temp_s2->unk_01 = -1;
     temp_s2->unk_07 = temp_s2->unk_06 = temp_s2->unk_08 = -1;

@@ -1,38 +1,46 @@
 #include "common.h"
 #include "pad.h"
 
+s32 _CheckFlag(s32 arg0);
+
+typedef struct GW_COMMON {
+    u8 unk_00;
+    char unk_01[0xA3];
+} GW_COMMON; //sizeof 0xA4
+
+typedef struct GW_STORY {
+    char unk_00[0x74];
+} GW_STORY;
+
 extern u8 D_800CD0B6[];
-extern u8 D_800CC0C8[0xA4];
-extern u8 D_800D0308[0x74];
-extern s8 D_800CD068;
+extern GW_COMMON GwCommon;
+extern GW_STORY GwStory;
 extern u8 D_800CC0DE[];
 extern u8 D_800CC153[];
 extern u16 D_800CC0CA[];
 extern s32 D_800B1A30;
 
-s32 func_80035EB0_36AB0(s32 arg0);
-
-void func_80035A50_36650(void) {
-    u8* ptr = D_800CC0C8;
+void GWInit(void) {
+    GW_COMMON* gw = &GwCommon;
     
-    bzero(&D_800CC0C8, sizeof(D_800CC0C8));
-    bzero(&D_800D0308, sizeof(D_800D0308));
+    bzero(&GwCommon, sizeof(GwCommon));
+    bzero(&GwStory, sizeof(GwStory));
     
-    ptr[0] = 0x91;
-    D_800CD058.current_board_index = 0;
-    D_800CD058.unk10 = 0;
+    gw->unk_00 = 0x91;
+    GwSystem.current_board_index = 0;
+    GwSystem.unk10 = 0;
 }
 
-void func_80035AA8_366A8(s8 arg0) {
-    D_800CD068 = arg0;
+void GWMgNoSet(s8 arg0) {
+    GwSystem.unk10 = arg0;
 }
 
 // bit position to byte + bit position
-void func_80035AB4_366B4(s16 bitPos, s16* byteIdx, s16* bitIdx) {
+void GWMgBitGet(s16 bitPos, s16* byteIdx, s16* bitIdx) {
     s16 pos;
 
-    if (bitPos < 0 && D_800CD068 > 0) {
-       pos = D_800CD068 - 1;
+    if (bitPos < 0 && GwSystem.unk10 > 0) {
+       pos = GwSystem.unk10 - 1;
     } else {
         if (bitPos < 0) {
             pos = 0;
@@ -46,53 +54,53 @@ void func_80035AB4_366B4(s16 bitPos, s16* byteIdx, s16* bitIdx) {
 }
 
 // set bit
-void func_80035B2C_3672C(s16 bitPos) {
+void GWMgUnlockSet(s16 bitPos) {
     s16 outBytePos;
     s16 outBitPos;
 
-    func_80035AB4_366B4(bitPos, &outBytePos, &outBitPos);
+    GWMgBitGet(bitPos, &outBytePos, &outBitPos);
     D_800CC0DE[outBytePos] |= (1 << outBitPos);
 }
 
 // clear bit
-void func_80035B80_36780(s16 bitPos) {
+void GWMgUnlockReset(s16 bitPos) {
     s16 outBytePos;
     s16 outBitPos;
 
-    func_80035AB4_366B4(bitPos, &outBytePos, &outBitPos);
+    GWMgBitGet(bitPos, &outBytePos, &outBitPos);
     D_800CC0DE[outBytePos] &= ~(1 << outBitPos);
 }
 
 // check bit
-s32 func_80035BD8_367D8(s16 arg0) {
+s32 GWMgUnlockCheck(s16 arg0) {
     s16 sp10;
     s16 sp12;
 
-    func_80035AB4_366B4(arg0, &sp10, &sp12);
+    GWMgBitGet(arg0, &sp10, &sp12);
     return D_800CC0DE[sp10] & (1 << sp12);
 }
 
-void func_80035C20_36820(s16 arg0, s16 arg1) {
-    if (func_80035EB0_36AB0(0xF) == 0) {
+void GWMgRecordSet(s16 arg0, s16 arg1) {
+    if (_CheckFlag(0xF) == 0) {
         D_800CC0CA[arg0] = arg1;
     }
 }
 
-u16 func_80035C6C_3686C(s16 arg0) {
+u16 GWMgRecordGet(s16 arg0) {
     return D_800CC0CA[arg0];
 }
 
-void SetCurrentBoardIndex(s8 boardIndex) {
-    D_800CD058.current_board_index = boardIndex;
+void GWBoardNoSet(s8 boardIndex) {
+    GwSystem.current_board_index = boardIndex;
 }
 
-INCLUDE_ASM(s32, "save", func_80035C90_36890);
+INCLUDE_ASM(s32, "save", GWBoardRecordGet);
 
-INCLUDE_ASM(s32, "save", func_80035CF8_368F8);
+INCLUDE_ASM(s32, "save", GWPlayNumGet);
 
-INCLUDE_ASM(s32, "save", func_80035D1C_3691C);
+INCLUDE_ASM(s32, "save", GWPlayNumInc);
 
-INCLUDE_ASM(s32, "save", func_80035DA4_369A4);
+INCLUDE_ASM(s32, "save", GWCharPlayNumInc);
 
 INCLUDE_ASM(s32, "save", func_80035E3C_36A3C);
 
@@ -100,15 +108,15 @@ INCLUDE_ASM(s32, "save", func_80035E60_36A60);
 
 INCLUDE_ASM(s32, "save", func_80035E88_36A88);
 
-s32 func_80035EB0_36AB0(s32 arg0) {
+s32 _CheckFlag(s32 arg0) {
     return D_800CC153[arg0 / 8] & (1 << (arg0 % 8));
 }
 
-INCLUDE_ASM(s32, "save", func_80035EF4_36AF4);
+INCLUDE_ASM(s32, "save", _SetFlag);
 
-INCLUDE_ASM(s32, "save", func_80035F44_36B44);
+INCLUDE_ASM(s32, "save", _ClearFlag);
 
-s32 _CheckFlag(s32 input) {
+s32 GWBoardFlagCheck(s32 input) {
     s32 byteValue;
     s32 adjustedIndex;
     s32 byteIndex;
@@ -135,7 +143,7 @@ s32 _CheckFlag(s32 input) {
 }
 
 
-void _SetFlag(s32 input) {
+void GWBoardFlagSet(s32 input) {
     s32 adjustedInput;
     s32 byteIndex;
     s32 bitIndex;
@@ -164,7 +172,7 @@ void _SetFlag(s32 input) {
     D_800CD0B6[byteIndex] = D_800CD0B6[byteIndex] | (1 << (input - (bitIndex)));
 }
 
-void _ClearFlag(s32 input) {
+void GWBoardFlagClear(s32 input) {
     s32 adjustedInput;
     s32 byteIndex;
     s32 bitIndex;
@@ -193,9 +201,9 @@ void _ClearFlag(s32 input) {
     D_800CD0B6[byteIndex] = D_800CD0B6[byteIndex] & ~(1 << (input - (bitIndex)));
 }
 
-void HuSaveSetPadIsInserted(void)
+void GWContErrorSet(void)
 {
-    if (HuGetPadInserted(0) != FALSE)
+    if (CheckControllerRead(0) != FALSE)
     {
         D_800B1A30 = TRUE;
         return;
@@ -203,4 +211,4 @@ void HuSaveSetPadIsInserted(void)
     D_800B1A30 = FALSE;
 }
 
-INCLUDE_ASM(s32, "save", func_800360B8_36CB8);
+INCLUDE_ASM(s32, "save", GWContErrorGet);

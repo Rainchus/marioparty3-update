@@ -1,6 +1,6 @@
 #include "libultra.h"
 #include "common_structs.h"
 
-extern PlayerData gPlayers[4];
+extern PlayerData GwPlayer[4];
 extern s8 gCurrentPlayerIndex;
-extern GameStatus D_800CD058;
+extern GW_SYSTEM GwSystem;

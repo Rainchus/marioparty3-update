@@ -42,7 +42,7 @@ typedef struct {
 } unkGraphicsMessage2; // OSMesg
 
 
-void func_800511C4_51DC4(unkSchedStruct*, OSMesgQueue*, s32);
+void AddSchedulerClient(unkSchedStruct*, OSMesgQueue*, s32);
 void func_8004D85C_4E45C();
 void func_8004D878_4E478();
 

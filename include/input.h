@@ -13,7 +13,7 @@ extern u8 D_800CBB6E[];
 extern s16 D_800CDA7C[];
 extern s8 D_800D20A1[];
 
-void func_80009880_A480(void);
-void func_800098FC_A4FC(void);
+void ContDataInit(void);
+void ContDataUpdate(void);
 
 #endif

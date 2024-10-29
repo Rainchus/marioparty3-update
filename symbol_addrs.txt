@@ -1,2 +1,9 @@
 alCSPGetChlVol = 0x8006CFF0;
 alCSPGetChlFXMix = 0x8006D010;
+gPlayers = 0x800D1108; //size:0xE0
+gGameStatus = 0x800CD058; //size:0x62
+
+D_800A46A0 = 0x800A46A0; //size:0x190 type:f32
+
+_ovltbl = 0x800962F4; //rom:0x96EF4 size:0x1200
+_modeovltbl = 0x800974F4; //rom:0x980F4 size:0x6C

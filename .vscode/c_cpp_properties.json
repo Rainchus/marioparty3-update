@@ -7,7 +7,7 @@
             "compilerArgs": [
                 "-m32",
                 "-I.",
-                "-I include",
+                "-I include/",
                 "-I include/PR",
                 "-I include/engine",
                 "-I include/gcc",

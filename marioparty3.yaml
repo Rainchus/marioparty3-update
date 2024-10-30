@@ -2089,19 +2089,20 @@ segments:
       - [0x552C80, data, 54DD10] #8010A910
       - {0x552F50, type: bss, vram: 0x8010ABE0, name: ovl_7D_bss}
 
-  # - type: code
-  #   start: 0x552F50
-  #   vram: 0x801059A0
-  #   dir: overlays/ovl_7E_name
-  #   name: name_7E
-  #   overlay: True
-  #   exclusive_ram_id: minigame
-  #   symbol_name_format: $VRAM_$ROM_$SEG
-  #   bss_size: 0x000
-  #   subsegments:
-  #     - [0x552F50, c]
-  #     - [0x552F50, data, 552F50] #801059A0
-  #     - {0x552F50, type: bss, vram: 0x801059A0, name: ovl_7E_bss}
+  #this segment is 0 in size, but we need it to populate _ovltbl correctly
+  - type: code
+    start: 0x552F50
+    vram: 0x801059A0
+    dir: overlays/ovl_7E_name
+    name: name_7E
+    overlay: True
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x000
+    subsegments:
+      - [0x552F50, c]
+      - [0x552F50, data, 552F50] #801059A0
+      - {0x552F50, type: bss, vram: 0x801059A0, name: ovl_7E_bss}
 
   - type: code
     start: 0x552F50
@@ -2117,5 +2118,17 @@ segments:
       - [0x556240, data, 552F50] #80108C90
       - {0x557620, type: bss, vram: 0x8010A070, name: ovl_7F_bss}
 
-  - [0x557620, bin]
+  - [0x557620, bin, unk_557620]
+  - [0x557E20, bin, mainfs]
+
+  - [0x1209850, bin, strings_jp]
+  - [0x121CAA0, bin, strings_en]
+  - [0x12355C0, bin, strings_de]
+  - [0x124D440, bin, strings_fr]
+  - [0x1261F90, bin, strings_it]
+  - [0x12765F0, bin, strings_es]
+  - [0x128CC60, bin, hvq_data]
+  - [0x1881C40, bin, audio_mbf0]
+  - [0x1A56870, bin, audio_sbf0]
+  - [0x1EFD040, bin, audio_fxd0]
   - [0x2000000]

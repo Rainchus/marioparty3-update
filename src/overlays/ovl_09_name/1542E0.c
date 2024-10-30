@@ -94,3 +94,5 @@ void func_8010D0F0_15BA30_name_09(void) {
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_09_name/1542E0", func_8010D0F8_15BA38_name_09);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_09_name/1542E0", func_8010D268_15BBA8_name_09);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_09_name/1542E0", D_8010D9BC_15C2FC_name_09);

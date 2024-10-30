@@ -141,7 +141,7 @@ OverlayTable _ovltbl[] = {
     {name_7B_ROM_START, name_7B_ROM_END, name_7B_VRAM, name_7B_TEXT_START, name_7B_TEXT_END, name_7B_DATA_START, name_7B_RODATA_END, name_7B_BSS_START, name_7B_BSS_END },
     {name_7C_ROM_START, name_7C_ROM_END, name_7C_VRAM, name_7C_TEXT_START, name_7C_TEXT_END, name_7C_DATA_START, name_7C_RODATA_END, name_7C_BSS_START, name_7C_BSS_END },
     {name_7D_ROM_START, name_7D_ROM_END, name_7D_VRAM, name_7D_TEXT_START, name_7D_TEXT_END, name_7D_DATA_START, name_7D_RODATA_END, name_7D_BSS_START, name_7D_BSS_END },
-    {0x552F50, 0x552F50, 0x801059A0, 0x801059A0, 0x801059A0, 0x801059A0, 0x801059A0, 0x801059A0, 0x801059A0 },
+    {name_7E_ROM_START, name_7E_ROM_END, name_7E_VRAM, name_7E_TEXT_START, name_7E_TEXT_END, name_7E_DATA_START, name_7E_RODATA_END, name_7E_BSS_START, name_7E_BSS_END },
     {name_7F_ROM_START, name_7F_ROM_END, name_7F_VRAM, name_7F_TEXT_START, name_7F_TEXT_END, name_7F_DATA_START, name_7F_RODATA_END, name_7F_BSS_START, name_7F_BSS_END },
 };
 

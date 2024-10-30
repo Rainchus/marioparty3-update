@@ -69,222 +69,256 @@ segments:
     bss_size: 0x2E080
     subsegments:
       - [0x1060, asm]
+      - [0x8F20, asm]
+      - [0x99D0, asm, pad]
+      - [0xA480, asm, input]
+      - [0xAE30, asm, decode]
+      - [0xBCA0, asm, util]
+      - [0xC1F0, asm]
+      - [0xC3A0, asm, esprite]
+      - [0xCE10, asm, eeprom]
+      - [0xD7A0, asm]
+      - [0xE560, asm]
+      - [0xEFB0, asm]
+      - [0xEFC0, asm]
+      - [0xF610, asm]
+      - [0x12E20, asm]
+      - [0x13F90, asm]
+      - [0x14EA0, asm]
+      - [0x19C30, asm]
+      - [0x1A580, asm]
+      - [0x20A20, asm]
+      - [0x22EB0, asm]
+      - [0x30C40, asm]
+      - [0x32160, asm]
+      - [0x34DC0, asm]
+      - [0x34DD0, asm]
+      - [0x360A0, asm]
+      - [0x36440, asm]
+      - [0x36650, asm]
+      - [0x36CD0, asm]
+      - [0x36F80, asm]
+      - [0x37210, asm]
+      - [0x45F50, asm]
+      - [0x471D0, asm]
+      - [0x47D60, asm]
+      - [0x4B120, asm]
+      - [0x4BF40, asm]
+      - [0x4E5A0, asm]
+      - [0x4E800, asm]
+      - [0x4FE90, asm]
+      - [0x508F0, asm]
+      - [0x51B50, asm]
+      - [0x52350, asm]
+      - [0x527E0, asm]
+      - [0x52F30, asm]
+      - [0x58000, asm]
+      - [0x5ACF0, asm]
+      - [0x62750, asm]
+      - [0x66E70, asm]
+      - [0x67000, asm]
+      - [0x67100, asm]
+      - [0x671E0, asm]
+      - [0x6B050, asm]
+      - [0x6BA20, asm]
+      - [0x6C140, asm]
+      - [0x6C320, asm]
+      - [0x6C3A0, asm]
+      - [0x6C3C0, asm]
+      - [0x6C9F0, asm]
+      - [0x6DBD0, asm]
       - [0x6DBF0, c, lib/2.0L/cspgetchlvol]
       - [0x6DC10, c, lib/2.0L/seqpgetchlvol]
       - [0x6DC30, asm]
-      # - [0x6DBF0, asm, seqpgetchlvol]
-      # - [0x6DC10, asm, cspgetfxmix]
-      # - [0x6DC10, asm, seqpgetfxmix]
-      # - [0x6DC30, asm, cspgetpan]
-      # - [0x6DC30, asm, seqpgetpan]
-      # - [0x6DC50, asm, cspgetprogram]
-      # - [0x6DC50, asm, seqpgetprogram]
-      # - [0x6DCD0, asm, cspgetstate]
-      # - [0x6DCD0, asm, seqpgetstate]
-      # - [0x6DCE0, asm, cspgettempo]
-      # - [0x6DD10, asm, cspplay]
-      # - [0x6DD10, asm, seqpplay]
-      # - [0x6DD40, asm, cspsetbank]
-      # - [0x6DD40, asm, seqpsetbank]
-      # - [0x6DD70, asm, cspsetseq]
-      # - [0x6DD70, asm, seqpsetseq]
-      # - [0x6DDA0, asm, cspsettempo]
-      # - [0x6DDA0, asm, seqpsettempo]
-      # - [0x6DDF0, asm, cspsetvol]
-      # - [0x6DDF0, asm, seqpsetvol]
-      # - [0x6DE20, asm, cspstop]
-      # - [0x6DE20, asm, seqpstop]
-      # - [0x6DE50, asm]
-      # - [0x72C20, asm, conteepwrite]
-      # - [0x73020, asm, conteepprobe]
-      # - [0x730A0, asm, conteeplongwrite]
-      # - [0x73190, asm, conteeplongread]
-      # - [0x73200, hasm, setintmask]
-      # - [0x732A0, asm]
-      # - [0x73550, asm, epirawdma]
-      # - [0x73740, asm, epidma]
-      # - [0x737E0, asm, cartrominit]
-      # - [0x73960, asm, devmgr]
-      # - [0x73D20, asm]
-      # - [0x73E10, asm, aigetlen]
-      # - [0x73E20, asm, aisetfreq]
-      # - [0x73F40, asm, aisetnextbuf]
-      # - [0x73FE0, asm, drvrnew]
-      # - [0x74810, asm, load]
-      # - [0x75320, asm, auxbus]
-      # - [0x75430, asm, bnkf]
-      # - [0x75700, asm, env]
-      # - [0x763B0, asm, event]
-      # - [0x76700, asm, filter]
-      # - [0x76720, asm, mainbus]
-      # - [0x76890, asm, resample]
-      # - [0x76B40, asm, reverb]
-      # - [0x776E0, asm, save]
-      # - [0x777B0, asm, seq]
-      # - [0x77DA0, asm, sl]
-      # - [0x77E50, asm, heapinit]
-      # - [0x77E90, asm, heapalloc]
-      # - [0x77EE0, asm, copy] # ?
-      # - [0x77F20, asm, cseq]
-      # - [0x789E0, asm, synthesizer]
-      # - [0x79020, asm, syndelete]
-      # - [0x79030, asm, synaddplayer]
-      # - [0x79080, asm, synfreevoice]
-      # - [0x79120, asm, synallocvoice]
-      # - [0x79300, asm, synstopvoice]
-      # - [0x79380, asm, synstartvoice]
-      # - [0x79420, asm, synsetpitch]
-      # - [0x794B0, asm, synsetvol]
-      # - [0x79570, asm, synsetfxmix]
-      # - [0x79610, asm, synsetpan]
-      # - [0x796A0, asm, synallocfx]
-      # - [0x79740, asm, cents2ratio]
-      # - [0x797A0, hasm, invaldcache]
-      # - [0x79850, hasm, invalicache]
-      # - [0x798D0, hasm, writebackdcache]
-      # - [0x79950, hasm, writebackdcacheall]
-      # - [0x79980, asm, contreaddata]
-      # - [0x79B60, asm, controller]
-      # - [0x79E70, asm, contsetch]
-      # - [0x79ED0, asm, virtualtophysical]
-      # - [0x79F30, asm, cosf]
-      # - [0x7A080, asm, lookat]
-      # - [0x7A790, asm, lookathil]
-      # - [0x7B1F0, asm, lookatref]
-      # - [0x7B7E0, asm, ortho]
-      # - [0x7BA60, asm, perspective]
-      # - [0x7BDE0, asm, random]
-      # - [0x7BE10, asm, rotaterpy]
-      # - [0x7C130, asm, sinf]
-      # - [0x7C2D0, asm]
-      # - [0x7C570, hasm, bcopy]
-      # - [0x7C890, hasm, bzero]
-      # - [0x7C930, asm, string]
-      # - [0x7C9C0, asm, sprintf]
-      # - [0x7CA50, asm]
-      # - [0x7CB00, asm, createmesgqueue]
-      # - [0x7CB30, asm, jammesg]
-      # - [0x7CC70, asm, recvmesg]
-      # - [0x7CDA0, asm, sendmesg]
-      # - [0x7CED0, asm, seteventmesg]
-      # - [0x7CF80, hasm, setcause]
-      # - [0x7CF90, hasm, setcompare]
-      # - [0x7CFA0, hasm, setcount]
-      # - [0x7CFB0, hasm, setsr]
-      # - [0x7CFC0, asm, sptask]
-      # - [0x7D200, asm, sptaskyield]
-      # - [0x7D220, asm, sptaskyielded]
-      # - [0x7D270, asm, sirawdma]
-      # - [0x7D320, asm]
-      # - [0x7D510, asm, destroythread]
-      # - [0x7D5F0, asm, getthreadpri]
-      # - [0x7D610, asm, setthreadpri]
-      # - [0x7D6E0, asm, startthread]
-      # - [0x7D800, asm, thread]
-      # - [0x7D840, asm, yieldthread]
-      # - [0x7D890, asm, gettime]
-      # - [0x7D920, asm, settimer]
-      # - [0x7DA50, asm]
-      # - [0x7DE10, hasm, probetlb]
-      # - [0x7DED0, asm]
-      # - [0x7DF50, asm, vimgr]
-      # - [0x7E290, asm, visetevent]
-      # - [0x7E2F0, asm, visetmode]
-      # - [0x7E340, asm, visetspecial]
-      # - [0x7E4B0, asm, visetyscale]
-      # - [0x7E500, asm, viswapbuf]
-      # - [0x7E550, asm, viswapcontext]
-      # - [0x7E860, asm, viblack]
-      # - [0x7E8C0, asm, mtxidentf]
-      # - [0x7E920, asm, mtxf2l]
-      # - [0x7E9A0, asm, mtxl2f]
-      # - [0x7EA20, asm, mtxcatf]
-      # - [0x7EB20, asm, scale]
-      # - [0x7EBE0, asm, translatef]
-      # - [0x7EC40, asm, mtxcatl]
-      # - [0x7ECC0, asm, rotate]
-      # - [0x7EFA0, asm, motor]
-      # - [0x7F330, asm, pfsselectbank]
-      # - [0x7F3A0, asm, contramread]
-      # - [0x7F590, asm, contramwrite]
-      # - [0x7F7A0, asm]
-      # - [0x7F800, asm, afterprenmi]
-      # - [0x7F820, asm, getmemsize]
-      # - [0x7F8C0, asm]
-      # - [0x804E0, asm, conteepread]
-      # - [0x80710, asm]
-      # - [0x81540, hasm, interrupt]
-      # - [0x815D0, asm, setglobalintmask]
-      # - [0x81610, asm, resetglobalintmask]
-      # - [0x81660, asm, pirawdma]
-      # - [0x81730, asm, pigetcmdq]
-      # - [0x81750, asm, epirawread]
-      # - [0x818C0, asm, epirawwrite]
-      # - [0x81A30, asm]
-      # - [0x81AD0, asm, ai]
-      # - [0x81AF0, asm]
-      # - [0x82640, asm, xprintf]
-      # - [0x83090, hasm, getcause]
-      # - [0x830A0, hasm, getcount]
-      # - [0x830B0, hasm, getsr]
-      # - [0x830C0, hasm, setfpccsr]
-      # - [0x830D0, hasm, setwatchlo]
-      # - [0x830E0, asm]
-      # - [0x83290, asm, sp]
-      # - [0x832B0, asm, spgetstat]
-      # - [0x832C0, asm, spsetstat]
-      # - [0x832D0, asm, spsetpc]
-      # - [0x83300, asm, sprawdma]
-      # - [0x83390, asm]
-      # - [0x83430, asm, crc]
-      # - [0x83520, hasm, maptlbrdb]
-      # - [0x83580, hasm, unmaptlball]
-      # - [0x835D0, asm, vi]
-      # - [0x836E0, asm]
-      # - [0x83700, asm, normalize]
-      # - [0x83760, asm, pfsisplug]
-      # - [0x83A40, asm, pfsgetstatus]
-      # - [0x83C50, asm, contpfs]
-      # - [0x846E0, asm, pirawread]
-      # - [0x84730, asm, pirawwrite]
-      # - [0x84780, asm]
-      # - [0x84840, hasm, bcmp]
-      # - [0x84950, asm, xlitob]
-      # - [0x84BA0, asm, xldtob]
-      # - [0x85630, asm]
-      # - [0x87750, asm, si]
-      # - [0x87770, asm, stopthread]
-      # - [0x87830, asm]
-      # - [0x87840, asm, ldiv]
+      - [0x6DCD0, asm]
+      - [0x6DCE0, asm]
+      - [0x6DD10, asm]
+      - [0x6DD40, asm]
+      - [0x6DE50, asm]
+      - [0x6DF20, asm]
+      - [0x6DFA0, asm]
+      - [0x6DFD0, asm]
+      - [0x6E6B0, asm]
+      - [0x6E720, asm]
+      - [0x6E780, asm]
+      - [0x6E7E0, asm]
+      - [0x6E840, asm]
+      - [0x6E880, asm]
+      - [0x6E8E0, asm]
+      - [0x6E940, asm]
+      - [0x6E960, asm]
+      - [0x6F470, asm]
+      - [0x70420, asm]
+      - [0x70470, asm]
+      - [0x707B0, asm]
+      - [0x70850, asm]
+      - [0x70940, asm]
+      - [0x709E0, asm]
+      - [0x70A70, asm]
+      - [0x70B20, asm]
+      - [0x70BB0, asm]
+      - [0x70C30, asm]
+      - [0x723E0, asm]
+      - [0x72740, asm]
+      - [0x72750, asm]
+      - [0x73020, asm]
+      - [0x730A0, asm]
+      - [0x73190, asm]
+      - [0x73740, asm]
+      - [0x737E0, asm]
+      - [0x73E10, asm]
+      - [0x73F40, asm]
+      - [0x77E50, asm]
+      - [0x77E90, asm]
+      - [0x79030, asm]
+      - [0x79120, asm]
+      - [0x79380, asm]
+      - [0x79420, asm]
+      - [0x79570, asm]
+      - [0x79740, asm]
+      - [0x797A0, asm]
+      - [0x79950, asm]
+      - [0x79980, asm]
+      - [0x79B60, asm]
+      - [0x79E70, asm]
+      - [0x79F30, asm]
+      - [0x7BDE0, asm]
+      - [0x7C130, asm]
+      - [0x7C570, asm]
+      - [0x7C890, asm]
+      - [0x7C9C0, asm]
+      - [0x7CB30, asm]
+      - [0x7CC70, asm]
+      - [0x7CDA0, asm]
+      - [0x7D200, asm]
+      - [0x7D220, asm]
+      - [0x7D410, asm]
+      - [0x7D510, asm]
+      - [0x7D610, asm]
+      - [0x7D6E0, asm]
+      - [0x7D890, asm]
+      - [0x7DED0, asm]
+      - [0x7DF10, asm]
+      - [0x7DF50, asm]
+      - [0x7E290, asm]
+      - [0x7E2F0, asm]
+      - [0x7E340, asm]
+      - [0x7E4B0, asm]
+      - [0x7E500, asm]
+      - [0x7E860, asm]
+      - [0x7E8C0, asm]
+      - [0x7E920, asm]
+      - [0x7E9A0, asm]
+      - [0x7EA20, asm]
+      - [0x7EBE0, asm]
+      - [0x7EC40, asm]
+      - [0x7ECC0, asm]
+      - [0x7EFA0, asm]
+      - [0x7F330, asm]
+      - [0x7F3A0, asm]
+      - [0x7F590, asm]
+      - [0x7F800, asm]
+      - [0x7F820, asm]
+      - [0x7FCD0, asm]
+      - [0x800A0, asm]
+      - [0x80460, asm]
+      - [0x804E0, asm]
+      - [0x815D0, asm]
+      - [0x81660, asm]
+      - [0x818C0, asm]
+      - [0x81A30, asm]
+      - [0x81A80, asm]
+      - [0x81AD0, asm]
+      - [0x81AF0, asm]
+      - [0x81DB0, asm]
+      - [0x81E40, asm]
+      - [0x81E50, asm]
+      - [0x81F20, asm]
+      - [0x824C0, asm]
       - [0x87A00, asm]
+      - [0x88440, asm]
+      - [0x88460, asm]
+      - [0x88640, asm]
+      - [0x88710, asm]
+      - [0x88830, asm]
+      - [0x88B00, asm]
+      - [0x88C70, asm]
+      - [0x88C90, asm]
+      - [0x88CE0, asm]
+      - [0x88D20, asm]
+      - [0x88D50, asm]
+      - [0x890B0, asm]
+      - [0x89120, asm]
+      - [0x89170, asm]
+      - [0x89510, asm]
+      - [0x898B0, asm]
+      - [0x89FB0, asm]
+      - [0x8A350, asm]
+      - [0x8A3D0, asm]
+      - [0x8A420, asm]
+      - [0x8A460, asm]
+      - [0x8A4A0, asm]
+      - [0x8A4D0, asm]
+      - [0x8A4F0, asm]
+      - [0x8A580, asm]
+      - [0x8A640, asm]
+      - [0x8A670, asm]
+      - [0x8A6B0, asm]
+      - [0x8A6F0, asm]
+      - [0x8A770, asm]
+      - [0x8A830, asm]
+      - [0x8A860, asm]
+      - [0x8A890, asm]
+      - [0x8A920, asm]
+      - [0x8A960, asm]
+      - [0x8AA90, asm]
+      - [0x8ABF0, asm]
+      - [0x8AC30, asm]
+      - [0x8AC70, asm]
+      - [0x8ACD0, asm]
+      - [0x8AD20, asm]
+      - [0x8ADB0, asm]
+      - [0x8AEA0, asm]
+      - [0x8AF30, asm]
+      - [0x8B030, asm]
+      - [0x8B0C0, asm]
+      - [0x8B1C0, asm]
+      - [0x8B3F0, asm]
+      - [0x8B560, asm]
+      - [0x8B960, asm]
+      - [0x8BF00, asm]
+      - [0x8C2B0, asm]
+      - [0x8C440, asm]
+      - [0x8CB20, asm]
+      - [0x8D1E0, asm]
+      - [0x8D730, asm]
+      - [0x8D790, asm]
+      - [0x8D7F0, asm]
+      - [0x8D860, asm]
+      - [0x8D8C0, asm]
+      - [0x8DEC0, asm]
+      - [0x8E050, asm]
+      - [0x8E1D0, asm]
+      - [0x8E400, asm]
+      - [0x8E4A0, asm]
+      - [0x8E6B0, asm]
+      - [0x8EA10, asm]
+      - [0x8EFF0, asm]
+      - [0x8F1A0, asm]
+      - [0x8F320, asm]
+      - [0x8F480, asm]
+      - [0x8F620, asm]
+      - [0x8F760, asm]
+      - [0x8F7D0, asm]
+      - [0x8F830, asm]
+      - [0x8FB20, asm]
       - [0x8FCF0, data]
       - [0x96EF0, .data, overlay_table]
       - [0x98160, data]
-      #- [0xEE398, asm, viextendvstart]
-      #- [0x72890, data]
       - { start: 0xA96F0, type: bss, vram: 0x800A8AF0 }
 
-  # - type: bin
-  #   start: 0xA96F0
-  #   follows_vram: main
-
-  # # Creepy Cavern
-  # - name: main
-  #   dir: overlays/board_creepycavern
-  #   type: code
-  #   overlay: True
-  #   exclusive_ram_id: minigame
-  #   start: 0x37FF80
-  #   vram: 0x801059A0
-  #   symbol_name_format: $VRAM_$ROM_$SEG
-  #   subsegments:
-  #     - [0x37FF80, c]
-  #     - [0x37FFB0, c]
-  #     - [0x3975F0, bin] # data
-  # - [0x39AD20, bin]
-
   - type: code
-    start: 0x0A96F0
+    start: 0xA96F0
     vram: 0x800D6B70
     dir: overlays/ovl_82_name
     name: name_82
@@ -293,12 +327,13 @@ segments:
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x820
     subsegments:
-      - [0x0A96F0, c]
-      - [0x0BE2A0, data, 0A96F0] #800EB720
-      - {0x0BE940, type: bss, vram: 0x800EBDC0, name: ovl_82_bss}
+      - [0xA96F0, c]
+      - [0xBE2A0, data, A96F0] #800EB720
+      - [0xBE690, .rodata, A96F0] #800EBB10
+      - {0xBE940, type: bss, vram: 0x800EBDC0, name: ovl_82_bss}
 
   - type: code
-    start: 0x0BE940
+    start: 0xBE940
     vram: 0x800D6B70
     dir: overlays/ovl_81_name
     name: name_81
@@ -307,12 +342,13 @@ segments:
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x2D60
     subsegments:
-      - [0x0BE940, c]
-      - [0x0E8BE0, data, 0BE940] #80100E10
-      - {0x0EA790, type: bss, vram: 0x801029C0, name: ovl_81_bss}
+      - [0xBE940, c]
+      - [0xE8BE0, data, BE940] #80100E10
+      - [0xE9A00, .rodata, BE940] #80101C30
+      - {0xEA790, type: bss, vram: 0x801029C0, name: ovl_81_bss}
 
   - type: code
-    start: 0x0EA790
+    start: 0xEA790
     vram: 0x800D6B70
     dir: overlays/ovl_80_name
     name: name_80
@@ -321,8 +357,9 @@ segments:
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x32A0
     subsegments:
-      - [0x0EA790, c]
-      - [0x1143C0, data, 0EA790] #801007A0
+      - [0xEA790, c]
+      - [0x1143C0, data, EA790] #801007A0
+      - [0x115B60, .rodata, EA790] #80101F40
       - {0x116320, type: bss, vram: 0x80102700, name: ovl_80_bss}
 
   - type: code
@@ -337,6 +374,7 @@ segments:
     subsegments:
       - [0x116320, c]
       - [0x119560, data, 116320] #80108BE0
+      - [0x11A430, .rodata, 116320]
       - {0x11A480, type: bss, vram: 0x80109B00, name: ovl_00_bss}
 
   - type: code
@@ -347,10 +385,11 @@ segments:
     overlay: True
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
-    bss_size: 0x0C0
+    bss_size: 0xC0
     subsegments:
       - [0x11A480, c]
       - [0x1209E0, data, 11A480] #8010BF00
+      - [0x120A90, .rodata, 11A480] #8010BFB0
       - {0x120BC0, type: bss, vram: 0x8010C0E0, name: ovl_01_bss}
 
   - type: code
@@ -365,6 +404,7 @@ segments:
     subsegments:
       - [0x120BC0, c]
       - [0x126180, data, 120BC0] #8010AF60
+      - [0x126310, .rodata, 120BC0] #8010AF60
       - {0x1263E0, type: bss, vram: 0x8010B1C0, name: ovl_02_bss}
 
   - type: code
@@ -379,6 +419,7 @@ segments:
     subsegments:
       - [0x1263E0, c]
       - [0x12D700, data, 1263E0] #8010CCC0
+      - [0x12DC40, .rodata, 1263E0] #8010D200
       - {0x12DD30, type: bss, vram: 0x8010D2F0, name: ovl_03_bss}
 
   - type: code
@@ -389,10 +430,11 @@ segments:
     overlay: True
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
-    bss_size: 0x030
+    bss_size: 0x30
     subsegments:
       - [0x12DD30, c]
       - [0x131A90, data, 12DD30] #80109700
+      - [0x131B90, .rodata, 12DD30] #80109800
       - {0x131C10, type: bss, vram: 0x80109880, name: ovl_04_bss}
 
   - type: code
@@ -407,6 +449,7 @@ segments:
     subsegments:
       - [0x131C10, c]
       - [0x137A80, data, 131C10] #8010B810
+      - [0x137B60, .rodata, 131C10]
       - {0x137C00, type: bss, vram: 0x8010B990, name: ovl_05_bss}
 
   - type: code
@@ -421,6 +464,7 @@ segments:
     subsegments:
       - [0x137C00, c]
       - [0x13E5D0, data, 137C00] #8010C370
+      - [0x13E780, .rodata, 137C00]
       - {0x13E9C0, type: bss, vram: 0x8010C760, name: ovl_06_bss}
 
   - type: code
@@ -435,6 +479,7 @@ segments:
     subsegments:
       - [0x13E9C0, c]
       - [0x149CD0, data, 13E9C0] #80110CB0
+      - [0x149E80, .rodata, 13E9C0] #80110E60
       - {0x14A810, type: bss, vram: 0x801117F0, name: ovl_07_bss}
 
   - type: code
@@ -449,6 +494,7 @@ segments:
     subsegments:
       - [0x14A810, c]
       - [0x153BD0, data, 14A810] #8010ED60
+      - [0x153E40, .rodata, 14A810] #8010EFD0
       - {0x1542E0, type: bss, vram: 0x8010F470, name: ovl_08_bss}
 
   - type: code
@@ -463,6 +509,7 @@ segments:
     subsegments:
       - [0x1542E0, c]
       - [0x15BCF0, data, 1542E0] #8010D3B0
+      - [0x15C240, .rodata, 1542E0] #8010D900
       - {0x15C310, type: bss, vram: 0x8010D9D0, name: ovl_09_bss}
 
   - type: code
@@ -477,6 +524,7 @@ segments:
     subsegments:
       - [0x15C310, c]
       - [0x1613E0, data, 15C310] #8010AA70
+      - [0x161470, .rodata, 15C310] #8010AB00
       - {0x161750, type: bss, vram: 0x8010ADE0, name: ovl_0A_bss}
 
   - type: code
@@ -491,6 +539,7 @@ segments:
     subsegments:
       - [0x161750, c]
       - [0x164EB0, data, 161750] #80109100
+      - [0x164F00, .rodata, 161750] #80109150
       - {0x165010, type: bss, vram: 0x80109260, name: ovl_0B_bss}
 
   - type: code
@@ -501,7 +550,7 @@ segments:
     overlay: True
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
-    bss_size: 0x030
+    bss_size: 0x30
     subsegments:
       - [0x165010, c]
       - [0x16F3D0, data, 165010] #8010FD60
@@ -519,6 +568,7 @@ segments:
     subsegments:
       - [0x16F670, c]
       - [0x17AB40, data, 16F670] #80110E70
+      - [0x17AE20, .rodata, 16F670] #80111150
       - {0x17B3B0, type: bss, vram: 0x801116E0, name: ovl_0D_bss}
 
   - type: code
@@ -533,6 +583,7 @@ segments:
     subsegments:
       - [0x17B3B0, c]
       - [0x1817F0, data, 17B3B0] #8010BDE0
+      - [0x181880, .rodata, 17B3B0] #8010BE70
       - {0x181950, type: bss, vram: 0x8010BF40, name: ovl_0E_bss}
 
   - type: code
@@ -547,6 +598,7 @@ segments:
     subsegments:
       - [0x181950, c]
       - [0x18A560, data, 181950] #8010E5B0
+      - [0x18A6D0, .rodata, 181950] #8010E720
       - {0x18ABD0, type: bss, vram: 0x8010EC20, name: ovl_0F_bss}
 
   - type: code
@@ -561,6 +613,7 @@ segments:
     subsegments:
       - [0x18ABD0, c]
       - [0x190D60, data, 18ABD0] #8010BB30
+      - [0x1911E0, .rodata, 18ABD0] #8010BFB0
       - {0x191240, type: bss, vram: 0x8010C010, name: ovl_10_bss}
 
   - type: code

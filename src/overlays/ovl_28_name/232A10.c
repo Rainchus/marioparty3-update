@@ -237,3 +237,5 @@ void func_8010F2B0_23C320_name_28(void) {
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_28_name/232A10", func_8010F2B8_23C328_name_28);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_28_name/232A10", func_8010F42C_23C49C_name_28);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_28_name/232A10", D_8010F870_23C8E0_name_28);

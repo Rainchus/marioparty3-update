@@ -43,6 +43,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_2B_name/24A760", func_801071FC_24BFBC
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_2B_name/24A760", func_80107344_24C104_name_2B);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_2B_name/24A760", D_8010CEFC_251CBC_name_2B);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_2B_name/24A760", func_80107384_24C144_name_2B);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_2B_name/24A760", func_8010742C_24C1EC_name_2B);
@@ -109,3 +111,5 @@ void func_8010CA40_251800_name_2B(void) {
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_2B_name/24A760", func_8010CA48_251808_name_2B);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_2B_name/24A760", func_8010CBBC_25197C_name_2B);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_2B_name/24A760", D_8010D228_251FE8_name_2B);

@@ -26,6 +26,10 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_54_name/3CDEC0", func_801068E4_3CEE04
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_54_name/3CDEC0", func_80106990_3CEEB0_name_54);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_54_name/3CDEC0", D_80107740_3CFC60_name_54);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_54_name/3CDEC0", D_80107744_3CFC64_name_54);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_54_name/3CDEC0", func_80106F40_3CF460_name_54);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_54_name/3CDEC0", func_80107408_3CF928_name_54);

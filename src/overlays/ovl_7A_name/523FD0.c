@@ -180,6 +180,16 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_801080A8_5266D8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_80108118_526748_name_7A);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_7A_name/523FD0", D_80114CE4_533314_name_7A);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_7A_name/523FD0", D_80114D84_5333B4_name_7A);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_7A_name/523FD0", D_80114D90_5333C0_name_7A);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_7A_name/523FD0", D_80114D9C_5333CC_name_7A);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_7A_name/523FD0", D_80114DA8_5333D8_name_7A);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_80108148_526778_name_7A);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_80110B3C_52F16C_name_7A);

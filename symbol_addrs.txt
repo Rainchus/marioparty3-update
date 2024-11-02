@@ -7,3 +7,35 @@ D_800A46A0 = 0x800A46A0; //size:0x190 type:f32
 
 _ovltbl = 0x800962F4; //rom:0x96EF4 size:0x1200
 _modeovltbl = 0x800974F4; //rom:0x980F4 size:0x6C
+
+//ovl_6A
+D_8010FD20_48BCF0_name_6A = 0x8010FD20; //rom:0x48BCF0 type:s32 size:0x18 force_migration:False
+
+//ovl_6B
+D_80114DE4_49B274_name_6B = 0x80114DE4; //rom:0x49B274 type:f32 size:0xC force_migration:True
+D_80114DF0_49B280_name_6B = 0x80114DF0; //rom:0x49B280 type:f32 size:0xC force_migration:True
+D_80114EB8_49B348_name_6B = 0x80114EB8; //rom:0x49B348 type:f32 size:0xC
+D_801151F4_49B684_name_6B = 0x801151F4; //rom:0x49B684 type:f32 size:0xC force_migration:True
+D_80115200_49B690_name_6B = 0x80115200; //rom:0x49B690 type:f32 size:0xC force_migration:True
+D_801152C8_49B758_name_6B = 0x801152C8; //rom:0x49B758 type:f32 size:0xC
+D_80115604_49BA94_name_6B = 0x80115604; //rom:0x49BA94 type:f32 size:0xC force_migration:True
+D_80115610_49BAA0_name_6B = 0x80115610; //rom:0x49BAA0 type:f32 size:0xC force_migration:True
+D_801156D8_49BB68_name_6B = 0x801156D8; //rom:0x49BB68 type:f32 size:0xC
+D_801157C8_49BC58_name_6B = 0x801157C8; //rom:0x49BC58 type:f32 size:0xC force_migration:True
+
+//ovl_6D
+D_80115AAC_4C2AEC_name_6D = 0x80115AAC; //rom:0x4C2AEC type:f32 size:0x78 force_migration:True
+D_80115B60_4C2BA0_name_6D = 0x80115B60; //rom:0x4C2BA0 type:f32 size:0x10 force_migration:True
+
+//ovl_6E
+D_80111D5C_4CEF8C_name_6E = 0x80111D5C; //rom:0x4CEF8C type:f32 size:0x0C force_migration:True
+D_80111D68_4CEF98_name_6E = 0x80111D68; //rom:0x4CEF98 type:f32 size:0x0C force_migration:True
+D_80111E30_4CF060_name_6E = 0x80111E30; //rom:0x4CF060 type:f32 size:0x0C
+
+//ovl_6F
+D_80114A24_4DE3D4_name_6F = 0x80114A24; //rom:0x4DE3D4 type:f32 size:0x0C force_migration:True
+D_80114A30_4DE3E0_name_6F = 0x80114A30; //rom:0x4DE3E0 type:f32 size:0x0C force_migration:True
+D_80114AF4_4DE4A4_name_6F = 0x80114AF4; //rom:0x4DE4A4 type:f32 size:0x0C force_migration:True
+D_80114E60_4DE810_name_6F = 0x80114E60; //rom:0x4DE810 type:f32 size:0x0C
+D_80114E6C_4DE81C_name_6F = 0x80114E6C; //rom:0x4DE81C type:f32 size:0x0C
+D_80114F30_4DE8E0_name_6F = 0x80114F30; //rom:0x4DE8E0 type:f32 size:0x0C

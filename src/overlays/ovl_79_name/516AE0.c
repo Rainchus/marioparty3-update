@@ -162,6 +162,10 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_801083AC_5194EC
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_80108440_519580_name_79);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112A64_523BA4_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112A68_523BA8_name_79);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010846C_5195AC_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_80108834_519974_name_79);
@@ -188,6 +192,12 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_801099A8_51AAE8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_80109B2C_51AC6C_name_79);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112AE0_523C20_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112AE4_523C24_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112AE8_523C28_name_79);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010A028_51B168_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010A680_51B7C0_name_79);
@@ -195,6 +205,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010A680_51B7C0
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010A7D8_51B918_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010A978_51BAB8_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112AF0_523C30_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010A9B4_51BAF4_name_79);
 
@@ -225,6 +237,88 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010B6F4_51C834
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010B80C_51C94C_name_79);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B18_523C58_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B24_523C64_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B30_523C70_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B3C_523C7C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B48_523C88_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B54_523C94_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B60_523CA0_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B6C_523CAC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B78_523CB8_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B84_523CC4_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B90_523CD0_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112B9C_523CDC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BA8_523CE8_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BB4_523CF4_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BC0_523D00_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BCC_523D0C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BD8_523D18_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BE4_523D24_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BF0_523D30_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112BFC_523D3C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C08_523D48_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C14_523D54_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C20_523D60_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C2C_523D6C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C38_523D78_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C44_523D84_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C50_523D90_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C5C_523D9C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C68_523DA8_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C74_523DB4_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C80_523DC0_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C8C_523DCC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112C98_523DD8_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112CA4_523DE4_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112CB0_523DF0_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112CBC_523DFC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112CC8_523E08_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112CE4_523E24_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D00_523E40_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D1C_523E5C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D38_523E78_name_79);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010B998_51CAD8_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010BDC4_51CF04_name_79);
@@ -236,6 +330,18 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010BE30_51CF70
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010C25C_51D39C_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010C688_51D7C8_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D6C_523EAC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D7C_523EBC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D8C_523ECC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112D9C_523EDC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112DAC_523EEC_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112DBC_523EFC_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010C9B4_51DAF4_name_79);
 
@@ -272,6 +378,10 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010F168_5202A8
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010F5C8_520708_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010F65C_52079C_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112DF8_523F38_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112E08_523F48_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_8010F678_5207B8_name_79);
 
@@ -370,3 +480,5 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_80112684_5237C4
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_801126C0_523800_name_79);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_79_name/516AE0", func_80112758_523898_name_79);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_79_name/516AE0", D_80112E68_523FA8_name_79);

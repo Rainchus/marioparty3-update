@@ -44,6 +44,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010682C_3FF04C
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010718C_3FF9AC_name_5D);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117B20_410340_name_5D);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_801079BC_4001DC_name_5D);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_80107EC0_4006E0_name_5D);
@@ -90,6 +92,14 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010DA88_4062A8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010DB04_406324_name_5D);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117B58_410378_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117B64_410384_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117B70_410390_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117BA0_4103C0_name_5D);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010DB30_406350_name_5D);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010DC08_406428_name_5D);
@@ -103,6 +113,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010DDF0_406610
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010DF6C_40678C_name_5D);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010E00C_40682C_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117BD8_4103F8_name_5D);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010E1B8_4069D8_name_5D);
 
@@ -147,6 +159,36 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_8010FE9C_4086BC
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_801109B0_4091D0_name_5D);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_80110A0C_40922C_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117BF0_410410_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117C00_410420_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117C18_410438_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117C30_410450_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117C3C_41045C_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117C54_410474_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117C84_4104A4_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117CB4_4104D4_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117CB8_4104D8_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117CC0_4104E0_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117CE0_410500_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117CE4_410504_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117DCC_4105EC_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117EB4_4106D4_name_5D);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", D_80117F9C_4107BC_name_5D);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5D_name/3FE1C0", func_80110A70_409290_name_5D);
 

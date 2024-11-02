@@ -104,6 +104,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_8010DF78_42E9F8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_8010E018_42EA98_name_5F);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115E78_4368F8_name_5F);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_8010E1C4_42EC44_name_5F);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_8010E2DC_42ED5C_name_5F);
@@ -152,6 +154,34 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_80110038_430AB8
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_80110B4C_4315CC_name_5F);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_80110BA8_431628_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115EA0_436920_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115EB8_436938_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115ED0_436950_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115EDC_43695C_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115EF4_436974_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115F24_4369A4_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115F54_4369D4_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115F58_4369D8_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115F60_4369E0_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115F80_436A00_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80115F84_436A04_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_8011606C_436AEC_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_80116154_436BD4_name_5F);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_5F_name/426420", D_8011623C_436CBC_name_5F);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5F_name/426420", func_80110C0C_43168C_name_5F);
 

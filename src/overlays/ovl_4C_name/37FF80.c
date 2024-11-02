@@ -249,6 +249,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_4C_name/37FF80", func_8010FA8C_38A06C
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_4C_name/37FF80", func_8010FC50_38A230_name_4C);
 
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_4C_name/37FF80", D_80120690_39AC70_name_4C);
+
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_4C_name/37FF80", func_8010FEE8_38A4C8_name_4C);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_4C_name/37FF80", func_80110174_38A754_name_4C);

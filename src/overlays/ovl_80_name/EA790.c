@@ -131,7 +131,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800D9F5C_EDB7C_n
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800DA09C_EDCBC_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800DA190_EDDB0_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", RunDecisionTree);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800DA748_EE368_name_80);
 
@@ -458,7 +458,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800E48F4_F8514_n
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800E4954_F8574_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800E4978_F8598_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", PlayerHasItem);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800E49DC_F85FC_name_80);
 
@@ -742,7 +742,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EAE10_FEA30_n
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EB09C_FECBC_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EB160_FED80_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", GetSpaceData);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EB184_FEDA4_name_80);
 
@@ -868,9 +868,9 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800ECDD4_1009F4_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800ECE4C_100A6C_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800ECE9C_100ABC_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", RNGPercentChance);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800ECEE4_100B04_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", GetTurnsElapsed);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800ECF18_100B38_name_80);
 
@@ -956,7 +956,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE94C_10256C_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE97C_10259C_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE9C0_1025E0_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", BoardPlayerRankCalc);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EEA58_102678_name_80);
 
@@ -1033,17 +1033,17 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F1D34_105954_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F1EC8_105AE8_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2130_105D50_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", GetCurrentPlayerIndex);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F213C_105D5C_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", GetPlayerStruct);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F217C_105D9C_name_80);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2198_105DB8_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F21C0_105DE0_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", AdjustPlayerCoins);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2230_105E50_name_80);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", PlayerHasCoins);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2260_105E80_name_80);
 

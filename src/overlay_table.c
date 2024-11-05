@@ -12,7 +12,7 @@ typedef struct OverlayTable {
 /* 0x20 */ u8* bssVramEnd;
 } OverlayTable; //sizeof 0x24
 
-u8 D_800962F0[] = {0, 0, 0, 0};
+u8 D_800962F0_96EF0[] = {0, 0, 0, 0};
 
 OverlayTable _ovltbl[] = {
     {name_00_ROM_START, name_00_ROM_END, name_00_VRAM, name_00_TEXT_START, name_00_TEXT_END, name_00_DATA_START, name_00_RODATA_END, name_00_BSS_START, name_00_BSS_END },

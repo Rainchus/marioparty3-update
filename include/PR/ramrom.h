@@ -111,4 +111,3 @@ void __RamRomDestroy(int key);
 #endif /* _EMULATOR */
 
 #endif /* !_RAMROM_H */
-

@@ -1,6 +1,88 @@
 #include "common.h"
+#include "game/gamework_data.h"
+#include "game/object.h"
+#include "game/wipe.h"
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_801059A0_4F3780_name_74);
+void Hu3DCamSetPerspective(s16 camIndex, f32 fov, f32 near, f32 far);
+void ScissorSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
+void ViewportSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+void func_8000B690_C290(s32);
+void func_800142A0_14EA0(s32);
+void func_80019514_1A114(s32, s32, s32, s32);
+void func_80037258_37E58(void);
+void func_800E66E0_FA300_name_80(void);
+void func_800E69D8_FA5F8_name_80(void);
+void func_80105E0C_4F3BEC_name_74(void);
+void func_80105EF4_4F3CD4_name_74(void);
+void func_801060A4_4F3E84_name_74(void);
+void func_80106660_4F4440_name_74(void);
+void func_80106BA0_4F4980_name_74(void);
+void func_80107400_4F51E0_name_74(void);
+void func_80107D10_4F5AF0_name_74(void);
+void func_80108130_4F5F10_name_74(void);
+extern u8 D_80108F8C_4F6D6C_name_74[4];
+void func_8004B340_4BF40(omObjData*);
+void func_80105CAC_4F3A8C_name_74(omObjData*);
+void func_80105E64_4F3C44_name_74(omObjData*);
+
+void func_801059A0_4F3780_name_74(void) {
+    s16 var_a0_2;
+    s16 var_a1;
+    s16 i;
+    s16 j;
+
+    var_a1 = 0;
+    
+    for (i = 0; i < 4; i++) {
+        for (j = 0; j < 4; j++) {
+            if (i != GwPlayer[j].group) {
+                continue;
+            }
+            D_80108F8C_4F6D6C_name_74[var_a1] = j;
+            var_a1++;
+
+            if (var_a1 >= 4) {
+                break;
+            }
+        }
+        if (var_a1 >= 4) {
+            break;
+        }
+    }
+    func_800142A0_14EA0(0x78);
+    omInitObjMan(0x1E, 0x1E);
+    func_8000B690_C290(1);
+    ScissorSet(0U, 0.0f, 0.0f, 320.0f, 240.0f);
+    ViewportSet(0U, 640.0f, 480.0f, 511.0f, 640.0f, 480.0f, 511.0f);
+    Hu3DCamSetPerspective(0, 30.0f, 80.0f, 8000.0f);
+    omSetStatBit(omAddObj(0x7FDA, 0U, 0U, -1, func_8004B340_4BF40), 0xA0);
+    func_80019514_1A114(1, 0xFF, 0xFF, 0xFF);
+    
+    for (var_a0_2 = 0, i = 0; i < 4; i++) {
+        if (GwPlayer[i].minigameCoins == 3) {
+            var_a0_2++;
+        }
+    }
+
+    if (var_a0_2 >= 4) {
+        func_80037258_37E58();
+        func_800E69D8_FA5F8_name_80();
+        func_800E66E0_FA300_name_80();
+        omOvlReturnEx(1);
+        return;
+    }
+    func_801060A4_4F3E84_name_74();
+    omAddPrcObj(func_80108130_4F5F10_name_74, 0x1001U, 0x2000, 0);
+    omAddPrcObj(func_80107400_4F51E0_name_74, 0x1001U, 0x2000, 0);
+    omAddPrcObj(func_80107D10_4F5AF0_name_74, 0x1001U, 0x2000, 0);
+    omAddPrcObj(func_80106660_4F4440_name_74, 0x1001U, 0x2000, 0);
+    omAddPrcObj(func_80106BA0_4F4980_name_74, 0x1001U, 0x2000, 0);
+    omAddObj(0, 0, 0, -1, func_80105CAC_4F3A8C_name_74);
+    omAddObj(0, 0, 0, -1, func_80105E64_4F3C44_name_74);
+    func_80105EF4_4F3CD4_name_74();
+    func_80105E0C_4F3BEC_name_74();
+    HuWipeFadeIn(0xFF, 0x10);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_80105CAC_4F3A8C_name_74);
 

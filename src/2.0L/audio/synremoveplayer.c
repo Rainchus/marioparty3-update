@@ -22,7 +22,7 @@
 #include <os_internal.h>
 #include "audioTemp.h"
 
-void alSynRemovePlayer(ALSynth *drvr, ALPlayer *client)
+void alSynRemovePlayer(ALSynth *drvr)
 {
     ALPlayer *thing;
     ALPlayer *prev = 0;

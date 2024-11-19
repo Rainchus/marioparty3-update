@@ -643,3 +643,33 @@ GwStory = 0x800D0308; //size:0x74
 GwSystem = 0x800CD058; //size:0x62
 GwPlayer = 0x800D1108; //size:0xE0
 D_800BBED0 = 0x800BBED0;
+
+//libultra symbols
+//auxbus.c
+alAuxBusPull = 0x80074720; //rom:0x75320
+alAuxBusParam = 0x800747FC; //rom:0x753FC
+
+//bnkf.c
+alSeqFileNew = 0x80074830; //rom:0x75430
+alBnkfNew = 0x80074870; //rom:0x75470
+_bnkfPatchBank = 0x80074904; //rom:0x75504
+_bnkfPatchInst = 0x800749B0; //rom:0x755B0
+_bnkfPatchSound = 0x80074A44; //rom:0x75644
+_bnkfPatchWaveTable = 0x80074A9C; //rom:0x7569C
+
+//cents2ratio.c
+alCents2Ratio = 0x80078B40; //rom:0x79740
+
+//cseq.c
+//something odd here. __alCSeqNextDelta is much later in ram for some reason -
+//but it's in the same TU?
+//alCSeqNew = 0x8006E030; //rom:0x6EC30
+//alCSeqNextEvent = 0x8006E13C; //rom:0x6ED3C
+
+
+//synremoveplayer.c
+alSynRemovePlayer = 0x8006FC50; //rom:0x70850
+
+//sndpdeallocate.c
+alSndpDeallocate = 0x8006D320; //rom:0x6DF20
+

@@ -917,7 +917,9 @@ void            alSndpNew(ALSndPlayer *sndp, ALSndpConfig *c);
 void            alSndpDelete(ALSndPlayer *sndp);
 
 ALSndId         alSndpAllocate(ALSndPlayer *sndp, ALSound *sound);
-void            alSndpDeallocate(ALSndPlayer *sndp, ALSndId id);
+// void            alSndpDeallocate(ALSndPlayer *sndp, ALSndId id);
+//custom function signature
+void            alSndpDeallocate(ALSndId id);
 
 void            alSndpSetSound(ALSndPlayer *sndp, ALSndId id);
 ALSndId         alSndpGetSound(ALSndPlayer *sndp);

@@ -646,8 +646,8 @@ D_800BBED0 = 0x800BBED0;
 
 //libultra symbols
 //auxbus.c
-alAuxBusPull = 0x80074720; //rom:0x75320
-alAuxBusParam = 0x800747FC; //rom:0x753FC
+n_alAuxBusPull = 0x80074720; //rom:0x75320
+n_alAuxBusParam = 0x800747FC; //rom:0x753FC
 
 //bnkf.c
 alSeqFileNew = 0x80074830; //rom:0x75430

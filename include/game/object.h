@@ -13,12 +13,6 @@
 struct om_obj_data;
 typedef void (*omObjFunc)(struct om_obj_data *);
 
-typedef struct om_ovl_his_data {
-    s32 overlay;
-    s32 event;
-    s32 stat;
-} omOvlHisData;
-
 typedef struct om_obj_data {
 /* 0x00 */ u16 stat;
 /* 0x02 */ s16 next_idx_alloc;

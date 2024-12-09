@@ -673,3 +673,5 @@ alSynRemovePlayer = 0x8006FC50; //rom:0x70850
 //sndpdeallocate.c
 alSndpDeallocate = 0x8006D320; //rom:0x6DF20
 
+D_800A4340_A4F40 = 0x800A4340; //rom:0xA4F40 size:0x4 force_migration:True
+

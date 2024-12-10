@@ -13,6 +13,7 @@ src_dir = root_dir + "src/"
 # Project-specific
 CPP_FLAGS = [
     "-Iinclude",
+    "-Iinclude/game",
     "-Isrc",
     "-Iinclude/PR",
     "-Isrc/2.0L/audio",

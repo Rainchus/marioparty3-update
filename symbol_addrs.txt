@@ -492,7 +492,7 @@ _Genld = 0x80084484;
 guPerspectiveF = 0x8007AE60;
 guPerspective = 0x8007B010;
 guNormalize = 0x80082B00;
-gCurrentPlayerIndex = 0x800CD067;
+//gCurrentPlayerIndex = 0x800CD067;
 guLookAtF = 0x80088210;
 guLookAt = 0x80079800;
 HuSqrtf = 0x800880E0;
@@ -556,8 +556,8 @@ gPrevCoinBlockIndexes = 0x800CE1E8; //type:s16 size:0x14
 gPrevStarBlockIndexes = 0x800D59E0; //type:s16 size:0x14
 gPrevItemBlockIndexes = 0x800CC378; //type:s16 size:0x14
 
-gTotalTurns = 0x800CD05A;
-gCurrentTurn = 0x800CD05B;
+//gTotalTurns = 0x800CD05A;
+//gCurrentTurn = 0x800CD05B;
 
 
 
@@ -698,3 +698,10 @@ gThreadOutStackSize = 0x800CB8B8;
 gThreadYieldStack = 0x800CE1FC;
 gUCodeAddresses = 0x800D0A34;
 gMesgRingBuffer = 0x800CBB80;
+perm_heap_addr = 0x800B1A10;
+temp_heap_addr = 0x800B1A20;
+process_count = 0x800BBA94;
+top_process = 0x800BBA8C;
+process_jmp_buf = 0x800BBA30;
+current_process = 0x800BBA90;
+sPrcSleepLoc = 0x800D20A8;

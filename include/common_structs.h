@@ -186,10 +186,24 @@ typedef struct GW_SYSTEM {
     /* 0x57 - 800CD0AF */ s8 slow_dice_flags;
     /* 0x58 - 800CD0B0 */ char unk_58[4];
     /* 0x5C - 800CD0B4 */ u16 bank_coins;
-    /* 0x5E - 800CD0B6 */ u8 data_flags; //unknown what this is, but star spawns are included in this
-    /* 0x5F - 800CD0B7 */ u8 unk_flags;
-    /* 0x60 - 800CD0B8 */ u8 unk_60[0x44];
+    /* 0x5E - 800CD0B6 */ u8 data_flags[8]; //unknown what this is, unknown size
+    /* 0x66 - 800CD0B8 */ u8 unk_66[0x3E];
 } GW_SYSTEM; //sizeof 0xA4
+
+typedef struct GwCommon_s {
+/* 0x00 */ u8 unk_00;
+/* 0x01 */ char unk_01;
+/* 0x02 */ u16 mgRecord[8]; //is this still 8 in length like mp1?
+/* 0x12 */ char unk_12[4];
+/* 0x16 */ u8 mgUnlock[7]; //is this still 7 in length like mp1?
+/* 0x1D */ char unk_1D[0x6E];
+/* 0x8B */ u8 flag[12]; //is this still 12 in length like mp1?
+/* 0x97 */ char unk_9D[0xD];
+} GW_COMMON; //sizeof 0xA4?
+
+typedef struct GW_STORY {
+    char unk_00[0x74];
+} GW_STORY;
 
 typedef struct RectF {
 /* 0x00 */ f32 x1;

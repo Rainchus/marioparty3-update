@@ -44,7 +44,7 @@ s32 _InitController(u16* channel)
 s16 InitController(s16 ch, s32 arg1)
 {
     unkMesg siMesg;
-    RequestSIFunction(&siMesg, (HuSiFunc)&_InitController, &ch, 1);
+    RequestSIFunction(&siMesg, (void*)&_InitController, &ch, 1);
     
     D_800ABF9C_ACB9C = 0;
     

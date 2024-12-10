@@ -109,7 +109,7 @@ s32 InitEeprom(unkfunc_8001AFD8* arg0) {
     unkMesg sp10;
     unkfunc_8001AFD8* sp20 = arg0; //?
 
-    return RequestSIFunction(&sp10, &_InitEeprom, &sp20, 1);
+    return RequestSIFunction(&sp10, (void*)&_InitEeprom, &sp20, 1);
 }
 
 INCLUDE_ASM("asm/nonmatchings/eeprom", _WriteEeprom);

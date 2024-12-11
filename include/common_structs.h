@@ -11,76 +11,30 @@
 #define    OS_K0_TO_PHYSICAL(x)    (u32)(((char *)(x)-0x80000000))
 #define    OS_PHYSICAL_TO_K0(x)    (void *)(((u32)(x)+0x80000000))
 
-typedef struct objectt {
-    /*0x00*/ struct objectt *prev;
-    /*0x04*/ struct objectt *next;
-    /*0x08*/ u8 unk8;
-    /*0x09*/ s8 unk9;
-    /*0x0A*/ u16 unkA;
-
-    /*0x0C*/ Vec coords;
-
-    // Three Vec groups (Scale?, Rotation?, Position?)
-    f32 unk18; // Rotation?
-    f32 unk1C;
-    f32 unk20;
-
-    f32 unk24; // Scale?
-    f32 unk28;
-    f32 unk2C;
-
-    f32 unk30;
-    f32 unk34;
-    f32 unk38;
-
-    struct objectIndirectt *unk3C;
-    struct objectIndirectt *unk40;
-    s16 unk44;
-    s16 unk46;
-} object;
-
-struct objectIndirectt {
-    s16 unk0;
-    s16 unk2;
-    s16 unk4;
-    s16 unk6;
-    s16 unk8;
-    s16 unkA;
-    s16 unkC;
-    s16 unkE;
-    s32 unk10;
-
-    void *unk14;
-
-    // Three Vec groups (Scale?, Rotation?, Position?)
-    f32 unk18;
-    f32 unk1C;
-    f32 unk20;
-
-    f32 unk24; // Rotation?
-    f32 unk28;
-    f32 unk2C;
-
-    f32 unk30;
-    f32 unk34;
-    f32 unk38;
-
-    u16 unk3C; // count of unk40
-    s16 *unk40;
-    u16 unk44; // count of unk48
-    s16 *unk48;
-
-    s32 unk4C;
-    s32 unk50;
-    s32 unk54;
-    s32 unk58;
-    struct objectIndirect3t *unk5C;
-}; // sizeof 0x60
-
 typedef struct objectIndirect3t {
-    struct objectt *unk0;
-    f32 unk4;
+/* 0x00 */ struct objectt *unk0;
+/* 0x04 */ f32 unk4;
 } objectIndirect3;
+
+typedef struct DiceInstance {
+    char unk_00[0x4C];
+    s32 unk_4C;
+} DiceInstance; //unk size
+
+typedef struct UnkDiceRelatedInner {
+    /* 0x00 */ char unk_00[0x28];
+    /* 0x28 */ s16 unk_28;
+    /* 0x2A */ char unk_2A[10];
+    /* 0x34 */ DiceInstance* dice;
+    /* 0x38 */ char unk_38[12];
+} UnkDiceRelatedInner;
+
+typedef struct UnkDiceRelated {
+/* 0x00 */ s16 unk_00;
+/* 0x02 */ char unk_02[6];
+/* 0x08 */ UnkDiceRelatedInner UnkDiceInner;
+} UnkDiceRelated;
+
 
 typedef struct GwPlayer_s {
 /* 0x00 */ u8 group; //for which group you belong to in a minigame

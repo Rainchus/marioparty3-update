@@ -415,13 +415,16 @@ segments:
     vram: 0x800D6B70
     dir: overlays/ovl_80_name
     name: name_80
+    subalign: 16
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x32A0
     subsegments:
       - [0xEA790, c]
+      - [0xEE660, c]
       - [0x1143C0, data, EA790] #801007A0
-      - [0x115B60, .rodata, EA790] #80101F40
+      - [0x115B50, .rodata, EA790] #80101F40
+      - [0x115BF0, .rodata, EE660]
       - {0x116320, type: bss, vram: 0x80102700, name: ovl_80_bss}
 
   - type: code

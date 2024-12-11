@@ -14,7 +14,7 @@
 #include "types.h"
 
 #include "common_structs.h"
-// #include "functions.us.h"
+#include "functions.us.h"
 #include "include_asm.h"
 #include "variables.h"
 #include "macros.h"

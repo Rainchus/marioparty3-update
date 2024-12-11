@@ -32,6 +32,23 @@ typedef struct omObjData {
 /* 0x5C */ void* unk_5C;
 } omObjData; //sizeof 0x60
 
+typedef struct Object_s {
+/* 0x00 */ struct Object_s *prev;
+/* 0x04 */ struct Object_s *next;
+/* 0x08 */ u8 unk8;
+/* 0x09 */ s8 unk9;
+/* 0x0A */ u16 unkA;
+/* 0x0C */ Vec coords;
+// Three Vec groups (Scale?, Rotation?, Position?)
+/* 0x18 */ Vec unk18;
+/* 0x24 */ Vec unk24;
+/* 0x30 */ Vec unk30;
+/* 0x3C */ omObjData* unk3C;
+/* 0x40 */ omObjData* unk40;
+/* 0x44 */ s16 unk44;
+/* 0x46 */ s16 unk46;
+} Object;
+
 typedef struct
 {
     u16 unk0;                   // 0000

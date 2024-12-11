@@ -1,0 +1,1883 @@
+#this contains libultra file splits that the other yaml doesn't have
+
+name: Mario Party 3 (North America)
+sha1: 6beb80ff822b96bcf85dcdb512e8b2b7969d8259
+
+options:
+  basename: marioparty3
+  target_path: baserom.us.z64
+  base_path: .
+  compiler: GCC
+  find_file_boundaries: True
+  header_encoding: ASCII
+  platform: n64
+  symbol_name_format: $VRAM_$ROM
+  undefined_funcs_auto_path: undefined_funcs_auto.txt
+  undefined_syms_auto_path: undefined_syms_auto.txt
+  ld_script_path: marioparty3.ld
+  symbol_addrs_path: symbol_addrs.txt
+  # undefined_syms_path: undefined_syms.txt
+  # c_path: c
+  asm_path: asm
+  src_path: src
+  build_path: build
+  # extensions_path: tools/splat_ext
+  # auto_all_sections: True
+  asm_inc_header: "\t.set noat\n\t.set noreorder\n"
+
+segments:
+  - [0x000000, bin, "header"]
+  - [0x000040, bin, "boot"]
+  - type: code
+    start: 0x1000
+    vram: 0x80000400
+    subalign: 4
+    subsegments:
+    - [0x1000, hasm]
+    - [0x1060, c, unknown/1060]
+    - [0x8F20, c, unknown/8F20]
+    - [0x99D0, c, pad]
+    - [0xA480, c, input]
+    - [0xA6C0, c, data]
+    - [0xAE30, c, "decode"]
+    - [0xBCA0, c, util]
+    - [0xC1F0, c, unknown/C1F0]
+    - [0xC3A0, c, esprite]
+    - [0xCE10, c, eeprom]
+    - [0xD7A0, c, unknown/D7A0]
+    - [0xE560, c, unknown/E560]
+    - [0xEFB0, c, stubbed]
+    - [0xEFC0, c, gameman]
+    - [0xF610, c, graphics]
+    - [0xFCA0, c, hmfload]
+    - [0x12E20, c, camera]
+    - [0x13F90, c, unknown/13F90]
+    - [0x14EA0, c, unknown/14EA0]
+    - [0x19C30, c, unknown/19C30]
+    - [0x1A580, c, mallocblock]
+    - [0x1AC70, c, hmfman]
+    - [0x20A20, c, unknown/20A20]
+    - [0x22EB0, c, unknown/22EB0]
+    - [0x30C40, c, unknown/30C40]
+    - [0x32160, c, unknown/32160]
+    - [0x34DD0, c, unknown/34DD0]
+    - [0x360A0, c, main]
+    - [0x36440, c, mallocperm]
+    - [0x36510, c, malloctemp]
+    - [0x365E0, c, unknown/365E0]
+    - [0x36650, c, save]
+    - [0x36CD0, c, malloc]
+    - [0x36F80, c, unknown/36F80]
+    - [0x37210, c, unknown/gamemes]
+    - [0x45F50, c, unknown/pause]
+    - [0x471D0, c, unknown/471D0]
+    - [0x47D60, c, unknown/47D60]
+    - [0x4B120, c, unknown/4B120]
+    - [0x4BF40, c, unknown/4BF40]
+    - [0x4E010, c, profiler]
+    - [0x4E5A0, c, rom]
+    - [0x4E800, c, unknown/printfunc]
+    - [0x4F720, c, "process"]
+    - [0x4FE90, c, unknown/saveencode]
+    - [0x508F0, c, unknown/saveload]
+    - [0x51B50, c, nnsched]
+    - [0x52350, c, siman]
+    - [0x527E0, c, unknown/527E0]
+    - [0x52F30, c, "sprman"]
+    - [0x58000, c, "sprput"]
+    - [0x5ACF0, c, window]
+    - [0x62750, c, unknown/wipe]
+    - [0x66E70, c, unknown/66E70]
+    - [0x67000, c, unknown/67000]
+    - [0x67100, hasm, "setjmp"]
+    - [0x671E0, c, "lib/hvq"]
+    - [0x6B050, c, unknown/6B050]
+    - [0x6BA20, c, unknown/6BA20]
+    - [0x6C140, c, unknown/6C140]
+    - [0x6C320, c, unknown/6C320]
+    - [0x6C3A0, c, unknown/6C3A0]
+    - [0x6C3C0, c, unknown/6C3C0]
+    - [0x6C9F0, c, unknown/6C9F0]
+    - [0x6DBD0, c, unknown/6DBD0]
+    - [0x6DBF0, c, unknown/6DBF0]
+    - [0x6DC10, c, unknown/6DC10]
+    - [0x6DC30, c, unknown/6DC30]
+    - [0x6DC50, c, unknown/6DC50]
+    - [0x6DCD0, c, unknown/6DCD0]
+    - [0x6DCE0, c, unknown/6DCE0]
+    - [0x6DD10, c, unknown/6DD10]
+    - [0x6DF20, c, unknown/6DF20]
+    - [0x6DFA0, c, unknown/6DFA0]
+    - [0x6E6B0, c, unknown/6E6B0]
+    - [0x6E780, c, unknown/6E780]
+    - [0x6E7E0, c, unknown/6E7E0]
+    - [0x6E840, c, unknown/6E840]
+    - [0x6E880, c, unknown/6E880]
+    - [0x6E8E0, c, unknown/6E8E0]
+    - [0x6E940, c, unknown/6E940]
+    - [0x6F470, c, unknown/6F470]
+    - [0x70420, c, unknown/70420]
+    - [0x707B0, c, unknown/707B0]
+    - [0x70850, c, unknown/70850]
+    - [0x70940, c, unknown/70940]
+    - [0x709E0, c, unknown/709E0]
+    - [0x70A70, c, unknown/70A70]
+    - [0x70B20, c, unknown/70B20]
+    - [0x70BB0, c, unknown/70BB0]
+    - [0x70C30, c, unknown/70C30]
+    - [0x72740, c, unknown/72740]
+    - [0x72750, c, unknown/72750]
+    - [0x72890, bin] # Should this be 0x7288C? What is this?
+    - [0x72C20, c, "libultra/io/conteepwrite"]
+    - [0x73020, c, "libultra/io/conteepprobe"]
+    - [0x730A0, c, "libultra/io/conteeplongwrite"]
+    - [0x73190, c, "libultra/io/conteeplongread"]
+    - [0x73200, hasm, "libultra/os/setintmask"]
+    - [0x732A0, c, "libultra/io/pimgr"]
+    - [0x73550, c, "libultra/io/epirawdma"]
+    - [0x73740, c, "libultra/io/epidma"]
+    - [0x737E0, c, "libultra/io/cartrominit"]
+    - [0x73960, c, "libultra/io/devmgr"]
+    - [0x73D20, c, "libultra/io/piacs"] # double check
+    - [0x73E10, c, "libultra/io/aigetlen"]
+    - [0x73E20, c, "libultra/io/aisetfreq"]
+    - [0x73F40, c, "libultra/io/aisetnextbuf"]
+    - [0x73FE0, c, "libultra/audio/drvrnew"]
+    - [0x74810, c, "libultra/audio/load"]
+    - [0x75320, c, "libultra/audio/auxbus"]
+    - [0x75430, c, "libultra/audio/bnkf"]
+    - [0x75700, c, "libultra/audio/env"]
+    - [0x763B0, c, "libultra/audio/event"]
+    - [0x76700, c, "libultra/audio/filter"]
+    - [0x76720, c, "libultra/audio/mainbus"]
+    - [0x76890, c, "libultra/audio/resample"]
+    - [0x76B40, c, "libultra/audio/reverb"]
+    - [0x776E0, c, "libultra/audio/save"]
+    - [0x777B0, c, "libultra/audio/seq"]
+    - [0x77DA0, c, "libultra/audio/sl"]
+    - [0x77E50, c, "libultra/audio/heapinit"]
+    - [0x77E90, c, "libultra/audio/heapalloc"]
+    - [0x77EE0, c, "libultra/audio/copy"]
+    - [0x77F20, c, "libultra/audio/cseq"]
+    - [0x789E0, c, "libultra/audio/synthesizer"]
+    - [0x79020, c, "libultra/audio/syndelete"]
+    - [0x79030, c, "libultra/audio/synaddplayer"]
+    - [0x79080, c, "libultra/audio/synfreevoice"]
+    - [0x79120, c, "libultra/audio/synallocvoice"]
+    - [0x79300, c, "libultra/audio/synstopvoice"]
+    - [0x79380, c, "libultra/audio/synstartvoice"]
+    - [0x79420, c, "libultra/audio/synsetpitch"]
+    - [0x794B0, c, "libultra/audio/synsetvol"]
+    - [0x79570, c, "libultra/audio/synsetfxmix"]
+    - [0x79610, c, "libultra/audio/synsetpan"]
+    - [0x796A0, c, "libultra/audio/synallocfx"]
+    - [0x79740, c, "libultra/audio/cents2ratio"]
+    - [0x797A0, c, "libultra/os/invaldcache"]
+    - [0x79850, c, "libultra/os/invalicache"]
+    - [0x798D0, c, "libultra/os/writebackdcache"]
+    - [0x79950, c, "libultra/os/writebackdcacheall"]
+    - [0x79980, c, "libultra/io/contreaddata"]
+    - [0x79B60, c, "libultra/io/controller"]
+    - [0x79E70, c, "libultra/io/contsetch"]
+    - [0x79ED0, c, "libultra/os/virtualtophysical"]
+    - [0x79F30, c, "libultra/gu/cosf"]
+    - [0x7A080, c, "libultra/gu/lookat"]
+    - [0x7A790, c, "libultra/gu/lookathil"]
+    - [0x7B1F0, c, "libultra/gu/lookatref"]
+    - [0x7B7E0, c, "libultra/gu/ortho"]
+    - [0x7BA60, c, "libultra/gu/perspective"]
+    - [0x7BDE0, c, "libultra/gu/random"]
+    - [0x7BE10, c, "libultra/gu/rotaterpy"]
+    - [0x7C130, c, "libultra/gu/sinf"]
+    - [0x7C2D0, c, "libultra/os/rdbsend"]
+    - [0x7C4F0, c, "libultra/os/osInitRdb"]
+    - [0x7C570, hasm, "libultra/libc/bcopy"]
+    - [0x7C930, c, "libultra/libc/string"]
+    - [0x7C9C0, c, "libultra/libc/sprintf"]
+    - [0x7CA50, c, "libultra/libc/syncprintf"]
+    - [0x7CB00, c, "libultra/os/osCreateMesgQueue"]
+    - [0x7CB30, c, "libultra/os/osJamMesg"]
+    - [0x7CC70, c, "libultra/os/osRecvMesg"]
+    - [0x7CDA0, c, "libultra/os/osSendMesg"]
+    - [0x7CED0, c, "libultra/os/seteventmesg"]
+    - [0x7CF80, hasm, "libultra/os/setcause"]
+    - [0x7CF90, hasm, "libultra/os/setcompare"]
+    - [0x7CFA0, hasm, "libultra/os/setcount"]
+    - [0x7CFB0, hasm, "libultra/os/setsr"]
+    - [0x7CFC0, c, "libultra/io/sptask"]
+    - [0x7D200, c, "libultra/io/sptaskyield"]
+    - [0x7D220, c, "libultra/io/sptaskyielded"]
+    - [0x7D270, c, "libultra/io/sirawdma"]
+    - [0x7D320, c, "libultra/io/siacs"]
+    - [0x7D410, c, "libultra/os/createthread"]
+    - [0x7D510, c, "libultra/os/destroythread"]
+    - [0x7D5F0, c, "libultra/os/getthreadpri"]
+    - [0x7D610, c, "libultra/os/setthreadpri"]
+    - [0x7D6E0, c, "libultra/os/startthread"]
+    - [0x7D800, hasm, "__osDequeueThread"]
+    - [0x7D840, c, "libultra/os/yieldthread"]
+    - [0x7D890, c, "libultra/os/osGetTime"]
+    - [0x7D920, c, "libultra/os/osSetTimer"]
+    - [0x7DA50, c, "libultra/os/timerintr"]
+    - [0x7DE10, hasm, "libultra/os/probetlb"]
+    - [0x7DED0, c, "libultra/io/vigetcurrframebuf"]
+    - [0x7DF10, c, "libultra/io/vigetnextframebuf"]
+    - [0x7DF50, c, "libultra/io/vimgr"]
+    - [0x7E290, c, "libultra/io/visetevent"]
+    - [0x7E2F0, c, "libultra/io/visetmode"]
+    - [0x7E340, c, "libultra/io/visetspecial"]
+    - [0x7E4B0, c, "libultra/io/visetyscale"]
+    - [0x7E500, c, "libultra/io/viswapbuf"]
+    - [0x7E550, c, "libultra/io/viswapcontext"]
+    - [0x7E860, c, "libultra/io/viblack"]
+    - [0x7E8C0, hasm, "libultra/gu/mtxidenf"]
+    - [0x7E920, hasm, "libultra/gu/mtxf2l"]
+    - [0x7E9A0, hasm, "libultra/gu/mtxl2f"]
+    - [0x7EA20, hasm, "libultra/gu/mtxcatf"]
+    - [0x7EB20, hasm, "libultra/gu/scale"]
+    - [0x7EBE0, hasm, "libultra/gu/translatef"]
+    - [0x7EC40, c, "libultra/gu/mtxcatl"]
+    - [0x7ECC0, c, "libultra/gu/rotate"]
+    - [0x7EFA0, c, "libultra/io/motor"]
+    - [0x7F330, c, "libultra/io/pfsselectbank"]
+    - [0x7F3A0, c, "libultra/io/contramread"]
+    - [0x7F590, c, "libultra/io/contramwrite"]
+    - [0x7F800, c, "libultra/os/afterprenmi"]
+    - [0x7F820, c, "libultra/os/getmemsize"]
+    - [0x7F8C0, c, "libultra/os/initialize"]
+    - [0x7FCD0, c, "libultra/os/initialize_kmc"]
+    - [0x800A0, c, "libultra/os/initialize_msp"]
+    - [0x80460, c, "libultra/os/initialize_emu"]
+    - [0x804E0, c, "libultra/io/conteepread"]
+    - [0x80710, hasm, "libultra/os/exceptasm"]
+    - [0x815D0, c, "libultra/os/setglobalintmask"]
+    - [0x81610, c, "libultra/os/resetglobalintmask"]
+    - [0x81660, c, "libultra/io/pirawdma"]
+    - [0x81730, c, "libultra/io/pigetcmdq"]
+    - [0x81750, c, "libultra/io/epirawread"] # double check
+    - [0x818C0, c, "libultra/io/epirawwrite"]
+    - [0x81A30, c, "libultra/io/piwrite"]
+    - [0x81A80, c, "libultra/io/piread"]
+    - [0x81AD0, c, "libultra/io/ai"]
+    - [0x81AF0, c, "libultra/debug/kdebugserver"]
+    - [0x81DB0, c, "libultra/debug/threadprofile"]
+    - [0x81E40, hasm, "libultra/gu/sqrtf"]
+    - [0x81E50, c, "libultra/debug/readhost"]
+    - [0x81F20, c, "libultra/os/initialize_isv"]
+    - [0x824C0, hasm, "libultra/monutil"]
+    - [0x82640, c, "libultra/libc/xprintf"]
+    - [0x83090, hasm, "libultra/os/getcause"]
+    - [0x830A0, hasm, "libultra/os/getcount"]
+    - [0x830B0, hasm, "libultra/os/getsr"]
+    - [0x830C0, hasm, "libultra/os/setfpccsr"]
+    - [0x830D0, hasm, "libultra/os/setwatchlo"]
+    - [0x830E0, c, "libultra/rmon/rmonsio"]
+    - [0x83290, c, "libultra/io/sp"]
+    - [0x832B0, c, "libultra/io/spgetstat"]
+    - [0x832C0, c, "libultra/io/spsetstat"]
+    - [0x832D0, c, "libultra/io/spsetpc"]
+    - [0x83300, c, "libultra/io/sprawdma"]
+    - [0x83390, c, "libultra/io/sirawread"]
+    - [0x833E0, c, "libultra/io/sirawwrite"]
+    - [0x83430, c, "libultra/io/crc"]
+    - [0x83520, hasm, "libultra/os/maptlbrdb"]
+    - [0x83580, hasm, "libultra/os/unmaptlball"]
+    - [0x835D0, c, "libultra/io/vi"]
+    - [0x836E0, c, "libultra/io/vigetcurrcontext"]
+    - [0x836F0, bin] # empty
+    - [0x83700, hasm, "libultra/gu/normalize"]
+    - [0x83760, c, "libultra/io/pfsisplug"]
+    - [0x83A40, c, "libultra/io/pfsgetstatus"]
+    - [0x83C50, c, "libultra/io/contpfs"]
+    - [0x846E0, c, "libultra/io/pirawread"]
+    - [0x84730, c, "libultra/io/pirawwrite"]
+    - [0x84780, c, "libultra/io/epiwrite"]
+    - [0x847E0, c, "libultra/io/epiread"]
+    - [0x84840, hasm, "libultra/libc/bcmp"]
+    - [0x84950, c, "libultra/libc/xlitob"]
+    - [0x84BA0, c, "libultra/libc/xldtob"]
+    - [0x85630, c, "libultra/rmon/rmoncmds"]
+    - [0x856C0, c, "libultra/rmon/rmonmem"]
+    - [0x85E30, c, "libultra/rmon/rmonmisc"]
+    - [0x85F80, c, "libultra/rmon/rmonregs"]
+    - [0x86A40, c, "libultra/rmon/rmontask"]
+    - [0x87310, c, "libultra/rmon/rmonmain"]
+    - [0x876B0, c, "libultra/io/sprawread"]
+    - [0x87700, c, "libultra/io/sprawwrite"]
+    - [0x87750, c, "libultra/io/si"]
+    - [0x87770, hasm, "libultra/os/stopthread"]
+    - [0x87830, c, unknown/87830]
+    - [0x87840, c, "libultra/libc/ldiv"]
+    - [0x87A00, hasm, "libultra/rmon/rmonrcp"]
+    - [0x87AA0, c, "libultra/rmon/rmonbrk"]
+    - [0x88440, c, unknown/88440]
+    - [0x88460, c, unknown/88460]
+    - [0x88710, c, unknown/88710]
+    - [0x88830, c, unknown/88830] # last libultra scope
+    - [0x88CE0, c, libhmath/sqrtf]
+    - [0x88CF0, c, libhmath/vecmag]
+    - [0x88D50, c, libhmath/vecnorm]
+    - [0x88DE0, c, libhmath/vecdot]
+    - [0x88E10, c, unknown/88E10]
+    - [0x890B0, c, unknown/890B0]
+    - [0x89120, c, unknown/89120]
+    - [0x89510, c, unknown/89510]
+    - [0x89FB0, c, unknown/89FB0]
+    - [0x8A350, c, unknown/8A350]
+    - [0x8A3D0, c, unknown/8A3D0]
+    - [0x8A420, c, unknown/8A420]
+    - [0x8A460, c, unknown/8A460]
+    - [0x8A4A0, c, unknown/8A4A0]
+    - [0x8A4D0, c, unknown/8A4D0]
+    - [0x8A580, c, unknown/8A580]
+    - [0x8A610, c, libhmath/veccopy]
+    - [0x8A640, c, libhmath/vecneg]
+    - [0x8A670, c, libhmath/vecadd]
+    - [0x8A6B0, c, libhmath/vecsub]
+    - [0x8A6F0, c, libhmath/vecmuls]
+    - [0x8A720, c, libhmath/vecadds]
+    - [0x8A770, c, libhmath/veclinc]
+    - [0x8A830, c, libhmath/vecmags3f]
+    - [0x8A860, c, libhmath/vecmag3f]
+    - [0x8A890, c, libhmath/vecnorm3f]
+    - [0x8A920, c, libhmath/vecdist]
+    - [0x8A9B0, c, libhmath/vecdot3f]
+    - [0x8A9E0, c, libhmath/veccross]
+    - [0x8AA30, c, libhmath/veceq]
+    - [0x8AA90, c, unknown/8AA90]
+    - [0x8AC30, c, unknown/8AC30]
+    - [0x8AC70, c, unknown/8AC70]
+    - [0x8ACD0, c, unknown/8ACD0]
+    - [0x8AD20, c, unknown/8AD20]
+    - [0x8ADB0, c, unknown/8ADB0]
+    - [0x8AEA0, c, unknown/8AEA0]
+    - [0x8AF30, c, unknown/8AF30]
+    - [0x8B030, c, unknown/8B030]
+    - [0x8B0C0, c, unknown/8B0C0]
+    - [0x8B1C0, c, unknown/8B1C0]
+    - [0x8B3F0, c, unknown/8B3F0]
+    - [0x8B560, c, unknown/8B560]
+    - [0x8B960, c, unknown/8B960]
+    - [0x8D730, c, unknown/8D730]
+    - [0x8D790, c, unknown/8D790]
+    - [0x8D7F0, c, unknown/8D7F0]
+    - [0x8D860, c, unknown/8D860]
+    - [0x8D8C0, c, unknown/8D8C0]
+    - [0x8E050, c, unknown/8E050]
+    - [0x8E4A0, c, unknown/8E4A0]
+    - [0x8E6B0, c, unknown/8E6B0]
+    - [0x8EA10, c, unknown/8EA10]
+    - [0x8EFF0, c, unknown/8EFF0]
+    - [0x8F320, c, unknown/8F320]
+    - [0x8F480, c, unknown/8F480]
+    - [0x8F620, c, unknown/8F620]
+    - [0x8F760, c, unknown/8F760]
+    - [0x8F7D0, c, unknown/8F7D0]
+    - [0x8F830, c, unknown/8F830]
+    - [0x8FB20, c, libhmath/sin]
+    - [0x8FCF0, bin]
+    - [0x96EF0, data, BCA0]
+    - [0x98260, bin]
+    - [0x98310, bin]
+    - [0xA7590, .rodata, decode] # rodata
+    - [0xA75A8, bin]
+    - [0xA77B8, .rodata, mallocblock]
+    - [0xA77BC, bin]
+
+  - dir: overlays/shared_overlay130
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0xA96F0
+    vram: 0x800D6B70
+    subsegments:
+      - [0xA96F0, c]
+      - [0xAB1C0, c]
+      - [0xB3CE0, c]
+      - [0xB63A0, c]
+      - [0xB7600, c]
+      - [0xB88C0, c]
+      - [0xB8A20, c]
+      - [0xBA4B0, c]
+      - [0xBC7A0, c]
+      - [0xBD210, c]
+      - [0xBE2A0, bin] # data
+
+  - dir: overlays/shared_overlay129
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0xBE940
+    vram: 0x800D6B70
+    subsegments:
+      - [0xBE940, c]
+      - [0xBF4A0, c]
+      - [0xBFB40, c]
+      - [0xC1580, c]
+      - [0xC1BA0, c]
+      - [0xC1D60, c]
+      - [0xC4430, c]
+      - [0xC45D0, c]
+      - [0xC5770, c]
+      - [0xC9330, c]
+      - [0xC9690, c]
+      - [0xCA640, c]
+      - [0xCCD20, c]
+      - [0xD1190, c]
+      - [0xD28F0, c]
+      - [0xD3450, c]
+      - [0xD5B20, c]
+      - [0xDBE50, c]
+      - [0xDC0D0, c]
+      - [0xDC4E0, c]
+      - [0xDFD60, c]
+      - [0xE3CD0, c]
+      - [0xE78B0, c]
+      - [0xE7AE0, c]
+      - [0xE8BE0, bin] # data
+
+  # Board play overlay
+  - dir: overlays/shared_board
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0xEA790
+    vram: 0x800D6B70
+    subsegments:
+      - [0xEA790, c]
+      - [0xEB2F0, c]
+      - [0xEC3B0, c]
+      - [0xECA50, c]
+      - [0xEE3B0, c]
+      - [0xEE660, c]
+      - [0xF2910, c]
+      - [0xF5070, c]
+      - [0xF5B90, c]
+      # - [0xFE110, c] suspected based on mp1 spaces.c
+      - [0xFFB10, c]
+      - [0x1006F0, c]
+      - [0x101840, c]
+      - [0x105D50, c]
+      - [0x1063F0, c]
+      - [0x106640, c]
+      - [0x106A50, c]
+      - [0x10AD50, c]
+      - [0x10C230, c]
+      - [0x113520, c]
+      - [0x113750, c]
+      - [0x1143C0, bin] # data
+
+  - dir: overlays/test_menu1
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x116320
+    vram: 0x801059A0
+    subsegments:
+      - [0x116320, c]
+      - [0x119560, bin] # data
+
+  - dir: overlays/minigames/hand_line_sinker
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x11A480
+    vram: 0x801059A0
+    subsegments:
+      - [0x11A480, c]
+      - [0x120090, c]
+      - [0x1209E0, bin] # data
+
+  - dir: overlays/minigames/coconut_conk
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x120BC0
+    vram: 0x801059A0
+    subsegments:
+      - [0x120BC0, c]
+      - [0x126180, bin] # data
+
+  - dir: overlays/minigames/spotlight_swim
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1263E0
+    vram: 0x801059A0
+    subsegments:
+      - [0x1263E0, c]
+      - [0x12D700, bin] # data
+
+  - dir: overlays/minigames/boulder_ball
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x12DD30
+    vram: 0x801059A0
+    subsegments:
+      - [0x12DD30, c]
+      - [0x131A90, bin] # data
+
+  - dir: overlays/minigames/crazy_cogs
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x131C10
+    vram: 0x801059A0
+    subsegments:
+      - [0x131C10, c]
+      - [0x137A80, bin] # data
+
+  - dir: overlays/minigames/hide_and_sneak
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x137C00
+    vram: 0x801059A0
+    subsegments:
+      - [0x137C00, c]
+      - [0x13E5D0, bin] # data
+
+  - dir: overlays/minigames/ridiculous_relay
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x13E9C0
+    vram: 0x801059A0
+    subsegments:
+      - [0x13E9C0, c]
+      - [0x149CD0, bin] # data
+
+  - dir: overlays/minigames/thwomp_pull
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x14A810
+    vram: 0x801059A0
+    subsegments:
+      - [0x14A810, c]
+      - [0x153BD0, bin] # data
+
+  - dir: overlays/minigames/river_raiders
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1542E0
+    vram: 0x801059A0
+    subsegments:
+      - [0x1542E0, c]
+      - [0x15BCF0, bin] # data
+
+  - dir: overlays/minigames/tidal_toss
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x15C310
+    vram: 0x801059A0
+    subsegments:
+      - [0x15C310, c]
+      - [0x1613E0, bin] # data
+
+  - dir: overlays/minigames/eatsa_pizza
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x161750
+    vram: 0x801059A0
+    subsegments:
+      - [0x161750, c]
+      - [0x164EB0, bin] # data
+
+  - dir: overlays/minigames/baby_bowser_broadside
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x165010
+    vram: 0x801059A0
+    subsegments:
+      - [0x165010, c]
+      - [0x169540, c]
+      - [0x16F3D0, bin] # data
+
+  - dir: overlays/minigames/pump_pump_away
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x16F670
+    vram: 0x801059A0
+    subsegments:
+      - [0x16F670, c]
+      - [0x17AB40, bin] # data
+
+  - dir: overlays/minigames/hyper_hydrants
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x17B3B0
+    vram: 0x801059A0
+    subsegments:
+      - [0x17B3B0, c]
+      - [0x1817F0, bin] # data
+
+  - dir: overlays/minigames/picking_panic
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x181950
+    vram: 0x801059A0
+    subsegments:
+      - [0x181950, c]
+      - [0x18A560, bin] # data
+
+  # Toadstool Titan
+  - dir: overlays/minigames/cosmic_coaster
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x18ABD0
+    vram: 0x801059A0
+    subsegments:
+      - [0x18ABD0, c]
+      - [0x18EB30, c]
+      - [0x190D60, bin] # data
+
+  - dir: overlays/minigames/puddle_paddle
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x191240
+    vram: 0x801059A0
+    subsegments:
+      - [0x191240, c]
+      - [0x19CAC0, bin] # data
+
+  - dir: overlays/minigames/etch_n_catch
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x19CEF0
+    vram: 0x801059A0
+    subsegments:
+      - [0x19CEF0, c]
+      - [0x1A3BF0, bin] # data
+
+  - dir: overlays/minigames/log_jam
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1A3D80
+    vram: 0x801059A0
+    subsegments:
+      - [0x1A3D80, c]
+      - [0x1AC270, bin] # data
+
+  - dir: overlays/minigames/slot_synch
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1AC970
+    vram: 0x801059A0
+    subsegments:
+      - [0x1AC970, c]
+      - [0x1B47C0, bin] # data
+
+  - dir: overlays/minigames/treadmill_grill
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1B4F10
+    vram: 0x801059A0
+    subsegments:
+      - [0x1B4F10, c]
+      - [0x1BA4F0, bin] # data
+
+  - dir: overlays/minigames/toadstool_titan
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1BA850
+    vram: 0x801059A0
+    subsegments:
+      - [0x1BA850, c]
+      - [0x1C3C50, bin] # data
+
+  - dir: overlays/minigames/aces_high
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1C4280
+    vram: 0x801059A0
+    subsegments:
+      - [0x1C4280, c]
+      - [0x1CC400, c]
+      - [0x1CC420, bin] # data
+
+  - dir: overlays/minigames/bounce_n_trounce
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1CC730
+    vram: 0x801059A0
+    subsegments:
+      - [0x1CC730, c]
+      - [0x1D1920, c]
+      - [0x1D1940, bin] # data
+
+  - dir: overlays/minigames/ice_rink_risk
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1D1C40
+    vram: 0x801059A0
+    subsegments:
+      - [0x1D1C40, c]
+      - [0x1D47F0, bin] # data
+
+  - dir: overlays/minigames/locked_out
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1D4970
+    vram: 0x801059A0
+    subsegments:
+      - [0x1D4970, c]
+      - [0x1D90E0, bin] # data
+
+  - dir: overlays/minigames/chip_shot_challenge
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1D9550
+    vram: 0x801059A0
+    subsegments:
+      - [0x1D9550, c]
+      - [0x1DE3D0, bin] # data
+
+  # Snowball Summit
+  - dir: overlays/minigames/parasol_plummet
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1DE610
+    vram: 0x801059A0
+    subsegments:
+      - [0x1DE610, c]
+      - [0x1E3510, bin] # data
+
+  - dir: overlays/minigames/messy_memory
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1E37C0
+    vram: 0x801059A0
+    subsegments:
+      - [0x1E37C0, c]
+      - [0x1EEDE0, bin] # data
+
+  - dir: overlays/minigames/picture_imperfect
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1EF420
+    vram: 0x801059A0
+    subsegments:
+      - [0x1EF420, c]
+      - [0x1F3A60, bin] # data
+
+  - dir: overlays/minigames/marios_puzzle_party
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1F3B90
+    vram: 0x801059A0
+    subsegments:
+      - [0x1F3B90, c]
+      - [0x1FD760, c]
+      - [0x1FE270, bin] # data
+
+  - dir: overlays/minigames/the_beat_goes_on
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x1FE4D0
+    vram: 0x801059A0
+    subsegments:
+      - [0x1FE4D0, c]
+      - [0x204DB0, bin] # data
+
+  - dir: overlays/minigames/mpiq
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x204F90
+    vram: 0x801059A0
+    subsegments:
+      - [0x204F90, c]
+      - [0x20BC70, bin] # data
+
+  - dir: overlays/minigames/curtain_call
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x20BFA0
+    vram: 0x801059A0
+    subsegments:
+      - [0x20BFA0, c]
+      - [0x2116C0, bin] # data
+
+  - dir: overlays/minigames/water_whirled
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x211AB0
+    vram: 0x801059A0
+    subsegments:
+      - [0x211AB0, c]
+      - [0x216270, bin] # data
+
+  - dir: overlays/minigames/fridged_bridges
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x216670
+    vram: 0x801059A0
+    subsegments:
+      - [0x216670, c]
+      - [0x21CAC0, c]
+      - [0x21DBF0, bin] # data
+
+  - dir: overlays/minigames/awful_tower
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x21E010
+    vram: 0x801059A0
+    subsegments:
+      - [0x21E010, c]
+      - [0x2251D0, bin] # data
+
+  - dir: overlays/minigames/cheep_cheep_chase
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x225740
+    vram: 0x801059A0
+    subsegments:
+      - [0x225740, c]
+      - [0x22DDB0, bin] # data
+
+  - dir: overlays/minigames/pipe_cleaners
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x22E100
+    vram: 0x801059A0
+    subsegments:
+      - [0x22E100, c]
+      - [0x232620, bin] # data
+
+  - dir: overlays/minigames/snowball_summit
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x232A10
+    vram: 0x801059A0
+    subsegments:
+      - [0x232A10, c]
+      - [0x23C5C0, bin] # data
+
+  - dir: overlays/minigames/all_fired_up
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x23C8F0
+    vram: 0x801059A0
+    subsegments:
+      - [0x23C8F0, c]
+      - [0x240880, bin] # data
+
+  - dir: overlays/minigames/stacked_deck
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x240A10
+    vram: 0x801059A0
+    subsegments:
+      - [0x240A10, c]
+      - [0x24A300, bin] # data
+
+  - dir: overlays/minigames/three_door_monty
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x24A760
+    vram: 0x801059A0
+    subsegments:
+      - [0x24A760, c]
+      - [0x251AD0, bin] # data
+
+  - dir: overlays/minigames/rockin_raceway
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x251FF0
+    vram: 0x801059A0
+    subsegments:
+      - [0x251FF0, c]
+      - [0x25D530, bin] # data
+
+  - dir: overlays/minigames/merry_go_chomp
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x25E110
+    vram: 0x801059A0
+    subsegments:
+      - [0x25E110, c]
+      - [0x2648B0, bin] # data
+
+  - dir: overlays/minigames/slapdown
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x264B80
+    vram: 0x801059A0
+    subsegments:
+      - [0x264B80, c]
+      - [0x269880, bin] # data
+
+  - dir: overlays/minigames/storm_chasers
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x269BF0
+    vram: 0x801059A0
+    subsegments:
+      - [0x269BF0, c]
+      - [0x270B00, bin] # data
+
+  - dir: overlays/minigames/eye_sore
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x270EF0
+    vram: 0x801059A0
+    subsegments:
+      - [0x270EF0, c]
+      - [0x276160, bin] # data
+
+  - dir: overlays/minigames/vine_with_me
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x276470
+    vram: 0x801059A0
+    subsegments:
+      - [0x276470, c]
+      - [0x282620, bin] # data
+
+  - dir: overlays/minigames/popgun_pickoff
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x283060
+    vram: 0x801059A0
+    subsegments:
+      - [0x283060, c]
+      - [0x289C50, bin] # data
+
+  - dir: overlays/minigames/end_of_the_line
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x28A290
+    vram: 0x801059A0
+    subsegments:
+      - [0x28A290, c]
+      - [0x290E70, c]
+      - [0x290E90, bin] # data
+
+  - dir: overlays/minigames/bowser_toss
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x291020
+    vram: 0x801059A0
+    subsegments:
+      - [0x291020, c]
+      - [0x29A7D0, bin] # data
+
+  - dir: overlays/minigames/baby_bowser_bonkers
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x29B1D0
+    vram: 0x801059A0
+    subsegments:
+      - [0x29B1D0, c]
+      - [0x2A0C30, bin] # data
+
+  - dir: overlays/minigames/motor_rooter
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2A1430
+    vram: 0x801059A0
+    subsegments:
+      - [0x2A1430, c]
+      - [0x2A9850, c]
+      - [0x2ACFE0, bin] # data
+
+  - dir: overlays/minigames/silly_screws
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2AF250
+    vram: 0x801059A0
+    subsegments:
+      - [0x2AF250, c]
+      - [0x2B4B20, c]
+      - [0x2B56D0, bin] # data
+
+  - dir: overlays/minigames/crowd_cover
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2B5830
+    vram: 0x801059A0
+    subsegments:
+      - [0x2B5830, c]
+      - [0x2BC550, bin] # data
+
+  - dir: overlays/minigames/tick_tock_hop
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2BCE10
+    vram: 0x801059A0
+    subsegments:
+      - [0x2BCE10, c]
+      - [0x2C0E70, c]
+      - [0x2C5910, bin] # data
+
+  - dir: overlays/minigames/fowl_play
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2C5B50
+    vram: 0x801059A0
+    subsegments:
+      - [0x2C5B50, c]
+      - [0x2CE950, bin] # data
+
+  - dir: overlays/minigames/winners_wheel
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2CF3B0
+    vram: 0x801059A0
+    subsegments:
+      - [0x2CF3B0, c]
+      - [0x2D3C70, bin] # data
+
+  - dir: overlays/minigames/hey_batter_batter
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2D3E70
+    vram: 0x801059A0
+    subsegments:
+      - [0x2D3E70, c]
+      - [0x2D8030, bin] # data
+
+  - dir: overlays/minigames/bobbing_bow_loons
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2D8370
+    vram: 0x801059A0
+    subsegments:
+      - [0x2D8370, c]
+      - [0x2DC0F0, bin] # data
+
+  - dir: overlays/minigames/dorrie_dip
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2DC4D0
+    vram: 0x801059A0
+    subsegments:
+      - [0x2DC4D0, c]
+      - [0x2E0B70, bin] # data
+
+  # Swinging With Sharks
+  - dir: overlays/minigames/swinging_with_sharks
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2E0D20
+    vram: 0x801059A0
+    subsegments:
+      - [0x2E0D20, c,"swinging_with_sharks"]
+      - [0x2E6060, bin] # data
+
+  - dir: overlays/minigames/swing_n_swipe
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2E6BE0
+    vram: 0x801059A0
+    subsegments:
+      - [0x2E6BE0, c]
+      - [0x2ECF70, bin] # data
+
+  - dir: overlays/minigames/stardust_battle
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2ED2D0
+    vram: 0x801059A0
+    subsegments:
+      - [0x2ED2D0, c]
+      - [0x2FB5E0, bin] # data
+
+  - dir: overlays/minigames/game_guys_roulette
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x2FC270
+    vram: 0x801059A0
+    subsegments:
+      - [0x2FC270, c]
+      - [0x2FF5F0, c]
+      - [0x300F10, bin] # data
+
+  - dir: overlays/minigames/game_guys_lucky_7
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3010E0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3010E0, c]
+      - [0x306F70, c]
+      - [0x308890, bin] # data
+
+  - dir: overlays/minigames/game_guys_magic_boxes
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x308D10
+    vram: 0x801059A0
+    subsegments:
+      - [0x308D10, c]
+      - [0x30DC30, c]
+      - [0x30F550, bin] # data
+
+  - dir: overlays/minigames/game_guys_sweet_surprise
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x30F940
+    vram: 0x801059A0
+    subsegments:
+      - [0x30F940, c]
+      - [0x3151F0, c]
+      - [0x316B10, bin] # data
+
+  - dir: overlays/minigames/dizzy_dinghies
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x316DF0
+    vram: 0x801059A0
+    subsegments:
+      - [0x316DF0, c]
+      - [0x31AB90, bin] # data
+
+  - dir: overlays/wrapper1
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x31B3B0
+    vram: 0x801059A0
+    subsegments:
+      - [0x31B3B0, c,"overlay71_main"]
+      - [0x31B3E0, c,"overlay71"]
+      - [0x31B4F0, data, "overlay71_main"]
+
+  # Chilly Waters
+  - dir: overlays/board_chillywaters
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x31B510
+    vram: 0x801059A0
+    subsegments:
+      - [0x31B510, c,"chillywaters_main"]
+      - [0x31B540, c,"chillywaters"]
+      - [0x31B9F0, c,"chillywaters2"]
+      - [0x332DC0, data, "chillywaters_main"]
+      - [0x332DF0, data, "chillywaters2"]
+      # - [0x335440, rodata, "chillywaters2"]
+
+  # Deep Bloober Sea
+  - dir: overlays/board_deepbloobersea
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3355E0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3355E0, c]
+      - [0x335610, c]
+      - [0x34C270, bin] # data
+
+  # Spiny Desert
+  - dir: overlays/board_spinydesert
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x34E810
+    vram: 0x801059A0
+    subsegments:
+      - [0x34E810, c,"spinydesert_main"]
+      - [0x34E840, c,"spinydesert"]
+      # Possible split at 0x34EB90 if similar to Chilly Waters.
+      - [0x364F50, data, "spinydesert_main"]
+      - [0x364F80, bin] # data
+
+  # Woody Woods
+  - dir: overlays/board_woodywoods
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x367930
+    vram: 0x801059A0
+    subsegments:
+      - [0x367930, c]
+      - [0x367960, c]
+      - [0x37D6A0, bin] # data
+
+  # Creepy Cavern
+  - dir: overlays/board_creepycavern
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x37FF80
+    vram: 0x801059A0
+    subsegments:
+      - [0x37FF80, c]
+      - [0x37FFB0, c]
+      - [0x3975F0, bin] # data
+
+  # Waluigi's Island
+  - dir: overlays/board_waluigisisland
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x39AD20
+    vram: 0x801059A0
+    subsegments:
+      - [0x39AD20, c]
+      - [0x39AD50, c]
+      - [0x3B08D0, bin] # data
+
+  - dir: overlays/board_rulesmap
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3B35F0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3B35F0, c]
+      - [0x3B3620, c]
+      - [0x3B9420, bin] # data
+
+  - dir: overlays/results_cutscene
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3B9670
+    vram: 0x801059A0
+    subsegments:
+      - [0x3B9670, c]
+      - [0x3BFA00, c]
+      - [0x3C20B0, bin] # data
+
+  - dir: overlays/bowser_event
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3C27C0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3C27C0, c]
+      - [0x3C6170, bin] # data
+
+  - dir: overlays/last_5_turns
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3C6310
+    vram: 0x801059A0
+    subsegments:
+      - [0x3C6310, c]
+      - [0x3C7DF0, bin] # data
+
+  - dir: overlays/mushroom_genie
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3C7EC0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3C7EC0, c]
+      - [0x3CA5F0, bin] # data
+
+  - dir: overlays/chilly_waters_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3CA800
+    vram: 0x801059A0
+    subsegments:
+      - [0x3CA800, c]
+      - [0x3CDBD0, bin] # data
+
+  - dir: overlays/rule_map_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3CDEC0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3CDEC0, c]
+      - [0x3CFAE0, bin] # data
+
+  - dir: overlays/detailed_results_main
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3CFC80
+    vram: 0x801059A0
+    subsegments:
+      - [0x3CFC80, c]
+      - [0x3D3A90, bin] # data
+
+  # Character Animation Test
+  - dir: overlays/test_anim1
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3D3C80
+    vram: 0x801059A0
+    subsegments:
+      - [0x3D3C80, c, test_anim1]
+      - [0x3D5160, bin, test_anim1] # data
+
+  - dir: overlays/test_anim2
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3D5C30
+    vram: 0x801059A0
+    subsegments:
+      - [0x3D5C30, c]
+      - [0x3D7040, bin] # data
+
+  # Intro Screens
+  - dir: overlays/intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3D7150
+    vram: 0x801059A0
+    subsegments:
+      - [0x3D7150, c,"intro_main"]
+      - [0x3D7180, c,"intro"]
+      - [0x3D7690, data, "intro_main"]
+      - [0x3D76B0, bin, "intro"]
+      #- [auto, all_bss]
+
+  - dir: overlays/test_save1
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3D76C0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3D76C0, c]
+      - [0x3D8680, bin] # data
+
+  - dir: overlays/gate_guy_intro1
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3D8930
+    vram: 0x801059A0
+    subsegments:
+      - [0x3D8930, c]
+      - [0x3D8960, c]
+      - [0x3D8A70, bin] # data
+
+  - dir: overlays/board_gate_guy
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3D8A90
+    vram: 0x801059A0
+    subsegments:
+      - [0x3D8A90, c]
+      - [0x3D8AC0, c]
+      - [0x3EB7D0, bin] # data
+
+  - dir: overlays/board_arrowhead_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3EC560
+    vram: 0x801059A0
+    subsegments:
+      - [0x3EC560, c]
+      - [0x3EC590, c]
+      - [0x3FD130, bin] # data
+
+  - dir: overlays/board_pipesqueak_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x3FE1C0
+    vram: 0x801059A0
+    subsegments:
+      - [0x3FE1C0, c]
+      - [0x3FE1F0, c]
+      - [0x40FC20, bin] # data
+
+  - dir: overlays/board_blowhard_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4108E0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4108E0, c]
+      - [0x410910, c]
+      - [0x424BB0, bin] # data
+
+  - dir: overlays/board_mr_mover_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x426420
+    vram: 0x801059A0
+    subsegments:
+      - [0x426420, c]
+      - [0x426450, c]
+      - [0x436100, bin] # data
+
+  - dir: overlays/board_backtrack_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x436E20
+    vram: 0x801059A0
+    subsegments:
+      - [0x436E20, c]
+      - [0x436E50, c]
+      - [0x445900, bin] # data
+
+  - dir: overlays/battle_rules_map_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4461B0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4461B0, c]
+      - [0x4461E0, c]
+      - [0x4551C0, bin] # data
+
+  - dir: overlays/results
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4554C0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4554C0, c]
+      - [0x45A700, c]
+      - [0x45CDB0, bin] # data
+
+  - dir: overlays/detailed_results_battle
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x45D380
+    vram: 0x801059A0
+    subsegments:
+      - [0x45D380, c]
+      - [0x460610, bin] # data
+
+  - dir: overlays/gate_guy_intro2
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x460790
+    vram: 0x801059A0
+    subsegments:
+      - [0x460790, c]
+      - [0x463FF0, bin] # data
+
+  - dir: overlays/rules_map_intro
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x464360
+    vram: 0x801059A0
+    subsegments:
+      - [0x464360, c]
+      - [0x4672F0, bin] # data
+
+  - dir: overlays/test_save2
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4675D0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4675D0, c]
+      - [0x467600, c]
+      - [0x468310, bin] # data
+
+  - dir: overlays/overlay103
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4684F0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4684F0, c]
+      - [0x468520, c]
+      - [0x468A70, bin] # data
+
+  - dir: overlays/overlay104
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x468A90
+    vram: 0x801059A0
+    subsegments:
+      - [0x468A90, c]
+      - [0x468AC0, c]
+      - [0x46BB50, c]
+      - [0x46CB70, bin] # data
+
+  - dir: overlays/battle_room
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x46CC10
+    vram: 0x801059A0
+    subsegments:
+      - [0x46CC10, c]
+      - [0x473130, c]
+      - [0x479470, c]
+      - [0x47D880, c]
+      - [0x47DD90, c]
+      - [0x480120, bin] # data
+
+  - dir: overlays/chance_time
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x481970
+    vram: 0x801059A0
+    subsegments:
+      - [0x481970, c]
+      - [0x4822F0, c]
+      - [0x4832D0, c]
+      - [0x487F50, c]
+      - [0x48BAB0, bin] # data
+
+  - dir: overlays/story_results_strength
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x48BE30
+    vram: 0x801059A0
+    subsegments:
+      - [0x48BE30, c]
+      - [0x48D950, c]
+      - [0x492250, c]
+      - [0x496990, c]
+      - [0x49AF10, bin] # data
+
+  - dir: overlays/story_results_peach
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x49BD40
+    vram: 0x801059A0
+    subsegments:
+      - [0x49BD40, c]
+      - [0x49DF30, c]
+      - [0x4A7540, c]
+      - [0x4AC200, c]
+      - [0x4B0E80, c]
+      - [0x4B1CC0, bin] # data
+
+  - dir: overlays/story_results_luigi
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4B29E0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4B29E0, c]
+      - [0x4B4DC0, c]
+      - [0x4B9A30, c]
+      - [0x4C22A0, bin] # data
+
+  - dir: overlays/story_results_110
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4C2BD0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4C2BD0, c]
+      - [0x4C47E0, c]
+      - [0x4C8050, c]
+      - [0x4CECF0, bin] # data
+
+  - dir: overlays/story_results_111
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4CF350
+    vram: 0x801059A0
+    subsegments:
+      - [0x4CF350, c]
+      - [0x4D8E80, c]
+      - [0x4DE0E0, bin] # data
+
+  # Mini-Game Instructions Screen
+  - dir: overlays/minigame_instructions
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4DEB60
+    vram: 0x801059A0
+    subsegments:
+      - [0x4DEB60, c]
+      - [0x4E0630, c]
+      - [0x4E1510, c]
+      - [0x4E1CB0, c]
+      - [0x4E2670, c]
+      - [0x4E2C50, c]
+      - [0x4E3390, c]
+      - [0x4E4B50, c]
+      - [0x4E65C0, bin] # data
+
+  # Mini-Game Results Screen
+  - dir: overlays/minigame_results
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4E6DC0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4E6DC0, c]
+      - [0x4E8F60, c]
+      - [0x4E9120, c]
+      - [0x4EB420, c]
+      - [0x4EBD50, c]
+      - [0x4EBF10, bin] # data
+
+  - dir: overlays/game_guy_results
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4EC1B0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4EC1B0, c]
+      - [0x4ECDE0, c]
+      - [0x4EDCB0, c]
+      - [0x4F00D0, bin] # data
+
+  - dir: overlays/battle_minigame_results
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4F01F0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4F01F0, c]
+      - [0x4F1180, c]
+      - [0x4F36C0, bin] # data
+
+  - dir: overlays/battle_results
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4F3780
+    vram: 0x801059A0
+    subsegments:
+      - [0x4F3780, c]
+      - [0x4F4980, c]
+      - [0x4F5AF0, c]
+      - [0x4F66B0, bin] # data
+
+  - dir: overlays/wrapper2
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4F6810
+    vram: 0x801059A0
+    subsegments:
+      - [0x4F6810, c]
+      - [0x4F69B0, bin] # data
+
+  # Message Check
+  - dir: overlays/debug_message_check
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4F69F0
+    vram: 0x801059A0
+    subsegments:
+      - [0x4F69F0, c]
+      - [0x4F7550, bin] # data
+
+  # Castle Grounds
+  - dir: overlays/castle_grounds
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x4F7E90
+    vram: 0x801059A0
+    subsegments:
+      - [0x4F7E90, c]
+      - [0x4F7EC0, c]
+      - [0x4F8140, c]
+      - [0x501760, bin] # data
+
+  # Configuring gameplay ("warp pipe" in MP1 terminology)
+  - dir: overlays/star_lift
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x501C00
+    vram: 0x801059A0
+    subsegments:
+      - [0x501C00, c]
+      - [0x506F20, c]
+      - [0x508D50, c]
+      - [0x5092C0, c]
+      - [0x50B740, c]
+      - [0x513B70, c]
+      - [0x515670, bin] # data
+
+  # Select save game screen
+  - dir: overlays/file_select
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x516AE0
+    vram: 0x801059A0
+    subsegments:
+      - [0x516AE0, c]
+      - [0x516B10, c]
+      - [0x516D30, c]
+      - [0x5238E0, bin] # data
+
+  # Start Screen
+  - dir: overlays/start_screen
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x523FD0
+    vram: 0x801059A0
+    subsegments:
+      - [0x523FD0, c]
+      - [0x524000, c]
+      - [0x5242B0, c]
+      - [0x524820, c]
+      - [0x533180, bin] # data
+
+  - dir: overlays/inside_castle
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x5334D0
+    vram: 0x801059A0
+    subsegments:
+      - [0x5334D0, c]
+      - [0x533500, c]
+      - [0x535A80, c]
+      - [0x53DCA0, c]
+      - [0x540FE0, bin] # data
+
+  - dir: overlays/credits
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x542220
+    vram: 0x801059A0
+    subsegments:
+      - [0x542220, c]
+      - [0x5436A0, c]
+      - [0x543FC0, c]
+      - [0x544E70, c]
+      - [0x5486A0, c]
+      - [0x54CDB0, bin] # data
+
+  - dir: overlays/stamps
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x54DD10
+    vram: 0x801059A0
+    subsegments:
+      - [0x54DD10, c]
+      - [0x54F360, c]
+      - [0x552C80, bin] # data
+
+  # - dir: overlays/overlay126
+  #   type: code
+  #   overlay: True
+  #   start: 0x552F50
+  #   vram: 0x801059A0
+  #   subsegments:
+  #     - [0x552F50, c]
+  #     - [0x552F50, bin] # data
+
+  - dir: overlays/test_menu2
+    type: code
+    overlay: True
+    exclusive_ram_id: minigame
+    start: 0x552F50
+    vram: 0x801059A0
+    subsegments:
+      - [0x552F50, c]
+      - [0x556240, bin] # data
+
+  - [0x00557620, bin, "bin_557620"]
+
+  - [0x00557E20, bin, "bin_mainfs"]
+
+  - [0x01209850, bin, "bin_strings_jp"]
+  - [0x0121CAA0, bin, "bin_strings_en"]
+  - [0x012355C0, bin, "bin_strings_de"]
+  - [0x0124D440, bin, "bin_strings_fr"]
+  - [0x01261F90, bin, "bin_strings_it"]
+  - [0x012765F0, bin, "bin_strings_es"]
+
+  - [0x0128CC60, bin, "bin_hvq"]
+
+  - [0x01881C40, bin, "bin_audio_mbf0"]
+  - [0x01A56870, bin, "bin_audio_sbf0"]
+  - [0x01EFD040, bin, "bin_audio_fxd0"]
+  - [0x02000000]

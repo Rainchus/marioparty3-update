@@ -3,7 +3,6 @@
 
 #include "common.h"
 
-extern GWPLAYER GwPlayer[4];
 u8 rand8(void);
 
 #endif //__DECODE_H

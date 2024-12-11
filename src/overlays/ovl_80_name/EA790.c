@@ -1,4 +1,72 @@
 #include "common.h"
+#include "obj.h"
+#include "variables.h"
+
+typedef struct BoardStatus {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 unk1;
+    /* 0x02 */ u8 unk2[2];
+    /* 0x04 */ u8 unk4[2];
+    /* 0x06 */ s8 unk_06;
+    /* 0x07 */ s8 unk7;                             /* inferred */
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ s16 unkA;
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ s16 unkE;
+    /* 0x10 */ f32 xPos;
+    /* 0x14 */ f32 yPos;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ s32 unk30;
+    /* 0x34 */ char pad34[2];
+    /* 0x36 */ s16 unk_36;
+    /* 0x38 */ u8 unk_38[0xC];
+    /* 0x44 */ s16 unk_44[2];
+    /* 0x48 */ char pad48[0x1E];
+    /* 0x66 */ s16 counts[3]; //star count, coin count?
+} BoardStatus; //sizeof 0x6C
+
+typedef struct UnkBoard {
+/* 0x00 */ s16 unk_00;
+/* 0x02 */ s16 unk_02;
+/* 0x04 */ s32 unk_04;
+/* 0x08 */ omObjData* unk_08;
+} UnkBoard; //sizeof 0x0C
+
+typedef struct UnkCoinThing {
+    u8 unk_00[3];
+    char unk_03[5];
+    s16 unk_08[2];
+} UnkCoinThing;
+
+void func_80055140_55D40(s32, s16, u16, s32);
+void func_800550B4_55CB4(s32, s16, f32);
+void func_800550F4_55CF4(s16, s16, s32);
+void func_800EE7AC_1023CC_name_80(void* func);
+void func_80054904_55504(s16, s16, s16, s16);
+void func_800F3400_107020_name_80(omObjData*);
+void func_800F4190_107DB0_name_80(void);
+void func_800F43FC_10801C_name_80(s32);
+void func_800F4798_1083B8_name_80(s32, u8);
+void func_800F4874_108494_name_80(s32, s16, s16);
+s32 func_800EECB0_1028D0_name_80(s32);
+s32 func_800D9E0C_EDA2C_name_80(s32);
+void SprAttrSet(s16, s16, s32);
+void SprAttrReset(s16, s16, s32);
+void func_800D9D84_ED9A4_name_80(s32, s16, s32, s32, u16);
+
+extern s16 D_80101794_1153B4_name_80[8][2];
+extern Process* D_80105580_1191A0_name_80;
+extern s16 D_801055C2_1191E2_name_80;
+extern s16 D_801055C4_1191E4_name_80;
+extern s32 D_80101784_1153A4_name_80;
+extern BoardStatus D_801057E0_119400_name_80[];
+extern UnkBoard D_80105718_119338_name_80[16];
+extern s32 D_801055E8_119208_name_80[];
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800D6B70_EA790_name_80);
 
@@ -950,13 +1018,59 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE740_102360_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE7AC_1023CC_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE884_1024A4_name_80);
+u32 func_800EE884_1024A4_name_80(s32 arg0, s16 arg1, s16 arg2) {
+    omObjData* obj;
+    UnkBoard* temp_s1;
+    s32 i;
+    s32 ret;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE94C_10256C_name_80);
+    for (i = 0; i < 16; i++) {
+        temp_s1 = &D_80105718_119338_name_80[i];
+        if (temp_s1->unk_08 == NULL) {
+            break;
+        }
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EE97C_10259C_name_80);
+    if (i != 0x10) {
+        obj = omAddObj(0x2000, 0U, 0U, -1, func_800EE7AC_1023CC_name_80);
+        temp_s1->unk_08 = obj;
+        obj->work[0] = i;
+        temp_s1->unk_04 = arg0;
+        temp_s1->unk_00 = arg1;
+        temp_s1->unk_02 = arg2;
+        ret = i;
+    } else {
+        ret = -1;
+    }
+    return ret;
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", BoardPlayerRankCalc);
+void func_800EE94C_10256C_name_80(s32 arg0, s16 arg1, s32 arg2) {
+    func_800D9D84_ED9A4_name_80(arg0, arg1, 0, 0xA, arg2);
+}
+
+void func_800EE97C_10259C_name_80(s32 arg0) {
+    while (!(func_800D9E0C_EDA2C_name_80(arg0) & 1)) {
+        HuPrcVSleep();
+    }
+}
+
+s32 BoardPlayerRankCalc(s32 player) {
+    s32 rank;
+    s32 i;
+    s32 score[4];
+
+    for (i = 0; i < 4; i++) {
+        score[i] = func_800EECB0_1028D0_name_80(i);
+    }
+
+    for (rank = 0, i = 0; i < 4; i++) {
+        if ((i != player) && (score[player] < score[i])) {
+            rank++;
+        }
+    }
+    return rank;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800EEA58_102678_name_80);
 
@@ -1102,9 +1216,107 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2D8C_1069AC_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2DDC_1069FC_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F2E30_106A50_name_80);
+void func_800F2E30_106A50_name_80(s32 arg0) {
+    UnkCoinThing coinDigits;
+    BoardStatus* temp_s2;
+    s32 var_v1;
+    s32 i;
+    
+    temp_s2 = &D_801057E0_119400_name_80[arg0];
+    if (temp_s2->unk_08 != GwPlayer[arg0].coins) {
+        coinDigits.unk_00[0] = GwPlayer[arg0].coins / 100;
+        coinDigits.unk_00[1] = GwPlayer[arg0].coins / 10 % 10;
+        coinDigits.unk_00[2] = GwPlayer[arg0].coins % 10;
+        if (coinDigits.unk_00[0] == 0) {
+            if (coinDigits.unk_00[1] == 0) {
+                var_v1 = 1;
+            } else {
+                var_v1 = 2 | (-(coinDigits.unk_00[0] != 0) & 3);
+            }
+        } else {
+            var_v1 = 2 | (-(coinDigits.unk_00[0] != 0) & 3);
+        }
+        
+        if (var_v1 == 1) {
+            SprAttrSet(temp_s2->unkA, 6, 0x8000);
+            coinDigits.unk_00[1] = coinDigits.unk_00[2];
+        } else {
+            SprAttrReset(temp_s2->unkA, 6, 0x8000);
+        }
+    
+        if (coinDigits.unk_00[0] == 0) {
+            coinDigits.unk_00[0] = 10;
+        }
+        for (i = 0; i < 3; i++) {
+            func_80055140_55D40(temp_s2->unkA, i + 4, coinDigits.unk_00[i], 0);
+            func_800550F4_55CF4(temp_s2->unkA, i + 4, 1);
+        }
+    
+        temp_s2->unk_08 = GwPlayer[arg0].coins;
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F3370_106F90_name_80);
+    if (temp_s2->unk_06 != GwPlayer[arg0].stars) {
+        if (GwPlayer[arg0].stars > 99) {
+            func_80055140_55D40(temp_s2->unkA, 7, 9, 0);
+            func_80055140_55D40(temp_s2->unkA, 8, 9, 0);
+        } else {
+            if (GwPlayer[arg0].stars > 9) {
+                func_80055140_55D40(temp_s2->unkA, 7, (GwPlayer[arg0].stars / 10), 0);
+            } else {
+                func_80055140_55D40(temp_s2->unkA, 7, 10, 0);
+            }
+            func_80055140_55D40(temp_s2->unkA, 8, GwPlayer[arg0].stars % 10, 0);
+        }
+        func_800550F4_55CF4(temp_s2->unkA, 7, 1);
+        func_800550F4_55CF4(temp_s2->unkA, 8, 1);
+    
+        temp_s2->unk_06 = GwPlayer[arg0].stars; //?
+    }
+    coinDigits.unk_08[0] = GwPlayer[arg0].coins;
+    coinDigits.unk_08[1] = GwPlayer[arg0].stars;
+    
+    for (i = 0; i < 2; i++) {
+        if ((i != 0 && temp_s2->counts[i] != coinDigits.unk_08[i]) || (i == 0 && D_801055E8_119208_name_80[arg0] != 0)) {
+            if (temp_s2->unk2[i] == 0) {
+                func_800550B4_55CB4(temp_s2->unkA, i + 2, 1.0f);
+                temp_s2->unk2[i] = 0xF;
+            }
+        }
+
+        if (temp_s2->unk2[i] != 0) {
+            temp_s2->unk2[i]--;
+            if (temp_s2->unk2[i] == 0) {
+                if (i != 0 || D_801055E8_119208_name_80[arg0] == 0) {
+                    func_80055140_55D40(temp_s2->unkA, i + 2, 0U, 0);
+                    func_800550B4_55CB4(temp_s2->unkA, i + 2, 0);
+                    func_800550F4_55CF4(temp_s2->unkA, i + 2, 1);                       
+                }
+            }
+        }
+        temp_s2->counts[i] = coinDigits.unk_08[i];
+    }
+    if (temp_s2->unk1 != -1) {
+        func_80055140_55D40(temp_s2->unkA, 0xA, temp_s2->unk1 & 0xFFFF, 0);
+        func_800550F4_55CF4(temp_s2->unkA, 0xA, 1);
+        return;
+    }
+    if (temp_s2->unk7 != BoardPlayerRankCalc(arg0)) {
+        func_80055140_55D40(temp_s2->unkA, 0xA, BoardPlayerRankCalc(arg0) & 0xFFFF, 0);
+        func_800550F4_55CF4(temp_s2->unkA, 0xA, 1);
+        temp_s2->unk7 = BoardPlayerRankCalc(arg0);
+    }
+}
+
+void func_800F3370_106F90_name_80(void) {
+    s32 i, j;
+
+    for (i = 0; i < 4; i++) {
+        BoardStatus* boardStatus = &D_801057E0_119400_name_80[i];
+        for (j = 0; j < 0xE; j++) {
+            SprAttrSet(boardStatus->unkA, j, 0x8000);
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F3400_107020_name_80);
 
@@ -1140,7 +1352,21 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F482C_10844C_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F4850_108470_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F4874_108494_name_80);
+//initialize player UIs
+void func_800F4874_108494_name_80(s32 playerIndex, s16 arg1, s16 arg2) {
+    BoardStatus* boardStatus;
+    f32 temp_f0;
+    f32 temp_f0_2;
+
+    boardStatus = &D_801057E0_119400_name_80[playerIndex];
+    boardStatus->unk_18 = arg1;
+    boardStatus->xPos = arg1;
+    boardStatus->unk_1C = arg2;
+    boardStatus->yPos = arg2;
+    boardStatus->unk_20 = boardStatus->unk_24 = 0;
+    boardStatus->unkE = -2;
+    func_80054904_55504(boardStatus->unkA, 0, arg1 + 0x38, arg2 + 0x13);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F4924_108544_name_80);
 
@@ -1174,13 +1400,44 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5D60_109980_
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5D78_109998_name_80);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5D8C_1099AC_name_80);
+//toggle hide player UI bit on
+void func_800F5D8C_1099AC_name_80(void) {
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5DD8_1099F8_name_80);
+    for (i = 0; i < 4; i++) {
+        D_801057E0_119400_name_80[i].unk4[1] |= 1;
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5E24_109A44_name_80);
+//toggle hide player UI bit off
+void func_800F5DD8_1099F8_name_80(void) {
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5E30_109A50_name_80);
+    for (i = 0; i < 4; i++) {
+        D_801057E0_119400_name_80[i].unk4[1] &= ~1;
+    }
+}
+
+void func_800F5E24_109A44_name_80(s32 arg0) {
+    D_80101784_1153A4_name_80 = arg0;
+}
+
+void func_800F5E30_109A50_name_80(void) {
+    s32 i;
+
+    func_800F4190_107DB0_name_80();
+    for (i = 0; i < 4; i++) {
+        func_800F43FC_10801C_name_80(i);
+        //i + 4? is this right?
+        func_800F4874_108494_name_80(i, D_80101794_1153B4_name_80[i + 4][0], D_80101794_1153B4_name_80[i + 4][1]);
+        func_800F4798_1083B8_name_80(i, GwPlayer[i].turn_status);
+    }
+
+    D_80105580_1191A0_name_80 = omAddPrcObj(&func_800F3400_107020_name_80, 0, 0x2000, 0);
+    omPrcSetStatBit(D_80105580_1191A0_name_80, 0x80);
+    D_801055C4_1191E4_name_80 = -1;
+    D_801055C2_1191E2_name_80 = -1;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_name/EA790", func_800F5EF0_109B10_name_80);
 

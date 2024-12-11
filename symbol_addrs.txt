@@ -532,6 +532,8 @@ CameraScissorSet = 0x800124BC; //rom:0x130BC
 CameraViewportSet = 0x80012508; //rom:0x13108
 ScissorSet = 0x8000B364; //rom:0xBF64
 ViewportSet = 0x8000B3C8; //rom:0xBFC8
+SprAttrSet = 0x800553A8; //rom:0x55FA8
+SprAttrReset = 0x8005532C; //rom:0x55F2C
 
 omOvlCallEx = 0x80048128; //rom:0x48D28
 omOvlGotoEx = 0x80048228; //rom:0x48E28
@@ -705,3 +707,6 @@ top_process = 0x800BBA8C;
 process_jmp_buf = 0x800BBA30;
 current_process = 0x800BBA90;
 sPrcSleepLoc = 0x800D20A8;
+
+//ovl_80
+D_801057E0_119400_name_80 = 0x801057E0; //rom:0x119400 size:0x1B0 segment:name_80

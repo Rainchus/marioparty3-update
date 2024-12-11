@@ -67,7 +67,7 @@ s32  func_8004FDC0_509C0(void);
 void func_80050800_51400(void);
 void func_80050E78_51A78(u32 arg0);
 void func_80061B50_62750(void);
-void func_80087A40_88640(GWPLAYER *arg0, u32 arg1, u32 arg2);
+void func_80087A40_88640(GW_PLAYER *arg0, u32 arg1, u32 arg2);
 void Hu3DCamInit(u32 arg0);
 
 void func_8000E3C0_EFC0(void) {
@@ -202,25 +202,25 @@ void func_8000E804_F404(void) {
     s32 i;
 
     for (i = 0; i < MAX_PLAYERS; i++) {
-        func_80087A40_88640(&GwPlayer[i], 0, sizeof(GWPLAYER));
+        func_80087A40_88640(&GwPlayer[i], 0, sizeof(GW_PLAYER));
         if (CheckControllerRead(i) != PAD_NOT_INSERTED) {
             D_800CCF78_CDB78[i] = 0;
-            GwPlayer[i].flags &= ~1;
+            GwPlayer[i].flags1 &= ~1;
         } else {
             D_800CCF78_CDB78[i] = 1;
-            GwPlayer[i].flags |= 0x01;
+            GwPlayer[i].flags1 |= 1;
         }
 
-        GwPlayer[i].controller = i;
+        GwPlayer[i].controller_port = i;
         GwPlayer[i].coins = 10;
-        GwPlayer[i].bonusCoins = 0;
-        GwPlayer[i].id = i;
-        GwPlayer[i].cpuDifficulty = 0;
+        GwPlayer[i].coins_mg_bonus = 0;
+        GwPlayer[i].group = i;
+        GwPlayer[i].cpu_difficulty = 0;
         GwPlayer[i].stars = 0;
-        GwPlayer[i].minigameStar = 0;
-        GwPlayer[i].blueSpaceCount = 0;
-        GwPlayer[i].redSpaceCount = 0;
-        GwPlayer[i].happeningSpaceCount = 0;
+        GwPlayer[i].mg_star_coins = 0;
+        GwPlayer[i].blueSpacesLandedOn = 0;
+        GwPlayer[i].redSpacesLandedOn = 0;
+        GwPlayer[i].happeningSpacesLandedOn = 0;
     }
 }
 

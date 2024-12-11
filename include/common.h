@@ -16,7 +16,7 @@
 #include "common_structs.h"
 // #include "functions.us.h"
 #include "include_asm.h"
-// #include "variables.us.h"
+#include "variables.h"
 #include "macros.h"
 // #include "enums.h"
 #include "ld_addrs.h"

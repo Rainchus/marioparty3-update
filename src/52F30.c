@@ -66,9 +66,9 @@ INCLUDE_ASM("asm/nonmatchings/52F30", func_80055294_55E94);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_800552DC_55EDC);
 
-INCLUDE_ASM("asm/nonmatchings/52F30", func_8005532C_55F2C);
+INCLUDE_ASM("asm/nonmatchings/52F30", SprAttrReset);
 
-INCLUDE_ASM("asm/nonmatchings/52F30", func_800553A8_55FA8);
+INCLUDE_ASM("asm/nonmatchings/52F30", SprAttrSet);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_80055420_56020);
 

@@ -83,67 +83,46 @@ typedef struct objectIndirect3t {
 } objectIndirect3;
 
 typedef struct GwPlayer_s {
-    /*  0 (0x00) 800D1108 */ s8 id;
-    /*  1 (0x01) 800D1109 */ s8 cpuDifficulty;
-    /*  2 (0x02) 800D110A */ u8 controller;
-    /*  3 (0x03) 800D110B */ u8 character;
-
-    /**
-     * Player flags.
-     * 1: Is CPU player
-     * 4: ?
-     */
-    /*  4 (0x04) 800D110C */ u8 flags;
-    /*  5 (0x05) 800D110D */ s8 pad5[1];
-
-    /** Coins collected in a mini-game. */
-    /*  6 (0x06) 800D110E */ s16 bonusCoins;
-    /** Coins from mini-game wins. */
-    /*  8 (0x08) 800D1110 */ s16 coinsWon;
-    /** Current coin count. */
-    /* 10 (0x0A) 800D1112 */ s16 coins;
-    /** Coins obtained during a Mini-Game. */
-    /* 12 (0x0C) 800D1114 */ s16 minigameCoins;
-    /* 14 (0x0E) 800D1116 */ s8 stars;
-
-    /* 15 (0x0F) 800D1117 */ u8 curChainIndex;
-    /* 16 (0x10) 800D1118 */ u8 curSpaceIndex;
-    /* 17 (0x11) 800D1119 */ u8 nextChainIndex;
-    /* 18 (0x12) 800D111A */ u8 nextSpaceIndex;
-    /* 19 (0x13) 800D111B */ s8 unk1ChainIndex;
-    /* 20 (0x14) 800D111C */ s8 unk1SpaceIndex;
-    /* 21 (0x15) 800D111D */ s8 reverseChainIndex;
-    /* 22 (0x16) 800D111E */ s8 reverseSpaceIndex;
-
-    /**
-     * Movement flags.
-     * 1: Is moving in reverse.
-     */
-    /* 23 (0x17) 800D111F */ u8 flags2;
-    /* 24 (0x18) 800D1120 */ s8 items[3];
-    /* 27 (0x1B) 800D1123 */ s8 bowserSuitFlag;
-    /* 28 (0x1C) 800D1124 */ u8 turnColorStatus;
-    /* 29 (0x1D) 800D1125 */ s8 unk1D;
-
-    s8 unks1E1F[2]; // 20 - 31
-
-    /* 32 (0x20) 800D1128 */ Process*process;
-    /* 36 (0x24) 800D112C */ struct objectt *obj;
-    /* 40 (0x28) 800D1130 */ s16 minigameStar;
-    /* 42 (0x2A) 800D1132 */ s16 maxCoins;
-    /* 44 (0x2C) 800D1134 */ s8 happeningSpaceCount;
-    s8 redSpaceCount;
-    s8 blueSpaceCount;
-    s8 chanceSpaceCount;
-    /* 48 (0x30) 800D1138 */ s8 bowserSpaceCount;
-    s8 battleSpaceCount;
-    s8 itemSpaceCount;
-    s8 bankSpaceCount;
-    /* 52 (0x34) 800D113C */ s8 gameGuySpaceCount;
-    s8 unk35;
-
-    // s8 pad2[3];
-} GWPLAYER __attribute__((aligned(4))); //sizeof 0x38
+/* 0x00 */ u8 group; //for which group you belong to in a minigame
+/* 0x01 */ u8 cpu_difficulty;
+/* 0x02 */ u8 controller_port;
+/* 0x03 */ u8 characterID;
+/* 0x04 */ u8 flags1; //value & 1 == Player is CPU
+/* 0x05 */ char unk_05;
+/* 0x06 */ s16 coins_mg_bonus; //extra coins collected in minigames
+/* 0x08 */ s16 minigameCoins; //coins for winning current minigame
+/* 0x0A */ s16 coins; //referenced as u16 and s16 (usually if u16 it's casted to s16)
+/* 0x0C */ char unk_0C[2];
+/* 0x0E */ s8 stars;
+/* 0x0F */ u8 chainIndexCur;
+/* 0x10 */ u8 spaceIndexCur;
+/* 0x11 */ u8 chainIndexNext;
+/* 0x12 */ u8 spaceIndexNext;
+/* 0x13 */ u8 unk_13; //(Chain Index?)
+/* 0x14 */ u8 unk_14; //(Space Index?)
+/* 0x15 */ u8 chainIndexPrevious;
+/* 0x16 */ u8 spaceIndexPrevious;
+/* 0x17 */ u8 flags2;
+/* 0x18 */ u8 items[3];
+/* 0x1B */ u8 bowser_suit_flags;
+/* 0x1C */ u8 turn_status; //space type landed on (blue, red, etc.)
+/* 0x1D */ s8 playerIndex;
+/* 0x1E */ char unk_1E[2]; //likely padding
+/* 0x20 */ void* unk_20;
+/* 0x24	*/ void* player_obj; //ptr to struct 0x48 in size (things like model position, rotation, etc.)
+/* 0x24 */ s16 mg_star_coins; //used for mg star
+/* 0x26 */ s16 coins_total; //used for coin star
+/* 0x2C */ s8 happeningSpacesLandedOn;
+/* 0x2D */ s8 redSpacesLandedOn;
+/* 0x2E */ s8 blueSpacesLandedOn;
+/* 0x2F */ s8 chanceSpacesLandedOn;
+/* 0x30 */ s8 bowserSpacesLandedOn;
+/* 0x31 */ s8 battleSpacesLandedOn;
+/* 0x32 */ s8 itemSpacesLandedOn;
+/* 0x33 */ s8 bankSpacesLandedOn;
+/* 0x34 */ s8 gameGuySpacesLandedOn;
+/* 0x35 */ char unk_35[3]; //likely padding
+} GW_PLAYER __attribute__((aligned(4))); //sizeof 0x38;
 
 typedef struct SpaceData {
 /* 0x00 */ s8 unk_00;

@@ -1,5 +1,6 @@
 #include "common.h"
-#include "obj.h"
+#include "game/object.h"
+#include "malloc.h"
 
 typedef struct BoardStatus {
     /* 0x00 */ s8 unk_00;
@@ -60,7 +61,6 @@ void func_800D9714_ED334_name_80(Object*);
 void func_80055140_55D40(s32, s16, u16, s32);
 void func_800550B4_55CB4(s32, s16, f32);
 void func_800550F4_55CF4(s16, s16, s32);
-void func_800EE7AC_1023CC_name_80(void* func);
 void func_80054904_55504(s16, s16, s16, s16);
 void func_800F3400_107020_name_80(omObjData*);
 void func_800F4190_107DB0_name_80(void);
@@ -72,6 +72,7 @@ s32 func_800D9E0C_EDA2C_name_80(s32);
 void SprAttrSet(s16, s16, s32);
 void SprAttrReset(s16, s16, s32);
 void func_800D9D84_ED9A4_name_80(s32, s16, s32, s32, u16);
+void func_800EE7AC_1023CC_name_80(omObjData* func);
 
 extern s16 D_80101794_1153B4_name_80[8][2];
 extern Process* D_80105580_1191A0_name_80;

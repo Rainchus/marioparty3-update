@@ -52,8 +52,8 @@ typedef struct GwPlayer_s {
 /* 0x10 */ u8 spaceIndexCur;
 /* 0x11 */ u8 chainIndexNext;
 /* 0x12 */ u8 spaceIndexNext;
-/* 0x13 */ u8 unk_13; //(Chain Index?)
-/* 0x14 */ u8 unk_14; //(Space Index?)
+/* 0x13 */ s8 unk_13; //(Chain Index?)
+/* 0x14 */ s8 unk_14; //(Space Index?)
 /* 0x15 */ u8 chainIndexPrevious;
 /* 0x16 */ u8 spaceIndexPrevious;
 /* 0x17 */ u8 flags2;
@@ -117,7 +117,8 @@ typedef struct GW_SYSTEM {
     /* 0x51 - 800CD0A9 */ u8 cur_player_used_item; //1 if player already used an item this turn
     /* 0x52 - 800CD0AA */ char unk_52[5];
     /* 0x57 - 800CD0AF */ s8 slow_dice_flags;
-    /* 0x58 - 800CD0B0 */ char unk_58[4];
+    /* 0x58 - 800CD0B0 */ char unk_58[2];
+    /* 0x5A - 800CD0B2 */ s16 unk_5A;
     /* 0x5C - 800CD0B4 */ u16 bank_coins;
     /* 0x5E - 800CD0B6 */ u8 data_flags[8]; //unknown what this is, unknown size
     /* 0x66 - 800CD0B8 */ u8 unk_66[0x3E];
@@ -144,5 +145,10 @@ typedef struct RectF {
 /* 0x08 */ f32 x2;
 /* 0x0C */ f32 y2;
 } RectF; //sizeof 0x10
+
+typedef struct board_overlay_entrypoint {
+    s16 index;
+    void* fn;
+} board_overlay_entrypoint;
 
 #endif

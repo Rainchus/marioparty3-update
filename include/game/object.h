@@ -2,7 +2,6 @@
 #define _GAME_OBJECT_H
 
 #include "ultra64.h"
-#include "object.h"
 #include "common_structs.h"
 #include "process.h"
 
@@ -35,11 +34,35 @@ typedef struct om_obj_data {
 /* 0x5C */ void *data;
 } omObjData;
 
+typedef struct Object_s {
+/* 0x00 */ struct Object_s *prev;
+/* 0x04 */ struct Object_s *next;
+/* 0x08 */ u8 unk8;
+/* 0x09 */ s8 unk9;
+/* 0x0A */ u16 unkA;
+/* 0x0C */ Vec coords;
+// Three Vec groups (Scale?, Rotation?, Position?)
+/* 0x18 */ Vec unk18;
+/* 0x24 */ Vec unk24;
+/* 0x30 */ Vec unk30;
+/* 0x3C */ omObjData* unk3C;
+/* 0x40 */ omObjData* unk40;
+/* 0x44 */ s16 unk44;
+/* 0x46 */ s16 unk46;
+} Object;
+
 Process* omInitObjMan(s16 max_objs, s32 prio);
 void omSetStatBit(omObjData *obj, u16 stat);
-void omOvlReturnEx(s16 level);
+s32 omOvlReturnEx(s16 level);
 omObjData* omAddObjEx(Process *objman_process, s16 prio, u16 mdlcnt, u16 mtncnt, s16 group, omObjFunc func);
 omObjData* omAddObj(s16 priority, u16 arg1, u16 arg2, s16 arg3, omObjFunc func);
 Process* omAddPrcObj(process_func func, u16 priority, s32 stackSize, s32 extDataSize);
+s32 omOvlCallEx(s32 arg0, s16 arg1, u16 arg2);
+void omMain(void);
+void omPrcSetStatBit(Process*, s32);
+s32 omOvlGotoEx(s32, s16, u16);
+void omDestroyObjMan(void);
+void omPrcSetDestructor(s32, void*);
+void omPrcResetStatBit(Process*, s32);
 
 #endif //_GAME_OBJECT_H

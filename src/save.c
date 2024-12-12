@@ -4,9 +4,6 @@
 s32 _CheckFlag(s32);
 
 extern s32 D_800B1A30_B2630;
-extern GW_COMMON GwCommon;
-extern GW_STORY GwStory;
-extern GW_SYSTEM GwSystem;
 
 void GWInit(void) {
     GW_COMMON* gw = &GwCommon;

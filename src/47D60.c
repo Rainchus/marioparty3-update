@@ -1,5 +1,5 @@
 #include "common.h"
-#include "obj.h"
+#include "game/object.h"
 
 void func_8000BA00_C600(void);
 void func_800166D0_172D0(void);

@@ -1,4 +1,21 @@
 #include "common.h"
+#include "game/object.h"
+
+typedef struct UnkOmData {
+    omObjData* unk_00;
+    void (*objFunc)(omObjData*); //func pointer
+} UnkOmData;
+
+extern UnkOmData D_80109338_4F3B88_name_73;
+extern u16 D_800D530C_D5F0C;
+extern s8 D_80108E78_4F36C8_name_73;
+s32 HuWipeFadeOut(s32, s32);
+s32 HuWipeStatGet(void);
+void func_8004A994_4B594(s32);
+void func_8004AB0C_4B70C(s32);
+void func_80106054_4F08A4_name_73(void);
+void func_80106544_4F0D94_name_73(omObjData*);
+void func_80106270_4F0AC0_name_73(omObjData*);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_801059A0_4F01F0_name_73);
 
@@ -6,18 +23,66 @@ INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_73_name/4F01F0", D_80108EA0_4F36F0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_80105E90_4F06E0_name_73);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_80105FD4_4F0824_name_73);
+void func_80105FD4_4F0824_name_73(void) {
+    if (D_800D530C_D5F0C == 1) {
+        if (D_80108E78_4F36C8_name_73 == 0) {
+            HuWipeFadeOut(0, 0x14);
+            D_80108E78_4F36C8_name_73 = 1;
+            return;
+        }
+        if (HuWipeStatGet() == 0) {
+            func_8004A994_4B594(30);
+            func_8004AB0C_4B70C(30);
+            func_80106054_4F08A4_name_73();
+            omOvlReturnEx(1);
+        }
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_80106054_4F08A4_name_73);
+void func_80106054_4F08A4_name_73(void) {
+    func_800E52F8();
+    func_800E5000();
+    func_800F64FC();
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_80106080_4F08D0_name_73);
+void func_80106080_4F08D0_name_73(void) {
+    omObjData* temp_v0;
 
-void func_80106270_4F0AC0_name_73(void) {
+    temp_v0 = omAddObj(0x14, 5U, 8U, -1, NULL);
+    D_80109338_4F3B88_name_73.unk_00 = temp_v0;
+    temp_v0->model[1] = func_8000B108_BD08(0xA011B, 0x2B9);
+    func_8001C814_1D414(temp_v0->model[1], 2, 2);
+    func_8001C1A0_1CDA0(temp_v0->model[1], 0.9f, 0.9f, 0.9f);
+    temp_v0->model[2] = func_8000B108_BD08(9, 0x2B9);
+    func_8001C1A0_1CDA0(temp_v0->model[2], 2.0f, 1.0f, 2.0f);
+    func_8000B460_C060(temp_v0, 0, 0xA011C);
+    func_8000B460_C060(temp_v0, 1, 0xA011D);
+    func_8000B460_C060(temp_v0, 2, 0xA011E);
+    func_8000B460_C060(temp_v0, 3, 0xA011F);
+    func_8000B460_C060(temp_v0, 4, 0xA0120);
+    func_8001C5B4_1D1B4(temp_v0->model[1], temp_v0->motion[4]);
+    func_8001C814_1D414(temp_v0->model[1], 2, 2);
+    func_80106850_4F10A0_name_73(temp_v0, -1);
+    temp_v0->trans.x = 0.0f;
+    temp_v0->trans.y = 0.0f;
+    temp_v0->trans.z = 0.0f;
+    func_8001C0C4_1CCC4(temp_v0->model[0], temp_v0->trans.x, temp_v0->trans.y, temp_v0->trans.z);
+    func_8001C0C4_1CCC4(temp_v0->model[1], 0.0f, 0.0f, 2300.0f);
+    func_8001C0C4_1CCC4(temp_v0->model[2], 0.0f, 0.0f, 2300.0f);
+    omPrcSetDestructor(0, func_80106544_4F0D94_name_73);
+    D_80109338_4F3B88_name_73.objFunc = func_80106270_4F0AC0_name_73;
+    while (1) {
+        D_80109338_4F3B88_name_73.objFunc(temp_v0);
+        HuPrcVSleep();   
+    }
+}
+
+void func_80106270_4F0AC0_name_73(omObjData* arg0) {
 }
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_80106278_4F0AC8_name_73);
 
-void func_80106544_4F0D94_name_73(void) {
+void func_80106544_4F0D94_name_73(omObjData* arg0) {
 }
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_73_name/4F01F0", func_8010654C_4F0D9C_name_73);

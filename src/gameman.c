@@ -4,7 +4,7 @@
 #include "malloc.h"
 #include "pad.h"
 #include "process.h"
-#include "obj.h"
+#include "game/object.h"
 #include "util.h"
 
 struct str800D5298 {

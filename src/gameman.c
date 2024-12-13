@@ -67,7 +67,7 @@ s32  func_8004FDC0_509C0(void);
 void func_80050800_51400(void);
 void func_80050E78_51A78(u32 arg0);
 void func_80061B50_62750(void);
-void func_80087A40_88640(GW_PLAYER *arg0, u32 arg1, u32 arg2);
+void memset(void *dest, int ch, u32 /*size_t*/ n);
 void Hu3DCamInit(u32 arg0);
 
 void func_8000E3C0_EFC0(void) {
@@ -202,7 +202,7 @@ void func_8000E804_F404(void) {
     s32 i;
 
     for (i = 0; i < MAX_PLAYERS; i++) {
-        func_80087A40_88640(&GwPlayer[i], 0, sizeof(GW_PLAYER));
+        memset(&GwPlayer[i], 0, sizeof(GW_PLAYER));
         if (CheckControllerRead(i) != PAD_NOT_INSERTED) {
             D_800CCF78_CDB78[i] = 0;
             GwPlayer[i].flags1 &= ~1;

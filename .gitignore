@@ -21,3 +21,4 @@ build.ninja
 __pycache__/
 .DS_Store
 .*.swp
+.venv

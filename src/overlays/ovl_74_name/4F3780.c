@@ -10,8 +10,8 @@ void func_8000B690_C290(s32);
 void func_800142A0_14EA0(s32);
 void func_80019514_1A114(s32, s32, s32, s32);
 void func_80037258_37E58(void);
-void func_800E66E0_FA300_name_80(void);
-void func_800E69D8_FA5F8_name_80(void);
+void func_800E66E0_FA300_shared_board(void);
+void func_800E69D8_FA5F8_shared_board(void);
 void func_80105E0C_4F3BEC_name_74(void);
 void func_80105EF4_4F3CD4_name_74(void);
 void func_801060A4_4F3E84_name_74(void);
@@ -66,8 +66,8 @@ void func_801059A0_4F3780_name_74(void) {
 
     if (var_a0_2 >= 4) {
         func_80037258_37E58();
-        func_800E69D8_FA5F8_name_80();
-        func_800E66E0_FA300_name_80();
+        func_800E69D8_FA5F8_shared_board();
+        func_800E66E0_FA300_shared_board();
         omOvlReturnEx(1);
         return;
     }

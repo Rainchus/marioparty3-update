@@ -169,7 +169,7 @@ segments:
       - [0x70C30, c]
       - [0x723E0, asm]
       - [0x72740, asm]
-      - [0x72750, asm]
+      - [0x72750, asm] #libleo stuff
       - [0x73020, asm]
       - [0x730A0, asm]
       - [0x73190, c]
@@ -325,12 +325,14 @@ segments:
       - [0x8F830, c]
       - [0x8FB20, c]
       - [0x8FCF0, data]
+      - [0x960C0, bin, n_aspMain_code]
       - [0x96EF0, .data, overlay_table]
       - [0x98160, data]
       - [0xA4F30, .rodata, 8F1A0]
       #- [0xA4F40, .rodata, 8F320] #where does this rodata belong?
       - [0xA4F40, rodata]
       - [0xA4F50, rodata]
+      - [0xA6C50, rodata, n_aspMain_data]
       - [0xA6F00, .rodata, 1060]
       - [0xA7580, .rodata, 8F20]
       - [0xA7590, .rodata, decode]
@@ -413,8 +415,8 @@ segments:
   - type: code
     start: 0xEA790
     vram: 0x800D6B70
-    dir: overlays/ovl_80_name
-    name: name_80
+    dir: overlays/ovl_80_shared_board
+    name: shared_board
     subalign: 16
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
@@ -430,8 +432,8 @@ segments:
   - type: code
     start: 0x116320
     vram: 0x801059A0
-    dir: overlays/ovl_00_name
-    name: name_00
+    dir: overlays/ovl_00_test_menu1
+    name: test_menu1
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x220
@@ -444,8 +446,8 @@ segments:
   - type: code
     start: 0x11A480
     vram: 0x801059A0
-    dir: overlays/ovl_01_name
-    name: name_01
+    dir: overlays/ovl_01_hand_line_sinker
+    name: hand_line_sinker
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xC0
@@ -458,8 +460,8 @@ segments:
   - type: code
     start: 0x120BC0
     vram: 0x801059A0
-    dir: overlays/ovl_02_name
-    name: name_02
+    dir: overlays/ovl_02_coconut_conk
+    name: coconut_conk
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A10
@@ -472,8 +474,8 @@ segments:
   - type: code
     start: 0x1263E0
     vram: 0x801059A0
-    dir: overlays/ovl_03_name
-    name: name_03
+    dir: overlays/ovl_03_spotlight_swim
+    name: spotlight_swim
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1B80
@@ -486,8 +488,8 @@ segments:
   - type: code
     start: 0x12DD30
     vram: 0x801059A0
-    dir: overlays/ovl_04_name
-    name: name_04
+    dir: overlays/ovl_04_boulder_ball
+    name: boulder_ball
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x30
@@ -500,8 +502,8 @@ segments:
   - type: code
     start: 0x131C10
     vram: 0x801059A0
-    dir: overlays/ovl_05_name
-    name: name_05
+    dir: overlays/ovl_05_crazy_cogs
+    name: crazy_cogs
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x2530
@@ -514,8 +516,8 @@ segments:
   - type: code
     start: 0x137C00
     vram: 0x801059A0
-    dir: overlays/ovl_06_name
-    name: name_06
+    dir: overlays/ovl_06_hide_and_sneak
+    name: hide_and_sneak
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A60
@@ -528,8 +530,8 @@ segments:
   - type: code
     start: 0x13E9C0
     vram: 0x801059A0
-    dir: overlays/ovl_07_name
-    name: name_07
+    dir: overlays/ovl_07_ridiculous_relay
+    name: ridiculous_relay
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x2B0
@@ -542,8 +544,8 @@ segments:
   - type: code
     start: 0x14A810
     vram: 0x801059A0
-    dir: overlays/ovl_08_name
-    name: name_08
+    dir: overlays/ovl_08_thwomp_pull
+    name: thwomp_pull
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x150
@@ -556,8 +558,8 @@ segments:
   - type: code
     start: 0x1542E0
     vram: 0x801059A0
-    dir: overlays/ovl_09_name
-    name: name_09
+    dir: overlays/ovl_09_river_raiders
+    name: river_raiders
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x3420
@@ -570,8 +572,8 @@ segments:
   - type: code
     start: 0x15C310
     vram: 0x801059A0
-    dir: overlays/ovl_0A_name
-    name: name_0A
+    dir: overlays/ovl_0A_tidal_toss
+    name: tidal_toss
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x300
@@ -584,8 +586,8 @@ segments:
   - type: code
     start: 0x161750
     vram: 0x801059A0
-    dir: overlays/ovl_0B_name
-    name: name_0B
+    dir: overlays/ovl_0B_eatsa_pizza
+    name: eatsa_pizza
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x180
@@ -598,8 +600,8 @@ segments:
   - type: code
     start: 0x165010
     vram: 0x801059A0
-    dir: overlays/ovl_0C_name
-    name: name_0C
+    dir: overlays/ovl_0C_baby_bowser_broadside
+    name: baby_bowser_broadside
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x30
@@ -611,8 +613,8 @@ segments:
   - type: code
     start: 0x16F670
     vram: 0x801059A0
-    dir: overlays/ovl_0D_name
-    name: name_0D
+    dir: overlays/ovl_0D_pump_pump_away
+    name: pump_pump_away
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1F50
@@ -625,8 +627,8 @@ segments:
   - type: code
     start: 0x17B3B0
     vram: 0x801059A0
-    dir: overlays/ovl_0E_name
-    name: name_0E
+    dir: overlays/ovl_0E_hyper_hydrants
+    name: hyper_hydrants
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x100
@@ -639,8 +641,8 @@ segments:
   - type: code
     start: 0x181950
     vram: 0x801059A0
-    dir: overlays/ovl_0F_name
-    name: name_0F
+    dir: overlays/ovl_0F_picking_panic
+    name: picking_panic
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x3F0
@@ -653,8 +655,8 @@ segments:
   - type: code
     start: 0x18ABD0
     vram: 0x801059A0
-    dir: overlays/ovl_10_name
-    name: name_10
+    dir: overlays/ovl_10_cosmic_coaster
+    name: cosmic_coaster
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x3C0
@@ -667,8 +669,8 @@ segments:
   - type: code
     start: 0x191240
     vram: 0x801059A0
-    dir: overlays/ovl_11_name
-    name: name_11
+    dir: overlays/ovl_11_puddle_paddle
+    name: puddle_paddle
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x30
@@ -681,8 +683,8 @@ segments:
   - type: code
     start: 0x19CEF0
     vram: 0x801059A0
-    dir: overlays/ovl_12_name
-    name: name_12
+    dir: overlays/ovl_12_etch_n_catch
+    name: etch_n_catch
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x4BC0
@@ -695,8 +697,8 @@ segments:
   - type: code
     start: 0x1A3D80
     vram: 0x801059A0
-    dir: overlays/ovl_13_name
-    name: name_13
+    dir: overlays/ovl_13_log_jam
+    name: log_jam
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xE0
@@ -709,8 +711,8 @@ segments:
   - type: code
     start: 0x1AC970
     vram: 0x801059A0
-    dir: overlays/ovl_14_name
-    name: name_14
+    dir: overlays/ovl_14_slot_synch
+    name: slot_synch
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xE0
@@ -723,8 +725,8 @@ segments:
   - type: code
     start: 0x1B4F10
     vram: 0x801059A0
-    dir: overlays/ovl_15_name
-    name: name_15
+    dir: overlays/ovl_15_treadmill_grill
+    name: treadmill_grill
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x190
@@ -737,8 +739,8 @@ segments:
   - type: code
     start: 0x1BA850
     vram: 0x801059A0
-    dir: overlays/ovl_16_name
-    name: name_16
+    dir: overlays/ovl_16_toadstool_titan
+    name: toadstool_titan
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x2B0
@@ -751,8 +753,8 @@ segments:
   - type: code
     start: 0x1C4280
     vram: 0x801059A0
-    dir: overlays/ovl_17_name
-    name: name_17
+    dir: overlays/ovl_17_aces_high
+    name: aces_high
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xE0
@@ -765,8 +767,8 @@ segments:
   - type: code
     start: 0x1CC730
     vram: 0x801059A0
-    dir: overlays/ovl_18_name
-    name: name_18
+    dir: overlays/ovl_18_bounce_n_trounce
+    name: bounce_n_trounce
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x40
@@ -779,8 +781,8 @@ segments:
   - type: code
     start: 0x1D1C40
     vram: 0x801059A0
-    dir: overlays/ovl_19_name
-    name: name_19
+    dir: overlays/ovl_19_ice_rink_risk
+    name: ice_rink_risk
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x30
@@ -793,8 +795,8 @@ segments:
   - type: code
     start: 0x1D4970
     vram: 0x801059A0
-    dir: overlays/ovl_1A_name
-    name: name_1A
+    dir: overlays/ovl_1A_locked_out
+    name: locked_out
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x190
@@ -807,8 +809,8 @@ segments:
   - type: code
     start: 0x1D9550
     vram: 0x801059A0
-    dir: overlays/ovl_1B_name
-    name: name_1B
+    dir: overlays/ovl_1B_chip_shot_challenge
+    name: chip_shot_challenge
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xA0
@@ -821,8 +823,8 @@ segments:
   - type: code
     start: 0x1DE610
     vram: 0x801059A0
-    dir: overlays/ovl_1C_name
-    name: name_1C
+    dir: overlays/ovl_1C_parasol_plummet
+    name: parasol_plummet
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1C0
@@ -834,8 +836,8 @@ segments:
   - type: code
     start: 0x1E37C0
     vram: 0x801059A0
-    dir: overlays/ovl_1D_name
-    name: name_1D
+    dir: overlays/ovl_1D_messy_memory
+    name: messy_memory
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x47A0
@@ -848,8 +850,8 @@ segments:
   - type: code
     start: 0x1EF420
     vram: 0x801059A0
-    dir: overlays/ovl_1E_name
-    name: name_1E
+    dir: overlays/ovl_1E_picture_imperfect
+    name: picture_imperfect
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1B0
@@ -862,8 +864,8 @@ segments:
   - type: code
     start: 0x1F3B90
     vram: 0x801059A0
-    dir: overlays/ovl_1F_name
-    name: name_1F
+    dir: overlays/ovl_1F_marios_puzzle_party
+    name: marios_puzzle_party
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x6600
@@ -876,8 +878,8 @@ segments:
   - type: code
     start: 0x1FE4D0
     vram: 0x801059A0
-    dir: overlays/ovl_20_name
-    name: name_20
+    dir: overlays/ovl_20_the_beat_goes_on
+    name: the_beat_goes_on
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x140
@@ -890,8 +892,8 @@ segments:
   - type: code
     start: 0x204F90
     vram: 0x801059A0
-    dir: overlays/ovl_21_name
-    name: name_21
+    dir: overlays/ovl_21_mpiq
+    name: mpiq
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x680
@@ -904,8 +906,8 @@ segments:
   - type: code
     start: 0x20BFA0
     vram: 0x801059A0
-    dir: overlays/ovl_22_name
-    name: name_22
+    dir: overlays/ovl_22_curtain_call
+    name: curtain_call
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A90
@@ -918,8 +920,8 @@ segments:
   - type: code
     start: 0x211AB0
     vram: 0x801059A0
-    dir: overlays/ovl_23_name
-    name: name_23
+    dir: overlays/ovl_23_water_whirled
+    name: water_whirled
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x730
@@ -932,8 +934,8 @@ segments:
   - type: code
     start: 0x216670
     vram: 0x801059A0
-    dir: overlays/ovl_24_name
-    name: name_24
+    dir: overlays/ovl_24_fridged_bridges
+    name: fridged_bridges
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x37B0
@@ -946,8 +948,8 @@ segments:
   - type: code
     start: 0x21E010
     vram: 0x801059A0
-    dir: overlays/ovl_25_name
-    name: name_25
+    dir: overlays/ovl_25_awful_tower
+    name: awful_tower
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x330
@@ -960,11 +962,11 @@ segments:
   - type: code
     start: 0x225740
     vram: 0x801059A0
-    dir: overlays/ovl_26_name
-    name: name_26
+    dir: overlays/ovl_26_cheep_cheep_chase
+    name: cheep_cheep_chase
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
-    bss_size: 0x040
+    bss_size: 0x40
     subsegments:
       - [0x225740, c]
       - [0x22DDB0, data, 225740] #8010E010
@@ -974,8 +976,8 @@ segments:
   - type: code
     start: 0x22E100
     vram: 0x801059A0
-    dir: overlays/ovl_27_name
-    name: name_27
+    dir: overlays/ovl_27_pipe_cleaners
+    name: pipe_cleaners
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xAB0
@@ -988,8 +990,8 @@ segments:
   - type: code
     start: 0x232A10
     vram: 0x801059A0
-    dir: overlays/ovl_28_name
-    name: name_28
+    dir: overlays/ovl_28_snowball_summit
+    name: snowball_summit
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xA20
@@ -1002,8 +1004,8 @@ segments:
   - type: code
     start: 0x23C8F0
     vram: 0x801059A0
-    dir: overlays/ovl_29_name
-    name: name_29
+    dir: overlays/ovl_29_all_fired_up
+    name: all_fired_up
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A0
@@ -1016,8 +1018,8 @@ segments:
   - type: code
     start: 0x240A10
     vram: 0x801059A0
-    dir: overlays/ovl_2A_name
-    name: name_2A
+    dir: overlays/ovl_2A_stacked_deck
+    name: stacked_deck
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A90
@@ -1030,8 +1032,8 @@ segments:
   - type: code
     start: 0x24A760
     vram: 0x801059A0
-    dir: overlays/ovl_2B_name
-    name: name_2B
+    dir: overlays/ovl_2B_three_door_monty
+    name: three_door_monty
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A30
@@ -1044,8 +1046,8 @@ segments:
   - type: code
     start: 0x251FF0
     vram: 0x801059A0
-    dir: overlays/ovl_2C_name
-    name: name_2C
+    dir: overlays/ovl_2C_rockin_raceway
+    name: rockin_raceway
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A0
@@ -1058,8 +1060,8 @@ segments:
   - type: code
     start: 0x25E110
     vram: 0x801059A0
-    dir: overlays/ovl_2D_name
-    name: name_2D
+    dir: overlays/ovl_2D_merry_go_chomp
+    name: merry_go_chomp
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1AD0
@@ -1072,8 +1074,8 @@ segments:
   - type: code
     start: 0x264B80
     vram: 0x801059A0
-    dir: overlays/ovl_2E_name
-    name: name_2E
+    dir: overlays/ovl_2E_slapdown
+    name: slapdown
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1A70
@@ -1086,8 +1088,8 @@ segments:
   - type: code
     start: 0x269BF0
     vram: 0x801059A0
-    dir: overlays/ovl_2F_name
-    name: name_2F
+    dir: overlays/ovl_2F_storm_chasers
+    name: storm_chasers
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x2E0
@@ -1100,8 +1102,8 @@ segments:
   - type: code
     start: 0x270EF0
     vram: 0x801059A0
-    dir: overlays/ovl_30_name
-    name: name_30
+    dir: overlays/ovl_30_eye_sore
+    name: eye_sore
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1D20
@@ -1114,8 +1116,8 @@ segments:
   - type: code
     start: 0x276470
     vram: 0x801059A0
-    dir: overlays/ovl_31_name
-    name: name_31
+    dir: overlays/ovl_31_vine_with_me
+    name: vine_with_me
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x3110
@@ -1128,8 +1130,8 @@ segments:
   - type: code
     start: 0x283060
     vram: 0x801059A0
-    dir: overlays/ovl_32_name
-    name: name_32
+    dir: overlays/ovl_32_popgun_pickoff
+    name: popgun_pickoff
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x1310
@@ -1142,8 +1144,8 @@ segments:
   - type: code
     start: 0x28A290
     vram: 0x801059A0
-    dir: overlays/ovl_33_name
-    name: name_33
+    dir: overlays/ovl_33_end_of_the_line
+    name: end_of_the_line
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xB0
@@ -1156,11 +1158,11 @@ segments:
   - type: code
     start: 0x291020
     vram: 0x801059A0
-    dir: overlays/ovl_34_name
-    name: name_34
+    dir: overlays/ovl_34_bowser_toss
+    name: bowser_toss
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
-    bss_size: 0x090
+    bss_size: 0x90
     subsegments:
       - [0x291020, c]
       - [0x29A7D0, data, 291020] #8010F150
@@ -1170,8 +1172,8 @@ segments:
   - type: code
     start: 0x29B1D0
     vram: 0x801059A0
-    dir: overlays/ovl_35_name
-    name: name_35
+    dir: overlays/ovl_35_baby_bowser_bonkers
+    name: baby_bowser_bonkers
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x130
@@ -1184,8 +1186,8 @@ segments:
   - type: code
     start: 0x2A1430
     vram: 0x801059A0
-    dir: overlays/ovl_36_name
-    name: name_36
+    dir: overlays/ovl_36_motor_rooter
+    name: motor_rooter
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x30
@@ -1198,11 +1200,11 @@ segments:
   - type: code
     start: 0x2AF250
     vram: 0x801059A0
-    dir: overlays/ovl_37_name
-    name: name_37
+    dir: overlays/ovl_37_silly_screws
+    name: silly_screws
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
-    bss_size: 0x020
+    bss_size: 0x20
     subsegments:
       - [0x2AF250, c]
       - [0x2B56D0, data, 2AF250] #8010BE20
@@ -1212,8 +1214,8 @@ segments:
   - type: code
     start: 0x2B5830
     vram: 0x801059A0
-    dir: overlays/ovl_38_name
-    name: name_38
+    dir: overlays/ovl_38_crowd_cover
+    name: crowd_cover
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0xA70
@@ -1226,8 +1228,8 @@ segments:
   - type: code
     start: 0x2BCE10
     vram: 0x801059A0
-    dir: overlays/ovl_39_name
-    name: name_39
+    dir: overlays/ovl_39_tick_tock_hop
+    name: tick_tock_hop
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x30
@@ -1240,8 +1242,8 @@ segments:
   - type: code
     start: 0x2C5B50
     vram: 0x801059A0
-    dir: overlays/ovl_3A_name
-    name: name_3A
+    dir: overlays/ovl_3A_fowl_play
+    name: fowl_play
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x240
@@ -1254,8 +1256,8 @@ segments:
   - type: code
     start: 0x2CF3B0
     vram: 0x801059A0
-    dir: overlays/ovl_3B_name
-    name: name_3B
+    dir: overlays/ovl_3B_winners_wheel
+    name: winners_wheel
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x70

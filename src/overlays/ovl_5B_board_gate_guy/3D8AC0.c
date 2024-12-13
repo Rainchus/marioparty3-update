@@ -67,7 +67,7 @@ void func_80105C64_3D8D54_board_gate_guy(s32 arg0, s32 arg1, unkStruct01* arg2) 
     f32 temp_f20;
 
     func_800EB708_D34D8_name_81(arg0, arg1, arg2);
-    temp_f20 = func_800D76D0_EB2F0_name_80(arg2) + 15.0f;//could also potentially be func_800D76D0_BF4A0_name_81
+    temp_f20 = func_800D76D0_EB2F0_shared_board(arg2) + 15.0f;//could also potentially be func_800D76D0_BF4A0_name_81
     arg2->unk_00 = HuMathSin(temp_f20);
     arg2->unk_08 = HuMathCos(temp_f20);
 }

@@ -713,5 +713,8 @@ D_800CDD58_CE958 = 0x800CDD58; //rom:0xCE958 type:s16
 D_800D037C_D0F7C = 0x800D037C; //rom:0xD0F7C type:s16
 D_800D51F8_D5DF8 = 0x800D51F8; //rom:0xD5DF8 type:s16
 
+n_aspMain_code = 0x800954C0; //rom:0x960C0 size:0xC60
+n_aspMain_data = 0x800A6050; //rom:0xA6C50 size:0x2B0
+
 //ovl_80
-D_801057E0_119400_name_80 = 0x801057E0; //rom:0x119400 size:0x1B0 segment:name_80
+D_801057E0_119400_shared_board = 0x801057E0; //rom:0x119400 size:0x1B0 segment:shared_board

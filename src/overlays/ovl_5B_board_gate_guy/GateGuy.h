@@ -70,9 +70,9 @@ void func_800EA760_D2530_name_81(void);
 void func_800ECD0C_D4ADC_name_81(s32, s8, s8);
 f32 HuMathCos(f32);
 f32 HuMathSin(f32);
-f32 func_800D76D0_EB2F0_name_80(void*);
+f32 func_800D76D0_EB2F0_shared_board(void*);
 void func_800EB708_D34D8_name_81(s32, s32, unkStruct01*);
-void * HuMemMemoryAlloc(HeapNode * heap, s32 size);
+void* HuMemMemoryAlloc(HeapNode* heap, s32 size);
 unkStruct03* func_80047EA0_48AA0(void*, s32, s32, s32);
 void func_80105CC0_3D8DB0_board_gate_guy(void); //probably takes object as arg
 void func_800FC8C4_E4694_name_81(void*);

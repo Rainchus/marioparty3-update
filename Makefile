@@ -125,6 +125,7 @@ distclean: clean
 setup: distclean split
 
 split:
+	$(V)rm -rf asm
 	$(V)$(SPLAT)
 
 test: $(ROM)

@@ -18,5 +18,6 @@ void func_80106850_4F10A0_name_73(omObjData*, s32);
 void func_8001C0C4_1CCC4(s16, f32, f32, f32);
 u16 func_8000B108_BD08(s32 arg0, s32 arg1);
 void func_800359E0_365E0(board_overlay_entrypoint*, s16);
+f32 HuMathCos(f32);
 
 #endif

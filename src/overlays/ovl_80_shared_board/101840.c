@@ -45,7 +45,7 @@ u32 func_800EE884_1024A4_shared_board(s32 arg0, s16 arg1, s16 arg2) {
     s32 i;
     s32 ret;
 
-    for (i = 0; i < 16; i++) {
+    for (i = 0; i < ARRAY_COUNT(D_80105718_119338_shared_board); i++) {
         temp_s1 = &D_80105718_119338_shared_board[i];
         if (temp_s1->unk_08 == NULL) {
             break;

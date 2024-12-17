@@ -49,10 +49,6 @@ typedef struct UnkCoinThing {
 /* 0x08 */ s16 unk_08[2];
 } UnkCoinThing;
 
-extern char D_800D5218_D5E18[];
-extern s16 gCoinBlockSpaceIndex;
-extern s16 gStarBlockSpaceIndex;
-
 void func_800DA790_EE3B0_shared_board(s32, u16, char*, s32, s32);
 void func_8001C258_1CE58(s16, s32, s32);
 void func_8001C448_1D048(s16);
@@ -66,7 +62,7 @@ void func_80054904_55504(s16, s16, s16, s16);
 void func_800F3400_107020_shared_board(omObjData*);
 void func_800F4190_107DB0_shared_board(void);
 void func_800F43FC_10801C_shared_board(s32);
-void func_800F4798_1083B8_shared_board(s32, u8);
+void func_800F4798_1083B8_shared_board(u32, s32);
 void func_800F4874_108494_shared_board(s32, s16, s16);
 s32 func_800EECB0_1028D0_shared_board(s32);
 s32 func_800D9E0C_EDA2C_shared_board(s32);
@@ -76,10 +72,21 @@ void func_800D9D84_ED9A4_shared_board(s32, s16, s32, s32, u16);
 void func_800EE7AC_1023CC_shared_board(omObjData* func);
 s32 BoardPlayerRankCalc(s32 player);
 void func_80055024_55C24(s16, s16, s16, s32);
-void func_800551D8_55DD8(s16, s32, f32, f32);
+void func_800551D8_55DD8(s16, s16, f32, f32);
 void func_80055294_55E94(s16, s16, u16);
 void func_800F2E30_106A50_shared_board(s32);
+void func_80055420_56020(s16, s32, u8, u8, s32);
+void func_800F6A88_10A6A8_shared_board(s16, s32);
+void func_800F6AD0_10A6F0_shared_board(s32, f32, f32);
+void func_800F6E4C_10AA6C_shared_board(s32, s32, s32*, s32*);
 
+extern s32 D_80101788_1153A8_shared_board;
+extern s32 D_8010178C_1153AC_shared_board;
+extern char D_800D5218_D5E18[];
+extern s16 gCoinBlockSpaceIndex;
+extern s16 gStarBlockSpaceIndex;
+extern s16 D_80105588_1191A8_shared_board[];
+extern RGB D_8010188C_1154AC_shared_board[];
 extern s8 D_800D20B1_D2CB1;
 extern s32 D_80101780_1153A0_shared_board;
 extern s16 D_8010559C_1191BC_shared_board[];

@@ -728,3 +728,6 @@ n_aspMain_data = 0x800A6050; //rom:0xA6C50 size:0x2B0
 
 //ovl_80
 D_801057E0_119400_shared_board = 0x801057E0; //rom:0x119400 size:0x1B0 segment:shared_board
+D_80105718_119338_shared_board = 0x80105718; //rom:0x119338 size:0xC0 segment:shared_board
+D_801018E4_115504_shared_board = 0x801018E4; //rom:0x115504 size:0x10 segment:shared_board
+D_80101794_1153B4_shared_board = 0x80101794; //rom:0x1153B4 size:0x20 segment:shared_board

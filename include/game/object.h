@@ -27,11 +27,11 @@ typedef struct om_obj_data {
 /* 0x24 */ Vec rot;
 /* 0x30 */ Vec scale;
 /* 0x3C */ u16 mdlcnt;
-/* 0x40 */ s16 *model;
+/* 0x40 */ s16* model;
 /* 0x44 */ u16 mtncnt;
-/* 0x48 */ s16 *motion;
+/* 0x48 */ s16* motion;
 /* 0x4C */ u32 work[4];
-/* 0x5C */ void *data;
+/* 0x5C */ void* data;
 } omObjData;
 
 typedef struct Object_s {

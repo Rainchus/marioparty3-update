@@ -5,6 +5,8 @@
 #include "process.h"
 #include "math.h"
 
+#define CUR_PLAYER -1
+
 #define MAX_PLAYERS 4
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
@@ -38,7 +40,7 @@ typedef struct UnkDiceRelated {
 /* 0x00 */ s16 unk_00;
 /* 0x02 */ char unk_02[6];
 /* 0x08 */ UnkDiceRelatedInner UnkDiceInner;
-} UnkDiceRelated;
+} UnkDiceRelated; //sizeof 0x4C
 
 
 typedef struct GwPlayer_s {
@@ -91,7 +93,7 @@ typedef struct SpaceData {
 /* 0x08 */ Vec coords;
 /* 0x14 */ Vec rot;
 /* 0x20 */ void* event_list;
-} SpaceData;
+} SpaceData; //sizeof 0x24
 
 typedef struct omOvlHisData { //Object Manager History Data
 /* 0x00 */ s32 overlayID;
@@ -142,7 +144,7 @@ typedef struct GwCommon_s {
 
 typedef struct GW_STORY {
     char unk_00[0x74];
-} GW_STORY;
+} GW_STORY; //sizeof 0x74
 
 typedef struct RectF {
 /* 0x00 */ f32 x1;
@@ -152,8 +154,14 @@ typedef struct RectF {
 } RectF; //sizeof 0x10
 
 typedef struct board_overlay_entrypoint {
-    s16 index;
-    void* fn;
-} board_overlay_entrypoint;
+/* 0x00 */ s16 index;
+/* 0x04 */ void* fn;
+} board_overlay_entrypoint; //sizeof 0x08
+
+typedef struct RGB {
+/* 0x00 */ u8 r;
+/* 0x01 */ u8 g;
+/* 0x02 */ u8 b;
+} RGB; //sizeof 0x3
 
 #endif

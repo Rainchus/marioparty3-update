@@ -1,6 +1,22 @@
 #include "common.h"
 #include "ovl_80.h"
 
+extern s8 D_800D20B1_D2CB1;
+extern s32 D_80101780_1153A0_shared_board;
+extern s16 D_8010559C_1191BC_shared_board[];
+extern s16 D_801018E4_115504_shared_board[4][2];
+extern s32 D_80101790_1153B0_shared_board;
+extern f32 D_801055C8_1191E8_shared_board;
+extern s16 D_801055E4_119204_shared_board;
+extern Vec2f D_801055CC_1191EC_shared_board;
+extern Vec2f D_801055DC_1191FC_shared_board;
+extern Vec2f D_801055D4_1191F4_shared_board;
+
+void func_80055024_55C24(s16, s16, s16, s32);
+void func_800551D8_55DD8(s16, s32, f32, f32);
+void func_80055294_55E94(s16, s16, u16);
+void func_800F2E30_106A50_shared_board(s32);
+
 void func_800DAA40_EE660_shared_board(s32 arg0) {
     UnkDiceRelatedInner* temp_s0 = &D_800CDBC8_CE7C8[arg0].UnkDiceInner;
 
@@ -1089,7 +1105,135 @@ void func_800F3370_106F90_shared_board(void) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/EE660", func_800F3400_107020_shared_board);
+void func_800F3400_107020_shared_board(omObjData* arg0) {
+    f32 temp_f2;
+    f32 temp_f6;
+    f32 temp_f8;
+    s32 var_v1;
+    BoardStatus* temp_s2;
+    s32 i, j, k;
+
+    while (1) {
+        if (D_800D20B1_D2CB1 == 0) {
+            for (i = 0; i < 4; i++) {
+                if (D_80101780_1153A0_shared_board != -1 &&
+                    D_80101784_1153A4_shared_board != -1 &&
+                    i != D_80101780_1153A0_shared_board &&
+                    i != D_80101784_1153A4_shared_board) {
+                    continue;
+                }
+
+                temp_s2 = &D_801057E0_119400_shared_board[i];
+
+                if (temp_s2->unk_00 == 0) {
+                    if (temp_s2->unk4[1] & 1) {
+                        for (k = 0; k < 14; k++) {
+                            SprAttrSet(temp_s2->unkA, k, 0x8000);
+                        }
+                        continue;
+                    }
+
+                    for (k = 0; k < 14; k++) {
+                        switch (k) {
+                            case 9:
+                                if (GwPlayer[i].flags1 & 1) {
+                                    break;
+                                }
+                                continue;
+                            case 11:
+                            case 12:
+                            case 13:
+                                if (GwPlayer[i].items[k - 11] == -1) {
+                                    continue;
+                                }
+
+                                func_80055024_55C24(temp_s2->unkA, k, D_8010559C_1191BC_shared_board[GwPlayer[i].items[k - 11]], 0);
+                                func_800550F4_55CF4(temp_s2->unkA, k, 0);
+                                func_80055294_55E94(temp_s2->unkA, k, (i * 5) + 0x478E);
+                                SprAttrSet(temp_s2->unkA, k, 0);
+                                var_v1 = k;
+                                if (i >= 2) {
+                                    var_v1 = k + 3;
+                                }
+                                func_80054904_55504(temp_s2->unkA, k, D_801018E4_115504_shared_board[var_v1][0], D_801018E4_115504_shared_board[var_v1][1]);
+                                SprAttrSet(temp_s2->unkA, k, 0x8000);
+                                if (D_80101790_1153B0_shared_board != 0) {
+                                    break;
+                                }
+                                continue;
+                            case 6:
+                                if (GwPlayer[i].coins < 10) {
+                                    continue;
+                                }
+                                break;
+                        }
+                        SprAttrReset(temp_s2->unkA, k, 0x8000);
+                    }
+                    func_800F2E30_106A50_shared_board(i);
+                } else {
+                    if (temp_s2->unk4[1] & 1) {
+                        for (k = 0; k < 5; k++) {
+                            SprAttrSet(temp_s2->unkA, k, 0x8000);
+                        }
+                        SprAttrSet(temp_s2->unkA, 9, 0x8000);
+                        continue;
+                    }
+                    for (k = 0; k < 2; k++) {
+                        SprAttrReset(temp_s2->unkA, k, 0x8000);
+                    }
+                    for (k = 0; k < 3; k++) {
+                        if (temp_s2->unk_40[k] != -1) {
+                            SprAttrReset(temp_s2->unkA, (k + 2), 0x8000);
+                        }
+                    }
+                    if ((GwPlayer[i].flags1 & 1) && !(temp_s2->unk4[1] & 1)) {
+                        SprAttrReset(temp_s2->unkA, 9, 0x8000);
+                    } else {
+                        SprAttrSet(temp_s2->unkA, 9, 0x8000);
+                    }
+                    
+                }
+
+                if (temp_s2->unkE > 0) {
+                    temp_s2->unkE--;
+                    temp_s2->xPos += temp_s2->unk_20;
+                    temp_s2->yPos += temp_s2->unk_24;
+                    temp_s2->unk_20 += temp_s2->unk_28;
+                    temp_s2->unk_24 += temp_s2->unk_2C;
+                } else if (temp_s2->unkE == -1) {
+                    temp_s2->unkE = -2;
+                } else if (temp_s2->unkE != -2) {
+                    temp_s2->xPos = temp_s2->unk_18;
+                    temp_s2->yPos = temp_s2->unk_1C;
+                    temp_s2->unkE = -1;
+                }
+                func_80054904_55504(temp_s2->unkA, 0,
+                                    (s16)((s32)(temp_s2->xPos + 0.5f) + 0x38),
+                                    (s16)((s32)(temp_s2->yPos + 0.5f) + 0x13));
+            }
+
+            if (D_801055C2_1191E2_shared_board != -1) {
+                D_801055C8_1191E8_shared_board += 0.1f;
+                if (D_801055C8_1191E8_shared_board > 1.0f) {
+                    D_801055C8_1191E8_shared_board = 1.0f;
+                }
+                func_800551D8_55DD8(D_801055C2_1191E2_shared_board, 0, D_801055C8_1191E8_shared_board, D_801055C8_1191E8_shared_board);
+                if (D_801055E4_119204_shared_board > 0) {
+                    D_801055E4_119204_shared_board--;
+                    D_801055CC_1191EC_shared_board.x += D_801055D4_1191F4_shared_board.x;
+                    D_801055CC_1191EC_shared_board.y += D_801055D4_1191F4_shared_board.y;
+                    D_801055D4_1191F4_shared_board.x += D_801055DC_1191FC_shared_board.x;
+                    D_801055D4_1191F4_shared_board.y += D_801055DC_1191FC_shared_board.y;
+                    func_80054904_55504(D_801055C2_1191E2_shared_board, 0,
+                                        D_801055CC_1191EC_shared_board.x,
+                                        D_801055CC_1191EC_shared_board.y);
+                }
+            }
+        }
+        HuPrcVSleep();
+    }
+}
+
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/EE660", func_800F39C0_1075E0_shared_board);
 

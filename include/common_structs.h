@@ -11,6 +11,11 @@
 #define    OS_K0_TO_PHYSICAL(x)    (u32)(((char *)(x)-0x80000000))
 #define    OS_PHYSICAL_TO_K0(x)    (void *)(((u32)(x)+0x80000000))
 
+typedef struct Vec2f {
+/* 0x00 */ f32 x;
+/* 0x04 */ f32 y;
+} Vec2f;
+
 typedef struct objectIndirect3t {
 /* 0x00 */ struct objectt *unk0;
 /* 0x04 */ f32 unk4;
@@ -57,7 +62,7 @@ typedef struct GwPlayer_s {
 /* 0x15 */ u8 chainIndexPrevious;
 /* 0x16 */ u8 spaceIndexPrevious;
 /* 0x17 */ u8 flags2;
-/* 0x18 */ u8 items[3];
+/* 0x18 */ s8 items[3];
 /* 0x1B */ u8 bowser_suit_flags;
 /* 0x1C */ u8 turn_status; //space type landed on (blue, red, etc.)
 /* 0x1D */ s8 playerIndex;

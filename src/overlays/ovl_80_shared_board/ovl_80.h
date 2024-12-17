@@ -24,7 +24,8 @@ typedef struct BoardStatus {
     /* 0x30 */ s32 unk30;
     /* 0x34 */ char pad34[2];
     /* 0x36 */ s16 unk_36;
-    /* 0x38 */ u8 unk_38[0xC];
+    /* 0x38 */ u8 unk_38[8];
+    /* 0x40 */ s16 unk_40[2];
     /* 0x44 */ s16 unk_44[2];
     /* 0x48 */ char pad48[0x1E];
     /* 0x66 */ s16 counts[3]; //star count, coin count?

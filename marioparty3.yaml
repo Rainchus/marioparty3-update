@@ -421,16 +421,48 @@ segments:
     vram: 0x800D6B70
     dir: overlays/ovl_80_shared_board
     name: shared_board
-    subalign: 16
+    subalign: 8
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x32A0
     subsegments:
       - [0xEA790, c]
+      - [0xEAB00, c]
+      - [0xEB2F0, c]
+      - [0xEC3B0, c]
+      - [0xECA50, c]
+      - [0xEDDB0, c]
+      - [0xEE3B0, c]
       - [0xEE660, c]
+      - [0xF2910, c]
+      - [0xF5070, c]
+      - [0xF5B90, c]
+      - [0xFFB10, c]
+      - [0x1006F0, c]
+      - [0x101840, c]
+      - [0x105D50, c]
+      - [0x1063F0, c]
+      - [0x106640, c]
+      - [0x106A50, c]
+      - [0x10AD50, c]
+      - [0x10C230, c]
+      - [0x113520, c]
+      - [0x113750, c]
       - [0x1143C0, data, EA790] #801007A0
-      - [0x115B50, .rodata, EA790] #80101F40
+      - [0x115B50, .rodata, EA790]
+      - [0x115B60, .rodata, EAB00]
+      - [0x115B78, .rodata, EDDB0]
+      - [0x115BD8, .rodata, EE3B0]
       - [0x115BF0, .rodata, EE660]
+      - [0x115CB0, .rodata, F2910]
+      - [0x115DA0, .rodata, F5B90]
+      - [0x115F00, .rodata, 1006F0]
+      - [0x115F40, .rodata, 101840]
+      - [0x116060, .rodata, 106A50]
+      - [0x116140, .rodata, 10AD50]
+      - [0x116170, .rodata, 10C230]
+      - [0x116300, .rodata, 113520]
+      # - [0x115BF0, rodata]
       - {0x116320, type: bss, vram: 0x80102700, name: ovl_80_bss}
 
   - type: code

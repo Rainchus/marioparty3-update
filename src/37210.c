@@ -124,8 +124,6 @@ INCLUDE_RODATA("asm/nonmatchings/37210", D_800A7744_A8344);
 
 INCLUDE_ASM("asm/nonmatchings/37210", func_8003DE60_3EA60);
 
-INCLUDE_RODATA("asm/nonmatchings/37210", D_800A7760_A8360);
-
 INCLUDE_ASM("asm/nonmatchings/37210", func_8003E4A4_3F0A4);
 
 INCLUDE_ASM("asm/nonmatchings/37210", func_8003EBC8_3F7C8);

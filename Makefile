@@ -50,10 +50,10 @@ LD_MAP    := $(BUILD_DIR)/$(TARGET).map
 
 ### Tools ###
 
-PYTHON     := python3
+PYTHON     := venv/bin/python3  # Ensure we're using the Python from the virtual environment
 N64CKSUM   := $(PYTHON) tools/n64cksum.py
 SPLAT_YAML := marioparty3.yaml
-SPLAT      := splat split $(SPLAT_YAML)
+SPLAT      := $(PYTHON) -m splat split $(SPLAT_YAML)  # Use splat from the virtual environment
 EMULATOR   := mupen64plus
 DIFF       := diff
 

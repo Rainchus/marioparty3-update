@@ -25,17 +25,6 @@ extern Vec D_80097560_98160[];
 extern Vec D_800975A8_981A8[];
 extern s16 gNumOfControllers;
 
-s16 func_8000B13C_BD3C(s32);
-s16 Hu3DModelCreate(void*, s32);
-void* HuReadFileTag(s32 dirAndFile, s32 tag);
-void CameraScissorSet(s16 camIndex, RectF* arg1);
-void* ReadMainFS(s32);
-void CameraViewportSet(s16 camIndex, Vec* arg1, Vec* arg2);
-void HuMemMemoryFreePerm(void *ptr);
-void* ReadMainFS(s32 dirAndFile);
-s32 func_8001443C_1503C(void*, s32, u8);
-s32 func_800323CC_32FCC(s32, void*, s32, s32);
-
 u16 func_8000B0A0_BCA0(s32 arg0, s32 arg1) {
     return Hu3DModelCreate(ReadMainFS(arg0), arg1);
 }

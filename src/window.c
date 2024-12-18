@@ -16,7 +16,10 @@ typedef struct TextWindow {
 /* 0x2E */ s16 unk_2E;
 /* 0x30 */ char unk_30[4];
 /* 0x34 */ s16 unk_34;
-/* 0x36 */ char unk_36[0x77];
+/* 0x36 */ char unk_36[0x36];
+/* 0x6C */ s16 unk_6C;
+/* 0x6E */ s16 unk_6E[12];
+/* 0x86 */ char unk_86[0x27];
 /* 0xAD */ s8 usingStringIDBool[5]; //unknown size
 /* 0xB2 */ s8 unk_B2[6]; //unknown size
 /* 0xB8 */ s32 unk_B8[4];
@@ -24,7 +27,8 @@ typedef struct TextWindow {
 } TextWindow; //sizeof 0x27C
 
 extern TextWindow* D_800CC69C_CD29C;
-
+void func_800554C4_560C4(s32, s32, s32);
+s16 func_80055810_56410(void*);
 s32 func_800364DC_370DC(u32);
 void func_800365E8_371E8(u32);
 
@@ -89,7 +93,31 @@ void func_8005B6BC_5C2BC(s16 win_id, u32 arg1, s8 arg2) {
     textWindow->unk_B2[arg2] = -1;
 }
 
-INCLUDE_ASM("asm/nonmatchings/window", func_8005B7B8_5C3B8);
+s16 func_8005B7B8_5C3B8(s16 win_id, u32 spriteMainFsPair, s16 arg2, s16 arg3, u16 arg4) {
+    TextWindow* window = &D_800CC69C_CD29C[win_id];
+    s16 spriteId;
+    void *spriteBytes;
+    s16 i;
+
+    for (i = 4; i < 12; i++) {
+        if (window->unk_6E[i] != -1) {
+            continue;
+        }
+        break;
+    }
+    if (i >= 12) {
+        return -1;
+    }
+
+    spriteBytes = ReadMainFS(spriteMainFsPair);
+    spriteId = func_80055810_56410(spriteBytes);
+    window->unk_6E[i] = spriteId;
+    HuMemMemoryFreePerm(spriteBytes);
+    func_80055024_55C24(window->unk_6C, i, spriteId, arg4 & 0xFFFF);
+    func_80054904_55504(window->unk_6C, i, arg2, arg3);
+    func_800554C4_560C4(window->unk_6C, i, 0);
+    return i;
+}
 
 INCLUDE_ASM("asm/nonmatchings/window", func_8005B8F8_5C4F8);
 

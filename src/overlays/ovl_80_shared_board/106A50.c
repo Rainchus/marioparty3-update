@@ -273,9 +273,13 @@ void func_800F4798_1083B8_shared_board(u32 playerIndex, s32 turnStatus) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F482C_10844C_shared_board);
+s32 func_800F482C_10844C_shared_board(s32 arg0) {
+    return D_801057E0_119400_shared_board[arg0].unk4[0];
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4850_108470_shared_board);
+void func_800F4850_108470_shared_board(s32 arg0, s32 arg1) {
+    D_801057E0_119400_shared_board[arg0].unk1 = arg1;
+}
 
 //initialize player UIs
 void func_800F4874_108494_shared_board(s32 playerIndex, s16 arg1, s16 arg2) {
@@ -319,11 +323,25 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F59B
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5BF4_109814_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5D44_109964_shared_board);
+void func_800F5D44_109964_shared_board(s32 arg0, s32 arg1) {
+    func_800F5BF4_109814_shared_board(arg0, arg1, 1);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5D60_109980_shared_board);
+s32 func_800F5D60_109980_shared_board(s32 arg0) {
+    if (D_801055E8_119208_shared_board[arg0]) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5D78_109998_shared_board);
+s32 func_800F5D78_109998_shared_board(void) {
+    if (D_801057E0_119400_shared_board->unk4[1] & 1) {
+        return 0;
+    } else {
+        return 1;
+    }
+}
 
 //toggle hide player UI bit on
 void func_800F5D8C_1099AC_shared_board(void) {
@@ -364,75 +382,203 @@ void func_800F5E30_109A50_shared_board(void) {
     D_801055C2_1191E2_shared_board = -1;
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5EF0_109B10_shared_board);
+void func_800F5EF0_109B10_shared_board(void) {
+    func_800F462C_10824C_shared_board(D_80101780_1153A0_shared_board);
+    func_800F462C_10824C_shared_board(D_80101784_1153A4_shared_board);
+    func_800F4348_107F68_shared_board();
+    HuPrcKill(D_80105580_1191A0_shared_board);
+    func_800F5644_109264_shared_board();
+    D_80101780_1153A0_shared_board = -1;
+    D_80101784_1153A4_shared_board = -1;
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5F4C_109B6C_shared_board);
+void func_800F5F4C_109B6C_shared_board(s32 arg0, s32 arg1) {
+    D_80101780_1153A0_shared_board = arg0;
+    D_80101784_1153A4_shared_board = arg1;
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5F60_109B80_shared_board);
+void func_800F5F60_109B80_shared_board(void) {
+    func_800F4994_1085B4_shared_board(0x16);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5F7C_109B9C_shared_board);
+void func_800F5F7C_109B9C_shared_board(void) {
+    func_800F4994_1085B4_shared_board(0x17);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5F98_109BB8_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F63F0_10A010_shared_board);
+void func_800F63F0_10A010_shared_board(s32 arg0) {
+    if (arg0 == CUR_PLAYER) {
+        arg0 = GwSystem.current_player_index;
+    }
+    func_800F3FF4_107C14_shared_board(arg0);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F641C_10A03C_shared_board);
+void func_800F641C_10A03C_shared_board(s32 playerIndex) {
+    BoardStatus* temp_s2;
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F64E4_10A104_shared_board);
+    if (playerIndex == CUR_PLAYER) {
+        playerIndex = GwSystem.current_player_index;
+    }
+    
+    temp_s2 = &D_801057E0_119400_shared_board[playerIndex];
+    
+    for (i = 0; i < 3; i++) {
+        if (temp_s2->unk_40[i] != -1) {
+            func_800F6AA4_10A6C4_shared_board(temp_s2->unkA, i + 2);
+            func_80055670_56270(temp_s2->unk_40[i]);
+            temp_s2->unk_40[i] = -1;
+        }
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F66DC_10A2FC_shared_board);
+    func_800F5F98_109BB8_shared_board(playerIndex, 1);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6724_10A344_shared_board);
+void func_800F64E4_10A104_shared_board(s32 arg0, s32 arg1) {
+    BoardStatus* temp_s2;
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6748_10A368_shared_board);
+    temp_s2 = &D_801057E0_119400_shared_board[arg0];
+    if (temp_s2->unk_00 != arg1) {
+        temp_s2->unk_00 = arg1;
+        switch (arg1) {
+        case 0:
+            for (i = 0; i < 3; i++) {
+                if (temp_s2->unk_40[i] != -1) {
+                    SprAttrSet(temp_s2->unkA, i + 2, 0x8000);
+                    func_80055670_56270(temp_s2->unk_40[i]);
+                    temp_s2->unk_40[i] = -1;
+                }
+            }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6780_10A3A0_shared_board);
+            func_800F3A80_1076A0_shared_board(arg0);
+            func_800F3BD0_1077F0_shared_board(arg0);
+            func_800F3E34_107A54_shared_board(arg0);
+            func_800F3FF4_107C14_shared_board(arg0);
+            break;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6848_10A468_shared_board);
+        case 1:
+            for (i = 0; i < 2; i++) {
+                SprAttrSet(temp_s2->unkA, i + 2, 0x8000);
+                func_800550F4_55CF4(temp_s2->unkA, i + 2, 0);
+            }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F688C_10A4AC_shared_board);
+            func_80055670_56270(temp_s2->unk_3A);
+            
+            for (i = 0; i < 5; i++) {
+                SprAttrSet(temp_s2->unkA, i + 4, 0x8000);
+                func_800550F4_55CF4(temp_s2->unkA, i + 4, 0);
+            }
+            
+            temp_s2->unk_3A = -1;
+            SprAttrSet(temp_s2->unkA, 0xA, 0x8000);
+            func_800550F4_55CF4(temp_s2->unkA, 0xA, 0);
+            
+            for (i = 0; i < 3; i++) {
+                SprAttrSet(temp_s2->unkA, i + 0x0B, 0x8000);
+                func_800550F4_55CF4(temp_s2->unkA, i + 0x0B, 0);
+            }
+            func_800F5F98_109BB8_shared_board(arg0, 0);
+            break;
+        }
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F68E0_10A500_shared_board);
+void func_800F66DC_10A2FC_shared_board(s32 arg0) {
+    s32 i;
+    for (i = 0; i < 4; i++) {
+        func_800F64E4_10A104_shared_board(i, arg0);
+    }
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6928_10A548_shared_board);
+s32 func_800F6724_10A344_shared_board(s32 arg0) {
+    return D_801057E0_119400_shared_board[arg0].unk_00;
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F696C_10A58C_shared_board);
+void func_800F6748_10A368_shared_board(s16 arg0, s16 arg1, f32* arg2, f32* arg3) {
+    ESprite2* temp_v0;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F69B0_10A5D0_shared_board);
+    temp_v0 = D_800CDD70_CE970[arg0]->unk_10[arg1];
+    *arg2 = temp_v0->unk_48;
+    *arg3 = temp_v0->unk_4C;
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F69F8_10A618_shared_board);
+void func_800F6780_10A3A0_shared_board(s32 arg0, s32 arg1, f32 arg2, f32 arg3) {
+    f32 temp_f20;
+    f32 temp_f22;
+    s32 temp_s1;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6A40_10A660_shared_board);
+    temp_s1 = D_801057E0_119400_shared_board[arg0].unkA;
+    func_800F6748_10A368_shared_board(temp_s1, arg1 + 2, &temp_f20, &temp_f22);
+    temp_f20 += arg2;
+    temp_f22 += arg3;
+    func_80054904_55504(temp_s1, arg1 + 2, temp_f20, temp_f22);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6A88_10A6A8_shared_board);
+void func_800F6848_10A468_shared_board(s32 arg0, s32 arg1, f32* arg2, f32* arg3) {
+    func_800F6748_10A368_shared_board(D_801057E0_119400_shared_board[arg0].unkA, (arg1 + 2), arg2, arg3);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F6AA4_10A6C4_shared_board);
+void func_800F688C_10A4AC_shared_board(s32 arg0, s32 arg1, s16 arg2, s16 arg3) {
+    func_80054904_55504(D_801057E0_119400_shared_board[arg0].unkA, (arg1 + 2), arg2, arg3);
+}
 
-//TODO: remove goto
+void func_800F68E0_10A500_shared_board(s32 arg0, s32 arg1, s32 arg2) {
+    func_80055458_56058(D_801057E0_119400_shared_board[arg0].unkA, (arg1 + 2), arg2);
+}
+
+void func_800F6928_10A548_shared_board(s32 arg0, s32 arg1) {
+    func_800552DC_55EDC(D_801057E0_119400_shared_board[arg0].unkA, (arg1 + 2));
+}
+
+void func_800F696C_10A58C_shared_board(s32 arg0, s32 arg1, f32 arg2, f32 arg3) {
+    func_800551D8_55DD8(D_801057E0_119400_shared_board[arg0].unkA, arg1 + 2, arg2, arg3);
+}
+
+void func_800F69B0_10A5D0_shared_board(s32 arg0, s32 arg1, s32 arg2) {
+    func_80055294_55E94(D_801057E0_119400_shared_board[arg0].unkA, arg1 + 2, arg2);
+}
+
+void func_800F69F8_10A618_shared_board(s32 arg0, s32 arg1, s32 arg2) {
+    SprAttrSet(D_801057E0_119400_shared_board[arg0].unkA, arg1 + 2, arg2);
+}
+
+void func_800F6A40_10A660_shared_board(s32 arg0, s32 arg1, s32 arg2) {
+    SprAttrReset(D_801057E0_119400_shared_board[arg0].unkA, arg1 + 2, arg2);
+}
+
+void func_800F6A88_10A6A8_shared_board(s16 arg0, u16 arg1) {
+    D_800CDD70_CE970[arg0]->unk_08 = arg1;
+}
+
+void func_800F6AA4_10A6C4_shared_board(s16 arg0, s16 arg1) {
+    D_800CDD70_CE970[arg0]->unk_10[arg1]->unk_84 = 0;
+}
+
 void func_800F6AD0_10A6F0_shared_board(s32 arg0, f32 arg1, f32 arg2) {
     BoardStatus* temp_s1;
+    s32 var_a1;
+    s32 var_a1_2;
+    s32 var_s0;
+    s32 var_s0_2;
+    s8 temp_v1;
     s32 i;
 
     temp_s1 = &D_801057E0_119400_shared_board[arg0];
-    if (temp_s1->unk_00 != 0) {
-        if (temp_s1->unk_00 == 1) {
-            goto temp;
-        } else {
-            return;
-        }
-    } else {
+    switch(temp_s1->unk_00) {
+    case 0:
         for (i = 0; i < 14; i++) {
             func_800551D8_55DD8(temp_s1->unkA, i, arg1, arg2);
         }
-        return;
+        break;
+    case 1:
+        for (i = 0; i < 5; i++) {
+            func_800551D8_55DD8(temp_s1->unkA, i, arg1, arg2);
+        }
+        func_800551D8_55DD8(temp_s1->unkA, 9, arg1, arg2);
+        break;
     }
-
-    temp:
-    for (i = 0; i < 5; i++) {
-        func_800551D8_55DD8(temp_s1->unkA, i, arg1, arg2);
-    }
-    
-    func_800551D8_55DD8(temp_s1->unkA, 9, arg1, arg2);
 }
 
 void func_800F6BC4_10A7E4_shared_board(s32 arg0) {

@@ -3,15 +3,16 @@
 #include "malloc.h"
 
 typedef struct BoardStatus {
-    /* 0x00 */ s8 unk_00;
+    /* 0x00 */ s8 uiUpdatePaused;
     /* 0x01 */ s8 unk1;
     /* 0x02 */ u8 unk2[2];
-    /* 0x04 */ u8 unk4[2];
-    /* 0x06 */ s8 unk_06;
-    /* 0x07 */ s8 unk7;
-    /* 0x08 */ s16 unk_08;
-    /* 0x0A */ s16 unkA;
-    /* 0x0C */ s16 unk_0C;
+    /* 0x04 */ u8 spaceType;
+    /* 0x04 */ u8 uiVisible;
+    /* 0x06 */ s8 prevStars;
+    /* 0x07 */ s8 prevRank;
+    /* 0x08 */ s16 prevCoins;
+    /* 0x0A */ s16 playerIndex;
+    /* 0x0C */ char unk_0C[2];
     /* 0x0E */ s16 unkE;
     /* 0x10 */ f32 xPos;
     /* 0x14 */ f32 yPos;
@@ -46,7 +47,7 @@ typedef struct UnkBoard2 {
 } UnkBoard2;
 
 typedef struct UnkCoinThing {
-/* 0x00 */ u8 unk_00[3];
+/* 0x00 */ u8 digits[3];
 /* 0x03 */ char unk_03[5];
 /* 0x08 */ s16 unk_08[2];
 } UnkCoinThing;
@@ -64,7 +65,7 @@ s32 func_800D9E0C_EDA2C_shared_board(s32);
 void func_800D9D84_ED9A4_shared_board(s32, s16, s32, s32, u16);
 void func_800EE7AC_1023CC_shared_board(omObjData* func);
 s32 BoardPlayerRankCalc(s32 player);
-void func_800F2E30_106A50_shared_board(s32);
+void UpdatePlayerBoardStatus(s32);
 void func_800F6A88_10A6A8_shared_board(s16, u16);
 void func_800F6AD0_10A6F0_shared_board(s32, f32, f32);
 void func_800F6E4C_10AA6C_shared_board(s32, s32, s32*, s32*);
@@ -81,6 +82,8 @@ void func_800F4348_107F68_shared_board(void);
 void func_800F462C_10824C_shared_board(s32);
 void func_800F5644_109264_shared_board(void);
 void func_800F5BF4_109814_shared_board(s32, s32, s32);
+void func_800F3D70_107990_shared_board(s32);
+void func_800F3F0C_107B2C_shared_board(s32);
 
 extern s32 D_80101788_1153A8_shared_board;
 extern s32 D_8010178C_1153AC_shared_board;
@@ -99,7 +102,7 @@ extern s16 D_801055E4_119204_shared_board;
 extern Vec2f D_801055CC_1191EC_shared_board;
 extern Vec2f D_801055DC_1191FC_shared_board;
 extern Vec2f D_801055D4_1191F4_shared_board;
-extern s16 D_80101794_1153B4_shared_board[8][2];
+extern s16 PlayerBoardStatusRootPosition[8][2];
 extern Process* D_80105580_1191A0_shared_board;
 extern s16 D_801055C2_1191E2_shared_board;
 extern s16 D_801055C4_1191E4_shared_board;

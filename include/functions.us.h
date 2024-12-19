@@ -35,7 +35,7 @@ void func_800552DC_55EDC(s16, s16);
 void func_80055140_55D40(s32, s16, u16, s32);
 void func_800550B4_55CB4(s32, s16, f32);
 void func_800550F4_55CF4(s16, s16, s32);
-void func_800551D8_55DD8(s16, s16, f32, f32);
+void SprScale(s16, s16, f32, f32);
 void func_80055294_55E94(s16, s16, u16);
 void func_80055420_56020(s16, s32, u8, u8, s32);
 void func_80055458_56058(s16, s16, u16);

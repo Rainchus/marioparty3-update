@@ -60,7 +60,7 @@ INCLUDE_ASM("asm/nonmatchings/52F30", func_80055194_55D94);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_800551AC_55DAC);
 
-INCLUDE_ASM("asm/nonmatchings/52F30", func_800551D8_55DD8);
+INCLUDE_ASM("asm/nonmatchings/52F30", SprScale);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_80055294_55E94);
 

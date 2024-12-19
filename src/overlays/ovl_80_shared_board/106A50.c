@@ -281,14 +281,14 @@ void func_800F4190_107DB0_shared_board(void) {
     HuFreeFilePerm(temp_v0);
     
     //create player sprite ids
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_PLAYERS; i++) {
         temp_v0 = ReadMainFS(D_80101944_115564_shared_board[GwPlayer[i].characterID]);
         spriteIDs[i + 1] = func_80055810_56410(temp_v0);
         HuFreeFilePerm(temp_v0);
     }
 
     //create coin and star sprite ids
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(sp10); i++) {
         temp_v0 = ReadMainFS(sp10[i]);
         spriteIDs[i + 5] = func_80055810_56410(temp_v0);
         HuFreeFilePerm(temp_v0);
@@ -305,7 +305,7 @@ void func_800F4190_107DB0_shared_board(void) {
     HuFreeFilePerm(temp_v0);
 
     //create item sprite ids
-    for (i = 0; i < 0x13; i++) {
+    for (i = 0; i < ITEMS_END; i++) {
         temp_v0 = ReadMainFS(D_801019D0_1155F0_shared_board[i]);
         spriteIDs[i + 10] = func_80055810_56410(temp_v0);
         HuFreeFilePerm(temp_v0);

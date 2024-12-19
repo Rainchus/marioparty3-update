@@ -111,3 +111,5 @@ extern BoardStatus D_801057E0_119400_shared_board[];
 extern UnkBoard D_80105718_119338_shared_board[16];
 extern s32 D_801055E8_119208_shared_board[];
 extern s32 D_80101F30_115B50_shared_board[3];
+extern s32 D_80101944_115564_shared_board[]; //mainFS ids for character images
+extern s32 D_801019D0_1155F0_shared_board[];

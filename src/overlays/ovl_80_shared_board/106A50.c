@@ -268,7 +268,49 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3F0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3FF4_107C14_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4190_107DB0_shared_board);
+void func_800F4190_107DB0_shared_board(void) {
+    void* temp_v0;
+    s32 i;
+    s16* spriteIDs;
+    s32 sp10[2] = {0x130112, 0x130111};
+
+    spriteIDs = D_80105588_1191A8_shared_board;
+    //unk sprite id
+    temp_v0 = ReadMainFS(0x13010F);
+    spriteIDs[0] = func_80055810_56410(temp_v0);
+    HuFreeFilePerm(temp_v0);
+    
+    //create player sprite ids
+    for (i = 0; i < 4; i++) {
+        temp_v0 = ReadMainFS(D_80101944_115564_shared_board[GwPlayer[i].characterID]);
+        spriteIDs[i + 1] = func_80055810_56410(temp_v0);
+        HuFreeFilePerm(temp_v0);
+    }
+
+    //create coin and star sprite ids
+    for (i = 0; i < 2; i++) {
+        temp_v0 = ReadMainFS(sp10[i]);
+        spriteIDs[i + 5] = func_80055810_56410(temp_v0);
+        HuFreeFilePerm(temp_v0);
+    }
+
+    //create placement sprite id
+    temp_v0 = ReadMainFS(0x130110);
+    spriteIDs[8] = func_80055810_56410(temp_v0);
+    HuFreeFilePerm(temp_v0);
+
+    //create COM text sprite id
+    temp_v0 = ReadMainFS(0x1300D1);
+    spriteIDs[9] = func_80055810_56410(temp_v0);
+    HuFreeFilePerm(temp_v0);
+
+    //create item sprite ids
+    for (i = 0; i < 0x13; i++) {
+        temp_v0 = ReadMainFS(D_801019D0_1155F0_shared_board[i]);
+        spriteIDs[i + 10] = func_80055810_56410(temp_v0);
+        HuFreeFilePerm(temp_v0);
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4348_107F68_shared_board);
 

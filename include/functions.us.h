@@ -45,5 +45,6 @@ void func_8001C8E4_1D4E4(s16, s32);
 void func_80055670_56270(s16);
 void HuFreeFilePerm(void*);
 s16 func_80055810_56410(void*);
+s16 func_8005279C_5339C(s32, s32);
 
 #endif

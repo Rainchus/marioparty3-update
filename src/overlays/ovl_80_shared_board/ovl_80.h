@@ -7,7 +7,7 @@ typedef struct BoardStatus {
     /* 0x01 */ s8 unk1;
     /* 0x02 */ u8 unk2[2];
     /* 0x04 */ u8 spaceType;
-    /* 0x04 */ u8 uiVisible;
+    /* 0x05 */ u8 uiVisible;
     /* 0x06 */ s8 prevStars;
     /* 0x07 */ s8 prevRank;
     /* 0x08 */ s16 prevCoins;
@@ -85,6 +85,9 @@ void func_800F5BF4_109814_shared_board(s32, s32, s32);
 void func_800F3D70_107990_shared_board(s32);
 void func_800F3F0C_107B2C_shared_board(s32);
 
+extern s16 D_80101908_115528_shared_board[];
+extern s16 D_80105598_1191B8_shared_board;
+extern s16 D_8010559A_1191BA_shared_board;
 extern s32 D_80101788_1153A8_shared_board;
 extern s32 D_8010178C_1153AC_shared_board;
 extern char D_800D5218_D5E18[];
@@ -95,7 +98,7 @@ extern RGB D_8010188C_1154AC_shared_board[];
 extern s8 D_800D20B1_D2CB1;
 extern s32 D_80101780_1153A0_shared_board;
 extern s16 D_8010559C_1191BC_shared_board[];
-extern s16 D_801018E4_115504_shared_board[4][2];
+extern s16 D_801018E4_115504_shared_board[16][2];
 extern s32 D_80101790_1153B0_shared_board;
 extern f32 D_801055C8_1191E8_shared_board;
 extern s16 D_801055E4_119204_shared_board;

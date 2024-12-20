@@ -165,7 +165,9 @@ typedef struct RGB {
 } RGB; //sizeof 0x3
 
 typedef struct ESprite2 {
-    char unk_00[0x48];
+    char unk_00[0x14];
+    u16 unk_14;
+    char unk_18[0x30];
     f32 unk_48;
     f32 unk_4C;
     char unk_50[0x34];

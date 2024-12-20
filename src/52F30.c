@@ -1,5 +1,7 @@
 #include "common.h"
 
+extern s32 D_800A1EA0_A2AA0;
+
 INCLUDE_ASM("asm/nonmatchings/52F30", func_80052330_52F30);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_80052468_53068);
@@ -62,7 +64,15 @@ INCLUDE_ASM("asm/nonmatchings/52F30", func_800551AC_55DAC);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", SprScale);
 
-INCLUDE_ASM("asm/nonmatchings/52F30", func_80055294_55E94);
+void func_80055294_55E94(s16 arg0, s16 arg1, u16 arg2) {
+    ESprite2* temp_a0;
+
+    temp_a0 = D_800CDD70_CE970[arg0]->unk_10[arg1];
+    if (temp_a0->unk_14 != arg2) {
+        temp_a0->unk_14 = arg2;
+        D_800A1EA0_A2AA0 = 1;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_800552DC_55EDC);
 

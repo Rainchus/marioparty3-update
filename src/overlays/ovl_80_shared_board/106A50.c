@@ -1,8 +1,6 @@
 #include "common.h"
 #include "ovl_80.h"
 
-#define ITEM_NONE -1
-
 #define HUNDREDS 0
 #define TENS 1
 #define ONES 2
@@ -251,7 +249,7 @@ void func_800F39C0_1075E0_shared_board(s32 playerIndex) {
     temp_s1 = D_801057E0_119400_shared_board[playerIndex].playerIndex;
     func_80055024_55C24(temp_s1, 1, D_80105588_1191A8_shared_board[playerIndex+1], 0);
     func_800550F4_55CF4(temp_s1, 1, 0);
-    func_80055294_55E94(temp_s1, 1, ((playerIndex * 5) + 0x4790) & 0xFFFF);
+    func_80055294_55E94(temp_s1, 1, ((playerIndex * 5) + 0x4790));
     SprAttrSet(temp_s1, 1, 0);
     func_80054904_55504(temp_s1, 1, D_801018E4_115504_shared_board[1][0], D_801018E4_115504_shared_board[1][1]);
 }
@@ -260,13 +258,73 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3A8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3BD0_1077F0_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3D70_107990_shared_board);
+void func_800F3D70_107990_shared_board(s32 arg0) {
+    BoardStatus* temp_s0;
+    s16 temp_v0;
+    
+    temp_s0 = &D_801057E0_119400_shared_board[arg0];
+    temp_v0 = func_8005279C_5339C(0xE, 2);
+    temp_s0->playerIndex = temp_v0;
+    func_80055024_55C24(temp_v0, 0, D_80105588_1191A8_shared_board[0], 0);
+    func_80055294_55E94(temp_v0, 0, ((arg0 * 5) + 0x4790));
+    SprAttrSet(temp_v0, 0, 0x1000);
+    func_80054904_55504(temp_v0, 0, 0, 0);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3E34_107A54_shared_board);
+void func_800F3E34_107A54_shared_board(s32 arg0) {
+    BoardStatus* temp_v0;
+    s16 temp_s0;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3F0C_107B2C_shared_board);
+    temp_v0 = &D_801057E0_119400_shared_board[arg0];
+    temp_v0->prevRank = -1;
+    temp_s0 = temp_v0->playerIndex;
+    func_80055024_55C24(temp_s0, 0xA, D_80105598_1191B8_shared_board, 0);
+    func_800550F4_55CF4(temp_s0, 0xA, 1);
+    func_80055140_55D40(temp_s0, 0xA, 0, 0);
+    func_80055294_55E94(temp_s0, 0xA, ((arg0 * 5) + 0x478F) & 0xFFFF);
+    SprAttrSet(temp_s0, 0xA, 0);
+    func_80054904_55504(temp_s0, 0xA, D_80101908_115528_shared_board[2], D_80101908_115528_shared_board[3]);
+}
 
+void func_800F3F0C_107B2C_shared_board(s32 arg0) {
+    s16 temp_s2;
+
+    temp_s2 = D_801057E0_119400_shared_board[arg0].playerIndex;
+    func_80055024_55C24(temp_s2, 9, D_8010559A_1191BA_shared_board, 0);
+    func_800550F4_55CF4(temp_s2, 9, 0);
+    func_80055294_55E94(temp_s2, 9, ((arg0 * 5) + 0x478E) & 0xFFFF);
+    SprAttrSet(temp_s2, 9, 0);
+    func_80054904_55504(temp_s2, 9, D_80101908_115528_shared_board[0], D_80101908_115528_shared_board[1]);
+    if (!(GwPlayer[arg0].flags1 & 1)) {
+        SprAttrSet(temp_s2, 9, 0x8000);
+    }
+}
+
+#ifdef NON_MATCHING
+void func_800F3FF4_107C14_shared_board(s32 arg0) {
+    s32 temp_s3;
+    s16 var_s1;
+    s32 i;
+    s32 curItem;
+    temp_s3 = D_801057E0_119400_shared_board[arg0].playerIndex;
+
+    for (i = 0; i < ARRAY_COUNT(GwPlayer->items); i++) {
+        curItem = GwPlayer[arg0].items[i];
+        curItem = (curItem == -1) ? 0 : curItem;
+        func_80055024_55C24(temp_s3, i + 0xB, D_8010559C_1191BC_shared_board[curItem], 0);
+        func_800550F4_55CF4(temp_s3, i + 0xB, 0);
+        func_80055294_55E94(temp_s3, i + 0xB, ((arg0 * 5) + 0x478E));
+        SprAttrSet(temp_s3, i + 0xB, 0);
+        var_s1 = (arg0 >= 2) ?  i + 0xE : i;
+        func_80054904_55504(temp_s3, i + 0xB, D_801018E4_115504_shared_board[var_s1][0], D_801018E4_115504_shared_board[var_s1][1]);
+        if (GwPlayer[arg0].items[i] == -1) {
+            SprAttrSet(temp_s3, i + 0xB, 0x8000);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3FF4_107C14_shared_board);
+#endif
 
 void func_800F4190_107DB0_shared_board(void) {
     void* temp_v0;
@@ -383,9 +441,15 @@ void func_800F4874_108494_shared_board(s32 playerIndex, s16 arg1, s16 arg2) {
     func_80054904_55504(boardStatus->playerIndex, 0, arg1 + ITEMS_POS_OFFSET_X, arg2 + ITEMS_POS_OFFSET_Y);
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4924_108544_shared_board);
+//?
+void func_800F4924_108544_shared_board(s32 arg0, s32 arg1) {
+    s32 index = (arg1 * 4) + arg0;
+    func_800F4874_108494_shared_board(arg0, PlayerBoardStatusRootPosition[index][0], PlayerBoardStatusRootPosition[index][1]);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4960_108580_shared_board);
+void func_800F4960_108580_shared_board(s32 arg0, s32 arg1) {
+    func_800F4874_108494_shared_board(arg0, PlayerBoardStatusRootPosition[arg1][0], PlayerBoardStatusRootPosition[arg1][1]);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4994_1085B4_shared_board);
 

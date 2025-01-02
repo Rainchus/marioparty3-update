@@ -38,7 +38,17 @@ INCLUDE_ASM("asm/nonmatchings/52F30", func_80054218_54E18);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_80054658_55258);
 
-INCLUDE_ASM("asm/nonmatchings/52F30", func_80054904_55504);
+//SetSprPos?
+void func_80054904_55504(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
+    ESprite* temp = D_800CDD70_CE970[arg0];
+    ESprite2* temp_v1 = temp->unk_10[arg1];
+
+    if ((temp_v1->unk_48 != (f32) arg2) || (temp_v1->unk_4C != (f32) arg3)) {
+        temp->unk_0C = 1;
+        temp_v1->unk_48 = (f32) arg2;
+        temp_v1->unk_4C = (f32) arg3;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/52F30", func_800549C0_555C0);
 
@@ -64,7 +74,7 @@ INCLUDE_ASM("asm/nonmatchings/52F30", func_800551AC_55DAC);
 
 INCLUDE_ASM("asm/nonmatchings/52F30", SprScale);
 
-void func_80055294_55E94(s16 arg0, s16 arg1, u16 arg2) {
+void SprPriSet(s16 arg0, s16 arg1, u16 arg2) {
     ESprite2* temp_a0;
 
     temp_a0 = D_800CDD70_CE970[arg0]->unk_10[arg1];

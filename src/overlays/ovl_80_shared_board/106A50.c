@@ -74,7 +74,7 @@ void UpdatePlayerBoardStatus(s32 playerIndex) {
     coinDigits.unk_08[1] = GwPlayer[playerIndex].stars;
     
     for (i = 0; i < ARRAY_COUNT(coinDigits.unk_08); i++) {
-        if ((i != 0 && playerBoardStatus->counts[i] != coinDigits.unk_08[i]) || (i == 0 && D_801055E8_119208_shared_board[playerIndex] != 0)) {
+        if ((i != 0 && playerBoardStatus->counts[i] != coinDigits.unk_08[i]) || (i == 0 && D_801055E8_119208_shared_board[playerIndex] != NULL)) {
             if (playerBoardStatus->unk2[i] == 0) {
                 func_800550B4_55CB4(playerBoardStatus->playerIndex, i + 2, 1.0f);
                 playerBoardStatus->unk2[i] = 0xF;
@@ -84,7 +84,7 @@ void UpdatePlayerBoardStatus(s32 playerIndex) {
         if (playerBoardStatus->unk2[i] != 0) {
             playerBoardStatus->unk2[i]--;
             if (playerBoardStatus->unk2[i] == 0) {
-                if (i != 0 || D_801055E8_119208_shared_board[playerIndex] == 0) {
+                if (i != 0 || D_801055E8_119208_shared_board[playerIndex] == NULL) {
                     func_80055140_55D40(playerBoardStatus->playerIndex, i + 2, 0, 0);
                     func_800550B4_55CB4(playerBoardStatus->playerIndex, i + 2, 0.0f);
                     func_800550F4_55CF4(playerBoardStatus->playerIndex, i + 2, 1);                       
@@ -119,7 +119,7 @@ void func_800F3370_106F90_shared_board(void) {
 void func_800F3400_107020_shared_board(omObjData* arg0) {
     BoardStatus* temp_s2;
     s32 var_v1;
-    s32 i, j, k;
+    s32 i, j;
 
     while (1) {
         if (D_800D20B1_D2CB1 == 0) {
@@ -135,14 +135,14 @@ void func_800F3400_107020_shared_board(omObjData* arg0) {
 
                 if (temp_s2->uiUpdatePaused == FALSE) {
                     if (temp_s2->uiVisible & 1) {
-                        for (k = 0; k < 14; k++) {
-                            SprAttrSet(temp_s2->playerIndex, k, 0x8000);
+                        for (j = 0; j < 14; j++) {
+                            SprAttrSet(temp_s2->playerIndex, j, 0x8000);
                         }
                         continue;
                     }
 
-                    for (k = 0; k < 14; k++) {
-                        switch (k) {
+                    for (j = 0; j < 14; j++) {
+                        switch (j) {
                         case 9:
                             if (GwPlayer[i].flags1 & 1) {
                                 break;
@@ -151,20 +151,20 @@ void func_800F3400_107020_shared_board(omObjData* arg0) {
                         case 11:
                         case 12:
                         case 13:
-                            if (GwPlayer[i].items[k - 11] == ITEM_NONE) {
+                            if (GwPlayer[i].items[j - 11] == ITEM_NONE) {
                                 continue;
                             }
 
-                            func_80055024_55C24(temp_s2->playerIndex, k, D_8010559C_1191BC_shared_board[GwPlayer[i].items[k - 11]], 0);
-                            func_800550F4_55CF4(temp_s2->playerIndex, k, 0);
-                            func_80055294_55E94(temp_s2->playerIndex, k, (i * 5) + 0x478E);
-                            SprAttrSet(temp_s2->playerIndex, k, 0);
-                            var_v1 = k;
+                            func_80055024_55C24(temp_s2->playerIndex, j, D_8010559C_1191BC_shared_board[GwPlayer[i].items[j - 11]], 0);
+                            func_800550F4_55CF4(temp_s2->playerIndex, j, 0);
+                            SprPriSet(temp_s2->playerIndex, j, (i * 5) + 0x478E);
+                            SprAttrSet(temp_s2->playerIndex, j, 0);
+                            var_v1 = j;
                             if (i >= 2) {
-                                var_v1 = k + 3;
+                                var_v1 = j + 3;
                             }
-                            func_80054904_55504(temp_s2->playerIndex, k, D_801018E4_115504_shared_board[var_v1][0], D_801018E4_115504_shared_board[var_v1][1]);
-                            SprAttrSet(temp_s2->playerIndex, k, 0x8000);
+                            func_80054904_55504(temp_s2->playerIndex, j, D_801018E4_115504_shared_board[var_v1][0], D_801018E4_115504_shared_board[var_v1][1]);
+                            SprAttrSet(temp_s2->playerIndex, j, 0x8000);
                             if (D_80101790_1153B0_shared_board != 0) {
                                 break;
                             }
@@ -175,25 +175,25 @@ void func_800F3400_107020_shared_board(omObjData* arg0) {
                             }
                             break;
                         }
-                        SprAttrReset(temp_s2->playerIndex, k, 0x8000);
+                        SprAttrReset(temp_s2->playerIndex, j, 0x8000);
                     }
                     UpdatePlayerBoardStatus(i);
                 } else {
                     if (temp_s2->uiVisible & 1) {
-                        for (k = 0; k < 5; k++) {
-                            SprAttrSet(temp_s2->playerIndex, k, 0x8000);
+                        for (j = 0; j < 5; j++) {
+                            SprAttrSet(temp_s2->playerIndex, j, 0x8000);
                         }
                         SprAttrSet(temp_s2->playerIndex, 9, 0x8000);
                         continue;
                     }
 
-                    for (k = 0; k < 2; k++) {
-                        SprAttrReset(temp_s2->playerIndex, k, 0x8000);
+                    for (j = 0; j < 2; j++) {
+                        SprAttrReset(temp_s2->playerIndex, j, 0x8000);
                     }
 
-                    for (k = 0; k < 3; k++) {
-                        if (temp_s2->unk_40[k] != -1) {
-                            SprAttrReset(temp_s2->playerIndex, (k + 2), 0x8000);
+                    for (j = 0; j < 3; j++) {
+                        if (temp_s2->unk_40[j] != -1) {
+                            SprAttrReset(temp_s2->playerIndex, (j + 2), 0x8000);
                         }
                     }
 
@@ -249,14 +249,55 @@ void func_800F39C0_1075E0_shared_board(s32 playerIndex) {
     temp_s1 = D_801057E0_119400_shared_board[playerIndex].playerIndex;
     func_80055024_55C24(temp_s1, 1, D_80105588_1191A8_shared_board[playerIndex+1], 0);
     func_800550F4_55CF4(temp_s1, 1, 0);
-    func_80055294_55E94(temp_s1, 1, ((playerIndex * 5) + 0x4790));
+    SprPriSet(temp_s1, 1, ((playerIndex * 5) + 0x4790));
     SprAttrSet(temp_s1, 1, 0);
     func_80054904_55504(temp_s1, 1, D_801018E4_115504_shared_board[1][0], D_801018E4_115504_shared_board[1][1]);
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3A80_1076A0_shared_board);
+void func_800F3A80_1076A0_shared_board(s32 arg0) {
+    s16 temp_s2;
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3BD0_1077F0_shared_board);
+    temp_s2 = D_801057E0_119400_shared_board[arg0].playerIndex;
+
+    for (i = 0; i < 2; i++) {
+        func_80055024_55C24(temp_s2, i + 2, D_80105592_1191B2_shared_board[i], 0);
+        SprPriSet(temp_s2, i + 2, ((arg0 * 5) + 0x4790));
+        SprAttrReset(temp_s2, i + 2, 0xFFFF);
+        SprAttrSet(temp_s2, i + 2, 0x1000);
+        func_800552DC_55EDC(temp_s2, i + 2, 0.0f);
+        func_80054904_55504(temp_s2, i + 2, D_801018E4_115504_shared_board[i + 2][0], D_801018E4_115504_shared_board[i + 2][1]);
+        func_800550B4_55CB4(temp_s2, i + 2, 0.0f);
+        func_80055458_56058(temp_s2, i + 2, 0x100);
+    }
+}
+
+void func_800F3BD0_1077F0_shared_board(s32 arg0) {
+    BoardStatus* temp_s4;
+    s16 temp_s2;
+    void* temp_v0;
+    s32 i;
+
+    temp_s4 = &D_801057E0_119400_shared_board[arg0];
+    temp_s4->prevCoins = -1;
+    temp_s4->prevStars = -1;
+    temp_v0 = ReadMainFS(0x1300CF);
+    temp_s4->unk_3A = func_80055810_56410(temp_v0);
+    temp_s2 = temp_s4->playerIndex;
+    for (i = 0; i < 5; i++) {
+        func_80055024_55C24(temp_s2, i + 4, temp_s4->unk_3A, 0);
+        func_800550F4_55CF4(temp_s2, i + 4, 1);
+        func_80055140_55D40(temp_s2, i + 4, 0xAU, 0);
+        SprPriSet(temp_s2, i + 4, ((arg0 * 5) + 0x4790) & 0xFFFF);
+        SprAttrReset(temp_s2, i + 4, 0xFFFFU);
+        SprAttrSet(temp_s2, i + 4, 0U);
+        func_80054904_55504(temp_s2, i + 4, D_801018E4_115504_shared_board[i + 4][0], D_801018E4_115504_shared_board[i + 4][1]);
+        func_80055420_56020(temp_s2, i + 4, 0xFFU, 0xFFU, 0xFF);
+        func_80055458_56058(temp_s2, i + 4, 0x100U);
+        func_800552DC_55EDC(temp_s2, i + 4, 0.0f);        
+    }
+    HuFreeFilePerm(temp_v0);
+}
 
 void func_800F3D70_107990_shared_board(s32 arg0) {
     BoardStatus* temp_s0;
@@ -266,7 +307,7 @@ void func_800F3D70_107990_shared_board(s32 arg0) {
     temp_v0 = func_8005279C_5339C(0xE, 2);
     temp_s0->playerIndex = temp_v0;
     func_80055024_55C24(temp_v0, 0, D_80105588_1191A8_shared_board[0], 0);
-    func_80055294_55E94(temp_v0, 0, ((arg0 * 5) + 0x4790));
+    SprPriSet(temp_v0, 0, ((arg0 * 5) + 0x4790));
     SprAttrSet(temp_v0, 0, 0x1000);
     func_80054904_55504(temp_v0, 0, 0, 0);
 }
@@ -281,26 +322,25 @@ void func_800F3E34_107A54_shared_board(s32 arg0) {
     func_80055024_55C24(temp_s0, 0xA, D_80105598_1191B8_shared_board, 0);
     func_800550F4_55CF4(temp_s0, 0xA, 1);
     func_80055140_55D40(temp_s0, 0xA, 0, 0);
-    func_80055294_55E94(temp_s0, 0xA, ((arg0 * 5) + 0x478F) & 0xFFFF);
+    SprPriSet(temp_s0, 0xA, ((arg0 * 5) + 0x478F) & 0xFFFF);
     SprAttrSet(temp_s0, 0xA, 0);
-    func_80054904_55504(temp_s0, 0xA, D_80101908_115528_shared_board[2], D_80101908_115528_shared_board[3]);
+    func_80054904_55504(temp_s0, 0xA, D_801018E4_115504_shared_board[10][0], D_801018E4_115504_shared_board[10][1]);
 }
 
-void func_800F3F0C_107B2C_shared_board(s32 arg0) {
+void func_800F3F0C_107B2C_shared_board(s32 playerIndex) {
     s16 temp_s2;
 
-    temp_s2 = D_801057E0_119400_shared_board[arg0].playerIndex;
+    temp_s2 = D_801057E0_119400_shared_board[playerIndex].playerIndex;
     func_80055024_55C24(temp_s2, 9, D_8010559A_1191BA_shared_board, 0);
     func_800550F4_55CF4(temp_s2, 9, 0);
-    func_80055294_55E94(temp_s2, 9, ((arg0 * 5) + 0x478E) & 0xFFFF);
+    SprPriSet(temp_s2, 9, ((playerIndex * 5) + 0x478E) & 0xFFFF);
     SprAttrSet(temp_s2, 9, 0);
-    func_80054904_55504(temp_s2, 9, D_80101908_115528_shared_board[0], D_80101908_115528_shared_board[1]);
-    if (!(GwPlayer[arg0].flags1 & 1)) {
+    func_80054904_55504(temp_s2, 9, D_801018E4_115504_shared_board[9][0], D_801018E4_115504_shared_board[9][1]);
+    if (!(GwPlayer[playerIndex].flags1 & 1)) {
         SprAttrSet(temp_s2, 9, 0x8000);
     }
 }
 
-#ifdef NON_MATCHING
 void func_800F3FF4_107C14_shared_board(s32 arg0) {
     s32 temp_s3;
     s16 var_s1;
@@ -313,19 +353,21 @@ void func_800F3FF4_107C14_shared_board(s32 arg0) {
         curItem = (curItem == -1) ? 0 : curItem;
         func_80055024_55C24(temp_s3, i + 0xB, D_8010559C_1191BC_shared_board[curItem], 0);
         func_800550F4_55CF4(temp_s3, i + 0xB, 0);
-        func_80055294_55E94(temp_s3, i + 0xB, ((arg0 * 5) + 0x478E));
+        SprPriSet(temp_s3, i + 0xB, ((arg0 * 5) + 0x478E));
         SprAttrSet(temp_s3, i + 0xB, 0);
-        var_s1 = (arg0 >= 2) ?  i + 0xE : i;
+        var_s1 = i + 0xB;
+        if (arg0 >= 2) {
+            var_s1 = i + 0xE;
+        }
         func_80054904_55504(temp_s3, i + 0xB, D_801018E4_115504_shared_board[var_s1][0], D_801018E4_115504_shared_board[var_s1][1]);
         if (GwPlayer[arg0].items[i] == -1) {
             SprAttrSet(temp_s3, i + 0xB, 0x8000);
         }
     }
 }
-#else
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F3FF4_107C14_shared_board);
-#endif
 
+
+//create sprite IDs for hud elements
 void func_800F4190_107DB0_shared_board(void) {
     void* temp_v0;
     s32 i;
@@ -370,7 +412,26 @@ void func_800F4190_107DB0_shared_board(void) {
     }
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4348_107F68_shared_board);
+void func_800F4348_107F68_shared_board(void) {
+    s32 i;
+    s16* spriteIDs = D_80105588_1191A8_shared_board;
+
+    func_80055670_56270(spriteIDs[0]);
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        func_80055670_56270(spriteIDs[i + 1]);
+    }
+
+    for (i = 0; i < 2; i++) {
+        func_80055670_56270(spriteIDs[i + 5]);
+    }
+
+    func_80055670_56270(spriteIDs[8]);
+    func_80055670_56270(spriteIDs[9]);
+
+    for (i = 0; i < ITEMS_END; i++) {
+        func_80055670_56270(spriteIDs[i + 10]);
+    }
+}
 
 void func_800F43FC_10801C_shared_board(s32 arg0) {
     BoardStatus* temp_s2;
@@ -400,11 +461,34 @@ void func_800F43FC_10801C_shared_board(s32 arg0) {
     func_800F3F0C_107B2C_shared_board(arg0);
     func_800F3FF4_107C14_shared_board(arg0);
     UpdatePlayerBoardStatus(arg0);
-    D_801055E8_119208_shared_board[arg0] = 0;
+    D_801055E8_119208_shared_board[arg0] = NULL;
     temp_s2->unk30 = 0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F453C_10815C_shared_board);
+void func_800F453C_10815C_shared_board(void) {
+    s32 i, j;
+
+    func_800F4190_107DB0_shared_board();
+    
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        func_800F43FC_10801C_shared_board(i);
+    }
+    
+    D_80105580_1191A0_shared_board = omAddPrcObj(func_800F3400_107020_shared_board, 0U, 0x2000, 0);
+    omPrcSetStatBit(D_80105580_1191A0_shared_board, 0x80);
+    
+    D_801055C4_1191E4_shared_board = -1;
+    D_801055C2_1191E2_shared_board = -1;
+    D_80101780_1153A0_shared_board = -1;
+    D_80101784_1153A4_shared_board = -1;
+    
+    for (i = 0; i < 4; i++) {
+        D_801055FC_11921C_shared_board[i] = -1;
+        for (j = 0; j < 3; j++) {
+            D_80105608_119228_shared_board[i][j] = -1;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F462C_10824C_shared_board);
 
@@ -453,7 +537,18 @@ void func_800F4960_108580_shared_board(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F4994_1085B4_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5278_108E98_shared_board);
+s32 func_800F5278_108E98_shared_board(void) {
+    s32 var_a0;
+    s32 i;
+
+    var_a0 = 0;
+    for (i = 0; i < MAX_PLAYERS; i++) { //TODO: should this be MAX_PLAYERS?
+        if (D_801057E0_119400_shared_board[i].unkE != -2) {
+            var_a0 = 1;
+        }
+    }
+    return var_a0;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F52C4_108EE4_shared_board);
 
@@ -469,9 +564,69 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F582
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F591C_10953C_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F59B4_1095D4_shared_board);
+void func_800F59B4_1095D4_shared_board(omObjData* arg0) {
+    s32 var_s1;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5BF4_109814_shared_board);
+    var_s1 = 0;
+    while (arg0->scale.y <= 0.0f) {
+        if (arg0->trans.x > 0.0f) {
+            AdjustPlayerCoins(arg0->work[0], 1);
+            if (((arg0->work[3] != 0) & (var_s1 == 0)) && (arg0->scale.z >= 3.0f)) {
+                HuAudFXPlay(0x106);
+                var_s1 = 1;
+                arg0->scale.z -= 3.0f;
+            }
+            arg0->trans.x -= 1.0f;
+
+        } else {
+            AdjustPlayerCoins(arg0->work[0], -1);
+            arg0->trans.x += 1.0f;
+            if (arg0->work[3] != 0) {
+                if ((var_s1 == 0) && (arg0->scale.z >= 3.0f)) {
+                    HuAudFXPlay(0x109);
+                    var_s1 = 1;
+                    arg0->scale.z -= 3.0f;
+                }
+                if ((arg0->trans.x == 0.0f) || (GwPlayer[arg0->work[0]].coins == 0)) {
+                    HuAudFXPlay(0x10A);
+                }
+            }
+        }
+        
+        if ((arg0->trans.x == 0.0f) || (GwPlayer[arg0->work[0]].coins == 0)) {
+            D_801055E8_119208_shared_board[arg0->work[0]] = 0;
+            omDelObj(arg0);
+            return;
+        }
+        arg0->scale.y += arg0->scale.x;
+    }
+
+    arg0->scale.y -= 1.0f;
+    arg0->scale.z += 2.0f;
+}
+
+void func_800F5BF4_109814_shared_board(s32 playerIndex, s32 coinAmount, s32 arg2) {
+    if (coinAmount != 0) {
+        if (D_801055E8_119208_shared_board[playerIndex] != NULL) {
+            AdjustPlayerCoins(playerIndex, coinAmount);
+            return;
+        }
+        
+        if ((GwPlayer[playerIndex].coins == 0) && (coinAmount < 0)) {
+            return;
+        }
+        
+        D_801055E8_119208_shared_board[playerIndex] = omAddObj(-0x8000, 0, 0, -1, func_800F59B4_1095D4_shared_board);
+        D_801055E8_119208_shared_board[playerIndex]->work[0] = playerIndex;
+        D_801055E8_119208_shared_board[playerIndex]->trans.x = coinAmount;
+
+        D_801055E8_119208_shared_board[playerIndex]->scale.x = coinAmount > 0.0f ? (30.0f / coinAmount) : (30.0f / (0.0f - coinAmount));
+        
+        (D_801055E8_119208_shared_board[playerIndex])->scale.y = 0.0f;
+        (D_801055E8_119208_shared_board[playerIndex])->scale.z  = 3.0f;
+        (D_801055E8_119208_shared_board[playerIndex])->work[3] = arg2;
+    }
+}
 
 void func_800F5D44_109964_shared_board(s32 arg0, s32 arg1) {
     func_800F5BF4_109814_shared_board(arg0, arg1, 1);
@@ -554,7 +709,82 @@ void func_800F5F7C_109B9C_shared_board(void) {
     func_800F4994_1085B4_shared_board(0x17);
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F5F98_109BB8_shared_board);
+void func_800F5F98_109BB8_shared_board(s32 arg0, s32 arg1) {
+    s32 sp10;
+    s32 sp14;
+    BoardStatus* temp_s7;
+    s16 temp_s5;
+    s16 i;
+    void* var_s2;
+
+    temp_s7 = &D_801057E0_119400_shared_board[arg0];
+    temp_s5 = temp_s7->playerIndex;
+    var_s2 = NULL;
+    for (i = 0; i < 3; i++) {
+        var_s2 = NULL;
+        if (GwPlayer[arg0].items[i] != -1) {
+            var_s2 = ReadMainFS(D_8010197C_11559C_shared_board[GwPlayer[arg0].items[i]]);
+        } else {
+            if (i == 0) {
+                var_s2 = ReadMainFS(0x13025E);
+            }
+        }
+
+        if (var_s2 != NULL) {
+            temp_s7->unk_40[i] = func_80055810_56410(var_s2);
+            HuFreeFilePerm(var_s2);
+            func_80055024_55C24(temp_s5, i + 2, temp_s7->unk_40[i], 0);
+            if (i != 0) {
+                SprPriSet(temp_s5, i + 2, (arg0 * 5) + 0x4790);
+            } else {
+                SprPriSet(temp_s5, i + 2, ((arg0 * 5) + 0x478F) & 0xFFFF);
+            }
+            SprAttrSet(temp_s5, i + 2, 0x180CU);
+            SprAttrReset(temp_s5, i + 2, 0x8000U);
+            func_800552DC_55EDC(temp_s5, i + 2, 0.0f);
+            if (GwPlayer[arg0].items[0] != -1) {
+                if (arg1 != 0) {
+                    func_800F6E4C_10AA6C_shared_board(arg0, i, &sp10, &sp14);
+                    func_80054904_55504(temp_s7->playerIndex, i + 2, sp10, sp14);
+                } else {
+                    switch (i) {
+                    case 0:
+                        func_80054904_55504(temp_s5, i + 2, (i * 0x12) + 3, 5);
+                        break;
+                    case 1:
+                        func_80054904_55504(temp_s5, i + 2, (i * 0x12) + 3, -5);
+                        break;
+                    case 2:
+                        func_80054904_55504(temp_s5, i + 2, (i * 0x12) + 3, 5);
+                        break;
+                    }                    
+                }
+            } else {
+                if (arg1 != 0) {
+                    f32 xPos, yPos;
+                    xPos = (PlayerBoardStatusRootPosition[arg0][0] + 0x38);
+                    yPos = (PlayerBoardStatusRootPosition[arg0][1] + 0x13);
+                    xPos = xPos + 22.0f;
+                    xPos = xPos - 4.0f;
+                    
+                    func_80054904_55504(temp_s7->playerIndex, 2, xPos, yPos);
+                } else {
+                    func_80054904_55504(temp_s5, 2, 0x12, 0);
+                }
+            }
+            SprScale(temp_s5, i + 2, 1.0f, 1.0f);
+            func_800550B4_55CB4(temp_s5, i + 2, 0.0f);
+            if (arg0 == GwSystem.current_player_index) {
+                func_80055458_56058(temp_s5, i + 2, 0x100U);
+            } else {
+                func_80055458_56058(temp_s5, i + 2, 0x80U);
+            }
+            
+        } else {
+            temp_s7->unk_40[i] = -1;
+        }
+    }
+}
 
 void func_800F63F0_10A010_shared_board(s32 arg0) {
     if (arg0 == CUR_PLAYER) {
@@ -677,8 +907,8 @@ void func_800F68E0_10A500_shared_board(s32 arg0, s32 arg1, s32 arg2) {
     func_80055458_56058(D_801057E0_119400_shared_board[arg0].playerIndex, (arg1 + 2), arg2);
 }
 
-void func_800F6928_10A548_shared_board(s32 arg0, s32 arg1) {
-    func_800552DC_55EDC(D_801057E0_119400_shared_board[arg0].playerIndex, (arg1 + 2));
+void func_800F6928_10A548_shared_board(s32 arg0, s32 arg1, f32 arg2) {
+    func_800552DC_55EDC(D_801057E0_119400_shared_board[arg0].playerIndex, (arg1 + 2), arg2);
 }
 
 void func_800F696C_10A58C_shared_board(s32 arg0, s32 arg1, f32 arg2, f32 arg3) {
@@ -686,7 +916,7 @@ void func_800F696C_10A58C_shared_board(s32 arg0, s32 arg1, f32 arg2, f32 arg3) {
 }
 
 void func_800F69B0_10A5D0_shared_board(s32 arg0, s32 arg1, s32 arg2) {
-    func_80055294_55E94(D_801057E0_119400_shared_board[arg0].playerIndex, arg1 + 2, arg2);
+    SprPriSet(D_801057E0_119400_shared_board[arg0].playerIndex, arg1 + 2, arg2);
 }
 
 void func_800F69F8_10A618_shared_board(s32 arg0, s32 arg1, s32 arg2) {

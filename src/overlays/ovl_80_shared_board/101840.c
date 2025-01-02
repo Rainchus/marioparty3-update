@@ -52,7 +52,7 @@ u32 func_800EE884_1024A4_shared_board(s32 arg0, s16 arg1, s16 arg2) {
         }
     }
 
-    if (i != 0x10) {
+    if (i != ARRAY_COUNT(D_80105718_119338_shared_board)) {
         obj = omAddObj(0x2000, 0U, 0U, -1, func_800EE7AC_1023CC_shared_board);
         temp_s1->unk_08 = obj;
         obj->work[0] = i;
@@ -81,11 +81,11 @@ s32 BoardPlayerRankCalc(s32 player) {
     s32 i;
     s32 score[4];
 
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < MAX_PLAYERS; i++) {
         score[i] = func_800EECB0_1028D0_shared_board(i);
     }
 
-    for (rank = 0, i = 0; i < 4; i++) {
+    for (rank = 0, i = 0; i < MAX_PLAYERS; i++) {
         if ((i != player) && (score[player] < score[i])) {
             rank++;
         }
@@ -93,24 +93,216 @@ s32 BoardPlayerRankCalc(s32 player) {
     return rank;
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EEA58_102678_shared_board);
+s32 func_800EEA58_102678_shared_board(s32 arg0) {
+    s32 var_a0_2;
+    s32 var_a0;
+    s32 i;
+    s32 score[MAX_PLAYERS];
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EECB0_1028D0_shared_board);
+    if (GWBoardFlagCheck(0xF) == 0) {
+        return BoardPlayerRankCalc(arg0);
+    }
+    
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        score[i] = func_800EECB0_1028D0_shared_board(i);
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EECF0_102910_shared_board);
+    //calc what the highest mg coin total is
+    for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
+        if (var_a0_2 < GwPlayer[i].mg_star_coins) {
+            var_a0_2 = GwPlayer[i].mg_star_coins;
+        }
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EEE84_102AA4_shared_board);
+    //award players 1000 points (a star) for having the highest mg coin total
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if (GwPlayer[i].mg_star_coins == var_a0_2) {
+            score[i] += 1000;
+        }
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EEF80_102BA0_shared_board);
+    //calc what the highest amount of coins collected was
+    for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
+        if (var_a0_2 < GwPlayer[i].coins_total) {
+            var_a0_2 = GwPlayer[i].coins_total;
+        }
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EEFEC_102C0C_shared_board);
+    //award players 1000 points (a star) for having the highest amount of coins
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if (GwPlayer[i].coins_total == var_a0_2) {
+            score[i] += 1000;
+        }
+    }
+
+    //calc what the highest amount of happening spaces landed on was
+    for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
+        if (var_a0_2 < GwPlayer[i].happeningSpacesLandedOn) {
+            var_a0_2 =  GwPlayer[i].happeningSpacesLandedOn;
+        }
+    }
+
+    //award players 1000 points (a star) for landing on the most happening spaces
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if (GwPlayer[i].happeningSpacesLandedOn == var_a0_2) {
+            score[i] += 1000;
+        }
+    }
+
+    for (i = 0, var_a0 = 0; i < MAX_PLAYERS; i++) {
+        if (i != arg0) {
+            var_a0 += score[arg0] < score[i];
+        }
+    }
+
+    return var_a0;
+}
+
+s32 func_800EECB0_1028D0_shared_board(s32 arg0) {
+    return GwPlayer[arg0].stars * 1000 + GwPlayer[arg0].coins;
+}
+
+s32 func_800EECF0_102910_shared_board(s32 arg0) {
+    s32 var_a0_2;
+    s32 i;
+    s32 playerBaseScore;
+
+    playerBaseScore = (GwPlayer[arg0].stars * 1000) + GwPlayer[arg0].coins;
+
+    if (GWBoardFlagCheck(0xF) != 0) {
+        //calc what the highest mg coin total is
+        for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
+            if (var_a0_2 < GwPlayer[i].mg_star_coins) {
+                var_a0_2 = GwPlayer[i].mg_star_coins;
+            }
+        }
+        
+        if (GwPlayer[arg0].mg_star_coins == var_a0_2) {
+            playerBaseScore += 1000;
+        }
+
+        //calc what the highest amount of coins collected was
+        for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
+            if (var_a0_2 < GwPlayer[i].coins_total) {
+                var_a0_2 = GwPlayer[i].coins_total;
+            }
+        }
+        
+        if (GwPlayer[arg0].coins_total == var_a0_2) {
+            playerBaseScore += 1000;
+        }
+
+        for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
+            if (var_a0_2 < GwPlayer[i].happeningSpacesLandedOn) {
+                var_a0_2 = GwPlayer[i].happeningSpacesLandedOn;
+            }
+        }
+        
+        if (GwPlayer[arg0].happeningSpacesLandedOn == var_a0_2) {
+            playerBaseScore += 1000;
+        }
+    }
+    return playerBaseScore;
+}
+
+extern u16 D_800D5558_D6158[];
+
+void func_800EEE84_102AA4_shared_board(void) {
+    s32 i;
+    
+    HuPrcSleep(2);
+    for (i = 0; i < 4; i++) {
+        if (!(GwPlayer[i].flags1 & 1)) {
+            break;
+        }
+    }
+
+    if (i == 4) {
+        HuPrcSleep(30);
+        return;
+    }
+
+    while (1) {
+        for (i = 0; i < 4; i++) {
+            if (!(GwPlayer[i].flags1 & 1) &&
+                (D_800D5558_D6158[GwPlayer[i].controller_port] & (A_BUTTON | B_BUTTON))) {     
+                break;
+            }
+        }
+    
+        if (i == 4) {
+            HuPrcVSleep();
+        } else {
+            break;
+        }
+    }
+}
+
+s32 func_800EEF80_102BA0_shared_board(f32 arg0) { //800EFE20 in duel mode,
+    // rand8 returns an unsigned byte
+    u8 randomByte1 = rand8();
+    u8 randomByte2 = rand8();
+    s32 shiftedByte1 = (randomByte1 << 8);
+
+    // Normalize the 16-bit number to the range [0, 1), then multiply by arg0
+    s32 scaledRandom = ((randomByte2 | shiftedByte1) / 65536.0f) * arg0;
+    
+    return scaledRandom;
+}
+
+//is there some kind of macro at play here? the cast to u8 is weird because `work` used to be u8[] in mp1/mp2
+void func_800EEFEC_102C0C_shared_board(Object* arg0, s16 arg1, s16 arg2, s32 arg3) {
+    arg0->unk3C->work[0] = (u8)func_80017790_18390(arg0->unk3C->model[0], arg1, arg2, arg3);
+    arg0->unk3C->work[1] = (u8)arg1;
+    arg0->unk3C->work[2] = (u8)arg2;
+}
 
 void func_800EF068_102C88_shared_board(void) {
 }
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EF070_102C90_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EF0D8_102CF8_shared_board);
+s32 func_800EF0D8_102CF8_shared_board(s32 arg0) {
+    s32 randVal;
+    s32 scoreIndex;
+    s32 score[4];
+    s32 curPlayerScore;
+    s32 i, j;
+
+    for (i = 0, scoreIndex = 0; i < MAX_PLAYERS; i++) {
+        for (j = 0; j < 4; j++) {
+            if (BoardPlayerRankCalc(j) == i) {
+                score[scoreIndex++] = j;
+            }            
+        }
+    }
+
+    while (1) {
+        randVal = func_800EEF80_102BA0_shared_board(100.0f);
+        for (i = 0; i < MAX_PLAYERS; i++) {
+            if (D_801014C0_1150E0_shared_board[i] < randVal) {
+                continue;
+            } else {
+                break;
+            }
+        }
+
+        if (arg0 != 0 && score[i] == GwSystem.current_player_index) {
+            continue;
+        } else {
+            break;
+        }
+    }
+
+    //for some reason this requires reassigning i
+    i = score[i];
+    if (i >= 4) {
+        i = GwSystem.current_player_index + 1;
+        i = (i < 4) ? i : 0;
+    }
+    
+    return i;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EF200_102E20_shared_board);
 
@@ -134,6 +326,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EF8F
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EFA34_103654_shared_board);
 
+//draws a message?
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EFD8C_1039AC_shared_board);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/101840", func_800EFE0C_103A2C_shared_board);

@@ -8,9 +8,25 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/105D50", func_800F217
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/105D50", func_800F2198_105DB8_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/105D50", AdjustPlayerCoins);
+void AdjustPlayerCoins(s32 arg0, s32 arg1) {
+    GW_PLAYER* player;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/105D50", PlayerHasCoins);
+    player = GetPlayerStruct(arg0);
+    player->coins = player->coins + arg1;
+    if (player->coins >= 1000) {
+        player->coins = 999;
+    }
+    if (player->coins < 0) {
+        player->coins = 0;
+    }
+    if (player->coins_total <= player->coins) {
+        player->coins_total = player->coins;
+    }
+}
+
+s32 PlayerHasCoins(s32 playerIndex, s32 requiredCoins) {
+    return GetPlayerStruct(playerIndex)->coins >= requiredCoins;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/105D50", func_800F2260_105E80_shared_board);
 

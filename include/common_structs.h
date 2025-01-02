@@ -178,7 +178,7 @@ typedef struct ESprite {
     char unk_00[8];
     s16 unk_08;
     s16 unk_0A;
-    char unk_0C[4];
+    s32 unk_0C;
     ESprite2* unk_10[4]; //unknown size
 } ESprite; //unknown size
 

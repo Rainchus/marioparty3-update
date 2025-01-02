@@ -57,7 +57,7 @@ HuPrcVSleep = 0x8004F074;
 InitEspriteSlot = 0x8000BFEC;
 HuAudSeqPlay = 0x8004A520;
 HuAudFXPlay = 0x8004AA88;
-HuDrawTextDbg = 0x8004DD7C;
+print8 = 0x8004DD7C;
 HuWipeFadeIn = 0x80061FE8;
 HuWipeFadeOut = 0x80062050;
 HuWipeStatGet = 0x800620BC;
@@ -535,6 +535,8 @@ GetCurrentPlayerIndex = 0x800F2130; //rom:0x105D50
 BoardPlayerRankCalc = 0x800EE9C0; //rom:0x1025E0
 GetTurnsElapsed = 0x800ECEE4; //rom:0x100B04
 PlayerHasItem = 0x800E4978; //rom:0xF8598
+PlayerHasEmptyItemSlot = 0x800E49DC; //rom:0xF85FC
+FixUpPlayerItemSlots = 0x800E4A08; //rom:0xF8628
 RNGPercentChance = 0x800ECE9C; //rom:0x100ABC
 RunDecisionTree = 0x800DA190; //rom:0xEDDB0
 Hu3DModelCreate = 0x8001A150; //rom:0x1AD50
@@ -642,6 +644,9 @@ GWCharPlayNumInc = 0x80035DA4; //rom:0x369A4
 _CheckFlag = 0x80035EB0; //rom:0x36AB0
 _SetFlag = 0x80035EF4; //rom:0x36AF4
 _ClearFlag = 0x80035F44; //rom:0x36B44
+SprPriSet = 0x80055294; //rom:0x55E94
+
+ShowPlayerCoinChange = 0x800E1F48; //rom:0xF5B68
 
 GWBoardFlagCheck = 0x80035F98;
 GWBoardFlagSet = 0x80035FDC;
@@ -655,6 +660,17 @@ GwStory = 0x800D0308; //size:0x74
 GwSystem = 0x800CD058; //size:0x62
 GwPlayer = 0x800D1108; //size:0xE0
 D_800BBED0 = 0x800BBED0;
+strline = 0x800B2A30; //size:0x9000
+fontcolor = 0x800CB8A4; //type:s32 size:0x4
+empstrline = 0x800D0410; //type:u16
+strlinecnt = 0x800CC6A0; //type:u16
+
+pfInit = 0x8004DC00; //rom:0x4E800
+pfClsScr = 0x8004DC98; //rom:0x4E898
+pfDrawFonts = 0x8004E03C; //rom:0x4EC3C
+gMainGfxPos = 0x800D1FF4; //type:s32
+
+DrawSpaces = 0x800EA6F4; //rom:0xFE314 segment:shared_board
 
 //libultra symbols
 //auxbus.c
@@ -730,6 +746,6 @@ n_aspMain_data = 0x800A6050; //rom:0xA6C50 size:0x2B0
 //ovl_80
 D_801057E0_119400_shared_board = 0x801057E0; //rom:0x119400 size:0x1B0 segment:shared_board
 D_80105718_119338_shared_board = 0x80105718; //rom:0x119338 size:0xC0 segment:shared_board
-D_801018E4_115504_shared_board = 0x801018E4; //rom:0x115504 size:0x10 segment:shared_board
+D_801018E4_115504_shared_board = 0x801018E4; //rom:0x115504 size:0x44 segment:shared_board
 PlayerBoardStatusRootPosition = 0x80101794; //rom:0x1153B4 size:0x20 segment:shared_board
 UpdatePlayerBoardStatus = 0x800F2E30; //rom:0x106A50 segment:shared_board

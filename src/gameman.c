@@ -60,8 +60,8 @@ void func_800224BC_230BC(void);
 void GWInit(void); // save.h
 void GWMgRecordSet(s16 arg0, s16 arg1); // save.h
 void func_80036380_36F80(Addr arg0);
-void func_8004DC00_4E800(void);
-void func_8004DC98_4E898(void);
+void pfInit(void);
+void pfClsScr(void);
 void func_8004F290_4FE90(void);
 s32  func_8004FDC0_509C0(void);
 void func_80050800_51400(void);
@@ -105,7 +105,7 @@ void func_8000E3C0_EFC0(void) {
     func_80061B50_62750();
     func_8001A070_1AC70(&HuMemMemoryAllocPerm, &HuMemMemoryFreePerm, D_800D4082_D4C82, D_800CD2F4_CDEF4, D_800D6A56_D7656, D_800D1710_D2310);
     Hu3DCamInit(1);
-    func_8004DC00_4E800();
+    pfInit();
     func_80036380_36F80(strings_jp_ROM_START);
     D_800D1F36_D2B36 = 0;
 
@@ -176,7 +176,7 @@ void func_8000E740_F340(void) {
         func_800224BC_230BC();
         func_800143F0_14FF0();
         func_8001BF90_1CB90(0x2000000, 0x3D0800);
-        func_8004DC98_4E898();
+        pfClsScr();
     }
 }
 

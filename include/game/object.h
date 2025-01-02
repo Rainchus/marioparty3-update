@@ -64,5 +64,6 @@ s32 omOvlGotoEx(s32, s16, u16);
 void omDestroyObjMan(void);
 void omPrcSetDestructor(s32, void*);
 void omPrcResetStatBit(Process*, s32);
+void omDelObj(omObjData*);
 
 #endif //_GAME_OBJECT_H

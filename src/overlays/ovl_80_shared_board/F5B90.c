@@ -76,7 +76,37 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E34E0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E3584_F71A4_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E35F8_F7218_shared_board);
+f32 HuMathSin(f32);                                 /* extern */
+void func_800F696C_10A58C_shared_board(s32, s32, f32, f32); /* extern */
+void omDelPrcObj(s32);                                   /* extern */
+
+void func_800E35F8_F7218_shared_board(void) {
+    f32 temp_f0;
+    f32 var_f20;
+    s32* temp_s0;
+    s32 prev;
+
+    temp_s0 = HuPrcCurrentGet()->user_data;
+    var_f20 = 0.0f;
+    prev = *temp_s0;
+    while (*temp_s0 != -1) {
+        if (*temp_s0 != prev) {
+            func_800F696C_10A58C_shared_board(GwSystem.current_player_index, prev, 1.0f, 1.0f);
+            var_f20 = 0.0f;
+            prev = *temp_s0;
+        }
+        if (var_f20 > 360.0f) {
+            var_f20 -= 360.0f;
+        }
+        temp_f0 = (HuMathSin(var_f20) * 0.2f) + 1.0f;
+        func_800F696C_10A58C_shared_board(GwSystem.current_player_index, *temp_s0, temp_f0, temp_f0);
+        HuPrcVSleep();
+        var_f20 += 13.0f;
+        
+    }
+    func_800F696C_10A58C_shared_board(GwSystem.current_player_index, prev, 1.0f, 1.0f);
+    omDelPrcObj(0);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E3734_F7354_shared_board);
 
@@ -116,11 +146,52 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E48F4
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E4954_F8574_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", PlayerHasItem);
+s32 PlayerHasItem(s32 playerIndex, s32 itemID) {
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E49DC_F85FC_shared_board);
+    if (playerIndex == CUR_PLAYER) {
+        playerIndex = GwSystem.current_player_index;
+    }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E4A08_F8628_shared_board);
+    for (i = 0; i < ARRAY_COUNT(GwPlayer->items); i++) {
+        if (GwPlayer[playerIndex].items[i] == itemID) {
+            break;
+        }
+    }
+
+    if (i == 3) {
+        return -1;
+    } else {
+        return i;
+    }
+}
+
+void PlayerHasEmptyItemSlot(s32 arg0) {
+    if (arg0 == CUR_PLAYER) {
+        arg0 = GwSystem.current_player_index;
+    }
+    
+    PlayerHasItem(arg0, -1);
+}
+
+void FixUpPlayerItemSlots(s32 arg0) {
+    s8* playerItems;
+    s32 i;
+
+
+    if (arg0 == -1) {
+        arg0 = GwSystem.current_player_index;
+    }
+
+    playerItems = GwPlayer[arg0].items;
+
+    for (i = 0; i < 2; i++) {
+        if (playerItems[i] == -1) {
+            playerItems[i] = playerItems[i+1];
+            playerItems[i+1] = -1;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E4A6C_F868C_shared_board);
 
@@ -392,7 +463,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6B0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6E0_FE300_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6F4_FE314_shared_board);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", DrawSpaces);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EAE00_FEA20_shared_board);
 

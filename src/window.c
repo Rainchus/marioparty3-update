@@ -113,7 +113,7 @@ s16 func_8005B7B8_5C3B8(s16 win_id, u32 spriteMainFsPair, s16 arg2, s16 arg3, u1
     spriteId = func_80055810_56410(spriteBytes);
     window->unk_6E[i] = spriteId;
     HuMemMemoryFreePerm(spriteBytes);
-    func_80055024_55C24(window->unk_6C, i, spriteId, arg4 & 0xFFFF);
+    func_80055024_55C24(window->unk_6C, i, spriteId, arg4);
     func_80054904_55504(window->unk_6C, i, arg2, arg3);
     func_800554C4_560C4(window->unk_6C, i, 0);
     return i;

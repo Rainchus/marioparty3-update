@@ -84,7 +84,13 @@ void func_800F5644_109264_shared_board(void);
 void func_800F5BF4_109814_shared_board(s32, s32, s32);
 void func_800F3D70_107990_shared_board(s32);
 void func_800F3F0C_107B2C_shared_board(s32);
-
+void func_80055670_56270(s16);
+void func_800F59B4_1095D4_shared_board(omObjData*);
+extern s32 D_8010197C_11559C_shared_board[]; //item mainFS ID array
+extern u8 D_801014C0_1150E0_shared_board[];
+extern s16 D_80105592_1191B2_shared_board[];
+extern s16 D_801055FC_11921C_shared_board[];
+extern s16 D_80105608_119228_shared_board[4][3];
 extern s16 D_80101908_115528_shared_board[];
 extern s16 D_80105598_1191B8_shared_board;
 extern s16 D_8010559A_1191BA_shared_board;
@@ -98,7 +104,7 @@ extern RGB D_8010188C_1154AC_shared_board[];
 extern s8 D_800D20B1_D2CB1;
 extern s32 D_80101780_1153A0_shared_board;
 extern s16 D_8010559C_1191BC_shared_board[];
-extern s16 D_801018E4_115504_shared_board[16][2];
+extern s16 D_801018E4_115504_shared_board[17][2];
 extern s32 D_80101790_1153B0_shared_board;
 extern f32 D_801055C8_1191E8_shared_board;
 extern s16 D_801055E4_119204_shared_board;
@@ -112,7 +118,7 @@ extern s16 D_801055C4_1191E4_shared_board;
 extern s32 D_80101784_1153A4_shared_board;
 extern BoardStatus D_801057E0_119400_shared_board[];
 extern UnkBoard D_80105718_119338_shared_board[16];
-extern s32 D_801055E8_119208_shared_board[];
+extern omObjData* D_801055E8_119208_shared_board[];
 extern s32 D_80101F30_115B50_shared_board[3];
 extern s32 D_80101944_115564_shared_board[]; //mainFS ids for character images
 extern s32 D_801019D0_1155F0_shared_board[];

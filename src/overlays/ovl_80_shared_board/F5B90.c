@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ovl_80.h"
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E1F70_F5B90_shared_board);
 
@@ -30,7 +31,34 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E2960
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E2974_F6594_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E29E8_F6608_shared_board);
+s32 func_800E29E8_F6608_shared_board(void) {
+    GW_PLAYER* player;
+    GW_SYSTEM* system = &GwSystem;
+
+    player = GetPlayerStruct(CUR_PLAYER);
+    if (func_800DEB2C_F274C_shared_board(system->current_player_index) == 3 && player->rev & 0x80) {
+        player->rev &= ~0x80;
+        func_800EC590_1001B0_shared_board(-1, 0x3A2B);
+    } else {
+        if (func_800DEB2C_F274C_shared_board(system->current_player_index) == 3) {
+            func_800EC590_1001B0_shared_board(-1, 0x3A27);
+        }
+        if (player->rev & 0x80) {
+            player->rev &= ~0x80;
+            func_800EC590_1001B0_shared_board(-1, 0x3A29);
+        }        
+    }
+
+    func_800DCA64_F0684_shared_board(GwSystem.current_player_index);
+    D_80102C70_116890_shared_board();
+    GwPlayer[GwSystem.current_player_index].itemNo[D_80100F90_114BB0_shared_board] = -1;
+    FixUpPlayerItemSlots(GwSystem.current_player_index);
+    func_800DE9AC_F25CC_shared_board(GwSystem.current_player_index, 2);
+    func_800FF900_113520_shared_board(-1, 2);
+    func_800DC128_EFD48_shared_board(GwSystem.current_player_index);
+    HuPrcSleep(0xF);
+    return 1;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E2B24_F6744_shared_board);
 
@@ -153,8 +181,8 @@ s32 PlayerHasItem(s32 playerIndex, s32 itemID) {
         playerIndex = GwSystem.current_player_index;
     }
 
-    for (i = 0; i < ARRAY_COUNT(GwPlayer->items); i++) {
-        if (GwPlayer[playerIndex].items[i] == itemID) {
+    for (i = 0; i < ARRAY_COUNT(GwPlayer->itemNo); i++) {
+        if (GwPlayer[playerIndex].itemNo[i] == itemID) {
             break;
         }
     }
@@ -166,12 +194,12 @@ s32 PlayerHasItem(s32 playerIndex, s32 itemID) {
     }
 }
 
-void PlayerHasEmptyItemSlot(s32 arg0) {
+s32 PlayerHasEmptyItemSlot(s32 arg0) {
     if (arg0 == CUR_PLAYER) {
         arg0 = GwSystem.current_player_index;
     }
     
-    PlayerHasItem(arg0, -1);
+    return PlayerHasItem(arg0, -1);
 }
 
 void FixUpPlayerItemSlots(s32 arg0) {
@@ -183,9 +211,9 @@ void FixUpPlayerItemSlots(s32 arg0) {
         arg0 = GwSystem.current_player_index;
     }
 
-    playerItems = GwPlayer[arg0].items;
+    playerItems = GwPlayer[arg0].itemNo;
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(GwPlayer->itemNo) - 1; i++) {
         if (playerItems[i] == -1) {
             playerItems[i] = playerItems[i+1];
             playerItems[i+1] = -1;

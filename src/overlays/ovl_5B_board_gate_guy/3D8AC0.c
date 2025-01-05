@@ -5,7 +5,7 @@ void func_801059D0_3D8AC0_board_gate_guy(void) {
     D_800CDD58_CE958 = 1;
     D_800D037C_D0F7C = 0;
     omPrcSetStatBit(HuPrcCurrentGet(), 0x80);
-    func_80100CEC_E8ABC_name_81(GwPlayer[GwSystem.current_player_index].controller_port);
+    func_80100CEC_E8ABC_name_81(GwPlayer[GwSystem.current_player_index].pad);
     omPrcResetStatBit(HuPrcCurrentGet(), 0x80);
     D_800CDD58_CE958 = 0;
     D_800D037C_D0F7C = 1;
@@ -51,10 +51,10 @@ void func_80105B9C_3D8C8C_board_gate_guy(void) {
     func_800ECD0C_D4ADC_name_81(0, sp10, sp11);
     func_800E9F4C_D1D1C_name_81(0x1B, &sp10, &sp11);
     func_800ECD0C_D4ADC_name_81(1, sp10, sp11);
-    GwPlayer[0].unk_13 = -1;
-    GwPlayer[0].unk_14 = -1;
-    GwPlayer[1].unk_13 = -1;
-    GwPlayer[1].unk_14 = -1;
+    GwPlayer[0].nnlink = -1;
+    GwPlayer[0].nnidx = -1;
+    GwPlayer[1].nnlink = -1;
+    GwPlayer[1].nnidx = -1;
     func_800E9D9C_D1B6C_name_81();
     func_800E9564_D1334_name_81();
     GwSystem.bank_coins = 5;

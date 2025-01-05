@@ -205,22 +205,22 @@ void func_8000E804_F404(void) {
         memset(&GwPlayer[i], 0, sizeof(GW_PLAYER));
         if (CheckControllerRead(i) != PAD_NOT_INSERTED) {
             D_800CCF78_CDB78[i] = 0;
-            GwPlayer[i].flags1 &= ~1;
+            GwPlayer[i].stat &= ~1;
         } else {
             D_800CCF78_CDB78[i] = 1;
-            GwPlayer[i].flags1 |= 1;
+            GwPlayer[i].stat |= 1;
         }
 
-        GwPlayer[i].controller_port = i;
-        GwPlayer[i].coins = 10;
-        GwPlayer[i].coins_mg_bonus = 0;
+        GwPlayer[i].pad = i;
+        GwPlayer[i].coin = 10;
+        GwPlayer[i].gameCoin = 0;
         GwPlayer[i].group = i;
         GwPlayer[i].cpu_difficulty = 0;
-        GwPlayer[i].stars = 0;
-        GwPlayer[i].mg_star_coins = 0;
-        GwPlayer[i].blueSpacesLandedOn = 0;
-        GwPlayer[i].redSpacesLandedOn = 0;
-        GwPlayer[i].happeningSpacesLandedOn = 0;
+        GwPlayer[i].star = 0;
+        GwPlayer[i].gamePrize = 0;
+        GwPlayer[i].bluePrize = 0;
+        GwPlayer[i].redPrize = 0;
+        GwPlayer[i].hatenaPrize = 0;
     }
 }
 

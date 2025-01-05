@@ -59,7 +59,7 @@ void func_801059A0_4F3780_name_74(void) {
     func_80019514_1A114(1, 0xFF, 0xFF, 0xFF);
     
     for (var_a0_2 = 0, i = 0; i < MAX_PLAYERS; i++) {
-        if (GwPlayer[i].minigameCoins == 3) {
+        if (GwPlayer[i].bonusCoin == 3) {
             var_a0_2++;
         }
     }

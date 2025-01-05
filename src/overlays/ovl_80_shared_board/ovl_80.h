@@ -86,6 +86,22 @@ void func_800F3D70_107990_shared_board(s32);
 void func_800F3F0C_107B2C_shared_board(s32);
 void func_80055670_56270(s16);
 void func_800F59B4_1095D4_shared_board(omObjData*);
+s32 func_800F2198_105DB8_shared_board(s16);
+void func_800DC128_EFD48_shared_board(s32);
+void func_800DCA64_F0684_shared_board(s32);
+void func_800F696C_10A58C_shared_board(s32, s32, f32, f32);
+s32 func_800DEB2C_F274C_shared_board(s32);
+void func_800EC590_1001B0_shared_board(s32, s32);
+void func_800FF900_113520_shared_board(s32, s32);
+void func_800DE9AC_F25CC_shared_board(s32, s32);
+void func_800F76A4_10B2C4_shared_board(s32 arg0);
+
+extern s32 D_801055F8_119218_shared_board;
+extern s32 D_80101A50_115670_shared_board[]; //randomly generated items
+extern s32 D_80105630_119250_shared_board[];
+extern s32 D_80100F90_114BB0_shared_board;
+void (*D_80102C70_116890_shared_board)(void);
+extern s16 D_800C9520_CA120[];
 extern s32 D_8010197C_11559C_shared_board[]; //item mainFS ID array
 extern u8 D_801014C0_1150E0_shared_board[];
 extern s16 D_80105592_1191B2_shared_board[];

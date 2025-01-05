@@ -71,7 +71,8 @@ void func_8004DCFC_4E8FC(s16 arg0) {
     }
 }
 
-s32 print8(s16 x, s16 y, u8* src) {
+//unsure if this should be char* src or u8* src
+s32 print8(u16 x, u16 y, char* src) {
     u8* dst;
     strline_data* strLine;
     s16 prevStrIndex;
@@ -85,8 +86,8 @@ s32 print8(s16 x, s16 y, u8* src) {
         strLine->x = x;
         strLine->y = y;
         dst = strLine->str;
-        while (*src != '\0') {
-            *dst++ = *src++;
+        while (*(u8*)src != '\0') {
+            *dst++ = *(u8*)src++;
         }
         *dst = '\0';
         return prevStrIndex;

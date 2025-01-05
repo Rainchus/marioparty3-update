@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ovl_80.h"
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F8610_10C230_shared_board);
 
@@ -16,7 +17,17 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F88D
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F88FC_10C51C_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F8908_10C528_shared_board);
+void func_800F8908_10C528_shared_board(void) {
+    s32* temp_s0;
+
+    temp_s0 = HuPrcCurrentGet()->user_data;
+    while (1) {
+        if ((func_800F2198_105DB8_shared_board(temp_s0[0]) == 0) && (D_800A12D8 == 0) && ((GwSystem.current_player_index != temp_s0[0]) || (D_800A12D4 == 0)) && (D_800C9520_CA120[GwPlayer[temp_s0[0]].pad] & 0x20)) {
+            func_8004ACE0_4B8E0(0x2BD, temp_s0[0]);
+        }
+        HuPrcVSleep();
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F89D0_10C5F0_shared_board);
 

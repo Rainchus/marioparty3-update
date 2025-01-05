@@ -12,20 +12,20 @@ void AdjustPlayerCoins(s32 arg0, s32 arg1) {
     GW_PLAYER* player;
 
     player = GetPlayerStruct(arg0);
-    player->coins = player->coins + arg1;
-    if (player->coins >= 1000) {
-        player->coins = 999;
+    player->coin = player->coin + arg1;
+    if (player->coin >= 1000) {
+        player->coin = 999;
     }
-    if (player->coins < 0) {
-        player->coins = 0;
+    if (player->coin < 0) {
+        player->coin = 0;
     }
-    if (player->coins_total <= player->coins) {
-        player->coins_total = player->coins;
+    if (player->coinPrize <= player->coin) {
+        player->coinPrize = player->coin;
     }
 }
 
 s32 PlayerHasCoins(s32 playerIndex, s32 requiredCoins) {
-    return GetPlayerStruct(playerIndex)->coins >= requiredCoins;
+    return GetPlayerStruct(playerIndex)->coin >= requiredCoins;
 }
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/105D50", func_800F2260_105E80_shared_board);

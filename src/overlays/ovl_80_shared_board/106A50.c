@@ -23,10 +23,10 @@ void UpdatePlayerBoardStatus(s32 playerIndex) {
     s32 i;
     
     playerBoardStatus = &D_801057E0_119400_shared_board[playerIndex];
-    if (playerBoardStatus->prevCoins != GwPlayer[playerIndex].coins) {
-        coinDigits.digits[HUNDREDS] = GwPlayer[playerIndex].coins / 100;
-        coinDigits.digits[TENS] = GwPlayer[playerIndex].coins / 10 % 10;
-        coinDigits.digits[ONES] = GwPlayer[playerIndex].coins % 10;
+    if (playerBoardStatus->prevCoins != GwPlayer[playerIndex].coin) {
+        coinDigits.digits[HUNDREDS] = GwPlayer[playerIndex].coin / 100;
+        coinDigits.digits[TENS] = GwPlayer[playerIndex].coin / 10 % 10;
+        coinDigits.digits[ONES] = GwPlayer[playerIndex].coin % 10;
         if (coinDigits.digits[HUNDREDS] != 0) {
             var_v1 = ((coinDigits.digits[HUNDREDS] != 0) ? 3 : 2);
         } else if (coinDigits.digits[TENS] != 0) {
@@ -50,28 +50,28 @@ void UpdatePlayerBoardStatus(s32 playerIndex) {
             func_800550F4_55CF4(playerBoardStatus->playerIndex, i + COINS_HUNDREDS_DIGIT, 1);
         }
     
-        playerBoardStatus->prevCoins = GwPlayer[playerIndex].coins;
+        playerBoardStatus->prevCoins = GwPlayer[playerIndex].coin;
     }
 
-    if (playerBoardStatus->prevStars != GwPlayer[playerIndex].stars) {
-        if (GwPlayer[playerIndex].stars > 99) {
+    if (playerBoardStatus->prevStars != GwPlayer[playerIndex].star) {
+        if (GwPlayer[playerIndex].star > 99) {
             func_80055140_55D40(playerBoardStatus->playerIndex, STARS_TENS_DIGIT, 9, 0);
             func_80055140_55D40(playerBoardStatus->playerIndex, STARS_ONES_DIGIT, 9, 0);
         } else {
-            if (GwPlayer[playerIndex].stars > 9) {
-                func_80055140_55D40(playerBoardStatus->playerIndex, STARS_TENS_DIGIT, (GwPlayer[playerIndex].stars / 10), 0);
+            if (GwPlayer[playerIndex].star > 9) {
+                func_80055140_55D40(playerBoardStatus->playerIndex, STARS_TENS_DIGIT, (GwPlayer[playerIndex].star / 10), 0);
             } else {
                 func_80055140_55D40(playerBoardStatus->playerIndex, STARS_TENS_DIGIT, DIGIT_X, 0);
             }
-            func_80055140_55D40(playerBoardStatus->playerIndex, STARS_ONES_DIGIT, GwPlayer[playerIndex].stars % 10, 0);
+            func_80055140_55D40(playerBoardStatus->playerIndex, STARS_ONES_DIGIT, GwPlayer[playerIndex].star % 10, 0);
         }
         func_800550F4_55CF4(playerBoardStatus->playerIndex, STARS_TENS_DIGIT, 1);
         func_800550F4_55CF4(playerBoardStatus->playerIndex, STARS_ONES_DIGIT, 1);
     
-        playerBoardStatus->prevStars = GwPlayer[playerIndex].stars;
+        playerBoardStatus->prevStars = GwPlayer[playerIndex].star;
     }
-    coinDigits.unk_08[0] = GwPlayer[playerIndex].coins;
-    coinDigits.unk_08[1] = GwPlayer[playerIndex].stars;
+    coinDigits.unk_08[0] = GwPlayer[playerIndex].coin;
+    coinDigits.unk_08[1] = GwPlayer[playerIndex].star;
     
     for (i = 0; i < ARRAY_COUNT(coinDigits.unk_08); i++) {
         if ((i != 0 && playerBoardStatus->counts[i] != coinDigits.unk_08[i]) || (i == 0 && D_801055E8_119208_shared_board[playerIndex] != NULL)) {
@@ -144,18 +144,18 @@ void func_800F3400_107020_shared_board(omObjData* arg0) {
                     for (j = 0; j < 14; j++) {
                         switch (j) {
                         case 9:
-                            if (GwPlayer[i].flags1 & 1) {
+                            if (GwPlayer[i].stat & 1) {
                                 break;
                             }
                             continue;
                         case 11:
                         case 12:
                         case 13:
-                            if (GwPlayer[i].items[j - 11] == ITEM_NONE) {
+                            if (GwPlayer[i].itemNo[j - 11] == ITEM_NONE) {
                                 continue;
                             }
 
-                            func_80055024_55C24(temp_s2->playerIndex, j, D_8010559C_1191BC_shared_board[GwPlayer[i].items[j - 11]], 0);
+                            func_80055024_55C24(temp_s2->playerIndex, j, D_8010559C_1191BC_shared_board[GwPlayer[i].itemNo[j - 11]], 0);
                             func_800550F4_55CF4(temp_s2->playerIndex, j, 0);
                             SprPriSet(temp_s2->playerIndex, j, (i * 5) + 0x478E);
                             SprAttrSet(temp_s2->playerIndex, j, 0);
@@ -170,7 +170,7 @@ void func_800F3400_107020_shared_board(omObjData* arg0) {
                             }
                             continue;
                         case 6:
-                            if (GwPlayer[i].coins < 10) {
+                            if (GwPlayer[i].coin < 10) {
                                 continue;
                             }
                             break;
@@ -197,7 +197,7 @@ void func_800F3400_107020_shared_board(omObjData* arg0) {
                         }
                     }
 
-                    if ((GwPlayer[i].flags1 & 1) && !(temp_s2->uiVisible & 1)) {
+                    if ((GwPlayer[i].stat & 1) && !(temp_s2->uiVisible & 1)) {
                         SprAttrReset(temp_s2->playerIndex, 9, 0x8000);
                     } else {
                         SprAttrSet(temp_s2->playerIndex, 9, 0x8000);
@@ -336,7 +336,7 @@ void func_800F3F0C_107B2C_shared_board(s32 playerIndex) {
     SprPriSet(temp_s2, 9, ((playerIndex * 5) + 0x478E) & 0xFFFF);
     SprAttrSet(temp_s2, 9, 0);
     func_80054904_55504(temp_s2, 9, D_801018E4_115504_shared_board[9][0], D_801018E4_115504_shared_board[9][1]);
-    if (!(GwPlayer[playerIndex].flags1 & 1)) {
+    if (!(GwPlayer[playerIndex].stat & 1)) {
         SprAttrSet(temp_s2, 9, 0x8000);
     }
 }
@@ -348,8 +348,8 @@ void func_800F3FF4_107C14_shared_board(s32 arg0) {
     s32 curItem;
     temp_s3 = D_801057E0_119400_shared_board[arg0].playerIndex;
 
-    for (i = 0; i < ARRAY_COUNT(GwPlayer->items); i++) {
-        curItem = GwPlayer[arg0].items[i];
+    for (i = 0; i < ARRAY_COUNT(GwPlayer->itemNo); i++) {
+        curItem = GwPlayer[arg0].itemNo[i];
         curItem = (curItem == -1) ? 0 : curItem;
         func_80055024_55C24(temp_s3, i + 0xB, D_8010559C_1191BC_shared_board[curItem], 0);
         func_800550F4_55CF4(temp_s3, i + 0xB, 0);
@@ -360,7 +360,7 @@ void func_800F3FF4_107C14_shared_board(s32 arg0) {
             var_s1 = i + 0xE;
         }
         func_80054904_55504(temp_s3, i + 0xB, D_801018E4_115504_shared_board[var_s1][0], D_801018E4_115504_shared_board[var_s1][1]);
-        if (GwPlayer[arg0].items[i] == -1) {
+        if (GwPlayer[arg0].itemNo[i] == -1) {
             SprAttrSet(temp_s3, i + 0xB, 0x8000);
         }
     }
@@ -382,7 +382,7 @@ void func_800F4190_107DB0_shared_board(void) {
     
     //create player sprite ids
     for (i = 0; i < MAX_PLAYERS; i++) {
-        temp_v0 = ReadMainFS(D_80101944_115564_shared_board[GwPlayer[i].characterID]);
+        temp_v0 = ReadMainFS(D_80101944_115564_shared_board[GwPlayer[i].chr]);
         spriteIDs[i + 1] = func_80055810_56410(temp_v0);
         HuFreeFilePerm(temp_v0);
     }
@@ -443,8 +443,8 @@ void func_800F43FC_10801C_shared_board(s32 arg0) {
         temp_s2->unk2[i] = 0;
     }
 
-    temp_s2->counts[0] = GwPlayer[arg0].coins;
-    temp_s2->counts[1] = GwPlayer[arg0].stars;
+    temp_s2->counts[0] = GwPlayer[arg0].coin;
+    temp_s2->counts[1] = GwPlayer[arg0].star;
     temp_s2->uiVisible = 0;
     temp_s2->unk1 = -1;
     temp_s2->prevCoins = -1;
@@ -550,7 +550,49 @@ s32 func_800F5278_108E98_shared_board(void) {
     return var_a0;
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F52C4_108EE4_shared_board);
+//decide what type of minigame will be played
+s32 func_800F52C4_108EE4_shared_board(void) {
+    u8 type1Indices[4];
+    u8 type2Indices[4];
+    u8 otherCount = 0;
+    u8 type2Count = 0;
+    u8 type1Count = 0;
+    s32 i;
+
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        switch (D_801057E0_119400_shared_board[i].spaceType) {
+        case 1:
+            type1Indices[type1Count++] = i;
+            break;
+        case 2:
+            type2Indices[type2Count++] = i;
+            break;
+        default:
+            otherCount++;
+        }
+    }
+
+    // Determine result based on counts
+    if (otherCount > 0) {
+        return -1;
+    }
+
+    if (type1Count == 0 || type1Count == 4) {
+        return 0;
+    }
+
+    if (type1Count == 1) {
+        D_801055F8_119218_shared_board = type1Indices[0];
+        return 1;
+    }
+
+    if (type1Count == 3) {
+        D_801055F8_119218_shared_board = type2Indices[0];
+        return 1;
+    }
+
+    return 2;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/106A50", func_800F53B4_108FD4_shared_board);
 
@@ -587,14 +629,14 @@ void func_800F59B4_1095D4_shared_board(omObjData* arg0) {
                     var_s1 = 1;
                     arg0->scale.z -= 3.0f;
                 }
-                if ((arg0->trans.x == 0.0f) || (GwPlayer[arg0->work[0]].coins == 0)) {
+                if ((arg0->trans.x == 0.0f) || (GwPlayer[arg0->work[0]].coin == 0)) {
                     HuAudFXPlay(0x10A);
                 }
             }
         }
         
-        if ((arg0->trans.x == 0.0f) || (GwPlayer[arg0->work[0]].coins == 0)) {
-            D_801055E8_119208_shared_board[arg0->work[0]] = 0;
+        if ((arg0->trans.x == 0.0f) || (GwPlayer[arg0->work[0]].coin == 0)) {
+            D_801055E8_119208_shared_board[arg0->work[0]] = NULL;
             omDelObj(arg0);
             return;
         }
@@ -612,7 +654,7 @@ void func_800F5BF4_109814_shared_board(s32 playerIndex, s32 coinAmount, s32 arg2
             return;
         }
         
-        if ((GwPlayer[playerIndex].coins == 0) && (coinAmount < 0)) {
+        if ((GwPlayer[playerIndex].coin == 0) && (coinAmount < 0)) {
             return;
         }
         
@@ -677,7 +719,7 @@ void func_800F5E30_109A50_shared_board(void) {
     for (i = 0; i < MAX_PLAYERS; i++) {
         func_800F43FC_10801C_shared_board(i);
         func_800F4874_108494_shared_board(i, PlayerBoardStatusRootPosition[i + 4][0], PlayerBoardStatusRootPosition[i + 4][1]);
-        func_800F4798_1083B8_shared_board(i, GwPlayer[i].turn_status);
+        func_800F4798_1083B8_shared_board(i, GwPlayer[i].color);
     }
 
     D_80105580_1191A0_shared_board = omAddPrcObj(&func_800F3400_107020_shared_board, 0, 0x2000, 0);
@@ -722,8 +764,8 @@ void func_800F5F98_109BB8_shared_board(s32 arg0, s32 arg1) {
     var_s2 = NULL;
     for (i = 0; i < 3; i++) {
         var_s2 = NULL;
-        if (GwPlayer[arg0].items[i] != -1) {
-            var_s2 = ReadMainFS(D_8010197C_11559C_shared_board[GwPlayer[arg0].items[i]]);
+        if (GwPlayer[arg0].itemNo[i] != -1) {
+            var_s2 = ReadMainFS(D_8010197C_11559C_shared_board[GwPlayer[arg0].itemNo[i]]);
         } else {
             if (i == 0) {
                 var_s2 = ReadMainFS(0x13025E);
@@ -742,7 +784,7 @@ void func_800F5F98_109BB8_shared_board(s32 arg0, s32 arg1) {
             SprAttrSet(temp_s5, i + 2, 0x180CU);
             SprAttrReset(temp_s5, i + 2, 0x8000U);
             func_800552DC_55EDC(temp_s5, i + 2, 0.0f);
-            if (GwPlayer[arg0].items[0] != -1) {
+            if (GwPlayer[arg0].itemNo[0] != -1) {
                 if (arg1 != 0) {
                     func_800F6E4C_10AA6C_shared_board(arg0, i, &sp10, &sp14);
                     func_80054904_55504(temp_s7->playerIndex, i + 2, sp10, sp14);
@@ -854,7 +896,7 @@ void func_800F64E4_10A104_shared_board(s32 arg0, s32 arg1) {
             SprAttrSet(temp_s2->playerIndex, 0xA, 0x8000);
             func_800550F4_55CF4(temp_s2->playerIndex, 0xA, 0);
             
-            for (i = 0; i < ARRAY_COUNT(GwPlayer->items); i++) {
+            for (i = 0; i < ARRAY_COUNT(GwPlayer->itemNo); i++) {
                 SprAttrSet(temp_s2->playerIndex, i + 0x0B, 0x8000);
                 func_800550F4_55CF4(temp_s2->playerIndex, i + 0x0B, 0);
             }
@@ -966,9 +1008,9 @@ void func_800F6BC4_10A7E4_shared_board(s32 arg0) {
             if (temp_s2->uiUpdatePaused == TRUE) {
                 func_800F6A88_10A6A8_shared_board(temp_s2->playerIndex, 2);
                 func_80054904_55504(temp_s2->playerIndex, 1, D_801018E4_115504_shared_board[1][0], D_801018E4_115504_shared_board[1][1]);
-                if (GwPlayer[i].items[0] != ITEM_NONE) {
+                if (GwPlayer[i].itemNo[0] != ITEM_NONE) {
                     //used for item positions when closing items screen
-                    for (j = 0; j < ARRAY_COUNT(GwPlayer->items); j++) {
+                    for (j = 0; j < ARRAY_COUNT(GwPlayer->itemNo); j++) {
                         switch (j) {
                         case 0:
                             func_80054904_55504(temp_s2->playerIndex, j + 2, j * 0x12 + 3, 5);
@@ -1051,8 +1093,8 @@ void func_800F6ECC_10AAEC_shared_board(s32 arg0) {
                 sp10 = PlayerBoardStatusRootPosition[i][0] + ITEMS_POS_OFFSET_X;
                 sp14 = PlayerBoardStatusRootPosition[i][1] + ITEMS_POS_OFFSET_Y;
                 func_80054904_55504(temp_s2->playerIndex, 1, sp10, sp14);
-                if (GwPlayer[i].items[0] != ITEM_NONE) {
-                    for (j = 0; j < ARRAY_COUNT(GwPlayer->items); j++) {
+                if (GwPlayer[i].itemNo[0] != ITEM_NONE) {
+                    for (j = 0; j < ARRAY_COUNT(GwPlayer->itemNo); j++) {
                         func_800F6E4C_10AA6C_shared_board(i, j, &sp10, &sp14);
                         func_80054904_55504(temp_s2->playerIndex, j + 2, sp10, sp14);
                     }
@@ -1065,10 +1107,12 @@ void func_800F6ECC_10AAEC_shared_board(s32 arg0) {
     HuPrcVSleep();
 }
 
+//draw item icons
 void func_800F70F8_10AD18_shared_board(void) {
     D_80101790_1153B0_shared_board = 1;
 }
 
+//hide item icons
 void func_800F7108_10AD28_shared_board(void) {
     D_80101790_1153B0_shared_board = 0;
 }

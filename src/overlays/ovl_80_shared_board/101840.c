@@ -109,42 +109,42 @@ s32 func_800EEA58_102678_shared_board(s32 arg0) {
 
     //calc what the highest mg coin total is
     for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
-        if (var_a0_2 < GwPlayer[i].mg_star_coins) {
-            var_a0_2 = GwPlayer[i].mg_star_coins;
+        if (var_a0_2 < GwPlayer[i].gamePrize) {
+            var_a0_2 = GwPlayer[i].gamePrize;
         }
     }
 
     //award players 1000 points (a star) for having the highest mg coin total
     for (i = 0; i < MAX_PLAYERS; i++) {
-        if (GwPlayer[i].mg_star_coins == var_a0_2) {
+        if (GwPlayer[i].gamePrize == var_a0_2) {
             score[i] += 1000;
         }
     }
 
     //calc what the highest amount of coins collected was
     for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
-        if (var_a0_2 < GwPlayer[i].coins_total) {
-            var_a0_2 = GwPlayer[i].coins_total;
+        if (var_a0_2 < GwPlayer[i].coinPrize) {
+            var_a0_2 = GwPlayer[i].coinPrize;
         }
     }
 
     //award players 1000 points (a star) for having the highest amount of coins
     for (i = 0; i < MAX_PLAYERS; i++) {
-        if (GwPlayer[i].coins_total == var_a0_2) {
+        if (GwPlayer[i].coinPrize == var_a0_2) {
             score[i] += 1000;
         }
     }
 
     //calc what the highest amount of happening spaces landed on was
     for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
-        if (var_a0_2 < GwPlayer[i].happeningSpacesLandedOn) {
-            var_a0_2 =  GwPlayer[i].happeningSpacesLandedOn;
+        if (var_a0_2 < GwPlayer[i].hatenaPrize) {
+            var_a0_2 =  GwPlayer[i].hatenaPrize;
         }
     }
 
     //award players 1000 points (a star) for landing on the most happening spaces
     for (i = 0; i < MAX_PLAYERS; i++) {
-        if (GwPlayer[i].happeningSpacesLandedOn == var_a0_2) {
+        if (GwPlayer[i].hatenaPrize == var_a0_2) {
             score[i] += 1000;
         }
     }
@@ -159,7 +159,7 @@ s32 func_800EEA58_102678_shared_board(s32 arg0) {
 }
 
 s32 func_800EECB0_1028D0_shared_board(s32 arg0) {
-    return GwPlayer[arg0].stars * 1000 + GwPlayer[arg0].coins;
+    return GwPlayer[arg0].star * 1000 + GwPlayer[arg0].coin;
 }
 
 s32 func_800EECF0_102910_shared_board(s32 arg0) {
@@ -167,38 +167,38 @@ s32 func_800EECF0_102910_shared_board(s32 arg0) {
     s32 i;
     s32 playerBaseScore;
 
-    playerBaseScore = (GwPlayer[arg0].stars * 1000) + GwPlayer[arg0].coins;
+    playerBaseScore = (GwPlayer[arg0].star * 1000) + GwPlayer[arg0].coin;
 
     if (GWBoardFlagCheck(0xF) != 0) {
         //calc what the highest mg coin total is
         for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
-            if (var_a0_2 < GwPlayer[i].mg_star_coins) {
-                var_a0_2 = GwPlayer[i].mg_star_coins;
+            if (var_a0_2 < GwPlayer[i].gamePrize) {
+                var_a0_2 = GwPlayer[i].gamePrize;
             }
         }
         
-        if (GwPlayer[arg0].mg_star_coins == var_a0_2) {
+        if (GwPlayer[arg0].gamePrize == var_a0_2) {
             playerBaseScore += 1000;
         }
 
         //calc what the highest amount of coins collected was
         for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
-            if (var_a0_2 < GwPlayer[i].coins_total) {
-                var_a0_2 = GwPlayer[i].coins_total;
+            if (var_a0_2 < GwPlayer[i].coinPrize) {
+                var_a0_2 = GwPlayer[i].coinPrize;
             }
         }
         
-        if (GwPlayer[arg0].coins_total == var_a0_2) {
+        if (GwPlayer[arg0].coinPrize == var_a0_2) {
             playerBaseScore += 1000;
         }
 
         for (i = 0, var_a0_2 = -100000; i < MAX_PLAYERS; i++) {
-            if (var_a0_2 < GwPlayer[i].happeningSpacesLandedOn) {
-                var_a0_2 = GwPlayer[i].happeningSpacesLandedOn;
+            if (var_a0_2 < GwPlayer[i].hatenaPrize) {
+                var_a0_2 = GwPlayer[i].hatenaPrize;
             }
         }
         
-        if (GwPlayer[arg0].happeningSpacesLandedOn == var_a0_2) {
+        if (GwPlayer[arg0].hatenaPrize == var_a0_2) {
             playerBaseScore += 1000;
         }
     }
@@ -212,7 +212,7 @@ void func_800EEE84_102AA4_shared_board(void) {
     
     HuPrcSleep(2);
     for (i = 0; i < 4; i++) {
-        if (!(GwPlayer[i].flags1 & 1)) {
+        if (!(GwPlayer[i].stat & 1)) {
             break;
         }
     }
@@ -224,8 +224,8 @@ void func_800EEE84_102AA4_shared_board(void) {
 
     while (1) {
         for (i = 0; i < 4; i++) {
-            if (!(GwPlayer[i].flags1 & 1) &&
-                (D_800D5558_D6158[GwPlayer[i].controller_port] & (A_BUTTON | B_BUTTON))) {     
+            if (!(GwPlayer[i].stat & 1) &&
+                (D_800D5558_D6158[GwPlayer[i].pad] & (A_BUTTON | B_BUTTON))) {     
                 break;
             }
         }

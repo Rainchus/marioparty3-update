@@ -1,6 +1,57 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_71_name/4E6DC0", func_801059A0_4E6DC0_name_71);
+void func_80105C08_4E7028_name_71(void);
+void func_80105CE8_4E7108_name_71(omObjData*);
+void func_80106DE8_4E8208_name_71(void);
+void func_80106F40_4E8360_name_71(omObjData*);
+void func_80106FC8_4E83E8_name_71(void);
+void func_80107188_4E85A8_name_71(void);
+void func_80107234_4E8654_name_71(void);
+
+typedef struct MinigameTable {
+    u8 minigameType;
+    char unk_01[0x13];
+} MinigameTable;
+
+extern MinigameTable D_800A6D44_A7944[];
+
+//updates mg star coins on results scene load
+void func_801059A0_4E6DC0_name_71(void) {
+    omObjData* obj;
+    s32 minigameType;
+    s8 i;
+
+    omInitObjMan(0x1E, 0x1E);
+    func_8000B690_C290(2);
+    for (i = 0; i < 2; i++) {
+        ScissorSet(i, 0.0f, 0.0f, 320.0f, 240.0f);
+        ViewportSet(i, 640.0f, 480.0f, 511.0f, 640.0f, 480.0f, 511.0f);
+        Hu3DCamSetPerspective(i, 30.0f, 80.0f, 8000.0f);        
+    }
+
+    obj = omAddObj(0x7FDA, 0, 0, -1, func_8004B4D4_4C0D4);
+    omSetStatBit(obj, 0xA0);
+    obj->work[0] = 2;
+    func_80019514_1A114(1, 0xFF, 0xFF, 0xFF);
+    minigameType = D_800A6D44_A7944[GwSystem.minigame_index - 1].minigameType;
+
+    if (minigameType < MINIGAME_ITEM) {
+        if (minigameType >= MINIGAME_4P) {
+            for (i = 0; i < MAX_PLAYERS; i++) {
+                u16 newMgStarCoins = GwPlayer[i].gameCoin + GwPlayer[i].bonusCoin + GwPlayer[i].gamePrize;
+                GwPlayer[i].gamePrize = newMgStarCoins;
+            }
+        }
+    }
+
+    func_80107234_4E8654_name_71();
+    omAddPrcObj(func_80105C08_4E7028_name_71, 0x1001, 0x2000, 0);
+    omAddObj(0, 0, 0, -1, func_80105CE8_4E7108_name_71);
+    omAddObj(0, 0, 0, -1, func_80106F40_4E8360_name_71);
+    func_80106FC8_4E83E8_name_71();
+    func_80107188_4E85A8_name_71();
+    func_80106DE8_4E8208_name_71();
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_71_name/4E6DC0", func_80105C08_4E7028_name_71);
 

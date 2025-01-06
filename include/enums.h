@@ -27,5 +27,13 @@ enum ITEMS {
     ITEMS_END
 };
 
+enum MINIGAME_TYPE {
+    MINIGAME_4P,
+    MINIGAME_1V3,
+    MINIGAME_2V2,
+    MINIGAME_ITEM,
+    MINIGAME_BATTLE,
+    MINIGAME_1V1
+};
 
 #endif //_ENUMS_H_

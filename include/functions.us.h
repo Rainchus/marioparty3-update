@@ -55,4 +55,11 @@ void AdjustPlayerCoins(s32 arg0, s32 arg1);
 s32 func_800EEF80_102BA0_shared_board(f32);
 void func_8004ACE0_4B8E0(s32, s16);
 void FixUpPlayerItemSlots(s32 arg0);
+void Hu3DCamSetPerspective(s16 camIndex, f32 fov, f32 near, f32 far);
+void ScissorSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
+void ViewportSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
+void func_8000B690_C290(s32);
+void func_80019514_1A114(s32, s32, s32, s32);
+void func_8004B4D4_4C0D4(omObjData*);
+
 #endif

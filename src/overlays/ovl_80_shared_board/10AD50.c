@@ -51,7 +51,13 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7EA
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7EF4_10BB14_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7F30_10BB50_shared_board);
+//Baby bowser gives all skeleton keys
+void func_800F7F30_10BB50_shared_board(void) {
+    func_800EC590_1001B0_shared_board(5, 0x3C20);
+    D_80105630_119250_shared_board[0] = D_80105630_119250_shared_board[1] = D_80105630_119250_shared_board[2] = ITEM_SKELETON_KEY;
+    func_800F76A4_10B2C4_shared_board(0);
+    func_800EC590_1001B0_shared_board(5, 0x3C1D);
+}
 
 //Baby bowser gives warp blocks from item space
 void func_800F7F7C_10BB9C_shared_board(void) {

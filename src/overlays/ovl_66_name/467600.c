@@ -21,20 +21,17 @@ void func_801059D0_467600_name_66(void) {
     func_8004A208_4AE08();
     Hu3DCamInit(1);
     CameraScissorSet(0, &D_801066F0_468320_name_66);
-    func_80019490_1A090(1);
-    func_80019514_1A114(0, 0x78, 0x78, 0x78);
-    func_80019514_1A114(1, 0x40, 0x40, 0x60);
-    func_80019568_1A168(1, -100.0f, 100.0f, 100.0f);
+    HmfLightMaxSet(1);
+    HmfLightColorSet(0, 0x78, 0x78, 0x78);
+    HmfLightColorSet(1, 0x40, 0x40, 0x60);
+    HmfLightDirSet(1, -100.0f, 100.0f, 100.0f);
     omAddPrcObj(func_80106134_467D64_name_66, 0xE000, 0, 0);
     omAddObj(0x500, 0, 0, -1, func_80106108_467D38_name_66);
-    HuWipeFadeIn(0, 0);
+    WipeCreateIn(0, 0);
 }
 
 void func_80105A98_4676C8_name_66(void) {
     s32 var_s2;
-    s16 var_v0;
-    s32 var_s0;
-    s32 var_s1;
     s32 i, j;
 
     var_s2 = D_80106700_468330_name_66;
@@ -56,7 +53,7 @@ void func_80105BB4_4677E4_name_66(void) {
     s16 i;
 
     var_s1 = 0;
-    func_80050E78_51A78(0);
+    SLCurBoxNoSet(0);
     func_80050974_51574();
     while (1) {
         HuPrcVSleep();
@@ -120,7 +117,7 @@ void func_80106108_467D38_name_66(omObjData* arg0) {
 void func_80106134_467D64_name_66(void) {
     s16 i, j;
 
-    func_80050E78_51A78(0);
+    SLCurBoxNoSet(0);
     func_80050ABC_516BC();
     while (1) {
         HuPrcVSleep();

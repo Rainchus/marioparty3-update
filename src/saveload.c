@@ -44,6 +44,6 @@ INCLUDE_ASM("asm/nonmatchings/saveload", func_80050D84_51984);
 
 INCLUDE_ASM("asm/nonmatchings/saveload", func_80050DDC_519DC);
 
-INCLUDE_ASM("asm/nonmatchings/saveload", func_80050E78_51A78);
+INCLUDE_ASM("asm/nonmatchings/saveload", SLCurBoxNoSet);
 
 INCLUDE_ASM("asm/nonmatchings/saveload", func_80050E84_51A84);

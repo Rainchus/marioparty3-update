@@ -58,9 +58,24 @@ InitEspriteSlot = 0x8000BFEC;
 HuAudSeqPlay = 0x8004A520;
 HuAudFXPlay = 0x8004AA88;
 print8 = 0x8004DD7C;
-HuWipeFadeIn = 0x80061FE8;
-HuWipeFadeOut = 0x80062050;
-HuWipeStatGet = 0x800620BC;
+WipeCreateIn = 0x80061FE8;
+WipeCreateOut = 0x80062050;
+WipeStatGet = 0x800620BC;
+WipeInit = 0x80061B50; //rom:0x62750
+WipeExecAlways = 0x80061BD4; //rom:0x627D4
+WipeColorSet = 0x800620C8; //rom:0x62CC8
+WipeMalloc = 0x800620E4; //rom:0x62CE4
+
+HmfLightInit = 0x80019030; //rom:0x19C30
+HmfLightClose = 0x800190FC; //rom:0x19CFC
+HmfLightExec = 0x80019104; //rom:0x19D04
+HmfLightReset = 0x800193A8; //rom:0x19FA8
+HmfLightMaxSet = 0x80019490; //rom:0x1A090
+HmfLightStatSet = 0x800194B8; //rom:0x1A0B8
+HmfLightColorSet = 0x80019514; //rom:0x1A114
+HmfLightDirSet = 0x80019568; //rom:0x1A168
+SLCurBoxNoSet = 0x80050E78; //rom:0x51A78
+
 Hu3DCamInit = 0x80012220;
 Hu3DCamSetPositionOrientation = 0x80012408;
 Hu3DCamSetPerspective = 0x8001247C;

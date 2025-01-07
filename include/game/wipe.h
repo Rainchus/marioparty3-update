@@ -3,6 +3,6 @@
 
 #include "ultra64.h"
 
-void HuWipeFadeIn(s32, s32);
+void WipeCreateIn(s32, s32);
 
 #endif //_WIPE_H

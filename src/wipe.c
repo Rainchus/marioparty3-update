@@ -1,18 +1,18 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/nonmatchings/wipe", func_80061B50_62750);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeInit);
 
-INCLUDE_ASM("asm/nonmatchings/wipe", func_80061BD4_627D4);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeExecAlways);
 
-INCLUDE_ASM("asm/nonmatchings/wipe", HuWipeFadeIn);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeCreateIn);
 
-INCLUDE_ASM("asm/nonmatchings/wipe", HuWipeFadeOut);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeCreateOut);
 
-INCLUDE_ASM("asm/nonmatchings/wipe", HuWipeStatGet);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeStatGet);
 
-INCLUDE_ASM("asm/nonmatchings/wipe", func_800620C8_62CC8);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeColorSet);
 
-INCLUDE_ASM("asm/nonmatchings/wipe", func_800620E4_62CE4);
+INCLUDE_ASM("asm/nonmatchings/wipe", WipeMalloc);
 
 INCLUDE_ASM("asm/nonmatchings/wipe", func_80062168_62D68);
 

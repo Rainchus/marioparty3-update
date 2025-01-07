@@ -1,21 +1,21 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_80019030_19C30);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightInit);
 
-void func_800190FC_19CFC(void) {
+void HmfLightClose(void) {
 }
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_80019104_19D04);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightExec);
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_800193A8_19FA8);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightReset);
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_80019490_1A090);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightMaxSet);
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_800194B8_1A0B8);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightStatSet);
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_80019514_1A114);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightColorSet);
 
-INCLUDE_ASM("asm/nonmatchings/19C30", func_80019568_1A168);
+INCLUDE_ASM("asm/nonmatchings/19C30", HmfLightDirSet);
 
 INCLUDE_ASM("asm/nonmatchings/19C30", func_80019668_1A268);
 

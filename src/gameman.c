@@ -61,7 +61,7 @@ void func_8000E3C0_EFC0(void) {
     D_800D4082_D4C82 = 0x1000;
     D_800CD2F4_CDEF4 = 0x2004;
     D_800D6A56_D7656 = 0x180;
-    func_80061B50_62750();
+    WipeInit();
     func_8001A070_1AC70(&HuMemMemoryAllocPerm, &HuMemMemoryFreePerm, D_800D4082_D4C82, D_800CD2F4_CDEF4, D_800D6A56_D7656, D_800D1710_D2310);
     Hu3DCamInit(1);
     pfInit();
@@ -88,7 +88,7 @@ void func_8000E3C0_EFC0(void) {
         GWInit();
         func_8000E978_F578();
         func_80000EA8_1AA8(&D_800D5298_D5E98);
-        func_80050E78_51A78(0);
+        SLCurBoxNoSet(0);
         func_80050800_51400();
         if (temp_s0 != 0) {
             omOvlCallEx(0x67, 0, 0x82);

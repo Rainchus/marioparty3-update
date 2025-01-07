@@ -32,7 +32,7 @@ void func_801059A0_4E6DC0_name_71(void) {
     obj = omAddObj(0x7FDA, 0, 0, -1, func_8004B4D4_4C0D4);
     omSetStatBit(obj, 0xA0);
     obj->work[0] = 2;
-    func_80019514_1A114(1, 0xFF, 0xFF, 0xFF);
+    HmfLightColorSet(1, 0xFF, 0xFF, 0xFF);
     minigameType = D_800A6D44_A7944[GwSystem.minigame_index - 1].minigameType;
 
     if (minigameType < MINIGAME_ITEM) {

@@ -8,7 +8,7 @@ void ScissorSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
 void ViewportSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
 void func_8000B690_C290(s32);
 void func_800142A0_14EA0(s32);
-void func_80019514_1A114(s32, s32, s32, s32);
+void HmfLightColorSet(s32, s32, s32, s32);
 void func_80037258_37E58(void);
 void func_800E66E0_FA300_shared_board(void);
 void func_800E69D8_FA5F8_shared_board(void);
@@ -56,7 +56,7 @@ void func_801059A0_4F3780_name_74(void) {
     ViewportSet(0U, 640.0f, 480.0f, 511.0f, 640.0f, 480.0f, 511.0f);
     Hu3DCamSetPerspective(0, 30.0f, 80.0f, 8000.0f);
     omSetStatBit(omAddObj(0x7FDA, 0U, 0U, -1, func_8004B340_4BF40), 0xA0);
-    func_80019514_1A114(1, 0xFF, 0xFF, 0xFF);
+    HmfLightColorSet(1, 0xFF, 0xFF, 0xFF);
     
     for (var_a0_2 = 0, i = 0; i < MAX_PLAYERS; i++) {
         if (GwPlayer[i].bonusCoin == 3) {
@@ -81,7 +81,7 @@ void func_801059A0_4F3780_name_74(void) {
     omAddObj(0, 0, 0, -1, func_80105E64_4F3C44_name_74);
     func_80105EF4_4F3CD4_name_74();
     func_80105E0C_4F3BEC_name_74();
-    HuWipeFadeIn(0xFF, 0x10);
+    WipeCreateIn(0xFF, 0x10);
 }
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_80105CAC_4F3A8C_name_74);

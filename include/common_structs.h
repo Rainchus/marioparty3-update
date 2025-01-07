@@ -144,8 +144,16 @@ typedef struct GwCommon_s {
 } GW_COMMON; //sizeof 0xA4?
 
 typedef struct GW_STORY {
-    char unk_00[0x74];
-} GW_STORY; //sizeof 0x74
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ u8 unk1;
+    /* 0x02 */ u8 unk2;
+    /* 0x03 */ u8 unk3[12];
+    /* 0x0F */ u8 unkF;
+    /* 0x10 */ u8 unk10[6][12];
+    /* 0x58 */ u8 unk58[6];
+    /* 0x5E */ u8 unk5E[6];
+    /* 0x64 */ char unk_64[0x10];
+} GW_STORY; /* size = 0x74 */
 
 typedef struct RectF {
 /* 0x00 */ f32 x1;
@@ -182,5 +190,25 @@ typedef struct ESprite {
     s32 unk_0C;
     ESprite2* unk_10[4]; //unknown size
 } ESprite; //unknown size
+
+typedef struct str800D5298 {
+    s32 unk0;
+    s32 unk4;
+    void *unk8; // mbf0 rom
+    void *unkC; // sbf0 rom
+    void *unk10; // fxd0 rom
+    void *unk14; // audio ram location?
+    s32 unk18; // audio ram size?
+    s32 unks1C24[3];
+    s32 unk28;
+    s32 unk2C;
+    s32 unks3040[5];
+    s32 unk44;
+    s32 unks4858[5];
+    s32 unk5C;
+    s32 unk60;
+    s32 unk64;
+    s32 unk68;
+} str800D5298;
 
 #endif

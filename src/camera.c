@@ -1,8 +1,5 @@
 #include "common.h"
 
-
-#define SCREEN_WIDTH 320.0f
-#define SCREEN_HEIGHT 240.0f
 #define SCREEN_WIDTH_CENTER SCREEN_WIDTH / 2.0f
 #define SCREEN_HEIGHT_CENTER SCREEN_HEIGHT / 2.0f
 #define ASPECT_RATIO (4.0f / 3.0f)

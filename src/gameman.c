@@ -7,26 +7,7 @@
 #include "game/object.h"
 #include "util.h"
 
-struct str800D5298 {
-    s32 unk0;
-    s32 unk4;
-    void *unk8; // mbf0 rom
-    void *unkC; // sbf0 rom
-    void *unk10; // fxd0 rom
-    void *unk14; // audio ram location?
-    s32 unk18; // audio ram size?
-    s32 unks1C24[3];
-    s32 unk28;
-    s32 unk2C;
-    s32 unks3040[5];
-    s32 unk44;
-    s32 unks4858[5];
-    s32 unk5C;
-    s32 unk60;
-    s32 unk64;
-    s32 unk68;
-};
-extern struct str800D5298 D_800D5298_D5E98;
+extern str800D5298 D_800D5298_D5E98;
 extern void* D_800CCF38_CDB38;
 extern u8 D_800CCF78_CDB78[];
 extern f32 D_800CD288_CDE88[];
@@ -47,28 +28,6 @@ extern Vec D_800D6AE0_D76E0[];
 extern u16 D_800A190C_A250C;
 extern u16 D_800A190E_A250E;
 
-void func_800007FC_13FC(struct str800D5298 *arg0);
-void func_80000EA8_1AA8(struct str800D5298 *arg0);
-void func_80000F30_1B30(u32 arg0);
-void func_8000BA30_C630(void); // esprite.h
-void func_800143F0_14FF0(void);
-void func_80014A3C_1563C(u32 arg0);
-void func_8001A070_1AC70(void *arg0, void *arg1, u16 arg2, u16 arg3, u16 arg4, u8 arg5); // hmfman.h
-void func_8001B0B4_1BCB4(void **arg0, u32 arg1); // hmfman.h
-void func_8001BF90_1CB90(u32 arg0, u32 arg1); // hmfman.h
-void func_800224BC_230BC(void);
-void GWInit(void); // save.h
-void GWMgRecordSet(s16 arg0, s16 arg1); // save.h
-void func_80036380_36F80(Addr arg0);
-void pfInit(void);
-void pfClsScr(void);
-void func_8004F290_4FE90(void);
-s32  func_8004FDC0_509C0(void);
-void func_80050800_51400(void);
-void func_80050E78_51A78(u32 arg0);
-void func_80061B50_62750(void);
-void memset(void *dest, int ch, u32 /*size_t*/ n);
-void Hu3DCamInit(u32 arg0);
 
 void func_8000E3C0_EFC0(void) {
     s32 i;

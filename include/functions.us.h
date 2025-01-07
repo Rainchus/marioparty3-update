@@ -61,5 +61,36 @@ void ViewportSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
 void func_8000B690_C290(s32);
 void func_80019514_1A114(s32, s32, s32, s32);
 void func_8004B4D4_4C0D4(omObjData*);
+void Hu3DCamInit(u32 arg0);
+void HuWipeFadeIn(s32, s32);
+void func_8004A208_4AE08(void);
+void func_80019490_1A090(s32);
+void func_80019568_1A168(s32, f32, f32, f32);
+void func_800007FC_13FC(str800D5298* arg0);
+void func_80000EA8_1AA8(str800D5298* arg0);
+void func_80000F30_1B30(u32 arg0);
+void func_8000BA30_C630(void); // esprite.h
+void func_800143F0_14FF0(void);
+void func_80014A3C_1563C(u32 arg0);
+void func_8001A070_1AC70(void *arg0, void *arg1, u16 arg2, u16 arg3, u16 arg4, u8 arg5); // hmfman.h
+void func_8001B0B4_1BCB4(void **arg0, u32 arg1); // hmfman.h
+void func_8001BF90_1CB90(u32 arg0, u32 arg1); // hmfman.h
+void func_800224BC_230BC(void);
+void GWInit(void); // save.h
+void GWMgRecordSet(s16 arg0, s16 arg1); // save.h
+void func_80036380_36F80(Addr arg0);
+void pfInit(void);
+void pfClsScr(void);
+void func_8004F290_4FE90(void);
+s32  func_8004FDC0_509C0(void);
+void func_80050800_51400(void);
+void func_80050E78_51A78(u32 arg0);
+void func_80061B50_62750(void);
+void memset(void *dest, int ch, u32 /*size_t*/ n);
+void func_80050974_51574(void);
+s32 print8(u16 x, u16 y, char* src);
+void func_8005035C_50F5C(s32);
+void func_80050ABC_516BC(void);
+void func_80050E78_51A78(u32);
 
 #endif

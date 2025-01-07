@@ -13,7 +13,7 @@ options:
   build_path: build
   create_asm_dependencies: True
   ld_script_path: marioparty3.ld
-  subalign: 8
+  subalign: 8 #fairly sure this is a hack. shouldn't alignment always be 16?
   # ld_dependencies: True
   find_file_boundaries: True
   header_encoding: ASCII
@@ -1901,13 +1901,16 @@ segments:
     vram: 0x801059A0
     dir: overlays/ovl_66_name
     name: name_66
+    subalign: 16
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x200
     subsegments:
       - [0x4675D0, c]
-      - [0x468310, data, 4675D0] #801066E0
-      - [0x468340, .rodata, 4675D0] #80106710
+      - [0x467600, c]
+      - [0x468310, .data, 4675D0] #801066E0
+      - [0x468320, .data, 467600]
+      - [0x468340, .rodata, 467600] #80106710
       - {0x4684F0, type: bss, vram: 0x801068C0, name: ovl_66_bss}
 
   - type: code

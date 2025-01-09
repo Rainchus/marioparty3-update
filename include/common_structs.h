@@ -129,7 +129,7 @@ typedef struct GW_SYSTEM {
     /* 0x52 - 800CD0AA */ char unk_52[5];
     /* 0x57 - 800CD0AF */ s8 slow_dice_flags;
     /* 0x58 - 800CD0B0 */ char unk_58[2];
-    /* 0x5A - 800CD0B2 */ s16 unk_5A;
+    /* 0x5A - 800CD0B2 */ s16 playerIndexVisitingBowser;
     /* 0x5C - 800CD0B4 */ u16 bank_coins;
     /* 0x5E - 800CD0B6 */ u8 data_flags[8]; //unknown what this is, unknown size
     /* 0x66 - 800CD0B8 */ u8 unk_66[0x3E];

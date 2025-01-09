@@ -95,7 +95,10 @@ void func_800EC590_1001B0_shared_board(s32, s32);
 void func_800FF900_113520_shared_board(s32, s32);
 void func_800DE9AC_F25CC_shared_board(s32, s32);
 void func_800F76A4_10B2C4_shared_board(s32 arg0);
+SpaceData* GetSpaceData(s16 arg0);
 
+extern SpaceData* D_80105214_118E34_shared_board;
+extern u8 D_80105268_118E88_shared_board[];
 extern s32 D_801055F8_119218_shared_board;
 extern s32 D_80101A50_115670_shared_board[]; //randomly generated items
 extern s32 D_80105630_119250_shared_board[];
@@ -138,3 +141,4 @@ extern omObjData* D_801055E8_119208_shared_board[];
 extern s32 D_80101F30_115B50_shared_board[3];
 extern s32 D_80101944_115564_shared_board[]; //mainFS ids for character images
 extern s32 D_801019D0_1155F0_shared_board[];
+extern SpaceData* D_80105214_118E34_shared_board;

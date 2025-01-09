@@ -1585,8 +1585,8 @@ segments:
   - type: code
     start: 0x3C27C0
     vram: 0x801059A0
-    dir: overlays/ovl_50_name
-    name: name_50
+    dir: overlays/ovl_50_BowserEvent
+    name: BowserEvent
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x80

@@ -491,7 +491,116 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6B0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6E0_FE300_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", DrawSpaces);
+void func_80012640_13240(s32, Gfx**);                    /* extern */
+void func_800127C4_133C4(s32, Gfx**);                    /* extern */
+void func_80017C10_18810(void*, f32, f32, f32); //fix arg0 type
+void func_80017CD0_188D0(void*, f32, f32, f32); //fix arg0 type
+void func_800185A4_191A4(void*, f32); //fix arg0 type
+u16 func_8004D6AC_4E2AC(s32, s32, s32);                   /* extern */
+void func_8004D6E8_4E2E8(s16);                         /* extern */
+void func_800898F0_8A4F0(void*, s32); //fix arg0 type
+void func_80089980_8A580(void*, s32); //fix arg0 type
+void func_800E989C_FD4BC_shared_board(void*);             /* extern */
+extern Addr D_101358;
+extern Addr D_101398;
+extern u16 D_800CCF28_CDB28;
+extern s32 D_800D1F68_D2B68;
+extern u16 D_80105210_118E30_shared_board;
+extern s16 D_80105260_118E80_shared_board;
+extern u16 D_80105262_118E82_shared_board;
+extern u8 D_80101308_114F28_shared_board[]; //u8 array that links space type to render type
+extern Gfx D_801013D8_114FF8_shared_board[];
+extern u8* D_80105220_118E40_shared_board[]; //space form images
+extern f32 D_80105290_118EB0_shared_board[];
+extern s32 D_801052B0_118ED0_shared_board;
+u8 (*D_801012C4_114EE4_shared_board)[0x80];
+
+void DrawSpaces(Gfx** arg0, s32 arg1, s32 arg2) {
+    Gfx** gfxPos = arg0;
+    char sp10[0x40]; //unknown type and size
+    char sp50[4]; //unknown type and size
+    s32 sp5C;
+    u8* sp64;
+    u8* sp6C;
+    s32 sp74;
+    u16 sp7E;
+    s32 sp84;
+    s32 sp94;
+    SpaceData* temp_s0;
+    s16 var_v0;
+    s32 temp_s0_3;
+    s32 i, j;
+    s32 var_s5;
+    u32 temp_s4;
+
+    sp5C = arg1;
+    var_s5 = 0;
+    if (!(arg2 & 0xFF) && (D_80105262_118E82_shared_board != 0) && (D_801012C4_114EE4_shared_board != 0)) {
+        sp7E = func_8004D6AC_4E2AC(0xC8, 0xC8, 0xC8);
+        gSPDisplayList((*gfxPos)++, D_801013D8_114FF8_shared_board);
+        func_80012640_13240(0, gfxPos);
+        func_800127C4_133C4(0, gfxPos);
+        func_800E989C_FD4BC_shared_board(&sp50);
+        
+        if ((D_80105260_118E80_shared_board == 0) || (var_v0 = 8, (D_80105260_118E80_shared_board != 1))) {
+            var_v0 = 0x10;
+            sp64 = D_101358;
+            sp6C = D_80101308_114F28_shared_board;
+            sp74 = 0;
+        } else {
+            var_v0 = 8;
+            sp64 = D_101398;
+            sp6C = NULL;
+            sp74 = 1;
+        }
+        //iterate over all space types
+        for (i = 0; i < 16; i++) {
+            if (D_80105220_118E40_shared_board[i] != 0) {
+                if (sp74 == 0) {
+                    switch (sp6C[i]) {
+                    case 0:
+                        gDPLoadTextureBlock((*gfxPos)++, D_80105220_118E40_shared_board[i] + 0x10, G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                            32, 32, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        break;
+                    case 1:
+                        // + 0x10 to skip image header data
+                        gDPLoadTextureBlock((*gfxPos)++, D_80105220_118E40_shared_board[i] + 0x10, G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                            16, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                        break;
+                    case 2:
+                        gDPLoadTextureBlock((*gfxPos)++, D_80105220_118E40_shared_board[i] + 0x10, G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                            16, 16, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+                        break;
+                    }
+                } else {
+                    gDPLoadTextureBlock((*gfxPos)++, D_80105220_118E40_shared_board[i] + 0x10, G_IM_FMT_RGBA, G_IM_SIZ_32b,
+                            var_v0, var_v0, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
+                }
+                //read over a space types space array
+                for (j = 0; j < D_80105210_118E30_shared_board; j++) {
+                    s32 spaceId = D_801012C4_114EE4_shared_board[i][j];
+                    if (spaceId == 0xff) {
+                        break;
+                    }
+                    temp_s0 = GetSpaceData(spaceId);
+                    func_80089980_8A580(&sp10, sp5C + 0x40);
+                    func_80017C10_18810(&sp10, temp_s0->coords.x, temp_s0->coords.y, temp_s0->coords.z);
+                    if ((i == 0xD) && (var_s5 < D_801052B0_118ED0_shared_board)) {
+                        func_800185A4_191A4(&sp10, D_80105290_118EB0_shared_board[var_s5++]);
+                    }
+                    func_80017CD0_188D0(&sp10, temp_s0->rot.x, 1.0f, temp_s0->rot.z);
+                    temp_s0_3 = ((s32) (D_800CCF28_CDB28++ << 0x10) >> 0xA) + D_800D1F68_D2B68;
+                    func_800898F0_8A4F0(&sp10, temp_s0_3);
+                    gSPMatrix((*gfxPos)++, OS_K0_TO_PHYSICAL(temp_s0_3), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                    gSPVertex((*gfxPos)++, sp64, 4, 0);
+                    gSP1Quadrangle((*gfxPos)++, 0, 1, 2, 3, 0);
+                }
+            }            
+        }
+
+        func_8004D6E8_4E2E8(sp7E);
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EAE00_FEA20_shared_board);
 
@@ -499,7 +608,9 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EAE10
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB09C_FECBC_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", GetSpaceData);
+SpaceData* GetSpaceData(s16 arg0) {
+    return &D_80105214_118E34_shared_board[arg0];
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB184_FEDA4_shared_board);
 
@@ -543,7 +654,28 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EBCFC
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EBD54_FF974_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EBDAC_FF9CC_shared_board);
+void func_800EBDAC_FF9CC_shared_board(void) {
+    s32 var_s0;
+    s32 i, j;
+
+    if (D_801012C4_114EE4_shared_board != NULL) {
+        HuMemMemoryFreeTemp(D_801012C4_114EE4_shared_board);
+    }
+    D_801012C4_114EE4_shared_board = HuMemMemoryAllocTemp(0x800U);
+    for (i = 0; i < 16; i++) {
+        var_s0 = 0;
+
+        for (j = 0; j < D_80105210_118E30_shared_board; j++) {
+            if (GetSpaceData(j)->space_type == i) {
+                D_801012C4_114EE4_shared_board[i][var_s0] = j;
+                var_s0++;
+            }                
+        }
+        
+        D_801012C4_114EE4_shared_board[i][var_s0] = 0xFF;
+        D_80105268_118E88_shared_board[i] = var_s0;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EBEAC_FFACC_shared_board);
 

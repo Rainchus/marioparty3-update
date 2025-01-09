@@ -58,7 +58,7 @@ void func_80105B9C_3D8C8C_board_gate_guy(void) {
     func_800E9D9C_D1B6C_name_81();
     func_800E9564_D1334_name_81();
     GwSystem.bank_coins = 5;
-    GwSystem.unk_5A = 0;
+    GwSystem.playerIndexVisitingBowser = 0;
     func_800EA760_D2530_name_81();
     omOvlReturnEx(1);
 }

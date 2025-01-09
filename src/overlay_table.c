@@ -98,7 +98,7 @@ OverlayTable _ovltbl[] = {
     OVL_ENTRY(name_4D),
     OVL_ENTRY(name_4E),
     OVL_ENTRY(name_4F),
-    OVL_ENTRY(name_50),
+    OVL_ENTRY(BowserEvent),
     OVL_ENTRY(name_51),
     OVL_ENTRY(name_52),
     OVL_ENTRY(name_53),

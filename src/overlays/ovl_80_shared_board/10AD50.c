@@ -17,7 +17,7 @@ void func_800F7610_10B230_shared_board(void) {
     s32 i = 0;
     s32* boardItemIds = D_80105630_119250_shared_board;
     
-    for (; i < 3; i++) {
+    for (; i < ARRAY_COUNT(GwPlayer->itemNo); i++) {
         boardItemIds = &D_80105630_119250_shared_board[i];
         while (1) {
             *boardItemIds = D_80101A50_115670_shared_board[func_800EEF80_102BA0_shared_board(9.0f)];
@@ -37,7 +37,15 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7CF
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7D10_10B930_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7D4C_10B96C_shared_board);
+//Toad gives all skeleton keys
+void func_800F7D4C_10B96C_shared_board(void) {
+    func_800EC590_1001B0_shared_board(CHAR_TOAD, 0x3C0B);
+    D_80105630_119250_shared_board[0] =
+    D_80105630_119250_shared_board[1] =
+    D_80105630_119250_shared_board[2] = ITEM_SKELETON_KEY;
+    func_800F76A4_10B2C4_shared_board(0);
+    func_800EC590_1001B0_shared_board(CHAR_TOAD, 0x3C0A);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7D98_10B9B8_shared_board);
 
@@ -49,22 +57,31 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7E6
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7EAC_10BACC_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7EF4_10BB14_shared_board);
+void func_800F7EF4_10BB14_shared_board(void) {
+    func_800EC590_1001B0_shared_board(CHAR_BABY_BOWSER, 0x3C1F);
+    func_800F7610_10B230_shared_board();
+    func_800F76A4_10B2C4_shared_board(0);
+    func_800EC590_1001B0_shared_board(CHAR_BABY_BOWSER, 0x3C1D);
+}
 
 //Baby bowser gives all skeleton keys
 void func_800F7F30_10BB50_shared_board(void) {
-    func_800EC590_1001B0_shared_board(5, 0x3C20);
-    D_80105630_119250_shared_board[0] = D_80105630_119250_shared_board[1] = D_80105630_119250_shared_board[2] = ITEM_SKELETON_KEY;
+    func_800EC590_1001B0_shared_board(CHAR_BABY_BOWSER, 0x3C20);
+    D_80105630_119250_shared_board[0] =
+    D_80105630_119250_shared_board[1] =
+    D_80105630_119250_shared_board[2] = ITEM_SKELETON_KEY;
     func_800F76A4_10B2C4_shared_board(0);
-    func_800EC590_1001B0_shared_board(5, 0x3C1D);
+    func_800EC590_1001B0_shared_board(CHAR_BABY_BOWSER, 0x3C1D);
 }
 
 //Baby bowser gives warp blocks from item space
 void func_800F7F7C_10BB9C_shared_board(void) {
-    func_800EC590_1001B0_shared_board(5, 0x3C21);
-    D_80105630_119250_shared_board[0] = D_80105630_119250_shared_board[1] = D_80105630_119250_shared_board[2] = ITEM_WARP_BLOCK;
+    func_800EC590_1001B0_shared_board(CHAR_BABY_BOWSER, 0x3C21);
+    D_80105630_119250_shared_board[0] =
+    D_80105630_119250_shared_board[1] =
+    D_80105630_119250_shared_board[2] = ITEM_WARP_BLOCK;
     func_800F76A4_10B2C4_shared_board(0);
-    func_800EC590_1001B0_shared_board(5, 0x3C1D);
+    func_800EC590_1001B0_shared_board(CHAR_BABY_BOWSER, 0x3C1D);
 }
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10AD50", func_800F7FC8_10BBE8_shared_board);

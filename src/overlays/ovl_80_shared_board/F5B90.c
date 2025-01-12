@@ -54,7 +54,7 @@ s32 func_800E29E8_F6608_shared_board(void) {
     GwPlayer[GwSystem.current_player_index].itemNo[D_80100F90_114BB0_shared_board] = -1;
     FixUpPlayerItemSlots(GwSystem.current_player_index);
     func_800DE9AC_F25CC_shared_board(GwSystem.current_player_index, 2);
-    func_800FF900_113520_shared_board(-1, 2);
+    func_800FF900_113520_shared_board(CUR_PLAYER, 2);
     func_800DC128_EFD48_shared_board(GwSystem.current_player_index);
     HuPrcSleep(0xF);
     return 1;
@@ -612,7 +612,9 @@ SpaceData* GetSpaceData(s16 arg0) {
     return &D_80105214_118E34_shared_board[arg0];
 }
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB184_FEDA4_shared_board);
+s16 func_800EB184_FEDA4_shared_board(u16 arg0, u16 arg1) {
+    return D_80105218_118E38_shared_board[arg0].spaces[arg1];
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB1B0_FEDD0_shared_board);
 
@@ -661,7 +663,7 @@ void func_800EBDAC_FF9CC_shared_board(void) {
     if (D_801012C4_114EE4_shared_board != NULL) {
         HuMemMemoryFreeTemp(D_801012C4_114EE4_shared_board);
     }
-    D_801012C4_114EE4_shared_board = HuMemMemoryAllocTemp(0x800U);
+    D_801012C4_114EE4_shared_board = HuMemMemoryAllocTemp(0x800);
     for (i = 0; i < 16; i++) {
         var_s0 = 0;
 

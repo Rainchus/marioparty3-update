@@ -61,7 +61,26 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F933
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F93A4_10CFC4_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F95FC_10D21C_shared_board);
+void func_800F95FC_10D21C_shared_board(s16 arg0) {
+    switch (--arg0) {
+    case 13:
+        if (GwSystem.current_player_index != 4) {
+            HuAudFXPlay(0x123);
+            return;
+        }
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 8:
+    case 11:
+    case 14:
+        HuAudFXPlay(0x101);
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F965C_10D27C_shared_board);
 
@@ -85,7 +104,32 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FA44
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FA640_10E260_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FA818_10E438_shared_board);
+s16 func_800FA818_10E438_shared_board(s32 arg0) {
+    GW_SYSTEM* system =  &GwSystem;
+    GW_PLAYER* player;
+    s16 temp_s3;
+    s32 var_s2;
+    s32 i;
+
+    var_s2 = 0;
+    if ((system->total_turns - system->current_turn) >= 5) {
+        return 0;
+    }
+
+    temp_s3 = func_800EB184_FEDA4_shared_board(GetPlayerStruct(CUR_PLAYER)->clink, GetPlayerStruct(CUR_PLAYER)->cidx);
+    
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if (i != GetPlayerStruct(CUR_PLAYER)->turn) {
+            if (temp_s3 == func_800EB184_FEDA4_shared_board(GetPlayerStruct(i)->clink, GetPlayerStruct(i)->cidx)) {
+                var_s2 |= 1 << i;
+                if (arg0 != 0) {
+                    func_800FF900_113520_shared_board(i, 3);
+                }
+            }
+        }    
+    }
+    return var_s2;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FA95C_10E57C_shared_board);
 

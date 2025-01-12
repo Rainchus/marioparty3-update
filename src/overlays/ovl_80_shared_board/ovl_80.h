@@ -34,6 +34,12 @@ typedef struct BoardStatus {
     /* 0x66 */ s16 counts[3]; //star count, coin count?
 } BoardStatus; //sizeof 0x6C
 
+typedef struct LinkData {
+/* 0x00 */ s16 chainIndicies;
+/* 0x02 */ s16 unk2;
+/* 0x04 */ s16* spaces;
+} LinkData; //sizeof 0x08
+
 typedef struct UnkBoard {
 /* 0x00 */ s16 unk_00;
 /* 0x02 */ s16 unk_02;
@@ -92,11 +98,16 @@ void func_800DCA64_F0684_shared_board(s32);
 void func_800F696C_10A58C_shared_board(s32, s32, f32, f32);
 s32 func_800DEB2C_F274C_shared_board(s32);
 void func_800EC590_1001B0_shared_board(s32, s32);
-void func_800FF900_113520_shared_board(s32, s32);
 void func_800DE9AC_F25CC_shared_board(s32, s32);
 void func_800F76A4_10B2C4_shared_board(s32 arg0);
 SpaceData* GetSpaceData(s16 arg0);
+s16 func_800EB184_FEDA4_shared_board(u16 arg0, u16 arg1);
+void func_800FF900_113520_shared_board(s16, s16);
+s16 GetCurrentPlayerIndex(void);
+void func_8004B25C_4BE5C(s16, s32, s32, s32);
+void func_800F7610_10B230_shared_board(void);
 
+extern LinkData* D_80105218_118E38_shared_board;
 extern SpaceData* D_80105214_118E34_shared_board;
 extern u8 D_80105268_118E88_shared_board[];
 extern s32 D_801055F8_119218_shared_board;

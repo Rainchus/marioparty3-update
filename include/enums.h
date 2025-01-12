@@ -36,4 +36,9 @@ enum MINIGAME_TYPE {
     MINIGAME_1V1
 };
 
+enum CHARACTER_IMAGES {
+    CHAR_TOAD = 3,
+    CHAR_BABY_BOWSER = 5,
+};
+
 #endif //_ENUMS_H_

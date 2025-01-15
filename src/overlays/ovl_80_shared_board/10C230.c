@@ -92,7 +92,57 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F9C6
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F9CA0_10D8C0_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F9D1C_10D93C_shared_board);
+//related to how CPUs decide who to duel?
+s32 func_800F9D1C_10D93C_shared_board(void) {
+    s32 i;
+    s32 var_s1;
+    s32 var_s2;
+    s32 var_s3;
+    s32 sp10[MAX_PLAYERS];
+    GW_SYSTEM* system = &GwSystem;
+
+    for (i = 0, var_s2 = 99; i < MAX_PLAYERS; i++) {
+        if ((i != system->current_player_index) && ((GwSystem.unk_58 >> i) & 1) && (BoardPlayerRankCalc(i) < var_s2) && GwPlayer[i].coin != 0) {
+            var_s2 = BoardPlayerRankCalc(i);
+        }
+    }
+    
+    var_s1 = 0;
+    
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if ((i != system->current_player_index) && ((GwSystem.unk_58 >> i) & 1) && (BoardPlayerRankCalc(i) == var_s2)) {
+            sp10[var_s1] = i;
+            var_s1 += 1;
+        }        
+    }
+    
+    if (GetPlayerStruct(CUR_PLAYER)->coin >= 20) {
+        if (GetPlayerStruct(sp10[0])->coin < 20) {
+            for (i = 0, var_s2 = 99, var_s3 = 0; i < MAX_PLAYERS; i++) {
+                if ((i != system->current_player_index) && (GetPlayerStruct(i)->coin >= 20)) {
+                    var_s3 = 1;
+                    if (BoardPlayerRankCalc(i) < var_s2) {
+                        var_s2 = BoardPlayerRankCalc(i);
+                    }
+                }
+            }
+            
+            if (var_s3 != 0) {
+                for (i = 0, var_s1 = 0; i < MAX_PLAYERS; i++) {
+                    if ((i != system->current_player_index) && ((GwSystem.unk_58 >> i) & 1) && (BoardPlayerRankCalc(i) == var_s2) && GwPlayer[i].coin != 0) {
+                        sp10[var_s1] = i;
+                        var_s1++;
+                    }
+                }
+            }
+        }
+    }
+    i = sp10[func_800EEF80_102BA0_shared_board(var_s1)];
+    if (GwPlayer[i].coin == 0) {
+        i = 4;
+    }
+    return i;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800F9F84_10DBA4_shared_board);
 

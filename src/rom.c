@@ -1,6 +1,8 @@
 #include "common.h"
 #include "rom.h"
 
+
+
 OSPiHandle* osCartRomInit(void);
 extern OSPiHandle* D_800CDD50_CE950;
 extern OSMesgQueue D_800B29F0_B35F0;

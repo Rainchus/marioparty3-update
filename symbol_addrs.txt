@@ -125,7 +125,7 @@ HuMemMemoryReallocTemp = 0x80035974;
 HuMemHeapAllocTempSizeGet = 0x800359A0;
 HuMemUsedMemoryBlockGetTemp = 0x800359C0;
 
-
+osPiRawStartDma = 0x80080A60; //rom:0x81660
 HuInitArchive = 0x80009AC0;
 HuInitFileInfo = 0x80009B64;
 ReadMainFS = 0x80009C10;

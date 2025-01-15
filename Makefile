@@ -6,6 +6,7 @@ COMPARE      ?= 1
 NON_MATCHING ?= 0
 CHECK        ?= 1
 VERBOSE      ?= 0
+MOD 		 ?= 0
 
 # Patches
 # PATCHES_ASFLAGS := --defsym MP_SAVETYPE_PATCH=1
@@ -54,6 +55,8 @@ PYTHON     := venv/bin/python3  # Ensure we're using the Python from the virtual
 N64CKSUM   := $(PYTHON) tools/n64cksum.py
 SPLAT_YAML := marioparty3.yaml
 SPLAT      := $(PYTHON) -m splat split $(SPLAT_YAML)  # Use splat from the virtual environment
+MOD_LINKER_INJECT := $(PYTHON) ./tools/append_mod_to_linker_script.py
+MOD_OVL_TABLE_INJECT := $(PYTHON) ./tools/gen_new_overlay_table_file.py
 EMULATOR   := mupen64plus
 DIFF       := diff
 
@@ -94,6 +97,11 @@ ifneq ($(CHECK),1)
 CFLAGS_CHECK += -w
 endif
 
+ifeq ($(MOD),1)
+CFLAGS += -DMOD
+CPPFLAGS += -DMOD
+endif
+
 OPTFLAGS := -O1
 
 ### Sources ###
@@ -124,10 +132,18 @@ distclean: clean
 
 setup: distclean split
 
+modsetup: distclean modsplit
+
+modsplit:
+	$(V)rm -rf asm
+	$(V)$(MOD_OVL_TABLE_INJECT)
+	$(V)$(SPLAT)
+	$(V)$(MOD_LINKER_INJECT)
+
 split:
 	$(V)rm -rf asm
 	$(V)$(SPLAT)
-
+	
 test: $(ROM)
 	$(V)$(EMULATOR) $<
 

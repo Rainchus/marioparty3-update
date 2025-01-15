@@ -1473,85 +1473,97 @@ segments:
   - type: code
     start: 0x31B510
     vram: 0x801059A0
-    dir: overlays/ovl_48_name
-    name: name_48
+    dir: overlays/ovl_48_ChillyWaters
+    name: ChillyWaters
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x150
     subsegments:
       - [0x31B510, c]
-      - [0x332DC0, data, 31B510] #8011D250
-      - [0x3354B0, .rodata, 31B510] #8011F940
+      - [0x31B540, c]
+      - [0x332DC0, .data, 31B510] #8011D250
+      - [0x332DF0, data, 31B540]
+      - [0x3354B0, .rodata, 31B540] #8011F940
       - {0x3355E0, type: bss, vram: 0x8011FA70, name: ovl_48_bss}
 
   - type: code
     start: 0x3355E0
     vram: 0x801059A0
-    dir: overlays/ovl_49_name
-    name: name_49
+    dir: overlays/ovl_49_DeepBlooberSea
+    name: DeepBlooberSea
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x140
     subsegments:
       - [0x3355E0, c]
-      - [0x34C270, data, 3355E0] #8011C630
-      - [0x34E7A0, .rodata, 3355E0] #8011EB60
+      - [0x335610, c]
+      - [0x34C270, .data, 3355E0] #8011C630
+      - [0x34C2A0, data, 335610] #335610
+      - [0x34E7A0, .rodata, 335610] #8011EB60
       - {0x34E810, type: bss, vram: 0x8011EBD0, name: ovl_49_bss}
 
   - type: code
     start: 0x34E810
     vram: 0x801059A0
-    dir: overlays/ovl_4A_name
-    name: name_4A
+    dir: overlays/ovl_4A_SpinyDesert
+    name: SpinyDesert
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x150
     subsegments:
       - [0x34E810, c]
-      - [0x364F50, data, 34E810] #8011C0E0
-      - [0x367780, .rodata, 34E810] #8011E910
+      - [0x34E840, c]
+      - [0x364F50, .data, 34E810] #8011C0E0
+      - [0x364F80, data, 34E840]
+      - [0x367780, .rodata, 34E840] #8011E910
       - {0x367930, type: bss, vram: 0x8011EAC0, name: ovl_4A_bss}
 
   - type: code
     start: 0x367930
     vram: 0x801059A0
-    dir: overlays/ovl_4B_name
-    name: name_4B
+    dir: overlays/ovl_4B_WoodyWoods
+    name: WoodyWoods
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x130
     subsegments:
       - [0x367930, c]
-      - [0x37D6A0, data, 367930] #8011B710
-      - [0x37FDD0, .rodata, 367930] #8011DE40
+      - [0x367960, c]
+      - [0x37D6A0, .data, 367930] #8011B710
+      - [0x37D6D0, data, 367960] #8011B710
+      - [0x37FDD0, .rodata, 367960] #8011DE40
       - {0x37FF80, type: bss, vram: 0x8011DFF0, name: ovl_4B_bss}
 
   - type: code
     start: 0x37FF80
     vram: 0x801059A0
-    dir: overlays/ovl_4C_name
-    name: name_4C
+    dir: overlays/ovl_4C_CreepyCavern
+    name: CreepyCavern
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x160
     subsegments:
       - [0x37FF80, c]
-      - [0x3975F0, data, 37FF80] #8011D010
-      - [0x39AC70, .rodata, 37FF80] #80120690
+      - [0x37FFB0, c]
+      - [0x3975F0, .data, 37FF80] #8011D010
+      - [0x397620, data, 37FFB0]
+      - [0x39AC70, .rodata, 37FFB0] #80120690
       - {0x39AD20, type: bss, vram: 0x80120740, name: ovl_4C_bss}
 
   - type: code
     start: 0x39AD20
     vram: 0x801059A0
-    dir: overlays/ovl_4D_name
-    name: name_4D
+    dir: overlays/ovl_4D_WaluigisIsland
+    name: WaluigisIsland
     exclusive_ram_id: minigame
     symbol_name_format: $VRAM_$ROM_$SEG
     bss_size: 0x140
     subsegments:
       - [0x39AD20, c]
-      - [0x3B08D0, data, 39AD20] #8011B550
-      - [0x3B3460, .rodata, 39AD20] #8011E0E0
+      - [0x39AD50, c]
+      - [0x3B08D0, .data, 39AD20] #8011B550
+      - [0x3B0900, data, 39AD50]
+      - [0x3B3460, .rodata, 39AD50] #8011E0E0
       - {0x3B35F0, type: bss, vram: 0x8011E270, name: ovl_4D_bss}
 
   - type: code

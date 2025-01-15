@@ -482,9 +482,9 @@ void func_800F453C_10815C_shared_board(void) {
     D_80101780_1153A0_shared_board = -1;
     D_80101784_1153A4_shared_board = -1;
     
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < SHARED_BOARD_UNK_SIZE_0; i++) {
         D_801055FC_11921C_shared_board[i] = -1;
-        for (j = 0; j < 3; j++) {
+        for (j = 0; j < ARRAY_COUNT_2D_COLS(D_80105608_119228_shared_board); j++) {
             D_80105608_119228_shared_board[i][j] = -1;
         }
     }
@@ -762,7 +762,7 @@ void func_800F5F98_109BB8_shared_board(s32 arg0, s32 arg1) {
     temp_s7 = &D_801057E0_119400_shared_board[arg0];
     temp_s5 = temp_s7->playerIndex;
     var_s2 = NULL;
-    for (i = 0; i < 3; i++) {
+    for (i = 0; i < ARRAY_COUNT(GwPlayer->itemNo); i++) {
         var_s2 = NULL;
         if (GwPlayer[arg0].itemNo[i] != -1) {
             var_s2 = ReadMainFS(D_8010197C_11559C_shared_board[GwPlayer[arg0].itemNo[i]]);
@@ -784,7 +784,7 @@ void func_800F5F98_109BB8_shared_board(s32 arg0, s32 arg1) {
             SprAttrSet(temp_s5, i + 2, 0x180CU);
             SprAttrReset(temp_s5, i + 2, 0x8000U);
             func_800552DC_55EDC(temp_s5, i + 2, 0.0f);
-            if (GwPlayer[arg0].itemNo[0] != -1) {
+            if (GwPlayer[arg0].itemNo[0] != ITEM_NONE) {
                 if (arg1 != 0) {
                     func_800F6E4C_10AA6C_shared_board(arg0, i, &sp10, &sp14);
                     func_80054904_55504(temp_s7->playerIndex, i + 2, sp10, sp14);
@@ -817,9 +817,9 @@ void func_800F5F98_109BB8_shared_board(s32 arg0, s32 arg1) {
             SprScale(temp_s5, i + 2, 1.0f, 1.0f);
             func_800550B4_55CB4(temp_s5, i + 2, 0.0f);
             if (arg0 == GwSystem.current_player_index) {
-                func_80055458_56058(temp_s5, i + 2, 0x100U);
+                func_80055458_56058(temp_s5, i + 2, 0x100);
             } else {
-                func_80055458_56058(temp_s5, i + 2, 0x80U);
+                func_80055458_56058(temp_s5, i + 2, 0x80);
             }
             
         } else {

@@ -119,8 +119,9 @@ extern s16 D_800C9520_CA120[];
 extern s32 D_8010197C_11559C_shared_board[]; //item mainFS ID array
 extern u8 D_801014C0_1150E0_shared_board[];
 extern s16 D_80105592_1191B2_shared_board[];
-extern s16 D_801055FC_11921C_shared_board[];
-extern s16 D_80105608_119228_shared_board[4][3];
+#define SHARED_BOARD_UNK_SIZE_0 4
+extern s16 D_801055FC_11921C_shared_board[SHARED_BOARD_UNK_SIZE_0];
+extern s16 D_80105608_119228_shared_board[SHARED_BOARD_UNK_SIZE_0][3];
 extern s16 D_80101908_115528_shared_board[];
 extern s16 D_80105598_1191B8_shared_board;
 extern s16 D_8010559A_1191BA_shared_board;

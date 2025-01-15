@@ -51,10 +51,12 @@ LD_MAP    := $(BUILD_DIR)/$(TARGET).map
 
 ### Tools ###
 
-PYTHON     := venv/bin/python3  # Ensure we're using the Python from the virtual environment
-N64CKSUM   := $(PYTHON) tools/n64cksum.py
-SPLAT_YAML := marioparty3.yaml
-SPLAT      := $(PYTHON) -m splat split $(SPLAT_YAML)  # Use splat from the virtual environment
+PYTHON		:= venv/bin/python3  # Ensure we're using the Python from the virtual environment
+N64CKSUM	:= $(PYTHON) tools/n64cksum.py
+SPLAT_YAML	:= marioparty3.yaml
+MOD_YAML	:= marioparty3_mod.yaml
+SPLAT	:= $(PYTHON) -m splat split $(SPLAT_YAML)  # Use splat from the virtual environment
+MOD_SPLAT	:= $(PYTHON) -m splat split $(MOD_YAML)  # Use splat from the virtual environment
 MOD_LINKER_INJECT := $(PYTHON) ./tools/append_mod_to_linker_script.py
 MOD_OVL_TABLE_INJECT := $(PYTHON) ./tools/gen_new_overlay_table_file.py
 EMULATOR   := mupen64plus
@@ -137,7 +139,7 @@ modsetup: distclean modsplit
 modsplit:
 	$(V)rm -rf asm
 	$(V)$(MOD_OVL_TABLE_INJECT)
-	$(V)$(SPLAT)
+	$(V)$(MOD_SPLAT)
 	$(V)$(MOD_LINKER_INJECT)
 
 split:

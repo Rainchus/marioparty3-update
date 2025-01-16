@@ -1,4 +1,4 @@
-#include "common.h"
+#include "ChillyWaters.h"
 
 void func_80107BF4_31D764_ChillyWaters(void);
 void func_80107C2C_31D79C_ChillyWaters(void);

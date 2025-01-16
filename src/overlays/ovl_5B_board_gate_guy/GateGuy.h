@@ -51,12 +51,9 @@ typedef struct unkStruct07 {
 extern s16 D_800A1764_A2364;
 
 void func_80100CEC_E8ABC_name_81(u8);
-extern s16 D_800CDD58_CE958;
-extern s16 D_800D037C_D0F7C;
 s32 func_800E1824_C95F4_name_81(s32, s32, s32);
 s32 func_800E88FC_D06CC_name_81(void);
 void func_800E1854_C9624_name_81(s32);
-extern s16 D_800D51F8_D5DF8;
 extern s32 D_80119470_3EC560_board_gate_guy;
 extern s32 D_80119474_3EC564_board_gate_guy;
 extern s32 D_80119478_3EC568_board_gate_guy;

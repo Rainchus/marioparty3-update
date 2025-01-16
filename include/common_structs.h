@@ -123,18 +123,22 @@ typedef struct GW_SYSTEM {
     /* 0x14 - 800CD06C */ s8 message_speed; //00 - Fast, 01 - Normal, 02 - Slow
     /* 0x15 - 800CD06D */ s8 walk_speed; //00 - Fast, 01 - Normal, 02 - Slow
     /* 0x16 - 800CD06E */ s8 show_com_minigames; //00 - Show COM minigame, 01 - Hide COM minigame
-    /* 0x17 - 800CD06F */ char unk_17[0x26]; //unknown
-    /* 0x3E - 800CD096 */ s8 board_bytes[0x13]; //bytes related to storing information for each board
+    /* 0x17 - 800CD06F */ char unk_17[0x27]; //unknown
+    union {
+        /* 0x3E - 800CD096 */ s16 halfWordBytes[9]; //bytes related to storing information for each board
+        /* 0x3E - 800CD096 */ s8 bytes[18]; //bytes related to storing information for each board
+    } boardData;
+    /* 0x50 - 800CD0A8 */ char unk_50[1];
     /* 0x51 - 800CD0A9 */ u8 cur_player_used_item; //1 if player already used an item this turn
-    /* 0x52 - 800CD0AA */ char unk_52[5];
-    /* 0x57 - 800CD0AF */ s8 slow_dice_flags;
+    /* 0x52 - 800CD0AA */ char unk_52[2];
+    /* 0x54 - 800CD0AC */ s16 unk_54;
+    /* 0x56 - 800CD0AE */ s16 slow_dice_flags;
     /* 0x58 - 800CD0B0 */ s16 unk_58;
     /* 0x5A - 800CD0B2 */ s16 playerIndexVisitingBowser;
     /* 0x5C - 800CD0B4 */ u16 bank_coins;
     /* 0x5E - 800CD0B6 */ u8 data_flags[8]; //unknown what this is, unknown size
     /* 0x66 - 800CD0B8 */ u8 unk_66[0x3E];
 } GW_SYSTEM; //sizeof 0xA4
-
 typedef struct GwCommon_s {
 /* 0x00 */ u8 unk_00;
 /* 0x01 */ char unk_01;

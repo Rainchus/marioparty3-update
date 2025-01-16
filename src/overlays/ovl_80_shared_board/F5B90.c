@@ -104,9 +104,8 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E34E0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E3584_F71A4_shared_board);
 
-f32 HuMathSin(f32);                                 /* extern */
-void func_800F696C_10A58C_shared_board(s32, s32, f32, f32); /* extern */
-void omDelPrcObj(s32);                                   /* extern */
+f32 HuMathSin(f32);
+void func_800F696C_10A58C_shared_board(s32, s32, f32, f32);
 
 void func_800E35F8_F7218_shared_board(void) {
     f32 temp_f0;
@@ -491,16 +490,16 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6B0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EA6E0_FE300_shared_board);
 
-void func_80012640_13240(s32, Gfx**);                    /* extern */
-void func_800127C4_133C4(s32, Gfx**);                    /* extern */
+void func_80012640_13240(s32, Gfx**);
+void func_800127C4_133C4(s32, Gfx**);
 void func_80017C10_18810(void*, f32, f32, f32); //fix arg0 type
 void func_80017CD0_188D0(void*, f32, f32, f32); //fix arg0 type
 void func_800185A4_191A4(void*, f32); //fix arg0 type
-u16 func_8004D6AC_4E2AC(s32, s32, s32);                   /* extern */
-void func_8004D6E8_4E2E8(s16);                         /* extern */
+u16 func_8004D6AC_4E2AC(s32, s32, s32);
+void func_8004D6E8_4E2E8(s16);
 void func_800898F0_8A4F0(void*, s32); //fix arg0 type
 void func_80089980_8A580(void*, s32); //fix arg0 type
-void func_800E989C_FD4BC_shared_board(void*);             /* extern */
+void func_800E989C_FD4BC_shared_board(void*);
 extern Addr D_101358;
 extern Addr D_101398;
 extern u16 D_800CCF28_CDB28;
@@ -630,7 +629,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB4F0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB5DC_FF1FC_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB7F0_FF410_shared_board);
+INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", SetSpaceType);
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800EB820_FF440_shared_board);
 

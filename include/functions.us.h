@@ -91,5 +91,10 @@ void func_80050974_51574(void);
 s32 print8(u16 x, u16 y, char* src);
 void func_8005035C_50F5C(s32);
 void func_80050ABC_516BC(void);
+void GWBoardFlagClear(s32 flag);
+void GWBoardFlagSet(s32 flag);
+void SetSpaceType(s16, s32);
+SpaceData* GetSpaceData(s16 arg0);
+void omDelPrcObj(s32);
 
 #endif

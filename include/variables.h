@@ -14,4 +14,8 @@ ESprite* D_800CDD70_CE970[256]__attribute__((aligned(16)));
 extern s32 D_800A12D4;
 extern s32 D_800A12D8;
 
+extern s16 D_800CDD58_CE958;
+extern s16 D_800D037C_D0F7C;
+extern s16 D_800D51F8_D5DF8;
+
 #endif //_VARIABLES_H_

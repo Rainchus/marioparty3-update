@@ -1481,9 +1481,10 @@ segments:
     subsegments:
       - [0x31B510, c]
       - [0x31B540, c]
+      - [0x31B9F0, c]
       - [0x332DC0, .data, 31B510] #8011D250
-      - [0x332DF0, data, 31B540]
-      - [0x3354B0, .rodata, 31B540] #8011F940
+      - [0x332DF0, data, 31B9F0]
+      - [0x3354B0, .rodata, 31B9F0] #8011F940
       - {0x3355E0, type: bss, vram: 0x8011FA70, name: ovl_48_bss}
 
   - type: code

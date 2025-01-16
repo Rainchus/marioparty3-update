@@ -39,7 +39,7 @@ extern HuMallocHeader* gFirstMallocBlock;
 
 
 void HuMemInit(HuAllocFunc malloc, HuFreeFunc free);
-void HuMemAlloc(s32 size);
+void* HuMemAlloc(s32 size);
 void* HuMemAllocTag(s32 size, s16 tag);
 void HuMemFree(void* data);
 void HuMemBlockFree(HuMallocHeader* block);

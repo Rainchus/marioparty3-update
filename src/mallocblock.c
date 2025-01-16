@@ -24,8 +24,8 @@ void HuMemInit(HuAllocFunc malloc, HuFreeFunc free)
     D_800C993C_CA53C = 0;
 }
 
-void HuMemAlloc(s32 size) {
-    HuMemAllocTag(size, 0);
+void* HuMemAlloc(s32 size) {
+    return HuMemAllocTag(size, 0);
 }
 
 void* HuMemAllocTag(s32 size, s16 tag)

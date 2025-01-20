@@ -167,9 +167,90 @@ INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", D_801021D0
 
 INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", D_801021DC_115DFC_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E455C_F817C_shared_board);
+void func_800E455C_F817C_shared_board(void) {
+    s8 sp20[4];
+    char sp28[16]; //unk type
+    char sp38[16];
+    s32 sp4C;
+    GW_PLAYER* curPlayer;
+    s16 absSpace;
+    s32 temp_s0_2;
+    s32 coinsToLose;
+    s32 totalCoinsToLose;
+    s32 playerPassed;
+    s32 curPlayerIndex;
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E48F4_F8514_shared_board);
+
+    curPlayerIndex = GwSystem.current_player_index;
+    curPlayer = GetPlayerStruct(CUR_PLAYER);
+    if (GwPlayer[curPlayerIndex].itemTurn != 0) {
+        for (playerPassed = 0, i = 0; i < MAX_PLAYERS; i++) {
+            if (i == curPlayerIndex) {
+                continue;
+            }
+            absSpace = func_800EB184_FEDA4_shared_board(GwPlayer[curPlayerIndex].clink, GwPlayer[curPlayerIndex].cidx);
+            if (absSpace == func_800EB184_FEDA4_shared_board(GwPlayer[i].clink, GwPlayer[i].cidx)) {
+                sp20[playerPassed++] = i;
+            }
+        }
+        if (playerPassed != 0) {
+            sp4C = func_800DBEC0_EFAE0_shared_board(curPlayerIndex);
+            func_800E6420_FA040_shared_board(-1, 2);
+            func_800ECC0C_10082C_shared_board(sp28);
+            func_800ED128_100D48_shared_board(&curPlayer->player_obj->unk18, sp28, &curPlayer->player_obj->unk18, 8);
+            HuPrcSleep(8);
+            totalCoinsToLose = 0;
+
+            for (i = 0; i < playerPassed; i++) {
+                if (GwPlayer[sp20[i]].coin != 0) {
+                    if (GwPlayer[sp20[i]].coin < 20) {
+                        coinsToLose = GwPlayer[sp20[i]].coin;
+                    } else {
+                        coinsToLose = 20;
+                    }
+                    sprintf(sp38, "%2d", coinsToLose);
+                    func_800EC8EC_10050C_shared_board(-1, 0x3A15, D_801014A0_1150C0_shared_board[GwPlayer[sp20[i]].chr], sp38, D_801014A0_1150C0_shared_board[GwPlayer[curPlayerIndex].chr], 0, 0);
+                    temp_s0_2 = -coinsToLose;
+                    func_800EC6C8_1002E8_shared_board();
+                    totalCoinsToLose += coinsToLose;
+                    func_800EC6EC_10030C_shared_board();
+                    func_8004ACE0_4B8E0(0, sp20[i]);
+                    func_800E1F28_F5B48_shared_board(sp20[i], temp_s0_2);
+                    func_800F5D44_109964_shared_board(sp20[i], temp_s0_2);
+                    HuPrcSleep(30);
+                } else {
+                    func_800EC8EC_10050C_shared_board(-1, 0x3A16, D_801014A0_1150C0_shared_board[GwPlayer[sp20[i]].chr], NULL, 0, 0, 0);
+                    func_800EC6C8_1002E8_shared_board();
+                    func_800EC6EC_10030C_shared_board();
+                    do {} while(0); //TODO: required to match
+                }
+            }
+            
+            if (totalCoinsToLose != 0) {
+                ShowPlayerCoinChange(curPlayerIndex, totalCoinsToLose);
+                func_800F5D44_109964_shared_board(curPlayerIndex, totalCoinsToLose);
+                HuPrcSleep(30);
+            }
+            if (sp4C != 0) {
+                func_800DB884_EF4A4_shared_board(GwSystem.current_player_index);
+            }
+            func_800E6420_FA040_shared_board(0, 2);
+        }
+    }
+    
+    if (D_800D41B0_D4DB0[4] == 0) {
+        func_800E48F4_F8514_shared_board();
+    }
+}
+
+void func_800E48F4_F8514_shared_board(void) {
+    s32 curPlayerIndex = GwSystem.current_player_index;
+    if (GwPlayer[curPlayerIndex].itemTurn != 0) {
+        D_80102C58_116878_shared_board[5]();
+        GwPlayer[curPlayerIndex].itemTurn = 0;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E4954_F8574_shared_board);
 
@@ -346,9 +427,102 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E6C4C
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E6C80_FA8A0_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E6CF8_FA918_shared_board);
+#define SlideReadUint(buffer, src) \
+    do { \
+        (buffer) = ((*src++) << 24); \
+        (buffer) += ((*src++) << 16); \
+        (buffer) += ((*src++) << 8);  \
+        (buffer) += (*src++);         \
+    } while (0)
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E6DEC_FAA0C_shared_board);
+void func_800E6CF8_FA918_shared_board(u8* input, u8* output, s32 compressedSize) {
+    u8* src = input + 4;       // Skip metadata
+    s32 flagLen = 0;         // Remaining bits in the bit buffer
+    s32 flag = 0;             // Buffer holding bits for control decisions
+    s32 size = compressedSize; // Bytes left to decompress
+    u8* matchPtr;                  // Pointer for back-reference matches
+    u32 offset, len;       // Offset and length for back-references
+    u32 dist;                 // Temporary value for reading data
+
+    while (size != 0) {
+        // Refill the bit buffer if empty
+        if (flagLen == 0) {
+            SlideReadUint(flag, src);
+            flagLen = 32;
+        }
+
+        // Determine if the next data is a literal or back-reference
+        if (flag >> 31) {
+            *output++ = *src++; // Write literal byte
+            size--;
+        } else {
+            // Read the next 16 bits for the back-reference
+            dist = (*src++ << 8);
+            dist += (*src++);
+            len = (dist >> 12) & 0xF;
+            dist &= 0xFFF;
+            // Calculate the pointer for the back-reference match
+            matchPtr = output - dist;
+
+            // Handle extended match lengths
+            if (len == 0) {
+                len = (*src++) + 0x12;
+            } else {
+                len += 2;
+            }
+
+            size -= len;
+            if (size < 0) {
+                break; // Prevent buffer overflow
+            }
+
+            // Copy the match data from the back-reference
+            while (len > 0) {
+                *output++ = matchPtr[-1];
+                matchPtr++;
+                len--;
+            }
+        }
+
+        // Shift the bit buffer and decrement remaining bits
+        flag <<= 1;
+        flagLen--;
+
+        // Exit if all bytes have been decompressed
+        if (size == 0) {
+            break;
+        }
+    }
+}
+
+//decodes HVQ board image tile?
+void func_800E6DEC_FAA0C_shared_board(void) {
+    HvqUnk* sp10;
+    HvqHeader* temp_a0;
+
+    func_8006A370_6AF70(0xFF);
+    func_80069E68_6AA68(D_80103138_116D58_shared_board); //"HVQ-MPS 1.1"
+    while (1) {
+        osRecvMesg(&D_80104880_1184A0_shared_board, (void*)&sp10, 1);
+        if (sp10 != NULL) {
+            temp_a0 = sp10->unk8;
+            D_80102DD0_1169F0_shared_board = sp10->unk8;
+            if (temp_a0->magic == 0x48565153) { //"HVQS"
+            //is HVQS, decode it
+                func_800698E8_6A4E8(&temp_a0->unk4, sp10->unk4, 0x40, D_80102DCC_1169EC_shared_board);
+            } else {
+                //0x1800 size for decoded tile
+                func_800E6CF8_FA918_shared_board((u8*)&D_80102DD0_1169F0_shared_board->unk4, sp10->unk4, 0x1800);
+            }
+            osSendMesg(&D_80104928_118548_shared_board, sp10, 0);
+        } else {
+            break;
+        }
+    }
+
+    osSendMesg(&D_801049D0_1185F0_shared_board, (void* )2, 0);
+    osDestroyThread(NULL);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E6EC8_FAAE8_shared_board);
 

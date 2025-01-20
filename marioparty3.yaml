@@ -277,7 +277,7 @@ segments:
       - [0x8A580, asm]
       - [0x8A640, asm]
       - [0x8A670, asm]
-      - [0x8A6B0, asm]
+      - [0x8A6B0, c]
       - [0x8A6F0, asm]
       - [0x8A770, asm]
       - [0x8A830, asm]

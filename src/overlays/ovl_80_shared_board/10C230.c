@@ -185,7 +185,35 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FA95
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FAB98_10E7B8_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FB578_10F198_shared_board);
+s32 func_800FB578_10F198_shared_board(s32 arg0) {
+    s32 var_a1;
+    s32 var_a0;
+    u32 temp_a2;
+    s32 i;
+    GW_SYSTEM* system = &GwSystem;
+
+    if (arg0 == CUR_PLAYER) {
+        arg0 = system->current_turn;
+    }
+
+    temp_a2 = (system->total_turns / 5) - 2;
+
+    if (system->total_turns < arg0) {
+        arg0 = system->total_turns;
+    }
+
+    if (temp_a2 >= 9) {
+        temp_a2 = 0;
+    }
+
+    for (i = 0; i < 3; i++) {
+        if (D_80101DE8_115A08_shared_board[temp_a2][i] > arg0) {
+            break;
+        }
+    }
+
+    return i;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/10C230", func_800FB624_10F244_shared_board);
 

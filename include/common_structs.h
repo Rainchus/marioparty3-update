@@ -4,6 +4,7 @@
 #include "common.h"
 #include "process.h"
 #include "math.h"
+#include "game/object.h"
 
 #define CUR_PLAYER -1
 
@@ -73,7 +74,7 @@ typedef struct GwPlayer_s {
 /* 0x1D */ u8 turn;
 /* 0x1E */ char unk_1E[2]; //likely padding
 /* 0x20 */ void* unk_20;
-/* 0x24 */ void* player_obj;
+/* 0x24 */ Object* player_obj;
 /* 0x28 */ s16 gamePrize; //minigame star
 /* 0x2A */ s16 coinPrize; //coin star
 /* 0x2C */ s8 hatenaPrize; //happening space star

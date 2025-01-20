@@ -143,7 +143,7 @@ void func_80107CC4_31D834_ChillyWaters(void) {
     func_800E2960_F6580_shared_board(2, &func_8010F730_3252A0_ChillyWaters);
     func_800E2960_F6580_shared_board(3, &func_80117C60_32D7D0_ChillyWaters);
     func_800E2960_F6580_shared_board(4, &func_8011093C_3264AC_ChillyWaters);
-    func_800E2960_F6580_shared_board(5, &func_80110BC8_326738_ChillyWaters);
+    func_800E2960_F6580_shared_board(5, &func_80110BC8_326738_ChillyWaters); //when landing on a space as bowser suit
     func_800E2960_F6580_shared_board(6, &func_8010FC24_325794_ChillyWaters);
     func_800E2960_F6580_shared_board(7, &func_80110194_325D04_ChillyWaters);
     func_800E2960_F6580_shared_board(8, &func_801104E0_326050_ChillyWaters);

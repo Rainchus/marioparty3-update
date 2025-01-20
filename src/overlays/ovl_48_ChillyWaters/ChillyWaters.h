@@ -57,14 +57,13 @@ void func_800F8D6C_10C98C_shared_board(s32);
 void func_800FF41C_11303C_shared_board(s32);
 void func_80107CC4_31D834_ChillyWaters(void);
 void func_8011A8D8_330448_ChillyWaters(void);
-void func_800FF41C_11303C_shared_board(s32);
-void func_80107CC4_31D834_ChillyWaters(void);
 void func_80108478_31DFE8_ChillyWaters(void);
 void func_80108574_31E0E4_ChillyWaters(s16);
 void func_80116484_32BFF4_ChillyWaters(void*, void*, void*);
 s16 func_800EB184_FEDA4_shared_board(u16 arg0, u16 arg1);
 void func_800ED998_1015B8_shared_board(s32, s32, s32);
 
+extern void (*D_80102C58_116878_shared_board[22])(void); //size based on func_80107CC4_31D834_ChillyWaters (calls to func_800E2960_F6580_shared_board)
 extern char D_8011D77C_3332EC_ChillyWaters[];
 extern char D_8011DB5C_3336CC_ChillyWaters[];
 extern char D_8011DB70_3336E0_ChillyWaters[];

@@ -58,6 +58,17 @@ typedef struct UnkCoinThing {
 /* 0x08 */ s16 unk_08[2];
 } UnkCoinThing;
 
+typedef struct HvqHeader {
+    s32 magic;
+    u8* unk4;
+} HvqHeader;
+
+typedef struct HvqUnk {
+    s32 unk0;
+    u8* unk4;
+    HvqHeader* unk8;
+} HvqUnk;
+
 void func_800DA790_EE3B0_shared_board(s32, u16, char*, s32, s32);
 Object* func_800D90C8_ECCE8_shared_board(u8, s32);
 void func_800D9714_ED334_shared_board(Object*);
@@ -105,17 +116,78 @@ void func_800FF900_113520_shared_board(s16, s16);
 s16 GetCurrentPlayerIndex(void);
 void func_8004B25C_4BE5C(s16, s32, s32, s32);
 void func_800F7610_10B230_shared_board(void);
+void func_800EC590_1001B0_shared_board(s32, s32);
+void func_800F74E4_10B104_shared_board(void);
+void func_800F76A4_10B2C4_shared_board(s32);
+void func_800F7578_10B198_shared_board(void);
+void func_800F7FE8_10BC08_shared_board(void);
+void ShowPlayerCoinChange(s32 player, s32 coins);
+void func_800DB884_EF4A4_shared_board(s32);
+s32 func_800DBEC0_EFAE0_shared_board(s32);
+void func_800E1F28_F5B48_shared_board(s32, s32);
+void func_800E48F4_F8514_shared_board(void);
+void func_800E6420_FA040_shared_board(s32, s32);
+void func_800EC6C8_1002E8_shared_board(void);
+void func_800EC6EC_10030C_shared_board(void);
+void func_800EC8EC_10050C_shared_board(s32, s32, s32, char*, s32, s32, s32);
+void func_800ECC0C_10082C_shared_board(char*);
+void func_800ED128_100D48_shared_board(Vec*, char*, Vec*, s32);
+void func_800F5D44_109964_shared_board(s32, s32);
+void func_800698E8_6A4E8(u8**, u8*, s32, s32);
+void func_80069E68_6AA68(s32);
+void func_8006A370_6AF70(s32);
+void func_800E6CF8_FA918_shared_board(u8* input, u8* output, s32 compressedSize);
+s32 func_800FB578_10F198_shared_board(s32);
+void func_800F5E24_109A44_shared_board(s32);
 
+extern u8 D_80101DE8_115A08_shared_board[][3];
+extern s32 D_80102DCC_1169EC_shared_board;
+extern HvqHeader* D_80102DD0_1169F0_shared_board;
+extern s32 D_80103138_116D58_shared_board;
+extern OSMesgQueue D_80104880_1184A0_shared_board;
+extern OSMesgQueue D_80104928_118548_shared_board;
+extern OSMesgQueue D_801049D0_1185F0_shared_board;
+extern s32 D_800D41B0_D4DB0[];
+extern s32 D_801014A0_1150C0_shared_board[];
+extern void (*D_80102C58_116878_shared_board[22])(void); //size based on func_80107CC4_31D834_ChillyWaters (calls to func_800E2960_F6580_shared_board)
+extern s32 D_80105654_119274_shared_board;
+extern s32 D_80105630_119250_shared_board[];
+extern s32 D_80105634_119254_shared_board;
+extern s32 D_80105638_119258_shared_board;
 extern LinkData* D_80105218_118E38_shared_board;
 extern SpaceData* D_80105214_118E34_shared_board;
 extern u8 D_80105268_118E88_shared_board[];
 extern s32 D_801055F8_119218_shared_board;
 extern s32 D_80101A50_115670_shared_board[]; //randomly generated items
-extern s32 D_80105630_119250_shared_board[];
 extern s32 D_80100F90_114BB0_shared_board;
 void (*D_80102C70_116890_shared_board)(void);
 extern s16 D_800C9520_CA120[];
-extern s32 D_8010197C_11559C_shared_board[]; //item mainFS ID array
+extern s32 D_8010197C_11559C_shared_board[22]; //item mainFS ID array
+// s32 D_8010197C_11559C_shared_board[] = {
+//     0x0013018E,
+//     0x0013018F,
+//     0x00130190,
+//     0x00130191,
+//     0x00130192,
+//     0x00130193,
+//     0x00130194,
+//     0x00130195,
+//     0x00130196,
+//     0x00130197,
+//     0x00130198,
+//     0x00130199,
+//     0x0013019A,
+//     0x0013019B,
+//     0x0013019C,
+//     0x0013019D,
+//     0x0013019E,
+//     0x0013019F,
+//     0x001301A0,
+//     0x001301A1,
+//     0x0013019D, //toad item bag
+//     0x001301B6, //baby bowser item bag
+// };
+
 extern u8 D_801014C0_1150E0_shared_board[];
 extern s16 D_80105592_1191B2_shared_board[];
 #define SHARED_BOARD_UNK_SIZE_0 4

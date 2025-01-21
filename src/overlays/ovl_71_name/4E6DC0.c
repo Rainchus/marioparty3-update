@@ -7,6 +7,10 @@ void func_80106F40_4E8360_name_71(omObjData*);
 void func_80106FC8_4E83E8_name_71(void);
 void func_80107188_4E85A8_name_71(void);
 void func_80107234_4E8654_name_71(void);
+void func_800E6630_FA250_shared_board(Addr);
+void func_800E6720_FA340_shared_board(s32, s32);
+void func_80107024_4E8444_name_71(void);
+extern s32 D_8010AD0C_4EC12C_name_71[];
 
 typedef struct MinigameTable {
     u8 minigameType;
@@ -71,7 +75,18 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_71_name/4E6DC0", func_80106DE8_4E8208
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_71_name/4E6DC0", func_80106F40_4E8360_name_71);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_71_name/4E6DC0", func_80106FC8_4E83E8_name_71);
+void func_80106FC8_4E83E8_name_71(void) {
+    GW_SYSTEM* system = &GwSystem;
+
+    func_800E6630_FA250_shared_board(hvq_data_ROM_START);
+    
+    if (!(system->playMode & 2)) {
+        func_800E6720_FA340_shared_board(D_8010AD0C_4EC12C_name_71[system->current_board_index], 0);
+    } else {
+        func_800E6720_FA340_shared_board(0x17, 0);
+    }
+    func_80107024_4E8444_name_71();
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_71_name/4E6DC0", func_80107024_4E8444_name_71);
 

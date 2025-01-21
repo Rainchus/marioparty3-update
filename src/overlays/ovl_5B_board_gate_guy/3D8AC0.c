@@ -274,7 +274,7 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_5B_board_gate_guy/3D8AC0", func_80110
 void func_80110B7C_3E3C6C_board_gate_guy(void) {
     unkStruct07* temp_s0;
 
-    temp_s0 = func_800F375C_DB52C_name_81(-1);
+    temp_s0 = func_800F375C_DB52C_name_81(CUR_PLAYER);
     if (func_800F3750_DB520_name_81() == 0 && !(temp_s0->unk_17 & 4)) {
         func_800F38DC_DB6AC_name_81(-1, -1, 2);
         func_80110068_3E3158_board_gate_guy(0);
@@ -284,7 +284,7 @@ void func_80110B7C_3E3C6C_board_gate_guy(void) {
 void func_80110BD8_3E3CC8_board_gate_guy(void) {
     unkStruct07* temp_s0;
 
-    temp_s0 = func_800F375C_DB52C_name_81(-1);
+    temp_s0 = func_800F375C_DB52C_name_81(CUR_PLAYER);
     if ((func_800F3750_DB520_name_81() == 1) && !(temp_s0->unk_17 & 4)) {
         func_800F38DC_DB6AC_name_81(-1, -1, 2);
         func_80110068_3E3158_board_gate_guy(1);

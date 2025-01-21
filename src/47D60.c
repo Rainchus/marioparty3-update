@@ -10,7 +10,6 @@ void func_80037190_37D90(void);
 extern s8 D_800A1762_A2362;
 extern u16 D_800B23C0_B2FC0;
 extern u16 D_800CD050_CDC50;
-extern s8 D_800CD280_CDE80;
 extern s16 omovlhisidx;
 extern omOvlHisData omovlhis[12];
 

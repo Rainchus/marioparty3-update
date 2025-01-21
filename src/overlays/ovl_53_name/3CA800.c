@@ -1,4 +1,5 @@
 #include "common.h"
+#include "../ovl_80_shared_board/ovl_80.h"
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_53_name/3CA800", func_801059A0_3CA800_name_53);
 
@@ -44,6 +45,30 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_53_name/3CA800", func_80108C58_3CDAB8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_53_name/3CA800", func_80108C8C_3CDAEC_name_53);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_53_name/3CA800", func_80108CC0_3CDB20_name_53);
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80108F80_3CDDE0_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80108F98_3CDDF8_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80108FB0_3CDE10_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80108FC0_3CDE20_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80108FD8_3CDE38_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80108FF0_3CDE50_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80109008_3CDE68_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80109020_3CDE80_name_53);
+
+INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_53_name/3CA800", D_80109038_3CDE98_name_53);
+
+void func_80108CC0_3CDB20_name_53(void) {
+    s32 sp10[] = {3, 6, 9, 0xC, 0xF, 0x12};
+    
+    Hu3DCamInit(1);
+    func_800E6630_FA250_shared_board(hvq_data_ROM_START);
+    func_800E69BC_FA5DC_shared_board(sp10[GwSystem.current_board_index]);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_53_name/3CA800", func_80108D44_3CDBA4_name_53);

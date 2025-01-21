@@ -1,32 +1,53 @@
 #include "common.h"
+#include "malloc.h"
 
 typedef struct TextWindow {
-/* 0x00 */ u8 unk_00;
-/* 0x01 */ char unk_01[3];
-/* 0x04 */ char unk_04;
-/* 0x05 */ u8 unk_05;
-/* 0x06 */ char unk_06[0x0A];
-/* 0x10 */ u8 unk_10;
-/* 0x11 */ char unk_11[3];
-/* 0x14 */ char unk_14[4];
-/* 0x18 */ s16 unk_18;
-/* 0x1A */ s16 unk_1A;
-/* 0x1C */ char unk_1C[0x10];
-/* 0x2C */ s16 unk_2C;
-/* 0x2E */ s16 unk_2E;
-/* 0x30 */ char unk_30[4];
-/* 0x34 */ s16 unk_34;
-/* 0x36 */ char unk_36[0x36];
-/* 0x6C */ s16 unk_6C;
-/* 0x6E */ s16 unk_6E[12];
-/* 0x86 */ char unk_86[0x27];
-/* 0xAD */ s8 usingStringIDBool[5]; //unknown size
-/* 0xB2 */ s8 unk_B2[6]; //unknown size
-/* 0xB8 */ s32 unk_B8[4];
-/* 0xC8 */ char unk_C8[0x1B4];
-} TextWindow; //sizeof 0x27C
+    /* 0x000 */ u8 unk_00;
+    /* 0x001 */ char pad1[3];
+    /* 0x004 */ s8 unk_04;
+    /* 0x005 */ u8 unk_05;
+    /* 0x006 */ char pad6[0xA];
+    /* 0x010 */ u8 unk_10;
+    /* 0x011 */ char pad11[7];
+    /* 0x018 */ s16 unk_18;
+    /* 0x01A */ s16 unk_1A;
+    /* 0x01C */ char pad1C[0x10];
+    /* 0x02C */ s16 unk_2C;
+    /* 0x02E */ s16 unk_2E;
+    /* 0x030 */ char pad30[4];
+    /* 0x034 */ s16 unk_34;
+    /* 0x036 */ char pad36[0x28];
+    /* 0x05E */ s16 unk5E;
+    /* 0x060 */ char pad60[2];
+    /* 0x062 */ s16 unk62;
+    /* 0x064 */ s16 unk64;
+    /* 0x066 */ char pad66[6];
+    /* 0x06C */ s16 unk_6C;
+    /* 0x06E */ s16 unk_6E[0xC];
+    /* 0x086 */ char pad86[0x27];
+    /* 0x0AD */ s8 usingStringIDBool[5];
+    /* 0x0B2 */ s8 unk_B2[6];
+    /* 0x0B8 */ s32 unk_B8[4];
+    /* 0x0C8 */ char padC8[0x1B4];
+} TextWindow;                                       /* size = 0x27C */
 
 extern TextWindow* D_800CC69C_CD29C;
+extern u8 D_800A2150_A2D50;
+extern u8 D_800A2151_A2D51;
+extern s16 D_800BDA50_BE650[12];
+extern s16 D_800BDA68_BE668;
+extern s8 D_800CB99C_CC59C;
+extern s8 D_800CD2A4_CDEA4;
+extern void* D_800CE2C4_CEEC4;
+extern Process* D_800D040C_D100C;
+extern s8 D_800D1F34_D2B34;
+extern void* D_800D1FE4_D2BE4;
+extern void* D_800D4084_D4C84;
+extern u8 D_800D5206_D5E06[5];
+extern s8 D_800D5540_D6140;
+extern s8 D_800D6A26_D7626;
+extern s16 D_800D6B62_D7762;
+
 void func_800554C4_560C4(s32, s32, s32);
 s16 func_80055810_56410(void*);
 s32 func_800364DC_370DC(u32);
@@ -56,7 +77,72 @@ INCLUDE_ASM("asm/nonmatchings/window", func_8005A61C_5B21C);
 
 INCLUDE_ASM("asm/nonmatchings/window", func_8005A674_5B274);
 
-INCLUDE_ASM("asm/nonmatchings/window", func_8005A6B0_5B2B0);
+void func_8005A6B0_5B2B0(void) {
+    Process* temp_v0_4;
+    void* temp_v0_6;
+    s16 i;
+
+    if (D_800A2150_A2D50 == 0) {
+        D_800CC69C_CD29C = HuMemMemoryAllocTemp(sizeof(TextWindow) * 16);
+        for (i = 0; i < 16; i++) {
+            D_800CC69C_CD29C[i].unk5E = -1;
+        }
+        D_800CC69C_CD29C[0].unk62 = -1;
+        D_800CC69C_CD29C[0].unk64 = 1;
+        D_800CC69C_CD29C[0].unk5E = 0;
+        D_800CC69C_CD29C[1].unk62 = 0;
+        D_800CC69C_CD29C[1].unk64 = -1;
+        D_800CC69C_CD29C[1].unk5E = -0x218;
+        D_800D6A26_D7626 = 0;
+        D_800D1F34_D2B34 = 0;
+        D_800D6B62_D7762 = 0x2710;
+        D_800A2151_A2D51 = GwCommon.unk_01;
+        if (D_800A2151_A2D51 >= 7 || D_800A2151_A2D51 == 0) {
+            D_800A2151_A2D51 = 2;
+        }
+        if (D_800A2151_A2D51 == 1) {
+            D_800D1FE4_D2BE4 = HuReadFileTemp(0x2B);
+            func_80036414_37014(strings_jp_ROM_START);
+        } else {
+            D_800D1FE4_D2BE4 = HuReadFileTemp(0x2C);
+            switch (D_800A2151_A2D51) {
+            case 2:
+                func_80036414_37014(strings_en_ROM_START);
+                break;
+            case 3:
+                func_80036414_37014(strings_fr_ROM_START);
+                break;
+            case 4:
+                func_80036414_37014(strings_de_ROM_START);
+                break;
+            case 5:
+                func_80036414_37014(strings_es_ROM_START);
+                break;
+            case 6:
+                func_80036414_37014(strings_it_ROM_START);
+                break;
+            }
+        }
+        temp_v0_4 = omAddPrcObj(func_8005DDDC_5E9DC, 0x1001, 0x800, 0);
+        D_800D040C_D100C = temp_v0_4;
+        omPrcSetStatBit(temp_v0_4, 0xA0);
+        D_800A2150_A2D50 = 1;
+        D_800CB99C_CC59C = 0;
+        D_800D4084_D4C84 = HuReadFileTemp(0x29);
+        D_800CE2C4_CEEC4 = HuReadFileTemp(0x2A);
+        for (i = 0; i < ARRAY_COUNT(D_800BDA50_BE650); i++) {
+            D_800BDA50_BE650[i] = -1;
+        }
+        temp_v0_6 = ReadMainFS(0x33);
+        D_800BDA68_BE668 = func_80055810_56410(temp_v0_6);
+        HuFreeFilePerm(temp_v0_6);
+        for (i = 0; i < ARRAY_COUNT(D_800D5206_D5E06); i++) {
+            D_800D5206_D5E06[i] = 0;
+        }
+        D_800D5540_D6140 = 0xC;
+        D_800CD2A4_CDEA4 = 0;
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/window", func_8005A968_5B568);
 

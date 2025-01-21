@@ -2,9 +2,6 @@
 
 typedef s16 Array2D[2][18];
 
-s16 HuAudFXPlay(s32);
-void HuFreeFileTemp(void*);
-void* HuReadFileTemp(s32);
 s16 InitEspriteSlot(s16, s32, s32);
 void func_8000BBD4_C7D4(u16, s32, s32);
 void func_8000BBFC_C7FC(u16, s16);

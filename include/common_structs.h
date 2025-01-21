@@ -219,4 +219,33 @@ typedef struct str800D5298 {
     s32 unk68;
 } str800D5298;
 
+typedef struct unkStruct07 {
+/* 0x00 */ char unk_00[0x17];
+/* 0x17 */ u8 unk_17;
+/* 0x18 */ char unk_18[12];
+/* 0x24 */ Object* unk_24;
+} unkStruct07;
+
+typedef struct HeapNode {
+/* 0x00 */ s32 size;
+/* 0x04 */ u8 heap_constant;
+/* 0x05 */ u8 active;
+/* 0x08 */ struct HeapNode* prev;
+/* 0x0C */ struct HeapNode* next;
+} HeapNode;
+
+typedef struct UnkOvl81 {
+/* 0x00 */ void* unk0;
+/* 0x04 */ void* unk4;
+/* 0x08 */ void* unk8;
+/* 0x0C */ char unk_0C[0x14];
+/* 0x20 */ s16 unk_20;
+/* 0x22 */ char unk_22[2];
+} UnkOvl81;
+
+typedef struct UnkOvl81_1 {
+    s32 unk_00;
+    char unk_04[0xC];
+} UnkOvl81_1;
+
 #endif

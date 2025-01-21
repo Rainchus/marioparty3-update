@@ -17,5 +17,7 @@ extern s32 D_800A12D8;
 extern s16 D_800CDD58_CE958;
 extern s16 D_800D037C_D0F7C;
 extern s16 D_800D51F8_D5DF8;
+extern UnkOvl81 D_800D1360_D1F60;
+extern s8 D_800CD280_CDE80;
 
 #endif //_VARIABLES_H_

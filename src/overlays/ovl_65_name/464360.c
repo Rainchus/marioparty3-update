@@ -1,4 +1,5 @@
 #include "common.h"
+#include "../ovl_81_name/ovl_81.h"
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_65_name/464360", func_801059A0_464360_name_65);
 
@@ -34,7 +35,12 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_65_name/464360", func_80108854_467214
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_65_name/464360", func_80108880_467240_name_65);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_65_name/464360", func_801088C4_467284_name_65);
+void func_801088C4_467284_name_65(void) {
+    Hu3DCamInit(1);
+    HmfLightColorSet(1, 0xFF, 0xFF, 0xFF);
+    func_800E4F50_CCD20_name_81(hvq_data_ROM_START);
+    func_800E52DC_CD0AC_name_81(30);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_65_name/464360", func_80108908_4672C8_name_65);
 

@@ -2,16 +2,8 @@
 #include "game/gamework_data.h"
 #include "game/object.h"
 #include "game/wipe.h"
+#include "../ovl_80_shared_board/ovl_80.h"
 
-void Hu3DCamSetPerspective(s16 camIndex, f32 fov, f32 near, f32 far);
-void ScissorSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4);
-void ViewportSet(u8 camIndex, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6);
-void func_8000B690_C290(s32);
-void func_800142A0_14EA0(s32);
-void HmfLightColorSet(s32, s32, s32, s32);
-void func_80037258_37E58(void);
-void func_800E66E0_FA300_shared_board(void);
-void func_800E69D8_FA5F8_shared_board(void);
 void func_80105E0C_4F3BEC_name_74(void);
 void func_80105EF4_4F3CD4_name_74(void);
 void func_801060A4_4F3E84_name_74(void);
@@ -20,10 +12,13 @@ void func_80106BA0_4F4980_name_74(void);
 void func_80107400_4F51E0_name_74(void);
 void func_80107D10_4F5AF0_name_74(void);
 void func_80108130_4F5F10_name_74(void);
-extern u8 D_80108F8C_4F6D6C_name_74[4];
-void func_8004B340_4BF40(omObjData*);
+void func_800E6720_FA340_shared_board(s32, s32);
 void func_80105CAC_4F3A8C_name_74(omObjData*);
 void func_80105E64_4F3C44_name_74(omObjData*);
+void func_80105F50_4F3D30_name_74(void);
+
+extern u8 D_80108F8C_4F6D6C_name_74[4];
+extern s32 D_80108908_4F66E8_name_74[];
 
 void func_801059A0_4F3780_name_74(void) {
     s16 var_a0_2;
@@ -90,7 +85,18 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_80105E0C_4F3BEC
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_80105E64_4F3C44_name_74);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_80105EF4_4F3CD4_name_74);
+void func_80105EF4_4F3CD4_name_74(void) {
+    GW_SYSTEM* system = &GwSystem;
+
+    func_800E6630_FA250_shared_board(hvq_data_ROM_START);
+    
+    if (!(system->playMode & 2)) {
+        func_800E6720_FA340_shared_board(D_80108908_4F66E8_name_74[system->current_board_index], 0);
+    } else {
+        func_800E6720_FA340_shared_board(0x17, 0);
+    }
+    func_80105F50_4F3D30_name_74();
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_74_name/4F3780", func_80105F50_4F3D30_name_74);
 

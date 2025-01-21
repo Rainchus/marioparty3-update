@@ -1,4 +1,15 @@
 #include "common.h"
+#include "../ovl_80_shared_board/ovl_80.h"
+
+void func_801061F0_524820_name_7A(void);
+void func_80110B90_52F1C0_name_7A(void);
+void func_80110F48_52F578_name_7A(void);
+void func_80112944_530F74_name_7A(void);
+void func_80114A2C_53305C_name_7A(void);
+
+extern Vec D_80114BB8_5331E8_name_7A;
+extern Vec D_80114BC4_5331F4_name_7A;
+extern RectF D_80114BD0_533200_name_7A;
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_801059A0_523FD0_name_7A);
 
@@ -176,7 +187,16 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_80107EBC_5264EC
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_80107EF4_526524_name_7A);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_801080A8_5266D8_name_7A);
+void func_801080A8_5266D8_name_7A(void) {
+    func_801061F0_524820_name_7A();
+    func_80110F48_52F578_name_7A();
+    CameraViewportSet(0, &D_80114BB8_5331E8_name_7A, &D_80114BC4_5331F4_name_7A);
+    CameraScissorSet(0, &D_80114BD0_533200_name_7A);
+    func_800E6630_FA250_shared_board(hvq_data_ROM_START);
+    func_80112944_530F74_name_7A();
+    func_80110B90_52F1C0_name_7A();
+    func_80114A2C_53305C_name_7A();
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7A_name/523FD0", func_80108118_526748_name_7A);
 

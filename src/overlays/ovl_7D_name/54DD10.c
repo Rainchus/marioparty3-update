@@ -1,4 +1,14 @@
 #include "common.h"
+#include "../ovl_81_name/ovl_81.h"
+
+void func_801060D0_54E440_name_7D(Vec*);
+void func_8010818C_5504FC_name_7D(s16*, s32);
+extern s16 D_8010A910_552C80_name_7D;
+extern s16 D_8010A912_552C82_name_7D;
+extern s16 D_8010A914_552C84_name_7D;
+extern Vec D_8010AB9C_552F0C_name_7D[];
+extern s16 D_8010AC28_552F98_name_7D;
+extern s16 D_8010AC2A_552F9A_name_7D;
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7D_name/54DD10", func_801059A0_54DD10_name_7D);
 
@@ -42,7 +52,33 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7D_name/54DD10", func_80107920_54FC90
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7D_name/54DD10", func_8010818C_5504FC_name_7D);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7D_name/54DD10", func_8010822C_55059C_name_7D);
+void func_8010822C_55059C_name_7D(void) {
+    s16 sp10;
+
+    D_800CD280_CDE80 = 0;
+    func_801060D0_54E440_name_7D(&D_8010AB9C_552F0C_name_7D[0]);
+    D_8010A912_552C82_name_7D = 1;
+    func_800E4F50_CCD20_name_81(hvq_data_ROM_START);
+    func_800E52DC_CD0AC_name_81(0x20);
+    func_800E8180_CFF50_name_81(1000.0f, 10000.0f);
+    D_8010AC2A_552F9A_name_7D = 0xB;
+    WipeCreateIn(0xB, 0x10);
+    while (WipeStatGet() != 0) {
+        HuPrcVSleep();
+    }
+    func_8010818C_5504FC_name_7D(&sp10, -1);
+    while (sp10 >= -1) {
+        HuPrcVSleep();
+    }
+    D_8010AC2A_552F9A_name_7D = 0xB;
+    D_8010AC28_552F98_name_7D = 0x36;
+    D_8010A914_552C84_name_7D = 2;
+    D_8010A910_552C80_name_7D = 1;
+
+    while (1) {
+        HuPrcVSleep();    
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7D_name/54DD10", func_8010832C_55069C_name_7D);
 

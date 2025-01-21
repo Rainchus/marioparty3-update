@@ -1,8 +1,12 @@
 #include "common.h"
 
+void func_8000086C_146C(str800D5298*);
 void func_800035E8_41E8(s16);
 extern s16 D_800A1904_A2504;
 extern u16 D_800A1906_A2506;
+extern u8 D_800D09A8_D15A8;
+extern str800D5298 D_800D5298_D5E98;
+extern s32 D_800D52C0_D5EC0;
 
 INCLUDE_ASM("asm/nonmatchings/4B120", HuAudSeqPlay);
 
@@ -78,4 +82,18 @@ INCLUDE_ASM("asm/nonmatchings/4B120", func_8004B25C_4BE5C);
 
 INCLUDE_ASM("asm/nonmatchings/4B120", func_8004B2C0_4BEC0);
 
-INCLUDE_ASM("asm/nonmatchings/4B120", func_8004B2C8_4BEC8);
+void func_8004B2C8_4BEC8(void) {
+    str800D5298* temp;
+
+    func_80000EA8_1AA8(&D_800D5298_D5E98);
+    temp = &D_800D5298_D5E98;
+    temp->unk28 = 1; //?
+    D_800D5298_D5E98.unk8 = audio_mbf0_ROM_START;
+    D_800D5298_D5E98.unkC = audio_sbf0_ROM_START;
+    func_8000086C_146C(&D_800D5298_D5E98);
+    if (!(D_800D09A8_D15A8 & 1)) {
+        func_80000F30_1B30(0);
+    } else {
+        func_80000F30_1B30(1);
+    }
+}

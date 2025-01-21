@@ -2,24 +2,12 @@
 #include "../ovl_80_shared_board/ovl_80.h"
 
 void func_8005A6B0_5B2B0(void);
-void func_800D95C4_ED1E4_shared_board(f32);
-void func_800EA60C_FE22C_shared_board(void);
-void func_800EAE10_FEA30_shared_board(s32, s32);
-void func_800F453C_10815C_shared_board(void);
-void func_800F4874_108494_shared_board(s32, s16, s16);
 void func_80108D2C_3C5B4C_BowserEvent(void);
 void func_80109220_3C6040_BowserEvent(omObjData*);
 s32 func_8010926C_3C608C_BowserEvent(void);
 s32 func_801092D4_3C60F4_BowserEvent(void);
 void func_800525C8_531C8(s16);
 void func_8005F364_5FF64(s16);
-void func_800E21F4_F5E14_shared_board(void*);
-s16 func_800EB184_FEDA4_shared_board(u16 arg0, u16 arg1);
-void func_800EC134_FFD54_shared_board(s32);
-void func_800EC1E8_FFE08_shared_board(s32, char*, s32, s32, s32, s32);
-void func_800EC3C0_FFFE0_shared_board(s32);
-void func_800EC3E4_100004_shared_board(void);
-u32 func_800EE884_1024A4_shared_board(s32 arg0, s16 arg1, s16 arg2);
 void func_80107724_3C4544_BowserEvent(void);
 
 extern s16 D_801094F6_3C6316_BowserEvent;
@@ -439,6 +427,14 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_50_BowserEvent/3C27C0", func_8010926C
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_50_BowserEvent/3C27C0", func_801092A0_3C60C0_BowserEvent);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_50_BowserEvent/3C27C0", func_801092D4_3C60F4_BowserEvent);
+s32 func_801092D4_3C60F4_BowserEvent(void) {
+    Hu3DCamInit(1);
+    func_800E6630_FA250_shared_board(hvq_data_ROM_START);
+    func_800E69BC_FA5DC_shared_board(2);
+    return func_800E9344_FCF64_shared_board(100.0f, 10000.0f);
+}
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_50_BowserEvent/3C27C0", func_80109320_3C6140_BowserEvent);
+void func_80109320_3C6140_BowserEvent(void) {
+    func_800E69D8_FA5F8_shared_board();
+    func_800E66E0_FA300_shared_board();
+}

@@ -1,4 +1,37 @@
 #include "common.h"
+#include "../ovl_81_name/ovl_81.h"
+
+typedef struct UnkOvl7C {
+    char unk_00[0x18];
+    s16 unk_18;
+    s16 unk_1A;
+    s16 unk_1C;
+    s16 unk_1E;
+} UnkOvl7C;
+
+typedef struct UnkOvl7C_1 {
+/* 0x00 */ char unk_00[0x18];
+/* 0x18 */ s16 unk_18;
+/* 0x1A */ s16 unk_1A;
+/* 0x1C */ s16 unk_1C;
+/* 0x1E */ s16 unk_1E;
+/* 0x20 */ char unk_20[8];
+/* 0x28 */ s16 unk_28;
+/* 0x2A */ char unk_2A[2];
+} UnkOvl7C_1;
+
+void func_80105E6C_5426EC_name_7C(void*, s16*, s32);
+void func_8010C680_548F00_name_7C(s16*, s32*, f32*, void*);
+void func_8010C8F4_549174_name_7C(UnkOvl7C_1*);
+void func_8010CD74_5495F4_name_7C(UnkOvl7C_1*);
+void func_8010CFD4_549854_name_7C(UnkOvl7C*);
+extern f32 D_80110534_54CDB4_name_7C;
+extern s8 D_80110538_54CDB8_name_7C;
+extern char D_80110FF4_54D874_name_7C[];  //unk type
+extern Vec D_80111534_54DDB4_name_7C;
+extern Vec D_80111540_54DDC0_name_7C;
+extern f32 D_80111560_54DDE0_name_7C;
+extern f32 D_80111564_54DDE4_name_7C;
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7C_name/542220", func_801059A0_542220_name_7C);
 
@@ -128,7 +161,84 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7C_name/542220", func_8010CD74_5495F4
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7C_name/542220", func_8010CFD4_549854_name_7C);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7C_name/542220", func_8010D1E8_549A68_name_7C);
+void func_8010D1E8_549A68_name_7C(void) {
+    s16 sp10[3][2];
+    UnkOvl7C sp20[8];
+    UnkOvl7C_1 sp120[3];
+    s16 sp1A8;
+    s32 sp1AC;
+    f32 sp1B0;
+    s16 var_v0;
+    s16* temp_s2;
+    s16 var_s0;
+    s32 i;
+    UnkOvl7C_1* temp;
+    UnkOvl7C* temp2;
+    s16* temp3;
+
+    temp_s2 = HuPrcCurrentGet()->user_data;
+    HmfLightDirSet(1, 0.0f, 0.0f, 100.0f);
+    func_800E4F50_CCD20_name_81(hvq_data_ROM_START);
+    func_800E52DC_CD0AC_name_81(0x20);
+    func_800E8180_CFF50_name_81(1000.0f, 10000.0f);
+    func_800E8110_CFEE0_name_81();
+    D_80110538_54CDB8_name_7C = 1;
+    D_80111540_54DDC0_name_7C.x = 350.0f;
+    D_80111540_54DDC0_name_7C.y = 190.0f;
+    D_80111540_54DDC0_name_7C.z = 3770.0f;
+    D_80111534_54DDB4_name_7C.x = -1000.0f;
+    D_80111534_54DDB4_name_7C.y = 130.0f;
+    D_80111534_54DDB4_name_7C.z = 450.0f;
+    D_80110534_54CDB4_name_7C = 40.0f;
+    Hu3DCamSetPerspective(0, 40.0f, D_80111564_54DDE4_name_7C, D_80111560_54DDE0_name_7C);
+    func_80105E6C_5426EC_name_7C(D_80110FF4_54D874_name_7C, &sp10[0][0], 3);
+    func_8010CFD4_549854_name_7C(sp20);
+    func_8010CD74_5495F4_name_7C(sp120);
+    *temp_s2 = 0;
+    sp1A8 = 0;
+    sp1B0 = 90.0f;
+    sp1AC = 0;
+    for (var_s0 = 0; var_s0 >= 0;) {
+        if (var_s0 != *temp_s2) {
+            if (*temp_s2 == -1) {
+                var_s0 = -1;
+            } else {
+                var_s0 = *temp_s2;
+                func_8010C8F4_549174_name_7C(sp120);
+                func_8010C680_548F00_name_7C(&sp1A8, &sp1AC, &sp1B0, &sp20[3]);
+                HuPrcVSleep();
+            }
+        } else {
+            func_8010C8F4_549174_name_7C(sp120);
+            func_8010C680_548F00_name_7C(&sp1A8, &sp1AC, &sp1B0, &sp20[3]);
+            HuPrcVSleep();
+        }
+    }
+
+    //TODO: fix typing of temp3 or sp10
+    for (temp3 = sp10[0], i = 0; i < 3; i++, temp3 += 2) {
+        func_8001ACDC_1B8DC(*temp3); //?
+    }
+    for (temp2 = sp20, i = 0; i < 8; i++, temp2++) {
+        func_8001ACDC_1B8DC(temp2->unk_18);
+        func_8001ACDC_1B8DC(temp2->unk_1A);
+        func_80033354_33F54(temp2->unk_1C);
+        if (temp2->unk_1E >= 0) {
+            func_8001ACDC_1B8DC(temp2->unk_1E);
+        }
+    }
+
+    for (temp = sp120, i = 0; i < 3; i++, temp++) {
+        func_8001ACDC_1B8DC(temp->unk_28);
+    }
+
+    func_800E52F8();
+    func_800E5000();
+    *temp_s2 = 0;
+    while (1) {
+        HuPrcVSleep();
+    }
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_7C_name/542220", func_8010D450_549CD0_name_7C);
 

@@ -614,7 +614,9 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E9AE0
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E9AF0_FD710_shared_board);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E9BB0_FD7D0_shared_board);
+void func_800E9BB0_FD7D0_shared_board(void) {
+    func_800E6630_FA250_shared_board(hvq_data_ROM_START);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", func_800E9BD0_FD7F0_shared_board);
 

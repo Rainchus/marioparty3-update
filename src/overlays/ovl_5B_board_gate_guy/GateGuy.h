@@ -43,13 +43,8 @@ typedef struct unkStruct06 {
 /* 0x0C */ char unk_0C[4];
 } unkStruct06;
 
-typedef struct unkStruct07 {
-/* 0x00 */ char unk_00[0x17];
-/* 0x17 */ u8 unk_17;
-} unkStruct07;
-
 extern s16 D_800A1764_A2364;
-
+f32 func_800D76D0_EB2F0_shared_board(void*);
 void func_80100CEC_E8ABC_name_81(u8);
 s32 func_800E1824_C95F4_name_81(s32, s32, s32);
 s32 func_800E88FC_D06CC_name_81(void);
@@ -65,11 +60,7 @@ void func_800E9D9C_D1B6C_name_81(void);
 void func_800E9F4C_D1D1C_name_81(s32, s8*, s8*);
 void func_800EA760_D2530_name_81(void);
 void func_800ECD0C_D4ADC_name_81(s32, s8, s8);
-f32 HuMathCos(f32);
-f32 HuMathSin(f32);
-f32 func_800D76D0_EB2F0_shared_board(void*);
 void func_800EB708_D34D8_name_81(s32, s32, unkStruct01*);
-void* HuMemMemoryAlloc(HeapNode* heap, s32 size);
 unkStruct03* func_80047EA0_48AA0(void*, s32, s32, s32);
 void func_80105CC0_3D8DB0_board_gate_guy(void); //probably takes object as arg
 void func_800FC8C4_E4694_name_81(void*);

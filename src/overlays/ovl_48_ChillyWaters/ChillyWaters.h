@@ -43,7 +43,7 @@ void func_80112074_327BE4_ChillyWaters(void);
 void func_80112BCC_32873C_ChillyWaters(void);
 void func_801138E4_329454_ChillyWaters(void);
 void func_80114B80_32A6F0_ChillyWaters(void);
-void func_80115B80_32B6F0_ChillyWaters(void);
+void ItemUseWackyWatch(void);
 void func_80116DAC_32C91C_ChillyWaters(void);
 void func_80116F5C_32CACC_ChillyWaters(void);
 void func_801176A4_32D214_ChillyWaters(void);
@@ -62,7 +62,14 @@ void func_80108574_31E0E4_ChillyWaters(s16);
 void func_80116484_32BFF4_ChillyWaters(void*, void*, void*);
 s16 func_800EB184_FEDA4_shared_board(u16 arg0, u16 arg1);
 void func_800ED998_1015B8_shared_board(s32, s32, s32);
+void func_801155C4_32B134_ChillyWaters(omObjData*);
+void func_80115734_32B2A4_ChillyWaters(omObjData*);
+void func_801158FC_32B46C_ChillyWaters(omObjData*);
+void func_8011548C_32AFFC_ChillyWaters(s32, s32, f32*);
 
+extern s32 D_8011FB80_3356F0_ChillyWaters[4];
+extern void* D_8011FB90_335700_ChillyWaters;
+extern s16 D_8011FB8E_3356FE_ChillyWaters;
 extern void (*D_80102C58_116878_shared_board[22])(void); //size based on func_80107CC4_31D834_ChillyWaters (calls to func_800E2960_F6580_shared_board)
 extern char D_8011D77C_3332EC_ChillyWaters[];
 extern char D_8011DB5C_3336CC_ChillyWaters[];

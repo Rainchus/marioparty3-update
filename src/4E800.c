@@ -24,7 +24,7 @@ extern u16 strlinecnt;
 extern u16 empstrline;
 extern s32 fontcolor;
 extern u16 D_800D6A46_D7646;
-extern Unk_D_800CC440 D_800CC440_CD040[];
+extern Unk_D_800CC440 D_800CC440_CD040[4];
 extern s16 D_800CDD4C_CE94C;
 
 void pfInit(void) {

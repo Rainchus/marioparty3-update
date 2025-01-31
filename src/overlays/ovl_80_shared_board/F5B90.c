@@ -169,7 +169,7 @@ INCLUDE_RODATA("asm/nonmatchings/overlays/ovl_80_shared_board/F5B90", D_801021DC
 
 void func_800E455C_F817C_shared_board(void) {
     s8 sp20[4];
-    char sp28[16]; //unk type
+    Vec sp28;
     char sp38[16];
     s32 sp4C;
     GW_PLAYER* curPlayer;
@@ -197,8 +197,8 @@ void func_800E455C_F817C_shared_board(void) {
         if (playerPassed != 0) {
             sp4C = func_800DBEC0_EFAE0_shared_board(curPlayerIndex);
             func_800E6420_FA040_shared_board(-1, 2);
-            func_800ECC0C_10082C_shared_board(sp28);
-            func_800ED128_100D48_shared_board(&curPlayer->player_obj->unk18, sp28, &curPlayer->player_obj->unk18, 8);
+            func_800ECC0C_10082C_shared_board(&sp28);
+            func_800ED128_100D48_shared_board(&curPlayer->player_obj->unk18, &sp28, &curPlayer->player_obj->unk18, 8);
             HuPrcSleep(8);
             totalCoinsToLose = 0;
 

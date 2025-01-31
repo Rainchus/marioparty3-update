@@ -131,7 +131,7 @@ typedef struct GW_SYSTEM {
     } boardData;
     /* 0x50 - 800CD0A8 */ char unk_50[1];
     /* 0x51 - 800CD0A9 */ u8 cur_player_used_item; //1 if player already used an item this turn
-    /* 0x52 - 800CD0AA */ char unk_52[2];
+    /* 0x52 - 800CD0AA */ s16 unk_52;
     /* 0x54 - 800CD0AC */ s16 unk_54;
     /* 0x56 - 800CD0AE */ s16 slow_dice_flags;
     /* 0x58 - 800CD0B0 */ s16 unk_58;

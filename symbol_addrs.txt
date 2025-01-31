@@ -684,6 +684,8 @@ pfInit = 0x8004DC00; //rom:0x4E800
 pfClsScr = 0x8004DC98; //rom:0x4E898
 pfDrawFonts = 0x8004E03C; //rom:0x4EC3C
 gMainGfxPos = 0x800D1FF4; //type:s32
+D_800CC440_CD040 = 0x800CC440; //size:0x60
+D_800CE1DC_CEDDC = 0x800CE1DC; //size:0xC
 
 DrawSpaces = 0x800EA6F4; //rom:0xFE314 segment:shared_board
 
@@ -765,3 +767,4 @@ D_80105718_119338_shared_board = 0x80105718; //rom:0x119338 size:0xC0 segment:sh
 D_801018E4_115504_shared_board = 0x801018E4; //rom:0x115504 size:0x44 segment:shared_board
 PlayerBoardStatusRootPosition = 0x80101794; //rom:0x1153B4 size:0x20 segment:shared_board
 UpdatePlayerBoardStatus = 0x800F2E30; //rom:0x106A50 segment:shared_board
+ItemUseWackyWatch = 0x80115B80; //rom:0x32B6F0 segment:ChillyWaters

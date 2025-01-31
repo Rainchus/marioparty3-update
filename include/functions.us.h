@@ -118,5 +118,8 @@ void func_80036414_37014(Addr);
 void func_8005DDDC_5E9DC(void);
 void func_8001ACDC_1B8DC(s16);
 void func_80033354_33F54(s16);
+void func_800525C8_531C8(s16);
+void func_8005F364_5FF64(s16);
+void WipeColorSet(u8, u8, u8);
 
 #endif

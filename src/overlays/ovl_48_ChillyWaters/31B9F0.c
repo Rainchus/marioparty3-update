@@ -1,4 +1,5 @@
 #include "ChillyWaters.h"
+#include "../ovl_80_shared_board/ovl_80.h"
 
 // Get toad space index for current start space index.
 s16 func_80105E80_31B9F0_ChillyWaters(void) {
@@ -137,26 +138,26 @@ void func_80107CC4_31D834_ChillyWaters(void) {
     space = GetSpaceData(0x8F);
     func_800ECB58_100778_shared_board(&space->coords, &GetSpaceData(0x80)->coords, &sp10);
     func_800EA660_FE280_shared_board(func_800D8790_EC3B0_shared_board(&sp10) + 180.0f);
-    func_800E2960_F6580_shared_board(0, &func_8010DE7C_3239EC_ChillyWaters);
-    func_800E2960_F6580_shared_board(1, &func_8010F2FC_324E6C_ChillyWaters);
+    func_800E2960_F6580_shared_board(0, &func_8010DE7C_3239EC_ChillyWaters); //boo event
+    func_800E2960_F6580_shared_board(1, &func_8010F2FC_324E6C_ChillyWaters); //magic lamp
     func_800E2960_F6580_shared_board(9, &func_8010F6C4_325234_ChillyWaters);
-    func_800E2960_F6580_shared_board(2, &func_8010F730_3252A0_ChillyWaters);
-    func_800E2960_F6580_shared_board(3, &func_80117C60_32D7D0_ChillyWaters);
-    func_800E2960_F6580_shared_board(4, &func_8011093C_3264AC_ChillyWaters);
+    func_800E2960_F6580_shared_board(2, &func_8010F730_3252A0_ChillyWaters); //warp block
+    func_800E2960_F6580_shared_board(3, &func_80117C60_32D7D0_ChillyWaters); //plunder chest
+    func_800E2960_F6580_shared_board(4, &func_8011093C_3264AC_ChillyWaters); //activate bowser suit
     func_800E2960_F6580_shared_board(5, &func_80110BC8_326738_ChillyWaters); //when landing on a space as bowser suit
-    func_800E2960_F6580_shared_board(6, &func_8010FC24_325794_ChillyWaters);
-    func_800E2960_F6580_shared_board(7, &func_80110194_325D04_ChillyWaters);
+    func_800E2960_F6580_shared_board(6, &func_8010FC24_325794_ChillyWaters); //mushroom/golden mushroom/bowser suit
+    func_800E2960_F6580_shared_board(7, &func_80110194_325D04_ChillyWaters); //dueling glove/boo bell (?)
     func_800E2960_F6580_shared_board(8, &func_801104E0_326050_ChillyWaters);
-    func_800E2960_F6580_shared_board(0xA, &func_80116F5C_32CACC_ChillyWaters);
-    func_800E2960_F6580_shared_board(0xB, &func_801177DC_32D34C_ChillyWaters);
+    func_800E2960_F6580_shared_board(0xA, &func_80116F5C_32CACC_ChillyWaters); //poison mushroom
+    func_800E2960_F6580_shared_board(0xB, &func_801177DC_32D34C_ChillyWaters); //reverse mushroom
     func_800E2960_F6580_shared_board(0xE, &func_80111018_326B88_ChillyWaters);
-    func_800E2960_F6580_shared_board(0xF, &func_801112D8_326E48_ChillyWaters);
-    func_800E2960_F6580_shared_board(0x10, &func_80111678_3271E8_ChillyWaters);
-    func_800E2960_F6580_shared_board(0x11, &func_80112074_327BE4_ChillyWaters);
-    func_800E2960_F6580_shared_board(0x12, &func_80112BCC_32873C_ChillyWaters);
-    func_800E2960_F6580_shared_board(0x13, &func_801138E4_329454_ChillyWaters);
-    func_800E2960_F6580_shared_board(0x14, &func_80114B80_32A6F0_ChillyWaters);
-    func_800E2960_F6580_shared_board(0x15, &func_80115B80_32B6F0_ChillyWaters);
+    func_800E2960_F6580_shared_board(0xF, &func_801112D8_326E48_ChillyWaters); //bowser phone
+    func_800E2960_F6580_shared_board(0x10, &func_80111678_3271E8_ChillyWaters); //lucky lamp
+    func_800E2960_F6580_shared_board(0x11, &func_80112074_327BE4_ChillyWaters); //skeleton key throw away event
+    func_800E2960_F6580_shared_board(0x12, &func_80112BCC_32873C_ChillyWaters); //boo repellant/koopa kard thrown away
+    func_800E2960_F6580_shared_board(0x13, &func_801138E4_329454_ChillyWaters); //barter box
+    func_800E2960_F6580_shared_board(0x14, &func_80114B80_32A6F0_ChillyWaters); //game guy coin
+    func_800E2960_F6580_shared_board(0x15, &ItemUseWackyWatch); //wacky watch
     func_800E2960_F6580_shared_board(0xC, &func_80116DAC_32C91C_ChillyWaters);
     func_800E2960_F6580_shared_board(0xD, &func_801176A4_32D214_ChillyWaters);
     func_800DA748_EE368_shared_board(&func_8011C88C_3323FC_ChillyWaters);
@@ -479,7 +480,176 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_8011573
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_801158FC_32B46C_ChillyWaters);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_80115B80_32B6F0_ChillyWaters);
+//main function for using a wacky watch?
+void ItemUseWackyWatch(void) {
+    s32 sp18[4];
+    f32 sp28[2];
+    s32 sp30;
+    s32 sp34;
+    f32 sp38;
+    f32 sp3C;
+    s32 sp40;
+    Process* temp_v0_4;
+    f32 temp_f20;
+    f32 var_f20;
+    s32 temp_s0_3;
+    s32 temp_s4;
+    s32 temp_s7;
+    s32 temp_s1_2;
+    s32 var_s1;
+    s32 var_v0;
+    s32 var_v1;
+    s32* temp_s0;
+    void* temp_v0;
+    Object* temp_v0_3;
+    s32 i;
+    s32 j;
+    GW_SYSTEM* system = &GwSystem;
+    s32 temp;
+    
+    temp_s4 = func_8005279C_5339C(1, 0);
+    temp_v0 = ReadMainFS(D_8010197C_11559C_shared_board[18]);
+    temp_s7 = func_80055810_56410(temp_v0);
+    HuFreeFilePerm(temp_v0);
+    func_80055024_55C24(temp_s4, 0, temp_s7, 0);
+    SprPriSet(temp_s4, 0, 0x4776U);
+    SprAttrSet(temp_s4, 0, 0x1000U);
+    for (i = 0; i < 4; i++) {
+        D_8011FB80_3356F0_ChillyWaters[i] = func_8005279C_5339C(1, 0);
+        temp_v0 = ReadMainFS((i + 0x1BB) | 0x130000);
+        sp18[i] = func_80055810_56410(temp_v0);
+        HuFreeFilePerm(temp_v0);
+        func_80055024_55C24(D_8011FB80_3356F0_ChillyWaters[i], 0, sp18[i], 0);
+        SprPriSet(D_8011FB80_3356F0_ChillyWaters[i], 0, 0x4780U);
+        SprAttrSet(D_8011FB80_3356F0_ChillyWaters[i], 0, 0x980CU);
+        func_80055458_56058(D_8011FB80_3356F0_ChillyWaters[i], 0, 0U);
+        func_80055420_56020(D_8011FB80_3356F0_ChillyWaters[i], 0, 0xFF, 0xFF, 0);
+    }
+    temp_v0_3 = func_800D90C8_ECCE8_shared_board(0x46, 0);
+    D_8011FB90_335700_ChillyWaters = temp_v0_3;
+    func_8001C258_1CE58(temp_v0_3->unk3C->model[0], 0x180, 0);
+    func_8001C8E4_1D4E4(temp_v0_3->unk3C->model[0], 0x1800);
+    func_8001C448_1D048(temp_v0_3->unk3C->model[0]);
+    func_8001C1A0_1CDA0(temp_v0_3->unk3C->model[0], 0.0f, 0.0f, 0.0f);
+    HuVecCopy3F(&temp_v0_3->coords, &GetPlayerStruct(CUR_PLAYER)->player_obj->coords);
+    func_800D9714_ED334_shared_board(temp_v0_3);
+    func_800D9B24_ED744_shared_board(temp_v0_3);
+    SprAttrSet(D_8010570C_11932C_shared_board, 0, 0x8000U);
+    func_800F68E0_10A500_shared_board(system->current_player_index, func_800E4A7C_F869C_shared_board(), 0);
+    func_800F6E4C_10AA6C_shared_board(system->current_player_index, func_800E4A7C_F869C_shared_board(), &sp30, &sp34);
+    func_80054904_55504(temp_s4, 0, sp30, sp34);
+    sp28[0] = 160.0f;
+    sp28[1] = 76.0f;
+    HuAudFXPlay(0x145);
+    func_8011548C_32AFFC_ChillyWaters(temp_s4, 0x1E, sp28);
+    GwPlayer[system->current_player_index].itemNo[func_800E4A7C_F869C_shared_board()] = -1;
+    FixUpPlayerItemSlots(system->current_player_index);
+    func_800F6BC4_10A7E4_shared_board(CUR_PLAYER);
+    func_800F66DC_10A2FC_shared_board(0);
+    func_800F6ECC_10AAEC_shared_board(CUR_PLAYER);
+    HuPrcSleep(0x1E);
+    sp28[0] = 203.0f;
+    sp28[1] = 44.0f;
+    func_8011548C_32AFFC_ChillyWaters(temp_s4, 0xA, sp28);
+    temp_v0_4 = omAddPrcObj(func_801155C4_32B134_ChillyWaters, 0x4002U, 0, 0);
+    temp_v0_4->user_data = NULL;
+    HuPrcChildLink(HuPrcCurrentGet(), temp_v0_4);
+    sp28[0] -= 76.0f;
+    HuAudFXPlay(0x14D);
+    func_8011548C_32AFFC_ChillyWaters(temp_s4, 0xA, sp28);
+    HuPrcChildWait();
+    HuPrcSleep(0xA);
+    temp_v0_4 = omAddPrcObj(func_801155C4_32B134_ChillyWaters, 0x4002U, 0, 0);
+    temp_v0_4->user_data = (void* )1;
+    HuPrcChildLink(HuPrcCurrentGet(), temp_v0_4);
+    sp28[1] += 64.0f;
+    HuAudFXPlay(0x14D);
+    func_8011548C_32AFFC_ChillyWaters(temp_s4, 0xA, sp28);
+    HuPrcChildWait();
+    HuPrcSleep(0xA);
+    HuAudFXPlay(0x14E);
+    func_800F6748_10A368_shared_board(temp_s4, 0, &sp38, &sp3C);
+    for (var_f20 = 0.0f, var_s1 = 0; var_f20 < 90.0f; var_f20 += 3.6f) {
+        func_80054904_55504(temp_s4, 0, ((HuMathCos((2.0f * var_f20) + 270.0f) * 80.0f) + sp38), (((1.0f - HuMathCos(var_f20)) * 90.0f) + sp3C));
+        if (!(var_f20 > 54.0f)) {
+            var_v1 = 0;
+        } else {
+            var_v1 = 1;
+        }
+        temp = var_v1 != 0;
+        if (temp && var_s1 == 0) {
+            var_s1 = 1;
+            temp_v0_4 = omAddPrcObj(func_801155C4_32B134_ChillyWaters, 0x4002U, 0, 0);
+            temp_v0_4->user_data = (void* )2;
+            HuPrcChildLink(HuPrcCurrentGet(), temp_v0_4);
+        }
+        HuPrcVSleep();        
+    }
+
+    temp_s0_3 = (s16) (s32) ((HuMathCos(450.0f) * 80.0f) + sp38);
+    func_80054904_55504(temp_s4, 0, temp_s0_3, (((1.0f - HuMathCos(90.0f)) * 90.0f) + sp3C));
+    
+    for (j = 255; j > 0; j -= 0x19, HuPrcVSleep()) {
+        func_80055458_56058(temp_s4, 0, j);
+    }
+
+    func_800525C8_531C8(temp_s4);
+    func_80055670_56270(temp_s7);
+    HuPrcChildWait();
+    
+    for (i = 0; i < 3; i++) {
+        SprAttrSet(D_8011FB80_3356F0_ChillyWaters[i], 0, 0x8000);
+    }
+
+    SprAttrReset(D_8011FB8E_3356FE_ChillyWaters, 0, 0x8000U);
+    func_80055458_56058(D_8011FB8E_3356FE_ChillyWaters, 0, 0xFFU);
+    func_80054904_55504(D_8011FB8E_3356FE_ChillyWaters, 0, 0xA0, 0x78);
+    HuPrcChildLink(HuPrcCurrentGet(), omAddPrcObj(func_80115734_32B2A4_ChillyWaters, 0x4002U, 0, 0));
+    sp40 = 0;
+    omAddPrcObj(func_801158FC_32B46C_ChillyWaters, 0x4002U, 0, 0)->user_data = &sp40;
+    HuPrcChildWait();
+    HuAudFXPlay(0x14F);
+    temp_s1_2 = func_800FFA4C_11366C_shared_board(-1, 4, 5);
+    
+    for (i = 0; i < 0xB41; i += 0x32) {
+        temp_f20 = (HuMathSin(i) / 2.0f) + 1.0f;
+        SprScale(D_8011FB8E_3356FE_ChillyWaters, 0, temp_f20, (HuMathSin(i) / 3.0f) + 1.0f);
+        if (i >= 0x5A1) {
+            sp40 = 1;
+        }
+        HuPrcVSleep();        
+    }
+    
+    HuAudFXPlay(0x129);
+    WipeColorSet(0xFF, 0xFF, 0xFF);
+    WipeCreateOut(0xB, 0x32);
+    func_800FFAEC_11370C_shared_board(temp_s1_2);
+    var_f20 = 0.0f;
+    
+    while (WipeStatGet() != 0) {
+        SprScale(D_8011FB8E_3356FE_ChillyWaters, 0, var_f20, var_f20);
+        HuPrcVSleep();
+        var_f20 += 0.1f;
+    }
+    
+    while (WipeStatGet() != 0) {
+        HuPrcVSleep();
+    }
+    
+    sp40 = 2;
+    for (i = 0; i < 4; i++) {
+        func_800525C8_531C8(D_8011FB80_3356F0_ChillyWaters[i]);
+        func_80055670_56270(sp18[i]);
+    }
+    
+    WipeCreateIn(0xB, 0x5A);
+    while (WipeStatGet() != 0) {
+        HuPrcVSleep();
+    }
+    
+    func_800EC414_100034_shared_board(0x3A23);
+    GwSystem.unk_52 = 2;
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_80116484_32BFF4_ChillyWaters);
 

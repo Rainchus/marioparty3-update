@@ -6,8 +6,6 @@ void func_80108D2C_3C5B4C_BowserEvent(void);
 void func_80109220_3C6040_BowserEvent(omObjData*);
 s32 func_8010926C_3C608C_BowserEvent(void);
 s32 func_801092D4_3C60F4_BowserEvent(void);
-void func_800525C8_531C8(s16);
-void func_8005F364_5FF64(s16);
 void func_80107724_3C4544_BowserEvent(void);
 
 extern s16 D_801094F6_3C6316_BowserEvent;

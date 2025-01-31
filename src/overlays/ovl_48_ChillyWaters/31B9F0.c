@@ -474,9 +474,67 @@ INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_80114B8
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_8011548C_32AFFC_ChillyWaters);
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_801155C4_32B134_ChillyWaters);
+void func_801155C4_32B134_ChillyWaters(omObjData* obj) {
+    s32 temp_s1;
+    s32 temp_v0;
+    s32 var_s0;
+    s32 var_s3;
+    s32 var_v0;
+    s32 i;
 
-INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_80115734_32B2A4_ChillyWaters);
+    temp_s1 = (s32)HuPrcCurrentGet()->user_data;
+    var_s3 = 10;
+
+    switch (temp_s1) {
+    case 0:
+        func_80054904_55504(D_8011FB80_3356F0_ChillyWaters[temp_s1], 0, 0xB1, 0x2C);
+        break;
+    case 1:
+        func_80054904_55504(D_8011FB80_3356F0_ChillyWaters[temp_s1], 0, 0x7A, 0x39);
+        break;
+    default:
+        func_80054904_55504(D_8011FB80_3356F0_ChillyWaters[temp_s1], 0, 0xA0, 0x98);
+        var_s3 = 30;
+        break;
+    }
+
+    SprAttrReset(D_8011FB80_3356F0_ChillyWaters[temp_s1], 0, 0x8000U);
+    for (i = 0; i < 255; i += 255 / var_s3) {
+        func_80055458_56058(D_8011FB80_3356F0_ChillyWaters[temp_s1], 0, i & 0xFFFF);
+        HuPrcVSleep();
+    }
+
+    func_80055458_56058(D_8011FB80_3356F0_ChillyWaters[temp_s1], 0, 0xFF);
+    omDelPrcObj(0);
+}
+
+void func_80115734_32B2A4_ChillyWaters(omObjData* obj) {
+    RGB2 sp18;
+    RGB2 sp28;
+    s32 i, j;
+
+    for (i = 0; i <= 0; i++) {
+        sp18.r = D_8011E4B8_334028_ChillyWaters[i].r;
+        sp18.g = D_8011E4B8_334028_ChillyWaters[i].g;
+        sp18.b = D_8011E4B8_334028_ChillyWaters[i].b;
+
+        sp28.r = (D_8011E4B8_334028_ChillyWaters[i+1].r - sp18.r) / 30;
+        sp28.g = (D_8011E4B8_334028_ChillyWaters[i+1].g - sp18.g) / 30;
+        sp28.b = (D_8011E4B8_334028_ChillyWaters[i+1].b - sp18.b) / 30;
+
+        for (j = 0; j < 30; j++) {
+            func_80055420_56020(D_8011FB8E_3356FE_ChillyWaters, 0, sp18.r, sp18.g, sp18.b);
+            sp18.r += sp28.r;
+            sp18.g += sp28.g;
+            sp18.b += sp28.b;
+            HuPrcVSleep();            
+        }
+        func_80055420_56020(D_8011FB8E_3356FE_ChillyWaters, 0, D_8011E4B8_334028_ChillyWaters[i+1].r, D_8011E4B8_334028_ChillyWaters[i+1].g, D_8011E4B8_334028_ChillyWaters[i+1].b);
+        HuPrcSleep(0xA);        
+    }
+
+    omDelPrcObj(0);
+}
 
 INCLUDE_ASM("asm/nonmatchings/overlays/ovl_48_ChillyWaters/31B9F0", func_801158FC_32B46C_ChillyWaters);
 

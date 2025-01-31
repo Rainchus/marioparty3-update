@@ -37,7 +37,7 @@ void func_800550B4_55CB4(s32, s16, f32);
 void func_800550F4_55CF4(s16, s16, s32);
 void SprScale(s16, s16, f32, f32);
 void SprPriSet(s16, s16, u16);
-void func_80055420_56020(s16, s16, u8, u8, s32);
+void func_80055420_56020(s16, s16, u8, u8, u8);
 void func_80055458_56058(s16, s16, u16);
 void func_8001C258_1CE58(s16, s32, s32);
 void func_8001C448_1D048(s16);

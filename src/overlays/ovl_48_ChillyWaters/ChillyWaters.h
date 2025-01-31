@@ -1,6 +1,12 @@
 #include "common.h"
 #include "mallocblock.h"
 
+typedef struct RGB2 {
+    s32 r;
+    s32 g;
+    s32 b;
+} RGB2;
+
 void func_800E21F4_F5E14_shared_board(void*);
 void* func_800E210C_F5D2C_shared_board(s32, s32, s32);
 void func_8010067C_11429C_shared_board(s32);
@@ -67,6 +73,7 @@ void func_80115734_32B2A4_ChillyWaters(omObjData*);
 void func_801158FC_32B46C_ChillyWaters(omObjData*);
 void func_8011548C_32AFFC_ChillyWaters(s32, s32, f32*);
 
+extern RGB D_8011E4B8_334028_ChillyWaters[2];
 extern s32 D_8011FB80_3356F0_ChillyWaters[4];
 extern void* D_8011FB90_335700_ChillyWaters;
 extern s16 D_8011FB8E_3356FE_ChillyWaters;

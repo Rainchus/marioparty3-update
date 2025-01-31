@@ -41,4 +41,9 @@ enum CHARACTER_IMAGES {
     CHAR_BABY_BOWSER = 5,
 };
 
+enum REV_FLAGS {
+    FLAG_REV = 1,
+    FLAG_UNK_80 = 0x80
+};
+
 #endif //_ENUMS_H_

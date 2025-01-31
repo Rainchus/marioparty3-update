@@ -151,10 +151,13 @@ test: $(ROM)
 
 # Flags for individual files. TODO: move these to a common directory and make this a directory thing instead
 build/src/2.0L/audio/%.c.o: OPTFLAGS = -O2
-build/src/2.0L/audio/%.c.o: CFLAGS = -G0 -mips3 -mgp32 -mfp32 -D_MIPS_SZLONG=32 -D_LANGUAGE_C -DF3DEX_GBI
+build/src/2.0L/audio/%.c.o: CFLAGS = -G0 -mips3 -mgp32 -mfp32 -D_MIPS_SZLONG=32 -D_LANGUAGE_C -DF3DEX_GBI -D__MIPSEB__
 build/src/2.0L/audio/%.c.o: CPPFLAGS = -I include -I include/PR -I include/gcc -I $(BUILD_DIR)/include -I src -DNDEBUG -D_MIPS_SZLONG=32 -DF3DEX_GBI_2
 build/src/8A6B0.c.o: OPTFLAGS = -O2 #Could also be -O3?
-
+build/src/2.0L/libc/sprintf.c.o: OPTFLAGS = -O2
+build/src/2.0L/libc/syncprintf.c.o: OPTFLAGS = -O2
+build/src/2.0L/libc/string.c.o: OPTFLAGS = -O2
+build/src/2.0L/libc/xprintf.c.o: OPTFLAGS = -O2
 
 # Compile .c files with kmc gcc (use strip to fix objects so that they can be linked with modern gnu ld) 
 $(BUILD_DIR)/src/%.c.o: src/%.c

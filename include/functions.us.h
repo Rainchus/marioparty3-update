@@ -83,7 +83,7 @@ s32  func_8004FDC0_509C0(void);
 void func_80050800_51400(void);
 void SLCurBoxNoSet(u32 arg0);
 void WipeInit(void);
-void memset(void *dest, int ch, u32 /*size_t*/ n);
+void* memset(void *dest, int ch, unsigned int n);
 void func_80050974_51574(void);
 s32 print8(u16 x, u16 y, char* src);
 void func_8005035C_50F5C(s32);
@@ -121,5 +121,10 @@ void func_80033354_33F54(s16);
 void func_800525C8_531C8(s16);
 void func_8005F364_5FF64(s16);
 void WipeColorSet(u8, u8, u8);
-
+void func_8005B43C_5C03C(s16, s32, s32, s32);
+void func_8005B6BC_5C2BC(s16 win_id, u32 arg1, s8 arg2);
+void func_8005E1A8_5EDA8(s16, s16);
+void func_8006022C_60E2C(s32, s32);
+void func_80060394_60F94(s32, s16*, s32);
+void func_80061388_61F88(s16);
 #endif

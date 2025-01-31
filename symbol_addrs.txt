@@ -421,7 +421,7 @@ __osInitialize_emu = 0x8007F860;
 proutSyncPrintf = 0x8007F874;
 __printfunc = 0x800A3FB4;
 __osRdbSend = 0x8007B6D0;
-
+_Putfld = 0x80081FC0; //rom:0x82BC0
 abs = 0x80087840;
 __fint = 0x80087860;
 fmod = 0x800878E8;
@@ -719,7 +719,8 @@ alSynRemovePlayer = 0x8006FC50; //rom:0x70850
 alSndpDeallocate = 0x8006D320; //rom:0x6DF20
 
 D_800A4340_A4F40 = 0x800A4340; //rom:0xA4F40 size:0x4 force_migration:True
-
+_Printf = 0x80081A40; //rom:0x82640
+proutSprintf = 0x8007BE18; //rom:0x7CA18
 swapChainTask = 0x800B1800;
 gMesgQueue = 0x800B1960;
 rspBootAddressStart = 0x8008F0F0;

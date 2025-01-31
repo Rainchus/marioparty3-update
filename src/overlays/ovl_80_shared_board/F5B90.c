@@ -210,7 +210,7 @@ void func_800E455C_F817C_shared_board(void) {
                         coinsToLose = 20;
                     }
                     sprintf(sp38, "%2d", coinsToLose);
-                    func_800EC8EC_10050C_shared_board(-1, 0x3A15, D_801014A0_1150C0_shared_board[GwPlayer[sp20[i]].chr], sp38, D_801014A0_1150C0_shared_board[GwPlayer[curPlayerIndex].chr], 0, 0);
+                    func_800EC8EC_10050C_shared_board(-1, 0x3A15, D_801014A0_1150C0_shared_board[GwPlayer[sp20[i]].chr], (s32)sp38, D_801014A0_1150C0_shared_board[GwPlayer[curPlayerIndex].chr], 0, 0);
                     temp_s0_2 = -coinsToLose;
                     func_800EC6C8_1002E8_shared_board();
                     totalCoinsToLose += coinsToLose;

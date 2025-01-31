@@ -265,9 +265,9 @@ void func_80108DD0_31E940_ChillyWaters(void) {
     GW_PLAYER* player;
 
     player = GetPlayerStruct(CUR_PLAYER);
-    if ((func_800EB184_FEDA4_shared_board(player->blink, player->bidx) == 0x4B) && !(player->rev & 0x80)) {
+    if ((func_800EB184_FEDA4_shared_board(player->blink, player->bidx) == 0x4B) && !(player->rev & FLAG_UNK_80)) {
         func_800ED998_1015B8_shared_board(-1, 0xA, 0);
-        player->rev &= ~1;
+        player->rev &= ~FLAG_REV;
     } else {
         func_80116484_32BFF4_ChillyWaters(D_8011DB5C_3336CC_ChillyWaters, D_8011DB70_3336E0_ChillyWaters, D_8011D77C_3332EC_ChillyWaters);
     }
@@ -669,10 +669,10 @@ void ItemUseWackyWatch(void) {
     HuAudFXPlay(0x14F);
     temp_s1_2 = func_800FFA4C_11366C_shared_board(-1, 4, 5);
     
-    for (i = 0; i < 0xB41; i += 0x32) {
+    for (i = 0; i <= 2880; i += 50) {
         temp_f20 = (HuMathSin(i) / 2.0f) + 1.0f;
         SprScale(D_8011FB8E_3356FE_ChillyWaters, 0, temp_f20, (HuMathSin(i) / 3.0f) + 1.0f);
-        if (i >= 0x5A1) {
+        if (i >= (2880 / 2 + 1)) {
             sp40 = 1;
         }
         HuPrcVSleep();        
@@ -682,12 +682,10 @@ void ItemUseWackyWatch(void) {
     WipeColorSet(0xFF, 0xFF, 0xFF);
     WipeCreateOut(0xB, 0x32);
     func_800FFAEC_11370C_shared_board(temp_s1_2);
-    var_f20 = 0.0f;
     
-    while (WipeStatGet() != 0) {
+    for (var_f20 = 0.0f; WipeStatGet() != 0; var_f20 += 0.1f) {
         SprScale(D_8011FB8E_3356FE_ChillyWaters, 0, var_f20, var_f20);
         HuPrcVSleep();
-        var_f20 += 0.1f;
     }
     
     while (WipeStatGet() != 0) {

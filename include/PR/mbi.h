@@ -15,9 +15,9 @@
 
 /**************************************************************************
  *
- *  $Revision: 1.136 $
- *  $Date: 1999/01/05 13:04:00 $
- *  $Source: /hosts/gate3/exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/mbi.h,v $
+ *  $Revision: 1.135 $
+ *  $Date: 1997/11/26 00:30:54 $
+ *  $Source: /hosts/liberte/disk6/Master/cvsmdev2/PR/include/mbi.h,v $
  *
  **************************************************************************/
 
@@ -60,11 +60,7 @@
  *
  **************************************************************************/
 
-#ifdef F3D_OLD
-#include <PR/gbi_old.h>
-#else
 #include <PR/gbi.h>
-#endif
 
 /**************************************************************************
  *
@@ -83,8 +79,6 @@
 #define	M_GFXTASK	1
 #define	M_AUDTASK	2
 #define	M_VIDTASK	3
-#define M_HVQTASK	6
-#define M_HVQMTASK	7
 
 /**************************************************************************
  *

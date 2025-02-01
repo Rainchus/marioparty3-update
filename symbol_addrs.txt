@@ -1,3 +1,43 @@
+alCSPGetChlVol = 0x8006CFF0;
+alCSPGetChlFXMix = 0x8006D010;
+
+D_800A46A0 = 0x800A46A0; //size:0x190 type:f32
+
+_ovltbl = 0x800962F4; //rom:0x96EF4 size:0x1200
+_modeovltbl = 0x800974F4; //rom:0x980F4 size:0x6C
+
+//ovl_6A
+D_8010FD20_48BCF0_name_6A = 0x8010FD20; //rom:0x48BCF0 type:s32 size:0x18 force_migration:False
+
+//ovl_6B
+D_80114DE4_49B274_name_6B = 0x80114DE4; //rom:0x49B274 type:f32 size:0xC force_migration:True
+D_80114DF0_49B280_name_6B = 0x80114DF0; //rom:0x49B280 type:f32 size:0xC force_migration:True
+D_80114EB8_49B348_name_6B = 0x80114EB8; //rom:0x49B348 type:f32 size:0xC
+D_801151F4_49B684_name_6B = 0x801151F4; //rom:0x49B684 type:f32 size:0xC force_migration:True
+D_80115200_49B690_name_6B = 0x80115200; //rom:0x49B690 type:f32 size:0xC force_migration:True
+D_801152C8_49B758_name_6B = 0x801152C8; //rom:0x49B758 type:f32 size:0xC
+D_80115604_49BA94_name_6B = 0x80115604; //rom:0x49BA94 type:f32 size:0xC force_migration:True
+D_80115610_49BAA0_name_6B = 0x80115610; //rom:0x49BAA0 type:f32 size:0xC force_migration:True
+D_801156D8_49BB68_name_6B = 0x801156D8; //rom:0x49BB68 type:f32 size:0xC
+D_801157C8_49BC58_name_6B = 0x801157C8; //rom:0x49BC58 type:f32 size:0xC force_migration:True
+
+//ovl_6D
+D_80115AAC_4C2AEC_name_6D = 0x80115AAC; //rom:0x4C2AEC type:f32 size:0x78 force_migration:True
+D_80115B60_4C2BA0_name_6D = 0x80115B60; //rom:0x4C2BA0 type:f32 size:0x10 force_migration:True
+
+//ovl_6E
+D_80111D5C_4CEF8C_name_6E = 0x80111D5C; //rom:0x4CEF8C type:f32 size:0x0C force_migration:True
+D_80111D68_4CEF98_name_6E = 0x80111D68; //rom:0x4CEF98 type:f32 size:0x0C force_migration:True
+D_80111E30_4CF060_name_6E = 0x80111E30; //rom:0x4CF060 type:f32 size:0x0C
+
+//ovl_6F
+D_80114A24_4DE3D4_name_6F = 0x80114A24; //rom:0x4DE3D4 type:f32 size:0x0C force_migration:True
+D_80114A30_4DE3E0_name_6F = 0x80114A30; //rom:0x4DE3E0 type:f32 size:0x0C force_migration:True
+D_80114AF4_4DE4A4_name_6F = 0x80114AF4; //rom:0x4DE4A4 type:f32 size:0x0C force_migration:True
+D_80114E60_4DE810_name_6F = 0x80114E60; //rom:0x4DE810 type:f32 size:0x0C
+D_80114E6C_4DE81C_name_6F = 0x80114E6C; //rom:0x4DE81C type:f32 size:0x0C
+D_80114F30_4DE8E0_name_6F = 0x80114F30; //rom:0x4DE8E0 type:f32 size:0x0C
+
 HuMemInit = 0x80019980;
 HuMemAlloc = 0x800199F8;
 HuMemAllocTag = 0x80019A14;
@@ -17,10 +57,25 @@ HuPrcVSleep = 0x8004F074;
 InitEspriteSlot = 0x8000BFEC;
 HuAudSeqPlay = 0x8004A520;
 HuAudFXPlay = 0x8004AA88;
-HuDrawTextDbg = 0x8004DD7C;
-HuWipeFadeIn = 0x80061FE8;
-HuWipeFadeOut = 0x80062050;
-HuWipeStatGet = 0x800620BC;
+print8 = 0x8004DD7C;
+WipeCreateIn = 0x80061FE8;
+WipeCreateOut = 0x80062050;
+WipeStatGet = 0x800620BC;
+WipeInit = 0x80061B50; //rom:0x62750
+WipeExecAlways = 0x80061BD4; //rom:0x627D4
+WipeColorSet = 0x800620C8; //rom:0x62CC8
+WipeMalloc = 0x800620E4; //rom:0x62CE4
+
+HmfLightInit = 0x80019030; //rom:0x19C30
+HmfLightClose = 0x800190FC; //rom:0x19CFC
+HmfLightExec = 0x80019104; //rom:0x19D04
+HmfLightReset = 0x800193A8; //rom:0x19FA8
+HmfLightMaxSet = 0x80019490; //rom:0x1A090
+HmfLightStatSet = 0x800194B8; //rom:0x1A0B8
+HmfLightColorSet = 0x80019514; //rom:0x1A114
+HmfLightDirSet = 0x80019568; //rom:0x1A168
+SLCurBoxNoSet = 0x80050E78; //rom:0x51A78
+
 Hu3DCamInit = 0x80012220;
 Hu3DCamSetPositionOrientation = 0x80012408;
 Hu3DCamSetPerspective = 0x8001247C;
@@ -70,7 +125,7 @@ HuMemMemoryReallocTemp = 0x80035974;
 HuMemHeapAllocTempSizeGet = 0x800359A0;
 HuMemUsedMemoryBlockGetTemp = 0x800359C0;
 
-
+osPiRawStartDma = 0x80080A60; //rom:0x81660
 HuInitArchive = 0x80009AC0;
 HuInitFileInfo = 0x80009B64;
 ReadMainFS = 0x80009C10;
@@ -196,16 +251,8 @@ osViBlack = 0x8007DC60;
 
 osViSetEvent = 0x8007D690;
 
-
-D_800BBED0 = 0x800BBED0;
-
-
 osEepromRead = 0x8007F8E0;
 osEepromWrite = 0x80072020;
-
-osWritebackDCacheAll = 0x80078D50;
-
-
 __osSpDeviceBusy = 0x80082690;
 __osSpGetStatus = 0x800826B0;
 __osSpSetStatus = 0x800826C0;
@@ -367,18 +414,29 @@ __rmonHitBreak = 0x800874A4;
 __rmonHitSpBreak = 0x80087580;
 __rmonHitCpuFault = 0x8008760C;
 rmonFindFaultedThreads = 0x80087638;
-
+__sqrtf = 0x80087B10; //rom:0x88710
+__sqrt = 0x80087B18; //rom:0x88718
 
 __osInitialize_autodetect = 0x8007F048;
 __osInitialize_emu = 0x8007F860;
 proutSyncPrintf = 0x8007F874;
 __printfunc = 0x800A3FB4;
 __osRdbSend = 0x8007B6D0;
-
+_Putfld = 0x80081FC0; //rom:0x82BC0
+abs = 0x80087840;
+__fint = 0x80087860;
+fmod = 0x800878E8;
+ceil = 0x80087944;
+floor = 0x800879C0;
+memset = 0x80087A40;
+setmem = 0x80087AE0;
+strcmp = 0x80087B20;
+strcpy = 0x80087C30;
 __muldi3 = 0x80087D00;
 div64_64 = 0x80087D38;
 div64_32 = 0x80087E34;
 __divdi3 = 0x80087F00;
+__moddi3 = 0x80087FB0;
 __udivdi3 = 0x80088070;
 __umoddi3 = 0x80088090;
 sqrt = 0x800880D0;
@@ -460,12 +518,12 @@ _Genld = 0x80084484;
 guPerspectiveF = 0x8007AE60;
 guPerspective = 0x8007B010;
 guNormalize = 0x80082B00;
-gCurrentPlayerIndex = 0x800CD067;
+//gCurrentPlayerIndex = 0x800CD067;
 guLookAtF = 0x80088210;
 guLookAt = 0x80079800;
 HuSqrtf = 0x800880E0;
 
-HuVecGetLengthSqr = 0x800880F4;
+multVecGetLengthSqr = 0x800880F0; //rom:0x88CF0
 HuVecGetLength = 0x80088120;
 HuVecNormalize = 0x80088150;
 HuVecDotProduct = 0x800881E0;
@@ -493,6 +551,8 @@ GetCurrentPlayerIndex = 0x800F2130; //rom:0x105D50
 BoardPlayerRankCalc = 0x800EE9C0; //rom:0x1025E0
 GetTurnsElapsed = 0x800ECEE4; //rom:0x100B04
 PlayerHasItem = 0x800E4978; //rom:0xF8598
+PlayerHasEmptyItemSlot = 0x800E49DC; //rom:0xF85FC
+FixUpPlayerItemSlots = 0x800E4A08; //rom:0xF8628
 RNGPercentChance = 0x800ECE9C; //rom:0x100ABC
 RunDecisionTree = 0x800DA190; //rom:0xEDDB0
 Hu3DModelCreate = 0x8001A150; //rom:0x1AD50
@@ -500,6 +560,8 @@ CameraScissorSet = 0x800124BC; //rom:0x130BC
 CameraViewportSet = 0x80012508; //rom:0x13108
 ScissorSet = 0x8000B364; //rom:0xBF64
 ViewportSet = 0x8000B3C8; //rom:0xBFC8
+SprAttrSet = 0x800553A8; //rom:0x55FA8
+SprAttrReset = 0x8005532C; //rom:0x55F2C
 
 omOvlCallEx = 0x80048128; //rom:0x48D28
 omOvlGotoEx = 0x80048228; //rom:0x48E28
@@ -509,8 +571,6 @@ omovlhis = 0x800D2010; //size:0x60
 omOvlKill = 0x8004849C; //rom:0x4909C
 omMain = 0x80048504; //rom:0x49104
 omovlhisidx = 0x800A1768; //rom:0xA2368 size:0x02 type:s16
-_ovltbl = 0x800962F4; //rom:0x96EF4 size:0x1200
-_modeovltbl = 0x800974F4; //rom:0x980F4 size:0x6C
 OvlLoad = 0x8000B2C4; //rom:0xBEC4
 rnd_seed = 0x80097650; //rom:0x98250 type:u32
 
@@ -526,8 +586,8 @@ gPrevCoinBlockIndexes = 0x800CE1E8; //type:s16 size:0x14
 gPrevStarBlockIndexes = 0x800D59E0; //type:s16 size:0x14
 gPrevItemBlockIndexes = 0x800CC378; //type:s16 size:0x14
 
-gTotalTurns = 0x800CD05A;
-gCurrentTurn = 0x800CD05B;
+//gTotalTurns = 0x800CD05A;
+//gCurrentTurn = 0x800CD05B;
 
 
 
@@ -600,6 +660,9 @@ GWCharPlayNumInc = 0x80035DA4; //rom:0x369A4
 _CheckFlag = 0x80035EB0; //rom:0x36AB0
 _SetFlag = 0x80035EF4; //rom:0x36AF4
 _ClearFlag = 0x80035F44; //rom:0x36B44
+SprPriSet = 0x80055294; //rom:0x55E94
+
+ShowPlayerCoinChange = 0x800E1F48; //rom:0xF5B68
 
 GWBoardFlagCheck = 0x80035F98;
 GWBoardFlagSet = 0x80035FDC;
@@ -612,3 +675,98 @@ GwCommon = 0x800CC0C8; //size:0xA4
 GwStory = 0x800D0308; //size:0x74
 GwSystem = 0x800CD058; //size:0x62
 GwPlayer = 0x800D1108; //size:0xE0
+D_800BBED0 = 0x800BBED0;
+strline = 0x800B2A30; //size:0x9000
+fontcolor = 0x800CB8A4; //type:s32 size:0x4
+empstrline = 0x800D0410; //type:u16
+strlinecnt = 0x800CC6A0; //type:u16
+
+pfInit = 0x8004DC00; //rom:0x4E800
+pfClsScr = 0x8004DC98; //rom:0x4E898
+pfDrawFonts = 0x8004E03C; //rom:0x4EC3C
+gMainGfxPos = 0x800D1FF4; //type:s32
+D_800CC440_CD040 = 0x800CC440; //size:0x60
+D_800CE1DC_CEDDC = 0x800CE1DC; //size:0xC
+
+DrawSpaces = 0x800EA6F4; //rom:0xFE314 segment:shared_board
+
+//libultra symbols
+//auxbus.c
+n_alAuxBusPull = 0x80074720; //rom:0x75320
+n_alAuxBusParam = 0x800747FC; //rom:0x753FC
+
+//bnkf.c
+alSeqFileNew = 0x80074830; //rom:0x75430
+alBnkfNew = 0x80074870; //rom:0x75470
+_bnkfPatchBank = 0x80074904; //rom:0x75504
+_bnkfPatchInst = 0x800749B0; //rom:0x755B0
+_bnkfPatchSound = 0x80074A44; //rom:0x75644
+_bnkfPatchWaveTable = 0x80074A9C; //rom:0x7569C
+
+//cents2ratio.c
+alCents2Ratio = 0x80078B40; //rom:0x79740
+
+//cseq.c
+//something odd here. __alCSeqNextDelta is much later in ram for some reason -
+//but it's in the same TU?
+//alCSeqNew = 0x8006E030; //rom:0x6EC30
+//alCSeqNextEvent = 0x8006E13C; //rom:0x6ED3C
+
+
+//synremoveplayer.c
+alSynRemovePlayer = 0x8006FC50; //rom:0x70850
+
+//sndpdeallocate.c
+alSndpDeallocate = 0x8006D320; //rom:0x6DF20
+
+D_800A4340_A4F40 = 0x800A4340; //rom:0xA4F40 size:0x4 force_migration:True
+_Printf = 0x80081A40; //rom:0x82640
+proutSprintf = 0x8007BE18; //rom:0x7CA18
+swapChainTask = 0x800B1800;
+gMesgQueue = 0x800B1960;
+rspBootAddressStart = 0x8008F0F0;
+rspBootAddressEnd = 0x8008F1C0;
+gTaskDataPointers = 0x800CC390;
+gSwapChainMesgTotal = 0x800CC3BC;
+ringBufferIndex = 0x800CB8AE;
+nextFrameBuffer = 0x800D2090;
+currFrameBuffer = 0x800CB89C;
+gSwapChainMesgQueue = 0x800B1848;
+gSwapChainInitMesg = 0x800B1860;
+swapChainStack = 0x800AE000;
+swapChainThread = 0x800CC4E8;
+frameBufferCount = 0x800B199C;
+frameBufferPool = 0x800B1998;
+gMesgQueueInitMesg = 0x800B1978;
+frameBufferSegmentID = 0x800B199E;
+gThread3Stack = 0x800D0300;
+gThreadOutStack = 0x800D0548;
+gThreadOutStackSize = 0x800CB8B8;
+gThreadYieldStack = 0x800CE1FC;
+gUCodeAddresses = 0x800D0A34;
+gMesgRingBuffer = 0x800CBB80;
+perm_heap_addr = 0x800B1A10;
+temp_heap_addr = 0x800B1A20;
+process_count = 0x800BBA94;
+top_process = 0x800BBA8C;
+process_jmp_buf = 0x800BBA30;
+current_process = 0x800BBA90;
+sPrcSleepLoc = 0x800D20A8;
+D_800CDD54_CE954 = 0x800CDD54; //rom:0xCE954 type:s16
+D_800CDD56_CE956 = 0x800CDD56; //rom:0xCE956 type:s16
+D_800CDD58_CE958 = 0x800CDD58; //rom:0xCE958 type:s16
+D_800D037C_D0F7C = 0x800D037C; //rom:0xD0F7C type:s16
+D_800D51F8_D5DF8 = 0x800D51F8; //rom:0xD5DF8 type:s16
+SprScale = 0x800551D8; //rom:0x55DD8
+SetSpaceType = 0x800EB7F0; //rom:0xFF410 segment:shared_board
+
+n_aspMain_code = 0x800954C0; //rom:0x960C0 size:0xC60
+n_aspMain_data = 0x800A6050; //rom:0xA6C50 size:0x2B0
+
+//ovl_80
+D_801057E0_119400_shared_board = 0x801057E0; //rom:0x119400 size:0x1B0 segment:shared_board
+D_80105718_119338_shared_board = 0x80105718; //rom:0x119338 size:0xC0 segment:shared_board
+D_801018E4_115504_shared_board = 0x801018E4; //rom:0x115504 size:0x44 segment:shared_board
+PlayerBoardStatusRootPosition = 0x80101794; //rom:0x1153B4 size:0x20 segment:shared_board
+UpdatePlayerBoardStatus = 0x800F2E30; //rom:0x106A50 segment:shared_board
+ItemUseWackyWatch = 0x80115B80; //rom:0x32B6F0 segment:ChillyWaters

@@ -7,9 +7,18 @@
         IS_DEBUG_PANIC("Assertion failed: " #condition, __FILE__, __LINE__); \
     }
 
-#include "libultra.h"
+#define FALSE 0
+#define TRUE 1
+
+#include "ultra64.h"
+#include "types.h"
+
+#include "common_structs.h"
+#include "functions.us.h"
 #include "include_asm.h"
 #include "variables.h"
-#include "functions.h"
 #include "macros.h"
+#include "enums.h"
+#include "ld_addrs.h"
+
 #endif

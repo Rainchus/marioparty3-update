@@ -117,8 +117,7 @@ void* HuMemMemoryRealloc(HeapNode *heap, void *mem, u32 new_size)
     s32 temp;
 
     given_heap = (HeapNode *)(mem - sizeof(HeapNode));
-    temp = new_size + 0x1F;
-    temp = temp & -16;
+    temp = ALIGN_16(new_size);
 
     if (given_heap->size >= temp)
     {
@@ -200,5 +199,5 @@ u32 HuMemUsedMemoryBlockGet(HeapNode *heap)
  */
 s32 HuMemMemoryAllocSizeGet(s32 value)
 {
-    return (value + 0x1F) & -16;
+    return ALIGN_16(value);
 }

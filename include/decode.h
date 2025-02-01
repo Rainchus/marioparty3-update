@@ -1,7 +1,7 @@
 #ifndef __DECODE_H
 #define __DECODE_H
 
-#include "libultra.h"
+#include "common.h"
 
 typedef enum
 {

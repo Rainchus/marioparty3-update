@@ -1,17 +1,17 @@
 #ifndef _INPUT_H
 #define _INPUT_H
 
-#include "libultra.h"
+#include "common.h"
 
-extern s16 D_800C9520[];
-extern s16 D_800D0590[];
-extern s16 D_800D10F8[];
-extern u16 D_800D1350[];
-extern s16 D_800D5546[];
+extern s16 D_800C9520_CA120[];
+extern s16 D_800D0590_D1190[];
+extern s16 D_800D10F8_D1CF8[];
+extern u16 D_800D1350_D1F50[];
+extern s16 D_800D5546_D6146[];
 
-extern u8 D_800CBB6E[];
-extern s16 D_800CDA7C[];
-extern s8 D_800D20A1[];
+extern u8 D_800CBB6E_CC76E[];
+extern s16 D_800CDA7C_CE67C[];
+extern s8 D_800D20A1_D2CA1[];
 
 void ContDataInit(void);
 void ContDataUpdate(void);

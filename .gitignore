@@ -1,24 +1,25 @@
-assets/*
-build/*
-bin/*
-asm/*
-expected/*
-*.z64
-*.ld
-*.Identifier
-.splat_cache
-include/ld_addrs.h
+baserom.us.z64
 undefined_funcs_auto.txt
 undefined_syms_auto.txt
+asm/
+build/
+assets/
+mod/
+expected/
+rsp/
+include/ld_addrs.h
+marioparty3.ld
 ctx.c
-
-# Tools
-tools/n64cksum
-
-# Cache files
+build.ninja
+.ninja_deps
+.ninja_log
+.vscode/configurationCache.log
+.vscode/dryrun.log
+.vscode/targets.log
+.vscode/tasks.json
+.vscode/settings.json
 __pycache__/
-.pyc
-
-# Text editor remnants
-.vscode/
-.vs/
+.DS_Store
+.*.swp
+.venv
+venv/

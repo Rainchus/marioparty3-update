@@ -17,7 +17,7 @@
  *
  *  $Revision: 1.32 $
  *  $Date: 1997/02/11 08:16:37 $
- *  $Source: /exdisk2/cvs/N64OS/Master/cvsmdev2/PR/include/abi.h,v $
+ *  $Source: /hosts/liberte/disk6/Master/cvsmdev2/PR/include/abi.h,v $
  *
  **************************************************************************/
 
@@ -240,7 +240,9 @@ typedef union {
 /*
  * ADPCM State
  */
-typedef short ADPCM_STATE[16];
+#define ADPCMVSIZE	8
+#define ADPCMFSIZE      16
+typedef short ADPCM_STATE[ADPCMFSIZE];
 
 /*
  * Pole filter state
@@ -400,29 +402,6 @@ typedef short ENVMIX_STATE[40];
         _a->words.w1 = (unsigned int) d;                                \
 }
 
-/* 
- * --------------------------------------------------------------------
- * The below command is seemingly declared manually and used for the
- * sound driver.
- * --------------------------------------------------------------------
- */
-
-// This is a version of aSetAudio which takes a single 32-bit parameter
-// instead of two 16-bit ones. According to AziAudio, it is used to set
-// ramping values when neither bit 4 nor bit 8 is set in the flags parameter.
-
-#define aSetVolume32(pkt, f, v, tr)                                 \
-{                                                                   \
-    Acmd *_a = (Acmd *)pkt;                                         \
-                                                                    \
-    _a->words.w0 = (_SHIFTL(A_SETVOL, 24, 8) | _SHIFTL(f, 16, 16) | \
-                    _SHIFTL(v, 0, 16));                             \
-    _a->words.w1 = (unsigned int)(tr);                              \
-}
-
 #endif /* _LANGUAGE_C */
 
 #endif /* !_ABI_H_ */
-
-
-

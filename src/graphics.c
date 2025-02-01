@@ -21,12 +21,12 @@ extern u8 rspBootAddressStart;
 extern u8 rspBootAddressEnd;
 extern Gfx gTaskDataPointers[];
 
-extern s32 D_800CC0A4;
+extern s32 D_800CC0A4_CCCA4;
 extern void *nextFrameBuffer;
 extern void *currFrameBuffer;
 
 extern s32 *gUCodeAddresses;
-extern u32 D_800B19A0; // message count?
+extern u32 D_800B19A0_B25A0; // message count?
 
 
 extern OSMesgQueue gSwapChainMesgQueue;
@@ -36,8 +36,8 @@ extern s16 gSwapChainMesgTotal;
 extern OSMesgQueue gMesgQueue;
 extern void* gMesgQueueInitMesg;
 
-extern u32 D_800D2094; // Unk
-extern OSMesgQueue D_800CC3C0; // Another system's message queue
+extern u32 D_800D2094_D2C94; // Unk
+extern OSMesgQueue D_800CC3C0_CCFC0; // Another system's message queue
 
 /* Initialize Graphics SwapChain */
 
@@ -61,7 +61,7 @@ void func_8000EA10_F610(void **arg1, s32 arg2, s32 arg3, u64 **arg4, s32 *arg5) 
 
     gSwapChainMesgTotal = 0;
     ringBufferIndex = 0;
-    D_800CC0A4 = 0;
+    D_800CC0A4_CCCA4 = 0;
     nextFrameBuffer = 0;
     currFrameBuffer = 0;
     osCreateMesgQueue(&gSwapChainMesgQueue, &gSwapChainInitMesg, 0x40);
@@ -70,7 +70,6 @@ void func_8000EA10_F610(void **arg1, s32 arg2, s32 arg3, u64 **arg4, s32 *arg5) 
     osStartThread(&swapChainThread);
 }
 
-// INCLUDE_ASM(s32, "graphics", func_8000EB60_F760);
 /* Retrieve available frame buffer (triple buffering?) */
 void *func_8000EB60_F760(void) {
     void *current;
@@ -123,11 +122,11 @@ void func_8000EBEC_F7EC(void* arg0) {
             recvmesg:
             osRecvMesg(&mesgQueue, NULL, 1);
             if (osRecvMesg(&mesgQueue2, NULL, 0) == 0) { while (TRUE); } // Infinite loop?
-            if ((D_800D2094 - var_s4) < D_800B19A0) {
+            if ((D_800D2094_D2C94 - var_s4) < D_800B19A0_B25A0) {
                 goto recvmesg;
             }
     
-            var_s4 = D_800D2094;
+            var_s4 = D_800D2094_D2C94;
             func_8004D85C_4E45C();
             pAvailableFrameBuffer = (void *) func_8000EB60_F760();
         } while (pAvailableFrameBuffer == NULL);
@@ -154,7 +153,7 @@ void func_8000EBEC_F7EC(void* arg0) {
                 pTask->t.ucode =      (u64 *) *(   (recvdMesg->unk04* 2)      + gUCodeAddresses); // offset     (data pairs?)
                 pTask->t.ucode_data = (u64 *) *( ( (recvdMesg->unk04* 2) | 1) + gUCodeAddresses); // offset + 1
     
-                osSendMesg(&D_800CC3C0, (OSMesg) pSwapChain, 1);
+                osSendMesg(&D_800CC3C0_CCFC0, (OSMesg) pSwapChain, 1);
                 osRecvMesg(&gMesgQueue, NULL, 1);
     
                 intMask = osSetIntMask(1);
@@ -168,17 +167,17 @@ void func_8000EBEC_F7EC(void* arg0) {
 
         } while (!((s32) recvdMesg->unk08 & 1)); } while (FALSE);
     
-        for (i = 1; i < D_800B19A0; i++) {
+        for (i = 1; i < D_800B19A0_B25A0; i++) {
             osRecvMesg(&mesgQueue, NULL, 1);
         }
     
         osViSwapBuffer(pAvailableFrameBuffer);
-        if (D_800CC0A4 == 0) {
+        if (D_800CC0A4_CCCA4 == 0) {
             if (osRecvMesg(&mesgQueue2, NULL, 0) == 0) { while (TRUE); }
             osViSetYScale(1.0f);
             osViBlack(0);
         }
-        D_800CC0A4++;
+        D_800CC0A4_CCCA4++;
         func_8004D878_4E478(); // empty function
     }
 }
@@ -243,5 +242,5 @@ void func_8000F088_FC88(s32 *uCodeAdresses) {
 
 /* Swap chain state set? */
 void func_8000F094_FC94(u32 arg0) {
-    D_800B19A0 = arg0;
+    D_800B19A0_B25A0 = arg0;
 }

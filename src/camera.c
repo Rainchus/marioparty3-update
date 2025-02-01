@@ -1,26 +1,15 @@
 #include "common.h"
-#include "common_structs.h"
-#include <PR/gbi.h>
 
-#define ASPECT_RATIO (4.0f / 3.0f)
-#define SCREEN_WIDTH 320.0f
-#define SCREEN_HEIGHT 240.0f
 #define SCREEN_WIDTH_CENTER SCREEN_WIDTH / 2.0f
 #define SCREEN_HEIGHT_CENTER SCREEN_HEIGHT / 2.0f
+#define ASPECT_RATIO (4.0f / 3.0f)
 
-void guLookAt(Mtx *m,
-   float xEye, float yEye, float zEye,
-   float xAt,  float yAt,  float zAt,
-   float xUp,  float yUp,  float zUp );
-
-
-typedef struct
-{
+typedef struct {
     Mtx perspMtx;
     Mtx lookAtMtx;
 } HuCamMtxs;
 
-typedef struct {
+typedef struct HuCamera {
     /* 0x000 */ u16 perspNorm;
     /* 0x002 */ char pad2[2];
     /* 0x004 */ f32 unk4;
@@ -46,26 +35,21 @@ typedef struct {
     /* 0x0A8 */ s32 unkA8;
     /* 0x0AC */ s32 unkAC;
     /* 0x0B0 */ HuCamMtxs mtxs[3];
-} HuCamera;              
-
-extern HuCamera* gCameraList;
-typedef f32 HuMtx4F[4][4];
+} HuCamera;
 
 f32 HuMathCos(f32);
 f32 HuMathSin(f32);
 
-void guLookAtF(f32 mf[4][4], f32 xEye, f32 yEye, f32 zEye, f32 xAt, f32 yAt, f32 zAt, f32 xUp, f32 yUp, f32 zUp);
+extern HuCamera* gCameraList;
+extern u8 D_800D2008_D2C08;
+extern s16 D_800D418E_D4D8E;
 
-INCLUDE_ASM(s32, "camera", Hu3DCamInit);
-
-extern u8 D_800D2008;
-extern s16 D_800D418E;
+INCLUDE_ASM("asm/nonmatchings/camera", Hu3DCamInit);
 
 void func_800123F4_12FF4(void)
 {
-    D_800D418E = D_800D2008;
+    D_800D418E_D4D8E = D_800D2008_D2C08;
 }
-
 
 void Hu3DCamSetPositionOrientation(s16 camIndex, Vec * pos, Vec * at, Vec * up)
 {
@@ -106,7 +90,7 @@ void Hu3DCamUpdateMtx(s16 camIndex)
     HuCamMtxs * mtxs;
 
     camera = &gCameraList[camIndex];
-    mtxs = &camera->mtxs[D_800D418E];
+    mtxs = &camera->mtxs[D_800D418E_D4D8E];
 
     guPerspective(&mtxs->perspMtx, &camera->perspNorm, camera->fov, (SCREEN_WIDTH / SCREEN_HEIGHT), camera->near, camera->far, 1.0f);
     guLookAt(&mtxs->lookAtMtx, camera->pos.x, camera->pos.y, camera->pos.z, camera->at.x, camera->at.y, camera->at.z, camera->up.x, camera->up.y, camera->up.z);
@@ -118,15 +102,15 @@ void func_80012640_13240(s16 camIndex, Gfx ** dispList)
     HuCamera * camera;
 
     camera = &gCameraList[camIndex];
-    camMtx = &camera->mtxs[D_800D418E];
-    camera->viewports[D_800D418E].vp.vscale[0] = (s16) camera->screenScale.x;
-    camera->viewports[D_800D418E].vp.vscale[1] = (s16) camera->screenScale.y;
-    camera->viewports[D_800D418E].vp.vscale[2] = (s16) camera->screenScale.z;
-    camera->viewports[D_800D418E].vp.vtrans[0] = (s16) camera->screenPos.x;
-    camera->viewports[D_800D418E].vp.vtrans[1] = (s16) camera->screenPos.y;
-    camera->viewports[D_800D418E].vp.vtrans[2] = (s16) camera->screenPos.z;
+    camMtx = &camera->mtxs[D_800D418E_D4D8E];
+    camera->viewports[D_800D418E_D4D8E].vp.vscale[0] = (s16) camera->screenScale.x;
+    camera->viewports[D_800D418E_D4D8E].vp.vscale[1] = (s16) camera->screenScale.y;
+    camera->viewports[D_800D418E_D4D8E].vp.vscale[2] = (s16) camera->screenScale.z;
+    camera->viewports[D_800D418E_D4D8E].vp.vtrans[0] = (s16) camera->screenPos.x;
+    camera->viewports[D_800D418E_D4D8E].vp.vtrans[1] = (s16) camera->screenPos.y;
+    camera->viewports[D_800D418E_D4D8E].vp.vtrans[2] = (s16) camera->screenPos.z;
 
-    gSPViewport((*dispList)++, &camera->viewports[D_800D418E].vp);
+    gSPViewport((*dispList)++, &camera->viewports[D_800D418E_D4D8E].vp);
     gSPPerspNormalize((*dispList)++, camera->perspNorm);
     gSPMatrix((*dispList)++, osVirtualToPhysical(&camMtx->perspMtx), G_MTX_PROJECTION | G_MTX_LOAD);
     gSPMatrix((*dispList)++, OS_PHYSICAL_TO_K0(&camMtx->lookAtMtx), G_MTX_LOAD);
@@ -240,10 +224,10 @@ void func_80012B14_13714(s16 camIndex, Vec * worldPos, Vec * outPos)
     outPos->y = ((projectedY * (f4 / y)) + f4);
 }
 
-INCLUDE_ASM(s32, "camera", func_80012D0C_1390C);
+INCLUDE_ASM("asm/nonmatchings/camera", func_80012D0C_1390C);
 
-INCLUDE_ASM(s32, "camera", func_80012E54_13A54);
+INCLUDE_ASM("asm/nonmatchings/camera", func_80012E54_13A54);
 
-INCLUDE_ASM(s32, "camera", func_80013320_13F20);
+INCLUDE_ASM("asm/nonmatchings/camera", func_80013320_13F20);
 
-INCLUDE_ASM(s32, "camera", func_80013350_13F50);
+INCLUDE_ASM("asm/nonmatchings/camera", func_80013350_13F50);

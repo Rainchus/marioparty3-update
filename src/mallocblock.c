@@ -21,11 +21,11 @@ void HuMemInit(HuAllocFunc malloc, HuFreeFunc free)
     newBlock->prev = newBlock;
     newBlock->next = newBlock;
     
-    D_800C993C = 0;
+    D_800C993C_CA53C = 0;
 }
 
-void HuMemAlloc(s32 size) {
-    HuMemAllocTag(size, 0);
+void* HuMemAlloc(s32 size) {
+    return HuMemAllocTag(size, 0);
 }
 
 void* HuMemAllocTag(s32 size, s16 tag)
@@ -49,7 +49,7 @@ void* HuMemAllocTag(s32 size, s16 tag)
     newBlk->tag = tag;
     newBlk->size = alignedSize;
     newBlk->data = data;
-    newBlk->creationFrame = D_800D20AC;
+    newBlk->creationFrame = D_800D20AC_D2CAC;
     
     return newBlk->data;
 }
@@ -77,6 +77,7 @@ void HuMemBlockFree(HuMallocHeader* block)
     gFreeFunc(block->data);
 }
 
+
 void HuMemFreeAllWithTag(s16 tag)
 {
     HuMallocHeader* prevBlk;
@@ -97,7 +98,7 @@ void HuMemFreeAllWithTag(s16 tag)
                     HuMemBlockFree(block);
                     block = prevBlk;
                     
-                    if (--D_800C993C <= 0) {
+                    if (--D_800C993C_CA53C <= 0) {
                         break;
                     }
                 }
@@ -119,9 +120,9 @@ void func_80019C00_1A800(void* data)
     }
 
     block->tag = TAG_DELAYED_FREE;
-    block->framesLeft = D_800D1FF0 + 1;
+    block->framesLeft = D_800D1FF0_D2BF0 + 1;
     
-    ++D_800C993C;
+    ++D_800C993C_CA53C;
 }
 
 void func_80019C68_1A868(s16 arg0)
@@ -133,8 +134,8 @@ void func_80019C68_1A868(s16 arg0)
     {
         if (block->tag == arg0) {
             block->tag = TAG_DELAYED_FREE;
-            block->framesLeft = D_800D1FF0 + 1;
-            ++D_800C993C;
+            block->framesLeft = D_800D1FF0_D2BF0 + 1;
+            ++D_800C993C_CA53C;
         }
         block = block->next;
     }
@@ -159,7 +160,7 @@ void HuMemFreeAll(void)
     
     gFreeFunc((void *)gLastMallocBlock);
     
-    D_800C993C = 0;
+    D_800C993C_CA53C = 0;
     gHuMemIsDirty = FALSE;
 }
 
@@ -168,7 +169,7 @@ void HuMemCleanUp(void)
     if (gHuMemIsDirty) {
         HuMemFreeAll();
     }
-    else if (D_800C993C != 0) {
+    else if (D_800C993C_CA53C != 0) {
         HuMemFreeAllWithTag(TAG_DELAYED_FREE);
     }
 }
@@ -217,43 +218,45 @@ void HuMemSetTag(void* data, s16 tag)
     block->tag = tag;
 }
 
-s32 HuMemDebugCheck(void)
-{
-    HuMallocHeader* block;
-    s16 i;
-    s16 count;
-    s16 var_v1;
-    s32 size;
+INCLUDE_ASM("asm/nonmatchings/mallocblock", HuMemDebugCheck);
 
-    block = gFirstMallocBlock->next;
-    size = 0;
-    count = 0;
-    while (block != gLastMallocBlock)
-    {
-        D_800C9950[count] = block->data;
-        size += block->size;
-        block = block->next;
-        count++;
-    }
+//TODO: unknown why this causes issues when linked
+// s32 HuMemDebugCheck(void)
+// {
+//     HuMallocHeader* block;
+//     s16 i;
+//     s16 count;
+//     s16 var_v1;
+//     s32 size;
 
-    if ((D_800A08A2_A14A2 != 0) && (D_800A08A2_A14A2 != count)) {
-        for (i = 0; i < count; i++) 
-        {
-            for (var_v1 = 0; var_v1 < D_800A08A2_A14A2; var_v1++) 
-            {
-                if (D_800D2140[var_v1] == D_800C9950[i]) 
-                    break;
-            }
-            if (var_v1 == D_800A08A2_A14A2) {
-                osSyncPrintf("%x\n", D_800C9950[i]);
-            }
-        }
-    }
+//     block = gFirstMallocBlock->next;
+//     size = 0;
+//     count = 0;
+//     while (block != gLastMallocBlock)
+//     {
+//         D_800C9950_CA550[count] = block->data;
+//         size += block->size;
+//         block = block->next;
+//         count++;
+//     }
 
-    D_800A08A2_A14A2 = count;
-    for (i = 0; i < count; i++) 
-    {
-        D_800D2140[i] = D_800C9950[i];
-    }
-    return size;
-}
+//     if ((D_800A08A2_A14A2 != 0) && (D_800A08A2_A14A2 != count)) {
+//         for (i = 0; i < count; i++) 
+//         {
+//             for (var_v1 = 0; var_v1 < D_800A08A2_A14A2; var_v1++) 
+//             {
+//                 if (D_800D2140_D2D40[var_v1] == D_800C9950_CA550[i]) 
+//                     break;
+//             }
+//             if (var_v1 == D_800A08A2_A14A2) {
+//                 osSyncPrintf("%x\n", D_800C9950_CA550[i]);
+//             }
+//         }
+//     }
+
+//     D_800A08A2_A14A2 = count;
+//     for (i = 0; i < count; i++) {
+//         D_800D2140_D2D40[i] = D_800C9950_CA550[i];
+//     }
+//     return size;
+// }

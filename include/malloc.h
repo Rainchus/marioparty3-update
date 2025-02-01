@@ -2,14 +2,7 @@
 #define __MALLOC_H
 
 #include <libultra.h>
-
-typedef struct HeapNode {
-/* 0x00 */ s32 size;
-/* 0x04 */ u8 heap_constant;
-/* 0x05 */ u8 active;
-/* 0x08 */ struct HeapNode* prev;
-/* 0x0C */ struct HeapNode* next;
-} HeapNode;
+#include "common_structs.h"
 
 void* HuMemHeapInit(void *ptr, u32 size);
 void* HuMemMemoryAlloc(HeapNode *heap, s32 size);

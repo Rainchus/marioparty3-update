@@ -1,457 +1,455 @@
-name: Mario Party 3 (North America)
+name: Marioparty3 (North America)
 sha1: 6beb80ff822b96bcf85dcdb512e8b2b7969d8259
-
 options:
   basename: marioparty3
   target_path: baserom.us.z64
+  elf_path: build/marioparty3.elf
   base_path: .
-  compiler: GCC
-  find_file_boundaries: True
-  header_encoding: ASCII
   platform: n64
-  symbol_name_format: $VRAM_$ROM
-  undefined_funcs_auto_path: undefined_funcs_auto.txt
-  undefined_syms_auto_path: undefined_syms_auto.txt
-  ld_script_path: marioparty3.ld
-  symbol_addrs_path: symbol_addrs.txt
-  # undefined_syms_path: undefined_syms.txt
-  # c_path: c
+  ld_symbol_header_path: include/ld_addrs.h
+  compiler: GCC
   asm_path: asm
   src_path: src
   build_path: build
-  # extensions_path: tools/splat_ext
-  # auto_all_sections: True
-  asm_inc_header: "\t.set noat\n\t.set noreorder\n"
+  create_asm_dependencies: True
+  ld_script_path: marioparty3.ld
+  subalign: 8 #fairly sure this is a hack. shouldn't alignment always be 16?
+  # ld_dependencies: True
+  find_file_boundaries: True
+  header_encoding: ASCII
+  use_legacy_include_asm: False
+  #mips_abi_float_regs: o32
+  migrate_rodata_to_functions: True
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+  asm_inc_header: ""
+  symbol_name_format: $VRAM_$ROM
+  migrate_rodata_to_functions: True
+  # section_order: [".text", ".data", ".rodata", ".bss"]
+  # auto_all_sections: [".data", ".rodata", ".bss"]
 
+  symbol_addrs_path:
+    - symbol_addrs.txt
+  reloc_addrs_path:
+    - reloc_addrs.txt
+
+  # undefined_funcs_auto_path: undefined_funcs_auto.txt
+  # undefined_syms_auto_path: undefined_syms_auto.txt
+
+  extensions_path: tools/splat_ext
+
+  # string_encoding: ASCII
+  # data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+  # libultra_symbols: True
+  # hardware_regs: True
+  # gfx_ucode: # one of [f3d, f3db, f3dex, f3dexb, f3dex2]
 segments:
-  - [0x000000, bin, "header"]
-  - [0x000040, bin, "boot"]
-  - type: code
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: boot
+    type: bin
+    start: 0x40
+
+  - name: entry
+    type: code
     start: 0x1000
     vram: 0x80000400
-    subalign: 4
     subsegments:
-    - [0x1000, hasm]
-    - [0x1060, c, unknown/1060]
-    - [0x8F20, c, unknown/8F20]
-    - [0x99D0, c, pad]
-    - [0xA480, c, input]
-    - [0xA6C0, c, data]
-    - [0xAE30, c, "decode"]
-    - [0xBCA0, c, util]
-    - [0xC1F0, c, unknown/C1F0]
-    - [0xC3A0, c, esprite]
-    - [0xCE10, c, eeprom]
-    - [0xD7A0, c, unknown/D7A0]
-    - [0xE560, c, unknown/E560]
-    - [0xEFB0, c, stubbed]
-    - [0xEFC0, c, gameman]
-    - [0xF610, c, graphics]
-    - [0xFCA0, c, hmfload]
-    - [0x12E20, c, camera]
-    - [0x13F90, c, unknown/13F90]
-    - [0x14EA0, c, unknown/14EA0]
-    - [0x19C30, c, unknown/19C30]
-    - [0x1A580, c, mallocblock]
-    - [0x1AC70, c, hmfman]
-    - [0x20A20, c, unknown/20A20]
-    - [0x22EB0, c, unknown/22EB0]
-    - [0x30C40, c, unknown/30C40]
-    - [0x32160, c, unknown/32160]
-    - [0x34DD0, c, unknown/34DD0]
-    - [0x360A0, c, main]
-    - [0x36440, c, mallocperm]
-    - [0x36510, c, malloctemp]
-    - [0x365E0, c, unknown/365E0]
-    - [0x36650, c, save]
-    - [0x36CD0, c, malloc]
-    - [0x36F80, c, unknown/36F80]
-    - [0x37210, c, unknown/gamemes]
-    - [0x45F50, c, unknown/pause]
-    - [0x471D0, c, unknown/471D0]
-    - [0x47D60, c, unknown/47D60]
-    - [0x4B120, c, unknown/4B120]
-    - [0x4BF40, c, unknown/4BF40]
-    - [0x4E010, c, profiler]
-    - [0x4E5A0, c, rom]
-    - [0x4E800, c, unknown/printfunc]
-    - [0x4F720, c, "process"]
-    - [0x4FE90, c, unknown/saveencode]
-    - [0x508F0, c, unknown/saveload]
-    - [0x51B50, c, nnsched]
-    - [0x52350, c, siman]
-    - [0x527E0, c, unknown/527E0]
-    - [0x52F30, c, "sprman"]
-    - [0x58000, c, "sprput"]
-    - [0x5ACF0, c, window]
-    - [0x62750, c, unknown/wipe]
-    - [0x66E70, c, unknown/66E70]
-    - [0x67000, c, unknown/67000]
-    - [0x67100, hasm, "setjmp"]
-    - [0x671E0, c, "lib/hvq"]
-    - [0x6B050, c, unknown/6B050]
-    - [0x6BA20, c, unknown/6BA20]
-    - [0x6C140, c, unknown/6C140]
-    - [0x6C320, c, unknown/6C320]
-    - [0x6C3A0, c, unknown/6C3A0]
-    - [0x6C3C0, c, unknown/6C3C0]
-    - [0x6C9F0, c, unknown/6C9F0]
-    - [0x6DBD0, c, unknown/6DBD0]
-    - [0x6DBF0, c, unknown/6DBF0]
-    - [0x6DC10, c, unknown/6DC10]
-    - [0x6DC30, c, unknown/6DC30]
-    - [0x6DC50, c, unknown/6DC50]
-    - [0x6DCD0, c, unknown/6DCD0]
-    - [0x6DCE0, c, unknown/6DCE0]
-    - [0x6DD10, c, unknown/6DD10]
-    - [0x6DF20, c, unknown/6DF20]
-    - [0x6DFA0, c, unknown/6DFA0]
-    - [0x6E6B0, c, unknown/6E6B0]
-    - [0x6E780, c, unknown/6E780]
-    - [0x6E7E0, c, unknown/6E7E0]
-    - [0x6E840, c, unknown/6E840]
-    - [0x6E880, c, unknown/6E880]
-    - [0x6E8E0, c, unknown/6E8E0]
-    - [0x6E940, c, unknown/6E940]
-    - [0x6F470, c, unknown/6F470]
-    - [0x70420, c, unknown/70420]
-    - [0x707B0, c, unknown/707B0]
-    - [0x70850, c, unknown/70850]
-    - [0x70940, c, unknown/70940]
-    - [0x709E0, c, unknown/709E0]
-    - [0x70A70, c, unknown/70A70]
-    - [0x70B20, c, unknown/70B20]
-    - [0x70BB0, c, unknown/70BB0]
-    - [0x70C30, c, unknown/70C30]
-    - [0x72740, c, unknown/72740]
-    - [0x72750, c, unknown/72750]
-    - [0x72890, bin] # Should this be 0x7288C? What is this?
-    - [0x72C20, c, "libultra/io/conteepwrite"]
-    - [0x73020, c, "libultra/io/conteepprobe"]
-    - [0x730A0, c, "libultra/io/conteeplongwrite"]
-    - [0x73190, c, "libultra/io/conteeplongread"]
-    - [0x73200, hasm, "libultra/os/setintmask"]
-    - [0x732A0, c, "libultra/io/pimgr"]
-    - [0x73550, c, "libultra/io/epirawdma"]
-    - [0x73740, c, "libultra/io/epidma"]
-    - [0x737E0, c, "libultra/io/cartrominit"]
-    - [0x73960, c, "libultra/io/devmgr"]
-    - [0x73D20, c, "libultra/io/piacs"] # double check
-    - [0x73E10, c, "libultra/io/aigetlen"]
-    - [0x73E20, c, "libultra/io/aisetfreq"]
-    - [0x73F40, c, "libultra/io/aisetnextbuf"]
-    - [0x73FE0, c, "libultra/audio/drvrnew"]
-    - [0x74810, c, "libultra/audio/load"]
-    - [0x75320, c, "libultra/audio/auxbus"]
-    - [0x75430, c, "libultra/audio/bnkf"]
-    - [0x75700, c, "libultra/audio/env"]
-    - [0x763B0, c, "libultra/audio/event"]
-    - [0x76700, c, "libultra/audio/filter"]
-    - [0x76720, c, "libultra/audio/mainbus"]
-    - [0x76890, c, "libultra/audio/resample"]
-    - [0x76B40, c, "libultra/audio/reverb"]
-    - [0x776E0, c, "libultra/audio/save"]
-    - [0x777B0, c, "libultra/audio/seq"]
-    - [0x77DA0, c, "libultra/audio/sl"]
-    - [0x77E50, c, "libultra/audio/heapinit"]
-    - [0x77E90, c, "libultra/audio/heapalloc"]
-    - [0x77EE0, c, "libultra/audio/copy"]
-    - [0x77F20, c, "libultra/audio/cseq"]
-    - [0x789E0, c, "libultra/audio/synthesizer"]
-    - [0x79020, c, "libultra/audio/syndelete"]
-    - [0x79030, c, "libultra/audio/synaddplayer"]
-    - [0x79080, c, "libultra/audio/synfreevoice"]
-    - [0x79120, c, "libultra/audio/synallocvoice"]
-    - [0x79300, c, "libultra/audio/synstopvoice"]
-    - [0x79380, c, "libultra/audio/synstartvoice"]
-    - [0x79420, c, "libultra/audio/synsetpitch"]
-    - [0x794B0, c, "libultra/audio/synsetvol"]
-    - [0x79570, c, "libultra/audio/synsetfxmix"]
-    - [0x79610, c, "libultra/audio/synsetpan"]
-    - [0x796A0, c, "libultra/audio/synallocfx"]
-    - [0x79740, c, "libultra/audio/cents2ratio"]
-    - [0x797A0, c, "libultra/os/invaldcache"]
-    - [0x79850, c, "libultra/os/invalicache"]
-    - [0x798D0, c, "libultra/os/writebackdcache"]
-    - [0x79950, c, "libultra/os/writebackdcacheall"]
-    - [0x79980, c, "libultra/io/contreaddata"]
-    - [0x79B60, c, "libultra/io/controller"]
-    - [0x79E70, c, "libultra/io/contsetch"]
-    - [0x79ED0, c, "libultra/os/virtualtophysical"]
-    - [0x79F30, c, "libultra/gu/cosf"]
-    - [0x7A080, c, "libultra/gu/lookat"]
-    - [0x7A790, c, "libultra/gu/lookathil"]
-    - [0x7B1F0, c, "libultra/gu/lookatref"]
-    - [0x7B7E0, c, "libultra/gu/ortho"]
-    - [0x7BA60, c, "libultra/gu/perspective"]
-    - [0x7BDE0, c, "libultra/gu/random"]
-    - [0x7BE10, c, "libultra/gu/rotaterpy"]
-    - [0x7C130, c, "libultra/gu/sinf"]
-    - [0x7C2D0, c, "libultra/os/rdbsend"]
-    - [0x7C4F0, c, "libultra/os/osInitRdb"]
-    - [0x7C570, hasm, "libultra/libc/bcopy"]
-    - [0x7C930, c, "libultra/libc/string"]
-    - [0x7C9C0, c, "libultra/libc/sprintf"]
-    - [0x7CA50, c, "libultra/libc/syncprintf"]
-    - [0x7CB00, c, "libultra/os/osCreateMesgQueue"]
-    - [0x7CB30, c, "libultra/os/osJamMesg"]
-    - [0x7CC70, c, "libultra/os/osRecvMesg"]
-    - [0x7CDA0, c, "libultra/os/osSendMesg"]
-    - [0x7CED0, c, "libultra/os/seteventmesg"]
-    - [0x7CF80, hasm, "libultra/os/setcause"]
-    - [0x7CF90, hasm, "libultra/os/setcompare"]
-    - [0x7CFA0, hasm, "libultra/os/setcount"]
-    - [0x7CFB0, hasm, "libultra/os/setsr"]
-    - [0x7CFC0, c, "libultra/io/sptask"]
-    - [0x7D200, c, "libultra/io/sptaskyield"]
-    - [0x7D220, c, "libultra/io/sptaskyielded"]
-    - [0x7D270, c, "libultra/io/sirawdma"]
-    - [0x7D320, c, "libultra/io/siacs"]
-    - [0x7D410, c, "libultra/os/createthread"]
-    - [0x7D510, c, "libultra/os/destroythread"]
-    - [0x7D5F0, c, "libultra/os/getthreadpri"]
-    - [0x7D610, c, "libultra/os/setthreadpri"]
-    - [0x7D6E0, c, "libultra/os/startthread"]
-    - [0x7D800, hasm, "__osDequeueThread"]
-    - [0x7D840, c, "libultra/os/yieldthread"]
-    - [0x7D890, c, "libultra/os/osGetTime"]
-    - [0x7D920, c, "libultra/os/osSetTimer"]
-    - [0x7DA50, c, "libultra/os/timerintr"]
-    - [0x7DE10, hasm, "libultra/os/probetlb"]
-    - [0x7DED0, c, "libultra/io/vigetcurrframebuf"]
-    - [0x7DF10, c, "libultra/io/vigetnextframebuf"]
-    - [0x7DF50, c, "libultra/io/vimgr"]
-    - [0x7E290, c, "libultra/io/visetevent"]
-    - [0x7E2F0, c, "libultra/io/visetmode"]
-    - [0x7E340, c, "libultra/io/visetspecial"]
-    - [0x7E4B0, c, "libultra/io/visetyscale"]
-    - [0x7E500, c, "libultra/io/viswapbuf"]
-    - [0x7E550, c, "libultra/io/viswapcontext"]
-    - [0x7E860, c, "libultra/io/viblack"]
-    - [0x7E8C0, hasm, "libultra/gu/mtxidenf"]
-    - [0x7E920, hasm, "libultra/gu/mtxf2l"]
-    - [0x7E9A0, hasm, "libultra/gu/mtxl2f"]
-    - [0x7EA20, hasm, "libultra/gu/mtxcatf"]
-    - [0x7EB20, hasm, "libultra/gu/scale"]
-    - [0x7EBE0, hasm, "libultra/gu/translatef"]
-    - [0x7EC40, c, "libultra/gu/mtxcatl"]
-    - [0x7ECC0, c, "libultra/gu/rotate"]
-    - [0x7EFA0, c, "libultra/io/motor"]
-    - [0x7F330, c, "libultra/io/pfsselectbank"]
-    - [0x7F3A0, c, "libultra/io/contramread"]
-    - [0x7F590, c, "libultra/io/contramwrite"]
-    - [0x7F800, c, "libultra/os/afterprenmi"]
-    - [0x7F820, c, "libultra/os/getmemsize"]
-    - [0x7F8C0, c, "libultra/os/initialize"]
-    - [0x7FCD0, c, "libultra/os/initialize_kmc"]
-    - [0x800A0, c, "libultra/os/initialize_msp"]
-    - [0x80460, c, "libultra/os/initialize_emu"]
-    - [0x804E0, c, "libultra/io/conteepread"]
-    - [0x80710, hasm, "libultra/os/exceptasm"]
-    - [0x815D0, c, "libultra/os/setglobalintmask"]
-    - [0x81610, c, "libultra/os/resetglobalintmask"]
-    - [0x81660, c, "libultra/io/pirawdma"]
-    - [0x81730, c, "libultra/io/pigetcmdq"]
-    - [0x81750, c, "libultra/io/epirawread"] # double check
-    - [0x818C0, c, "libultra/io/epirawwrite"]
-    - [0x81A30, c, "libultra/io/piwrite"]
-    - [0x81A80, c, "libultra/io/piread"]
-    - [0x81AD0, c, "libultra/io/ai"]
-    - [0x81AF0, c, "libultra/debug/kdebugserver"]
-    - [0x81DB0, c, "libultra/debug/threadprofile"]
-    - [0x81E40, hasm, "libultra/gu/sqrtf"]
-    - [0x81E50, c, "libultra/debug/readhost"]
-    - [0x81F20, c, "libultra/os/initialize_isv"]
-    - [0x824C0, hasm, "libultra/monutil"]
-    - [0x82640, c, "libultra/libc/xprintf"]
-    - [0x83090, hasm, "libultra/os/getcause"]
-    - [0x830A0, hasm, "libultra/os/getcount"]
-    - [0x830B0, hasm, "libultra/os/getsr"]
-    - [0x830C0, hasm, "libultra/os/setfpccsr"]
-    - [0x830D0, hasm, "libultra/os/setwatchlo"]
-    - [0x830E0, c, "libultra/rmon/rmonsio"]
-    - [0x83290, c, "libultra/io/sp"]
-    - [0x832B0, c, "libultra/io/spgetstat"]
-    - [0x832C0, c, "libultra/io/spsetstat"]
-    - [0x832D0, c, "libultra/io/spsetpc"]
-    - [0x83300, c, "libultra/io/sprawdma"]
-    - [0x83390, c, "libultra/io/sirawread"]
-    - [0x833E0, c, "libultra/io/sirawwrite"]
-    - [0x83430, c, "libultra/io/crc"]
-    - [0x83520, hasm, "libultra/os/maptlbrdb"]
-    - [0x83580, hasm, "libultra/os/unmaptlball"]
-    - [0x835D0, c, "libultra/io/vi"]
-    - [0x836E0, c, "libultra/io/vigetcurrcontext"]
-    - [0x836F0, bin] # empty
-    - [0x83700, hasm, "libultra/gu/normalize"]
-    - [0x83760, c, "libultra/io/pfsisplug"]
-    - [0x83A40, c, "libultra/io/pfsgetstatus"]
-    - [0x83C50, c, "libultra/io/contpfs"]
-    - [0x846E0, c, "libultra/io/pirawread"]
-    - [0x84730, c, "libultra/io/pirawwrite"]
-    - [0x84780, c, "libultra/io/epiwrite"]
-    - [0x847E0, c, "libultra/io/epiread"]
-    - [0x84840, hasm, "libultra/libc/bcmp"]
-    - [0x84950, c, "libultra/libc/xlitob"]
-    - [0x84BA0, c, "libultra/libc/xldtob"]
-    - [0x85630, c, "libultra/rmon/rmoncmds"]
-    - [0x856C0, c, "libultra/rmon/rmonmem"]
-    - [0x85E30, c, "libultra/rmon/rmonmisc"]
-    - [0x85F80, c, "libultra/rmon/rmonregs"]
-    - [0x86A40, c, "libultra/rmon/rmontask"]
-    - [0x87310, c, "libultra/rmon/rmonmain"]
-    - [0x876B0, c, "libultra/io/sprawread"]
-    - [0x87700, c, "libultra/io/sprawwrite"]
-    - [0x87750, c, "libultra/io/si"]
-    - [0x87770, hasm, "libultra/os/stopthread"]
-    - [0x87830, c, unknown/87830]
-    - [0x87840, c, "libultra/libc/ldiv"]
-    - [0x87A00, hasm, "libultra/rmon/rmonrcp"]
-    - [0x87AA0, c, "libultra/rmon/rmonbrk"]
-    - [0x88440, c, unknown/88440]
-    - [0x88460, c, unknown/88460]
-    - [0x88710, c, unknown/88710]
-    - [0x88830, c, unknown/88830] # last libultra scope
-    - [0x88CE0, c, libhmath/sqrtf]
-    - [0x88CF0, c, libhmath/vecmag]
-    - [0x88D50, c, libhmath/vecnorm]
-    - [0x88DE0, c, libhmath/vecdot]
-    - [0x88E10, c, unknown/88E10]
-    - [0x890B0, c, unknown/890B0]
-    - [0x89120, c, unknown/89120]
-    - [0x89510, c, unknown/89510]
-    - [0x89FB0, c, unknown/89FB0]
-    - [0x8A350, c, unknown/8A350]
-    - [0x8A3D0, c, unknown/8A3D0]
-    - [0x8A420, c, unknown/8A420]
-    - [0x8A460, c, unknown/8A460]
-    - [0x8A4A0, c, unknown/8A4A0]
-    - [0x8A4D0, c, unknown/8A4D0]
-    - [0x8A580, c, unknown/8A580]
-    - [0x8A610, c, libhmath/veccopy]
-    - [0x8A640, c, libhmath/vecneg]
-    - [0x8A670, c, libhmath/vecadd]
-    - [0x8A6B0, c, libhmath/vecsub]
-    - [0x8A6F0, c, libhmath/vecmuls]
-    - [0x8A720, c, libhmath/vecadds]
-    - [0x8A770, c, libhmath/veclinc]
-    - [0x8A830, c, libhmath/vecmags3f]
-    - [0x8A860, c, libhmath/vecmag3f]
-    - [0x8A890, c, libhmath/vecnorm3f]
-    - [0x8A920, c, libhmath/vecdist]
-    - [0x8A9B0, c, libhmath/vecdot3f]
-    - [0x8A9E0, c, libhmath/veccross]
-    - [0x8AA30, c, libhmath/veceq]
-    - [0x8AA90, c, unknown/8AA90]
-    - [0x8AC30, c, unknown/8AC30]
-    - [0x8AC70, c, unknown/8AC70]
-    - [0x8ACD0, c, unknown/8ACD0]
-    - [0x8AD20, c, unknown/8AD20]
-    - [0x8ADB0, c, unknown/8ADB0]
-    - [0x8AEA0, c, unknown/8AEA0]
-    - [0x8AF30, c, unknown/8AF30]
-    - [0x8B030, c, unknown/8B030]
-    - [0x8B0C0, c, unknown/8B0C0]
-    - [0x8B1C0, c, unknown/8B1C0]
-    - [0x8B3F0, c, unknown/8B3F0]
-    - [0x8B560, c, unknown/8B560]
-    - [0x8B960, c, unknown/8B960]
-    - [0x8D730, c, unknown/8D730]
-    - [0x8D790, c, unknown/8D790]
-    - [0x8D7F0, c, unknown/8D7F0]
-    - [0x8D860, c, unknown/8D860]
-    - [0x8D8C0, c, unknown/8D8C0]
-    - [0x8E050, c, unknown/8E050]
-    - [0x8E4A0, c, unknown/8E4A0]
-    - [0x8E6B0, c, unknown/8E6B0]
-    - [0x8EA10, c, unknown/8EA10]
-    - [0x8EFF0, c, unknown/8EFF0]
-    - [0x8F320, c, unknown/8F320]
-    - [0x8F480, c, unknown/8F480]
-    - [0x8F620, c, unknown/8F620]
-    - [0x8F760, c, unknown/8F760]
-    - [0x8F7D0, c, unknown/8F7D0]
-    - [0x8F830, c, unknown/8F830]
-    - [0x8FB20, c, libhmath/sin]
-    - [0x8FCF0, bin]
-    - [0x96EF0, data, BCA0]
-    - [0x98260, bin]
-    - [0x98310, bin]
-    - [0xA7590, .rodata, decode] # rodata
-    - [0xA75A8, bin]
-    - [0xA77B8, .rodata, mallocblock]
-    - [0xA77BC, bin]
+      - [0x1000, hasm, entrypoint]
 
-  - dir: overlays/shared_overlay130
+  - name: main
     type: code
-    overlay: True
-    exclusive_ram_id: minigame
+    start: 0x1060
+    vram: 0x80000460
+    follows_vram: entry
+    bss_size: 0x2E080
+    subsegments:
+      - [0x1060, c]
+      - [0x8F20, c]
+      - [0x99D0, c, pad]
+      - [0xA480, c, input]
+      - [0xA6C0, c]
+      - [0xAE30, c, decode]
+      - [0xBCA0, c, util]
+      - [0xC1F0, asm]
+      - [0xC3A0, asm, esprite]
+      - [0xCE10, c, eeprom]
+      - [0xD7A0, asm]
+      - [0xE560, asm]
+      - [0xEFB0, asm]
+      - [0xEFC0, c, gameman]
+      - [0xF610, c, graphics]
+      - [0xFCA0, c, hmfload]
+      - [0x12E20, c, camera]
+      - [0x13F90, c]
+      - [0x14EA0, c]
+      - [0x19C30, c]
+      - [0x1A580, c, mallocblock]
+      - [0x1AC70, c, hmfman]
+      - [0x20A20, asm]
+      - [0x22EB0, c]
+      - [0x30C40, asm]
+      - [0x32160, c]
+      - [0x34DC0, asm]
+      - [0x34DD0, c]
+      - [0x360A0, c, main]
+      - [0x36440, c, mallocperm]
+      - [0x36510, c, malloctemp]
+      - [0x36650, c, save]
+      - [0x36CD0, c, malloc]
+      - [0x36F80, asm]
+      - [0x37210, c]
+      - [0x45F50, c]
+      - [0x471D0, c]
+      - [0x47D60, c]
+      - [0x4B120, c]
+      - [0x4BF40, asm]
+      - [0x4E010, c, profiler]
+      - [0x4E5A0, c, rom]
+      - [0x4E800, c]
+      - [0x4F720, c, process]
+      - [0x4FE90, c, saveEncode]
+      - [0x508F0, c, saveload]
+      - [0x51B50, c, nnsched]
+      - [0x52350, c, siman]
+      - [0x527E0, c]
+      - [0x52F30, c]
+      - [0x58000, c]
+      - [0x5ACF0, c, window]
+      - [0x62750, c, wipe]
+      - [0x66E70, asm]
+      - [0x67000, asm]
+      - [0x67100, hasm, setjmp]
+      - [0x671E0, c, lib/hvq]
+      - [0x6B050, c]
+      - [0x6BA20, asm]
+      - [0x6C140, c]
+      - [0x6C320, asm]
+      - [0x6C3A0, asm]
+      - [0x6C3C0, c]
+      - [0x6C9F0, c]
+      - [0x6DBD0, asm]
+      - [0x6DBF0, c, 2.0L/cspgetchlvol]
+      - [0x6DC10, c, 2.0L/seqpgetchlvol]
+      - [0x6DC30, asm]
+      - [0x6DCD0, asm]
+      - [0x6DCE0, asm]
+      - [0x6DD10, asm]
+      - [0x6DD40, asm]
+      - [0x6DE50, asm]
+      - [0x6DF20, c, 2.0L/audio/sndpdeallocate]
+      - [0x6DF70, asm]
+      - [0x6DFA0, asm]
+      - [0x6DFD0, c]
+      - [0x6E6B0, asm]
+      - [0x6E720, asm]
+      - [0x6E780, asm]
+      - [0x6E7E0, asm]
+      - [0x6E840, asm]
+      - [0x6E880, asm]
+      - [0x6E8E0, asm]
+      - [0x6E940, asm]
+      - [0x6E960, asm]
+      - [0x6EC30, c, 2.0L/audio/cseq]
+      - [0x6F470, c]
+      - [0x70420, asm]
+      - [0x70470, asm]
+      - [0x707B0, asm]
+      - [0x70850, c, 2.0L/audio/synremoveplayer]
+      - [0x70940, asm]
+      - [0x709E0, asm]
+      - [0x70A70, asm]
+      - [0x70B20, asm]
+      - [0x70BB0, asm]
+      - [0x70C30, c]
+      - [0x723E0, asm]
+      - [0x72740, asm]
+      - [0x72750, asm] #libleo stuff
+      - [0x73020, asm]
+      - [0x730A0, asm]
+      - [0x73190, c]
+      - [0x73740, asm]
+      - [0x737E0, c]
+      - [0x73E10, c]
+      - [0x73F40, c]
+      - [0x75320, c, 2.0L/audio/auxbus]
+      - [0x75430, c, 2.0L/audio/bnkf]
+      - [0x75700, c]
+      - [0x77E50, asm]
+      - [0x77E90, c]
+      - [0x79030, asm]
+      - [0x79120, asm]
+      - [0x79380, asm]
+      - [0x79420, asm]
+      - [0x79570, asm]
+      - [0x79740, c, 2.0L/audio/cents2ratio]
+      - [0x797A0, asm]
+      - [0x79950, asm]
+      - [0x79980, asm]
+      - [0x79B60, asm]
+      - [0x79E70, asm]
+      - [0x79F30, c]
+      - [0x7BDE0, asm]
+      - [0x7C130, c]
+      - [0x7C570, asm]
+      - [0x7C890, hasm, 2.0L/libc/bzero]
+      - [0x7C930, c, 2.0L/libc/string]
+      - [0x7C9C0, c, 2.0L/libc/sprintf]
+      - [0x7CA50, c, 2.0L/libc/syncprintf]
+      - [0x7CB00, c, os/createmesgqueue]
+      - [0x7CB30, asm]
+      - [0x7CC70, asm]
+      - [0x7CDA0, asm]
+      - [0x7D200, asm]
+      - [0x7D220, asm]
+      - [0x7D410, asm]
+      - [0x7D510, asm]
+      - [0x7D610, asm]
+      - [0x7D6E0, asm]
+      - [0x7D890, asm]
+      - [0x7DED0, asm]
+      - [0x7DF10, asm]
+      - [0x7DF50, asm]
+      - [0x7E290, asm]
+      - [0x7E2F0, asm]
+      - [0x7E340, asm]
+      - [0x7E4B0, asm]
+      - [0x7E500, c]
+      - [0x7E860, asm]
+      - [0x7E8C0, asm]
+      - [0x7E920, asm]
+      - [0x7E9A0, asm]
+      - [0x7EA20, asm]
+      - [0x7EBE0, asm]
+      - [0x7EC40, asm]
+      - [0x7ECC0, asm]
+      - [0x7EFA0, asm]
+      - [0x7F330, asm]
+      - [0x7F3A0, asm]
+      - [0x7F590, asm]
+      - [0x7F800, asm]
+      - [0x7F820, asm]
+      - [0x7FCD0, asm]
+      - [0x800A0, asm]
+      - [0x80460, asm]
+      - [0x804E0, c]
+      - [0x815D0, asm]
+      - [0x81660, asm]
+      - [0x818C0, asm]
+      - [0x81A30, asm]
+      - [0x81A80, asm]
+      - [0x81AD0, asm]
+      - [0x81AF0, asm]
+      - [0x81DB0, asm]
+      - [0x81E40, asm]
+      - [0x81E50, asm]
+      - [0x81F20, asm]
+      - [0x824C0, hasm, 2.0L/monutil]
+      - [0x82640, c, 2.0L/libc/xprintf]
+      - [0x83090, hasm, 2.0L/os/getcause]
+      - [0x830A0, hasm, 2.0L/os/getcount]
+      - [0x830B0, hasm, 2.0L/os/getsr]
+      - [0x830C0, hasm, 2.0L/os/setfpccsr]
+      - [0x830D0, hasm, 2.0L/os/setwatchlo]
+      - [0x830E0, c, 2.0L/rmon/rmonsio]
+      - [0x83290, asm, 2.0L/io/sp]
+      - [0x84BA0, c, 2.0L/libc/xldtob]
+      - [0x85630, c, 2.0L/rmon/rmoncmds]
+      - [0x87A00, c, 2.0L/rmon/rmonbrk]
+      - [0x88440, asm, libkmc/abs]
+      - [0x88460, asm, libkmc/fmod]
+      - [0x88640, asm, libkmc/memset]
+      - [0x88710, hasm, gu/sqrtf]
+      - [0x88720, asm, libkmc/strcmp]
+      - [0x88830, asm, libkmc/strcpy]
+      - [0x88900, hasm, libkmc/mmuldi3]
+      - [0x88CD0, hasm, sqrt]
+      - [0x88CE0, asm]
+      - [0x88CF0, c]
+      - [0x88D20, c]
+      - [0x88D50, asm]
+      - [0x890B0, asm]
+      - [0x89120, asm]
+      - [0x89170, asm]
+      - [0x89510, asm]
+      - [0x898B0, asm]
+      - [0x89FB0, asm]
+      - [0x8A350, asm]
+      - [0x8A3D0, asm]
+      - [0x8A420, asm]
+      - [0x8A460, asm]
+      - [0x8A4A0, asm]
+      - [0x8A4D0, asm]
+      - [0x8A4F0, asm]
+      - [0x8A580, asm]
+      - [0x8A640, asm]
+      - [0x8A670, asm]
+      - [0x8A6B0, c]
+      - [0x8A6F0, asm]
+      - [0x8A770, asm]
+      - [0x8A830, asm]
+      - [0x8A860, asm]
+      - [0x8A890, asm]
+      - [0x8A920, asm]
+      - [0x8A960, asm]
+      - [0x8AA90, asm]
+      - [0x8ABF0, asm]
+      - [0x8AC30, asm]
+      - [0x8AC70, asm]
+      - [0x8ACD0, asm]
+      - [0x8AD20, asm]
+      - [0x8ADB0, asm]
+      - [0x8AEA0, asm]
+      - [0x8AF30, asm]
+      - [0x8B030, asm]
+      - [0x8B0C0, asm]
+      - [0x8B1C0, asm]
+      - [0x8B3F0, asm]
+      - [0x8B560, asm]
+      - [0x8B960, asm]
+      - [0x8BF00, asm]
+      - [0x8C2B0, asm]
+      - [0x8C440, asm]
+      - [0x8CB20, asm]
+      - [0x8D1E0, asm]
+      - [0x8D730, asm]
+      - [0x8D790, asm]
+      - [0x8D7F0, asm]
+      - [0x8D860, asm]
+      - [0x8D8C0, asm]
+      - [0x8DEC0, asm]
+      - [0x8E050, asm]
+      - [0x8E1D0, asm]
+      - [0x8E400, asm]
+      - [0x8E4A0, c]
+      - [0x8E6B0, c]
+      - [0x8EA10, c]
+      - [0x8EFF0, c]
+      - [0x8F1A0, c]
+      - [0x8F320, c]
+      - [0x8F480, c]
+      - [0x8F620, c]
+      - [0x8F760, asm]
+      - [0x8F7D0, asm]
+      - [0x8F830, c]
+      - [0x8FB20, c]
+      - [0x8FCF0, data]
+      - [0x960C0, bin, n_aspMain_code]
+      - [0x96EF0, .data, overlay_table]
+      - [0x98160, data]
+      - [0xA4C50, .data, 2.0L/libc/xprintf]
+      - [0xA4CA0, data]
+      - [0xA4F30, .rodata, 8F1A0]
+      #- [0xA4F40, .rodata, 8F320] #where does this rodata belong?
+      - [0xA4F40, rodata]
+      - [0xA4F50, rodata]
+      - [0xA6C50, rodata, n_aspMain_data]
+      - [0xA6F00, .rodata, 1060]
+      - [0xA7580, .rodata, 8F20]
+      - [0xA7590, .rodata, decode]
+      - [0xA75A8, .rodata, hmfload]
+      - [0xA7660, .rodata, 13F90]
+      - [0xA7670, .rodata, 14EA0]
+      - [0xA77B8, .rodata, hmfman]
+      - [0xA7828, .rodata, 22EB0]
+      - [0xA78E0, .rodata, 32160]
+      - [0xA7F00, .rodata, 34DD0]
+      - [0xA7F20, .rodata, 37210]
+      - [0xA8620, .rodata, 45F50]
+      - [0xA8638, .rodata, 471D0]
+      - [0xA8740, .rodata, saveEncode]
+      - [0xA8760, .rodata, 527E0]
+      - [0xA87A0, .rodata, 52F30]
+      - [0xA8800, .rodata, 58000]
+      - [0xA8810, .rodata, window]
+      - [0xA8B50, .rodata, lib/hvq]
+      - [0xA8B90, .rodata, 6B050]
+      - [0xA8C00, .rodata, 6C140]
+      - [0xA8C10, .rodata, 6C3C0]
+      - [0xA8C30, .rodata, 6C9F0]
+      - [0xA8CE0, .rodata, 6DFD0]
+      - [0xA8D40, .rodata, 6F470]
+      - [0xA8DB0, .rodata, 70C30]
+      - [0xA8E10, .rodata, 73190]
+      - [0xA8E90, .rodata, 737E0]
+      - [0xA8EB0, .rodata, 73E10]
+      - [0xA8EC0, .rodata, 73F40]
+      - [0xA8F00, .rodata, 75700]
+      - [0xA90A0, .rodata, 77E90]
+      - [0xA9128, .rodata, 79F30]
+      - [0xA9228, .rodata, 7C130]
+      - [0xA9280, .rodata, 7E500]
+      - [0xA9290, .rodata, 804E0]
+      - [0xA9300, rodata] #nan?
+      - [0xA9310, .rodata, 2.0L/libc/xprintf]
+      - [0xA9490, rodata, 2.0L/io/sp]
+      - [0xA9510, .rodata, 2.0L/rmon/rmonbrk]
+      - [0xA9570, rodata, libkmc/fmod]
+      - [0xA9580, .rodata, 8E4A0]
+      - [0xA9590, .rodata, 8E6B0]
+      - [0xA9600, .rodata, 8EA10]
+      - [0xA9670, .rodata, 8EFF0]
+      - [0xA9680, .rodata, 8F320]
+      - [0xA9690, .rodata, 8F480]
+      - [0xA96A0, .rodata, 8F620]
+      - [0xA96B0, .rodata, 8F830]
+      - [0xA96E0, .rodata, 8FB20]
+      - { start: 0xA96F0, type: bss, vram: 0x800A8AF0 }
+
+  - type: code
     start: 0xA96F0
     vram: 0x800D6B70
+    dir: overlays/ovl_82_name
+    name: name_82
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x820
     subsegments:
       - [0xA96F0, c]
-      - [0xAB1C0, c]
-      - [0xB3CE0, c]
-      - [0xB63A0, c]
-      - [0xB7600, c]
-      - [0xB88C0, c]
-      - [0xB8A20, c]
-      - [0xBA4B0, c]
-      - [0xBC7A0, c]
-      - [0xBD210, c]
-      - [0xBE2A0, bin] # data
+      - [0xBE2A0, data, A96F0] #800EB720
+      - [0xBE690, .rodata, A96F0] #800EBB10
+      - {0xBE940, type: bss, vram: 0x800EBDC0, name: ovl_82_bss}
 
-  - dir: overlays/shared_overlay129
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0xBE940
     vram: 0x800D6B70
+    dir: overlays/ovl_81_name
+    name: name_81
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2D60
     subsegments:
       - [0xBE940, c]
-      - [0xBF4A0, c]
-      - [0xBFB40, c]
-      - [0xC1580, c]
-      - [0xC1BA0, c]
-      - [0xC1D60, c]
-      - [0xC4430, c]
-      - [0xC45D0, c]
-      - [0xC5770, c]
-      - [0xC9330, c]
-      - [0xC9690, c]
-      - [0xCA640, c]
-      - [0xCCD20, c]
-      - [0xD1190, c]
-      - [0xD28F0, c]
-      - [0xD3450, c]
-      - [0xD5B20, c]
-      - [0xDBE50, c]
-      - [0xDC0D0, c]
-      - [0xDC4E0, c]
-      - [0xDFD60, c]
-      - [0xE3CD0, c]
-      - [0xE78B0, c]
-      - [0xE7AE0, c]
-      - [0xE8BE0, bin] # data
+      - [0xE8BE0, data, BE940] #80100E10
+      - [0xE9A00, .rodata, BE940] #80101C30
+      - {0xEA790, type: bss, vram: 0x801029C0, name: ovl_81_bss}
 
-  # Board play overlay
-  - dir: overlays/shared_board
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0xEA790
     vram: 0x800D6B70
+    dir: overlays/ovl_80_shared_board
+    name: shared_board
+    subalign: 8
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x32A0
     subsegments:
       - [0xEA790, c]
+      - [0xEAB00, c]
       - [0xEB2F0, c]
       - [0xEC3B0, c]
       - [0xECA50, c]
+      - [0xEDDB0, c]
       - [0xEE3B0, c]
       - [0xEE660, c]
       - [0xF2910, c]
       - [0xF5070, c]
       - [0xF5B90, c]
-      # - [0xFE110, c] suspected based on mp1 spaces.c
       - [0xFFB10, c]
       - [0x1006F0, c]
       - [0x101840, c]
@@ -463,1419 +461,1844 @@ segments:
       - [0x10C230, c]
       - [0x113520, c]
       - [0x113750, c]
-      - [0x1143C0, bin] # data
+      - [0x1143C0, data, EA790] #801007A0
+      - [0x115B50, .rodata, EA790]
+      - [0x115B60, .rodata, EAB00]
+      - [0x115B78, .rodata, EDDB0]
+      - [0x115BD8, .rodata, EE3B0]
+      - [0x115BF0, .rodata, EE660]
+      - [0x115CB0, .rodata, F2910]
+      - [0x115DA0, .rodata, F5B90]
+      - [0x115F00, .rodata, 1006F0]
+      - [0x115F40, .rodata, 101840]
+      - [0x116060, .rodata, 106A50]
+      - [0x116140, .rodata, 10AD50]
+      - [0x116170, .rodata, 10C230]
+      - [0x116300, .rodata, 113520]
+      # - [0x115BF0, rodata]
+      - {0x116320, type: bss, vram: 0x80102700, name: ovl_80_bss}
 
-  - dir: overlays/test_menu1
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x116320
     vram: 0x801059A0
+    dir: overlays/ovl_00_test_menu1
+    name: test_menu1
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x220
     subsegments:
       - [0x116320, c]
-      - [0x119560, bin] # data
+      - [0x119560, data, 116320] #80108BE0
+      - [0x11A430, .rodata, 116320]
+      - {0x11A480, type: bss, vram: 0x80109B00, name: ovl_00_bss}
 
-  - dir: overlays/minigames/hand_line_sinker
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x11A480
     vram: 0x801059A0
+    dir: overlays/ovl_01_hand_line_sinker
+    name: hand_line_sinker
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xC0
     subsegments:
       - [0x11A480, c]
-      - [0x120090, c]
-      - [0x1209E0, bin] # data
+      - [0x1209E0, data, 11A480] #8010BF00
+      - [0x120A90, .rodata, 11A480] #8010BFB0
+      - {0x120BC0, type: bss, vram: 0x8010C0E0, name: ovl_01_bss}
 
-  - dir: overlays/minigames/coconut_conk
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x120BC0
     vram: 0x801059A0
+    dir: overlays/ovl_02_coconut_conk
+    name: coconut_conk
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A10
     subsegments:
       - [0x120BC0, c]
-      - [0x126180, bin] # data
+      - [0x126180, data, 120BC0] #8010AF60
+      - [0x126310, .rodata, 120BC0] #8010AF60
+      - {0x1263E0, type: bss, vram: 0x8010B1C0, name: ovl_02_bss}
 
-  - dir: overlays/minigames/spotlight_swim
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1263E0
     vram: 0x801059A0
+    dir: overlays/ovl_03_spotlight_swim
+    name: spotlight_swim
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1B80
     subsegments:
       - [0x1263E0, c]
-      - [0x12D700, bin] # data
+      - [0x12D700, data, 1263E0] #8010CCC0
+      - [0x12DC40, .rodata, 1263E0] #8010D200
+      - {0x12DD30, type: bss, vram: 0x8010D2F0, name: ovl_03_bss}
 
-  - dir: overlays/minigames/boulder_ball
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x12DD30
     vram: 0x801059A0
+    dir: overlays/ovl_04_boulder_ball
+    name: boulder_ball
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x12DD30, c]
-      - [0x131A90, bin] # data
+      - [0x131A90, data, 12DD30] #80109700
+      - [0x131B90, .rodata, 12DD30] #80109800
+      - {0x131C10, type: bss, vram: 0x80109880, name: ovl_04_bss}
 
-  - dir: overlays/minigames/crazy_cogs
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x131C10
     vram: 0x801059A0
+    dir: overlays/ovl_05_crazy_cogs
+    name: crazy_cogs
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2530
     subsegments:
       - [0x131C10, c]
-      - [0x137A80, bin] # data
+      - [0x137A80, data, 131C10] #8010B810
+      - [0x137B60, .rodata, 131C10]
+      - {0x137C00, type: bss, vram: 0x8010B990, name: ovl_05_bss}
 
-  - dir: overlays/minigames/hide_and_sneak
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x137C00
     vram: 0x801059A0
+    dir: overlays/ovl_06_hide_and_sneak
+    name: hide_and_sneak
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A60
     subsegments:
       - [0x137C00, c]
-      - [0x13E5D0, bin] # data
+      - [0x13E5D0, data, 137C00] #8010C370
+      - [0x13E780, .rodata, 137C00]
+      - {0x13E9C0, type: bss, vram: 0x8010C760, name: ovl_06_bss}
 
-  - dir: overlays/minigames/ridiculous_relay
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x13E9C0
     vram: 0x801059A0
+    dir: overlays/ovl_07_ridiculous_relay
+    name: ridiculous_relay
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2B0
     subsegments:
       - [0x13E9C0, c]
-      - [0x149CD0, bin] # data
+      - [0x149CD0, data, 13E9C0] #80110CB0
+      - [0x149E80, .rodata, 13E9C0] #80110E60
+      - {0x14A810, type: bss, vram: 0x801117F0, name: ovl_07_bss}
 
-  - dir: overlays/minigames/thwomp_pull
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x14A810
     vram: 0x801059A0
+    dir: overlays/ovl_08_thwomp_pull
+    name: thwomp_pull
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x150
     subsegments:
       - [0x14A810, c]
-      - [0x153BD0, bin] # data
+      - [0x153BD0, data, 14A810] #8010ED60
+      - [0x153E40, .rodata, 14A810] #8010EFD0
+      - {0x1542E0, type: bss, vram: 0x8010F470, name: ovl_08_bss}
 
-  - dir: overlays/minigames/river_raiders
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1542E0
     vram: 0x801059A0
+    dir: overlays/ovl_09_river_raiders
+    name: river_raiders
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x3420
     subsegments:
       - [0x1542E0, c]
-      - [0x15BCF0, bin] # data
+      - [0x15BCF0, data, 1542E0] #8010D3B0
+      - [0x15C240, .rodata, 1542E0] #8010D900
+      - {0x15C310, type: bss, vram: 0x8010D9D0, name: ovl_09_bss}
 
-  - dir: overlays/minigames/tidal_toss
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x15C310
     vram: 0x801059A0
+    dir: overlays/ovl_0A_tidal_toss
+    name: tidal_toss
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x300
     subsegments:
       - [0x15C310, c]
-      - [0x1613E0, bin] # data
+      - [0x1613E0, data, 15C310] #8010AA70
+      - [0x161470, .rodata, 15C310] #8010AB00
+      - {0x161750, type: bss, vram: 0x8010ADE0, name: ovl_0A_bss}
 
-  - dir: overlays/minigames/eatsa_pizza
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x161750
     vram: 0x801059A0
+    dir: overlays/ovl_0B_eatsa_pizza
+    name: eatsa_pizza
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x180
     subsegments:
       - [0x161750, c]
-      - [0x164EB0, bin] # data
+      - [0x164EB0, data, 161750] #80109100
+      - [0x164F00, .rodata, 161750] #80109150
+      - {0x165010, type: bss, vram: 0x80109260, name: ovl_0B_bss}
 
-  - dir: overlays/minigames/baby_bowser_broadside
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x165010
     vram: 0x801059A0
+    dir: overlays/ovl_0C_baby_bowser_broadside
+    name: baby_bowser_broadside
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x165010, c]
-      - [0x169540, c]
-      - [0x16F3D0, bin] # data
+      - [0x16F3D0, data, 165010] #8010FD60
+      - {0x16F670, type: bss, vram: 0x80110000, name: ovl_0C_bss}
 
-  - dir: overlays/minigames/pump_pump_away
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x16F670
     vram: 0x801059A0
+    dir: overlays/ovl_0D_pump_pump_away
+    name: pump_pump_away
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1F50
     subsegments:
       - [0x16F670, c]
-      - [0x17AB40, bin] # data
+      - [0x17AB40, data, 16F670] #80110E70
+      - [0x17AE20, .rodata, 16F670] #80111150
+      - {0x17B3B0, type: bss, vram: 0x801116E0, name: ovl_0D_bss}
 
-  - dir: overlays/minigames/hyper_hydrants
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x17B3B0
     vram: 0x801059A0
+    dir: overlays/ovl_0E_hyper_hydrants
+    name: hyper_hydrants
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x100
     subsegments:
       - [0x17B3B0, c]
-      - [0x1817F0, bin] # data
+      - [0x1817F0, data, 17B3B0] #8010BDE0
+      - [0x181880, .rodata, 17B3B0] #8010BE70
+      - {0x181950, type: bss, vram: 0x8010BF40, name: ovl_0E_bss}
 
-  - dir: overlays/minigames/picking_panic
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x181950
     vram: 0x801059A0
+    dir: overlays/ovl_0F_picking_panic
+    name: picking_panic
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x3F0
     subsegments:
       - [0x181950, c]
-      - [0x18A560, bin] # data
+      - [0x18A560, data, 181950] #8010E5B0
+      - [0x18A6D0, .rodata, 181950] #8010E720
+      - {0x18ABD0, type: bss, vram: 0x8010EC20, name: ovl_0F_bss}
 
-  # Toadstool Titan
-  - dir: overlays/minigames/cosmic_coaster
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x18ABD0
     vram: 0x801059A0
+    dir: overlays/ovl_10_cosmic_coaster
+    name: cosmic_coaster
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x3C0
     subsegments:
       - [0x18ABD0, c]
-      - [0x18EB30, c]
-      - [0x190D60, bin] # data
+      - [0x190D60, data, 18ABD0] #8010BB30
+      - [0x1911E0, .rodata, 18ABD0] #8010BFB0
+      - {0x191240, type: bss, vram: 0x8010C010, name: ovl_10_bss}
 
-  - dir: overlays/minigames/puddle_paddle
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x191240
     vram: 0x801059A0
+    dir: overlays/ovl_11_puddle_paddle
+    name: puddle_paddle
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x191240, c]
-      - [0x19CAC0, bin] # data
+      - [0x19CAC0, data, 191240] #80111220
+      - [0x19CEE0, .rodata, 191240] #80111640
+      - {0x19CEF0, type: bss, vram: 0x80111650, name: ovl_11_bss}
 
-  - dir: overlays/minigames/etch_n_catch
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x19CEF0
     vram: 0x801059A0
+    dir: overlays/ovl_12_etch_n_catch
+    name: etch_n_catch
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x4BC0
     subsegments:
       - [0x19CEF0, c]
-      - [0x1A3BF0, bin] # data
+      - [0x1A3BF0, data, 19CEF0] #8010C6A0
+      - [0x1A3C50, .rodata, 19CEF0] #8010C700
+      - {0x1A3D80, type: bss, vram: 0x8010C830, name: ovl_12_bss}
 
-  - dir: overlays/minigames/log_jam
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1A3D80
     vram: 0x801059A0
+    dir: overlays/ovl_13_log_jam
+    name: log_jam
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xE0
     subsegments:
       - [0x1A3D80, c]
-      - [0x1AC270, bin] # data
+      - [0x1AC270, data, 1A3D80] #8010DE90
+      - [0x1AC5B0, .rodata, 1A3D80] #8010E1D0
+      - {0x1AC970, type: bss, vram: 0x8010E590, name: ovl_13_bss}
 
-  - dir: overlays/minigames/slot_synch
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1AC970
     vram: 0x801059A0
+    dir: overlays/ovl_14_slot_synch
+    name: slot_synch
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xE0
     subsegments:
       - [0x1AC970, c]
-      - [0x1B47C0, bin] # data
+      - [0x1B47C0, data, 1AC970] #8010D7F0
+      - [0x1B4B70, .rodata, 1AC970] #8010DBA0
+      - {0x1B4F10, type: bss, vram: 0x8010DF40, name: ovl_14_bss}
 
-  - dir: overlays/minigames/treadmill_grill
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1B4F10
     vram: 0x801059A0
+    dir: overlays/ovl_15_treadmill_grill
+    name: treadmill_grill
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x190
     subsegments:
       - [0x1B4F10, c]
-      - [0x1BA4F0, bin] # data
+      - [0x1BA4F0, data, 1B4F10] #8010AF80
+      - [0x1BA7E0, .rodata, 1B4F10] #8010B270
+      - {0x1BA850, type: bss, vram: 0x8010B2E0, name: ovl_15_bss}
 
-  - dir: overlays/minigames/toadstool_titan
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1BA850
     vram: 0x801059A0
+    dir: overlays/ovl_16_toadstool_titan
+    name: toadstool_titan
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2B0
     subsegments:
       - [0x1BA850, c]
-      - [0x1C3C50, bin] # data
+      - [0x1C3C50, data, 1BA850] #8010EDA0
+      - [0x1C3D30, .rodata, 1BA850] #8010EE80
+      - {0x1C4280, type: bss, vram: 0x8010F3D0, name: ovl_16_bss}
 
-  - dir: overlays/minigames/aces_high
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1C4280
     vram: 0x801059A0
+    dir: overlays/ovl_17_aces_high
+    name: aces_high
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xE0
     subsegments:
       - [0x1C4280, c]
-      - [0x1CC400, c]
-      - [0x1CC420, bin] # data
+      - [0x1CC420, data, 1C4280] #8010DB40
+      - [0x1CC5C0, .rodata, 1C4280] #8010DCE0
+      - {0x1CC730, type: bss, vram: 0x8010DE50, name: ovl_17_bss}
 
-  - dir: overlays/minigames/bounce_n_trounce
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1CC730
     vram: 0x801059A0
+    dir: overlays/ovl_18_bounce_n_trounce
+    name: bounce_n_trounce
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x1CC730, c]
-      - [0x1D1920, c]
-      - [0x1D1940, bin] # data
+      - [0x1D1940, data, 1CC730] #8010ABB0
+      - [0x1D1B20, .rodata, 1CC730] #8010AD90
+      - {0x1D1C40, type: bss, vram: 0x8010AEB0, name: ovl_18_bss}
 
-  - dir: overlays/minigames/ice_rink_risk
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1D1C40
     vram: 0x801059A0
+    dir: overlays/ovl_19_ice_rink_risk
+    name: ice_rink_risk
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x1D1C40, c]
-      - [0x1D47F0, bin] # data
+      - [0x1D47F0, data, 1D1C40] #80108550
+      - [0x1D4950, .rodata, 1D1C40] #801086B0
+      - {0x1D4970, type: bss, vram: 0x801086D0, name: ovl_19_bss}
 
-  - dir: overlays/minigames/locked_out
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1D4970
     vram: 0x801059A0
+    dir: overlays/ovl_1A_locked_out
+    name: locked_out
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x190
     subsegments:
       - [0x1D4970, c]
-      - [0x1D90E0, bin] # data
+      - [0x1D90E0, data, 1D4970] #8010A110
+      - [0x1D91C0, .rodata, 1D4970] #8010A1F0
+      - {0x1D9550, type: bss, vram: 0x8010A580, name: ovl_1A_bss}
 
-  - dir: overlays/minigames/chip_shot_challenge
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1D9550
     vram: 0x801059A0
+    dir: overlays/ovl_1B_chip_shot_challenge
+    name: chip_shot_challenge
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xA0
     subsegments:
       - [0x1D9550, c]
-      - [0x1DE3D0, bin] # data
+      - [0x1DE3D0, data, 1D9550] #8010A820
+      - [0x1DE570, .rodata, 1D9550] #8010A9C0
+      - {0x1DE610, type: bss, vram: 0x8010AA60, name: ovl_1B_bss}
 
-  # Snowball Summit
-  - dir: overlays/minigames/parasol_plummet
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1DE610
     vram: 0x801059A0
+    dir: overlays/ovl_1C_parasol_plummet
+    name: parasol_plummet
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1C0
     subsegments:
       - [0x1DE610, c]
-      - [0x1E3510, bin] # data
+      - [0x1E3510, data, 1DE610] #8010A8A0
+      - {0x1E37C0, type: bss, vram: 0x8010AB50, name: ovl_1C_bss}
 
-  - dir: overlays/minigames/messy_memory
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1E37C0
     vram: 0x801059A0
+    dir: overlays/ovl_1D_messy_memory
+    name: messy_memory
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x47A0
     subsegments:
       - [0x1E37C0, c]
-      - [0x1EEDE0, bin] # data
+      - [0x1EEDE0, data, 1E37C0] #80110FC0
+      - [0x1EF210, .rodata, 1E37C0] #801113F0
+      - {0x1EF420, type: bss, vram: 0x80111600, name: ovl_1D_bss}
 
-  - dir: overlays/minigames/picture_imperfect
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1EF420
     vram: 0x801059A0
+    dir: overlays/ovl_1E_picture_imperfect
+    name: picture_imperfect
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1B0
     subsegments:
       - [0x1EF420, c]
-      - [0x1F3A60, bin] # data
+      - [0x1F3A60, data, 1EF420] #80109FE0
+      - [0x1F3AE0, .rodata, 1EF420] #8010A060
+      - {0x1F3B90, type: bss, vram: 0x8010A110, name: ovl_1E_bss}
 
-  - dir: overlays/minigames/marios_puzzle_party
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1F3B90
     vram: 0x801059A0
+    dir: overlays/ovl_1F_marios_puzzle_party
+    name: marios_puzzle_party
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x6600
     subsegments:
       - [0x1F3B90, c]
-      - [0x1FD760, c]
-      - [0x1FE270, bin] # data
+      - [0x1FE270, data, 1F3B90] #80110080
+      - [0x1FE490, .rodata, 1F3B90] #801102A0
+      - {0x1FE4D0, type: bss, vram: 0x801102E0, name: ovl_1F_bss}
 
-  - dir: overlays/minigames/the_beat_goes_on
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x1FE4D0
     vram: 0x801059A0
+    dir: overlays/ovl_20_the_beat_goes_on
+    name: the_beat_goes_on
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x140
     subsegments:
       - [0x1FE4D0, c]
-      - [0x204DB0, bin] # data
+      - [0x204DB0, data, 1FE4D0] #8010C280
+      - [0x204EC0, .rodata, 1FE4D0] #8010C390
+      - {0x204F90, type: bss, vram: 0x8010C460, name: ovl_20_bss}
 
-  - dir: overlays/minigames/mpiq
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x204F90
     vram: 0x801059A0
+    dir: overlays/ovl_21_mpiq
+    name: mpiq
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x680
     subsegments:
       - [0x204F90, c]
-      - [0x20BC70, bin] # data
+      - [0x20BC70, data, 204F90] #8010C680
+      - [0x20BCF0, .rodata, 204F90] #8010C700
+      - {0x20BFA0, type: bss, vram: 0x8010C9B0, name: ovl_21_bss}
 
-  - dir: overlays/minigames/curtain_call
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x20BFA0
     vram: 0x801059A0
+    dir: overlays/ovl_22_curtain_call
+    name: curtain_call
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A90
     subsegments:
       - [0x20BFA0, c]
-      - [0x2116C0, bin] # data
+      - [0x2116C0, data, 20BFA0] #8010B0C0
+      - [0x2118B0, .rodata, 20BFA0] #8010B2B0
+      - {0x211AB0, type: bss, vram: 0x8010B4B0, name: ovl_22_bss}
 
-  - dir: overlays/minigames/water_whirled
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x211AB0
     vram: 0x801059A0
+    dir: overlays/ovl_23_water_whirled
+    name: water_whirled
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x730
     subsegments:
       - [0x211AB0, c]
-      - [0x216270, bin] # data
+      - [0x216270, data, 211AB0] #8010A160
+      - [0x2165F0, .rodata, 211AB0] #8010A4E0
+      - {0x216670, type: bss, vram: 0x8010A560, name: ovl_23_bss}
 
-  - dir: overlays/minigames/fridged_bridges
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x216670
     vram: 0x801059A0
+    dir: overlays/ovl_24_fridged_bridges
+    name: fridged_bridges
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x37B0
     subsegments:
       - [0x216670, c]
-      - [0x21CAC0, c]
-      - [0x21DBF0, bin] # data
+      - [0x21DBF0, data, 216670] #8010CF20
+      - [0x21DF20, .rodata, 216670] #8010D250
+      - {0x21E010, type: bss, vram: 0x8010D340, name: ovl_24_bss}
 
-  - dir: overlays/minigames/awful_tower
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x21E010
     vram: 0x801059A0
+    dir: overlays/ovl_25_awful_tower
+    name: awful_tower
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x330
     subsegments:
       - [0x21E010, c]
-      - [0x2251D0, bin] # data
+      - [0x2251D0, data, 21E010] #8010CB60
+      - [0x225350, .rodata, 21E010] #8010CCE0
+      - {0x225740, type: bss, vram: 0x8010D0D0, name: ovl_25_bss}
 
-  - dir: overlays/minigames/cheep_cheep_chase
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x225740
     vram: 0x801059A0
+    dir: overlays/ovl_26_cheep_cheep_chase
+    name: cheep_cheep_chase
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x225740, c]
-      - [0x22DDB0, bin] # data
+      - [0x22DDB0, data, 225740] #8010E010
+      - [0x22DDF0, .rodata, 225740] #8010E050
+      - {0x22E100, type: bss, vram: 0x8010E360, name: ovl_26_bss}
 
-  - dir: overlays/minigames/pipe_cleaners
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x22E100
     vram: 0x801059A0
+    dir: overlays/ovl_27_pipe_cleaners
+    name: pipe_cleaners
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xAB0
     subsegments:
       - [0x22E100, c]
-      - [0x232620, bin] # data
+      - [0x232620, data, 22E100] #80109EC0
+      - [0x232850, .rodata, 22E100] #8010A0F0
+      - {0x232A10, type: bss, vram: 0x8010A2B0, name: ovl_27_bss}
 
-  - dir: overlays/minigames/snowball_summit
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x232A10
     vram: 0x801059A0
+    dir: overlays/ovl_28_snowball_summit
+    name: snowball_summit
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xA20
     subsegments:
       - [0x232A10, c]
-      - [0x23C5C0, bin] # data
+      - [0x23C5C0, data, 232A10] #8010F550
+      - [0x23C6A0, .rodata, 232A10] #8010F630
+      - {0x23C8F0, type: bss, vram: 0x8010F880, name: ovl_28_bss}
 
-  - dir: overlays/minigames/all_fired_up
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x23C8F0
     vram: 0x801059A0
+    dir: overlays/ovl_29_all_fired_up
+    name: all_fired_up
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A0
     subsegments:
       - [0x23C8F0, c]
-      - [0x240880, bin] # data
+      - [0x240880, data, 23C8F0] #80109930
+      - [0x2409C0, .rodata, 23C8F0] #80109A70
+      - {0x240A10, type: bss, vram: 0x80109AC0, name: ovl_29_bss}
 
-  - dir: overlays/minigames/stacked_deck
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x240A10
     vram: 0x801059A0
+    dir: overlays/ovl_2A_stacked_deck
+    name: stacked_deck
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A90
     subsegments:
       - [0x240A10, c]
-      - [0x24A300, bin] # data
+      - [0x24A300, data, 240A10] #8010F290
+      - [0x24A400, .rodata, 240A10] #8010F390
+      - {0x24A760, type: bss, vram: 0x8010F6F0, name: ovl_2A_bss}
 
-  - dir: overlays/minigames/three_door_monty
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x24A760
     vram: 0x801059A0
+    dir: overlays/ovl_2B_three_door_monty
+    name: three_door_monty
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A30
     subsegments:
       - [0x24A760, c]
-      - [0x251AD0, bin] # data
+      - [0x251AD0, data, 24A760] #8010CD10
+      - [0x251C20, .rodata, 24A760] #8010CE60
+      - {0x251FF0, type: bss, vram: 0x8010D230, name: ovl_2B_bss}
 
-  - dir: overlays/minigames/rockin_raceway
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x251FF0
     vram: 0x801059A0
+    dir: overlays/ovl_2C_rockin_raceway
+    name: rockin_raceway
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A0
     subsegments:
       - [0x251FF0, c]
-      - [0x25D530, bin] # data
+      - [0x25D530, data, 251FF0] #80110EE0
+      - [0x25DD90, .rodata, 251FF0] #80111740
+      - {0x25E110, type: bss, vram: 0x80111AC0, name: ovl_2C_bss}
 
-  - dir: overlays/minigames/merry_go_chomp
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x25E110
     vram: 0x801059A0
+    dir: overlays/ovl_2D_merry_go_chomp
+    name: merry_go_chomp
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1AD0
     subsegments:
       - [0x25E110, c]
-      - [0x2648B0, bin] # data
+      - [0x2648B0, data, 25E110] #8010C140
+      - [0x264A20, .rodata, 25E110] #8010C2B0
+      - {0x264B80, type: bss, vram: 0x8010C410, name: ovl_2D_bss}
 
-  - dir: overlays/minigames/slapdown
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x264B80
     vram: 0x801059A0
+    dir: overlays/ovl_2E_slapdown
+    name: slapdown
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A70
     subsegments:
       - [0x264B80, c]
-      - [0x269880, bin] # data
+      - [0x269880, data, 264B80] #8010A6A0
+      - [0x269AA0, .rodata, 264B80] #8010A8C0
+      - {0x269BF0, type: bss, vram: 0x8010AA10, name: ovl_2E_bss}
 
-  - dir: overlays/minigames/storm_chasers
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x269BF0
     vram: 0x801059A0
+    dir: overlays/ovl_2F_storm_chasers
+    name: storm_chasers
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2E0
     subsegments:
       - [0x269BF0, c]
-      - [0x270B00, bin] # data
+      - [0x270B00, data, 269BF0] #8010C8B0
+      - [0x270D60, .rodata, 269BF0] #8010CB10
+      - {0x270EF0, type: bss, vram: 0x8010CCA0, name: ovl_2F_bss}
 
-  - dir: overlays/minigames/eye_sore
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x270EF0
     vram: 0x801059A0
+    dir: overlays/ovl_30_eye_sore
+    name: eye_sore
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1D20
     subsegments:
       - [0x270EF0, c]
-      - [0x276160, bin] # data
+      - [0x276160, data, 270EF0] #8010AC10
+      - [0x276300, .rodata, 270EF0] #8010ADB0
+      - {0x276470, type: bss, vram: 0x8010AF20, name: ovl_30_bss}
 
-  - dir: overlays/minigames/vine_with_me
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x276470
     vram: 0x801059A0
+    dir: overlays/ovl_31_vine_with_me
+    name: vine_with_me
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x3110
     subsegments:
       - [0x276470, c]
-      - [0x282620, bin] # data
+      - [0x282620, data, 276470] #80111B50
+      - [0x282780, .rodata, 276470] #80111CB0
+      - {0x283060, type: bss, vram: 0x80112590, name: ovl_31_bss}
 
-  - dir: overlays/minigames/popgun_pickoff
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x283060
     vram: 0x801059A0
+    dir: overlays/ovl_32_popgun_pickoff
+    name: popgun_pickoff
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1310
     subsegments:
       - [0x283060, c]
-      - [0x289C50, bin] # data
+      - [0x289C50, data, 283060] #8010C590
+      - [0x289F60, .rodata, 283060] #8010C8A0
+      - {0x28A290, type: bss, vram: 0x8010CBD0, name: ovl_32_bss}
 
-  - dir: overlays/minigames/end_of_the_line
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x28A290
     vram: 0x801059A0
+    dir: overlays/ovl_33_end_of_the_line
+    name: end_of_the_line
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xB0
     subsegments:
       - [0x28A290, c]
-      - [0x290E70, c]
-      - [0x290E90, bin] # data
+      - [0x290E90, data, 28A290] #8010C5A0
+      - [0x290FD0, .rodata, 28A290] #8010C6E0
+      - {0x291020, type: bss, vram: 0x8010C730, name: ovl_33_bss}
 
-  - dir: overlays/minigames/bowser_toss
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x291020
     vram: 0x801059A0
+    dir: overlays/ovl_34_bowser_toss
+    name: bowser_toss
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x90
     subsegments:
       - [0x291020, c]
-      - [0x29A7D0, bin] # data
+      - [0x29A7D0, data, 291020] #8010F150
+      - [0x29ABB0, .rodata, 291020] #8010F530
+      - {0x29B1D0, type: bss, vram: 0x8010FB50, name: ovl_34_bss}
 
-  - dir: overlays/minigames/baby_bowser_bonkers
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x29B1D0
     vram: 0x801059A0
+    dir: overlays/ovl_35_baby_bowser_bonkers
+    name: baby_bowser_bonkers
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x130
     subsegments:
       - [0x29B1D0, c]
-      - [0x2A0C30, bin] # data
+      - [0x2A0C30, data, 29B1D0] #8010B400
+      - [0x2A1180, .rodata, 29B1D0] #8010B950
+      - {0x2A1430, type: bss, vram: 0x8010BC00, name: ovl_35_bss}
 
-  - dir: overlays/minigames/motor_rooter
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2A1430
     vram: 0x801059A0
+    dir: overlays/ovl_36_motor_rooter
+    name: motor_rooter
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x2A1430, c]
-      - [0x2A9850, c]
-      - [0x2ACFE0, bin] # data
+      - [0x2ACFE0, data, 2A1430] #80111550
+      - [0x2AF140, .rodata, 2A1430] #801136B0
+      - {0x2AF250, type: bss, vram: 0x801137C0, name: ovl_36_bss}
 
-  - dir: overlays/minigames/silly_screws
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2AF250
     vram: 0x801059A0
+    dir: overlays/ovl_37_silly_screws
+    name: silly_screws
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x20
     subsegments:
       - [0x2AF250, c]
-      - [0x2B4B20, c]
-      - [0x2B56D0, bin] # data
+      - [0x2B56D0, data, 2AF250] #8010BE20
+      - [0x2B5700, .rodata, 2AF250] #8010BE50
+      - {0x2B5830, type: bss, vram: 0x8010BF80, name: ovl_37_bss}
 
-  - dir: overlays/minigames/crowd_cover
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2B5830
     vram: 0x801059A0
+    dir: overlays/ovl_38_crowd_cover
+    name: crowd_cover
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xA70
     subsegments:
       - [0x2B5830, c]
-      - [0x2BC550, bin] # data
+      - [0x2BC550, data, 2B5830] #8010C6C0
+      - [0x2BC930, .rodata, 2B5830] #8010CAA0
+      - {0x2BCE10, type: bss, vram: 0x8010CF80, name: ovl_38_bss}
 
-  - dir: overlays/minigames/tick_tock_hop
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2BCE10
     vram: 0x801059A0
+    dir: overlays/ovl_39_tick_tock_hop
+    name: tick_tock_hop
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x2BCE10, c]
-      - [0x2C0E70, c]
-      - [0x2C5910, bin] # data
+      - [0x2C5910, data, 2BCE10] #8010E4A0
+      - [0x2C5B10, .rodata, 2BCE10] #8010E6A0
+      - {0x2C5B50, type: bss, vram: 0x8010E6E0, name: ovl_39_bss}
 
-  - dir: overlays/minigames/fowl_play
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2C5B50
     vram: 0x801059A0
+    dir: overlays/ovl_3A_fowl_play
+    name: fowl_play
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x240
     subsegments:
       - [0x2C5B50, c]
-      - [0x2CE950, bin] # data
+      - [0x2CE950, data, 2C5B50] #8010E7A0
+      - [0x2CED20, .rodata, 2C5B50] #8010EB70
+      - {0x2CF3B0, type: bss, vram: 0x8010F200, name: ovl_3A_bss}
 
-  - dir: overlays/minigames/winners_wheel
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2CF3B0
     vram: 0x801059A0
+    dir: overlays/ovl_3B_winners_wheel
+    name: winners_wheel
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x70
     subsegments:
       - [0x2CF3B0, c]
-      - [0x2D3C70, bin] # data
+      - [0x2D3C70, data, 2CF3B0] #8010A260
+      - [0x2D3CE0, .rodata, 2CF3B0] #8010A2D0
+      - {0x2D3E70, type: bss, vram: 0x8010A460, name: ovl_3B_bss}
 
-  - dir: overlays/minigames/hey_batter_batter
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2D3E70
     vram: 0x801059A0
+    dir: overlays/ovl_3C_hey_batter_batter
+    name: hey_batter_batter
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xA0
     subsegments:
       - [0x2D3E70, c]
-      - [0x2D8030, bin] # data
+      - [0x2D8030, data, 2D3E70] #80109B60
+      - [0x2D8270, .rodata, 2D3E70] #80109DA0
+      - {0x2D8370, type: bss, vram: 0x80109EA0, name: ovl_3C_bss}
 
-  - dir: overlays/minigames/bobbing_bow_loons
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2D8370
     vram: 0x801059A0
+    dir: overlays/ovl_3D_bobbing_bow_loons
+    name: bobbing_bow_loons
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x70
     subsegments:
       - [0x2D8370, c]
-      - [0x2DC0F0, bin] # data
+      - [0x2DC0F0, data, 2D8370] #80109720
+      - [0x2DC1A0, .rodata, 2D8370] #801097D0
+      - {0x2DC4D0, type: bss, vram: 0x80109B00, name: ovl_3D_bss}
 
-  - dir: overlays/minigames/dorrie_dip
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2DC4D0
     vram: 0x801059A0
+    dir: overlays/ovl_3E_dorrie_dip
+    name: dorrie_dip
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x80
     subsegments:
       - [0x2DC4D0, c]
-      - [0x2E0B70, bin] # data
+      - [0x2E0B70, data, 2DC4D0] #8010A040
+      - [0x2E0BA0, .rodata, 2DC4D0] #8010A070
+      - {0x2E0D20, type: bss, vram: 0x8010A1F0, name: ovl_3E_bss}
 
-  # Swinging With Sharks
-  - dir: overlays/minigames/swinging_with_sharks
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2E0D20
     vram: 0x801059A0
-    subsegments:
-      - [0x2E0D20, c,"swinging_with_sharks"]
-      - [0x2E6060, bin] # data
-
-  - dir: overlays/minigames/swing_n_swipe
-    type: code
-    overlay: True
+    dir: overlays/ovl_3F_swinging_with_sharks
+    name: swinging_with_sharks
     exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x360
+    subsegments:
+      - [0x2E0D20, c]
+      - [0x2E6060, data, 2E0D20] #8010ACE0
+      - [0x2E6AF0, .rodata, 2E0D20] #8010B770
+      - {0x2E6BE0, type: bss, vram: 0x8010B860, name: ovl_3F_bss}
+
+  - type: code
     start: 0x2E6BE0
     vram: 0x801059A0
+    dir: overlays/ovl_40_swing_n_swipe
+    name: swing_n_swipe
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x150
     subsegments:
       - [0x2E6BE0, c]
-      - [0x2ECF70, bin] # data
+      - [0x2ECF70, data, 2E6BE0] #8010BD30
+      - [0x2ED150, .rodata, 2E6BE0] #8010BF10
+      - {0x2ED2D0, type: bss, vram: 0x8010C090, name: ovl_40_bss}
 
-  - dir: overlays/minigames/stardust_battle
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2ED2D0
     vram: 0x801059A0
+    dir: overlays/ovl_41_stardust_battle
+    name: stardust_battle
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2A0
     subsegments:
       - [0x2ED2D0, c]
-      - [0x2FB5E0, bin] # data
+      - [0x2FB5E0, data, 2ED2D0] #80113CB0
+      - [0x2FBA30, .rodata, 2ED2D0] #80114100
+      - {0x2FC270, type: bss, vram: 0x80114940, name: ovl_41_bss}
 
-  - dir: overlays/minigames/game_guys_roulette
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x2FC270
     vram: 0x801059A0
+    dir: overlays/ovl_42_game_guys_roulette
+    name: game_guys_roulette
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x440
     subsegments:
       - [0x2FC270, c]
-      - [0x2FF5F0, c]
-      - [0x300F10, bin] # data
+      - [0x300F10, data, 2FC270] #8010A640
+      - [0x301000, .rodata, 2FC270] #8010A730
+      - {0x3010E0, type: bss, vram: 0x8010A810, name: ovl_42_bss}
 
-  - dir: overlays/minigames/game_guys_lucky_7
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3010E0
     vram: 0x801059A0
+    dir: overlays/ovl_43_game_guys_lucky_7
+    name: game_guys_lucky_7
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x330
     subsegments:
       - [0x3010E0, c]
-      - [0x306F70, c]
-      - [0x308890, bin] # data
+      - [0x308890, data, 3010E0] #8010D150
+      - [0x308A50, .rodata, 3010E0] #8010D310
+      - {0x308D10, type: bss, vram: 0x8010D5D0, name: ovl_43_bss}
 
-  - dir: overlays/minigames/game_guys_magic_boxes
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x308D10
     vram: 0x801059A0
+    dir: overlays/ovl_44_game_guys_magic_boxes
+    name: game_guys_magic_boxes
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x540
     subsegments:
       - [0x308D10, c]
-      - [0x30DC30, c]
-      - [0x30F550, bin] # data
+      - [0x30F550, data, 308D10] #8010C1E0
+      - [0x30F600, .rodata, 308D10] #8010C290
+      - {0x30F940, type: bss, vram: 0x8010C5D0, name: ovl_44_bss}
 
-  - dir: overlays/minigames/game_guys_sweet_surprise
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x30F940
     vram: 0x801059A0
+    dir: overlays/ovl_45_game_guys_sweet_surprise
+    name: game_guys_sweet_surprise
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2B0
     subsegments:
       - [0x30F940, c]
-      - [0x3151F0, c]
-      - [0x316B10, bin] # data
+      - [0x316B10, data, 30F940] #8010CB70
+      - [0x316C30, .rodata, 30F940] #8010CC90
+      - {0x316DF0, type: bss, vram: 0x8010CE50, name: ovl_45_bss}
 
-  - dir: overlays/minigames/dizzy_dinghies
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x316DF0
     vram: 0x801059A0
+    dir: overlays/ovl_46_dizzy_dinghies
+    name: dizzy_dinghies
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1F0
     subsegments:
       - [0x316DF0, c]
-      - [0x31AB90, bin] # data
+      - [0x31AB90, data, 316DF0] #80109740
+      - [0x31B300, .rodata, 316DF0] #80109EB0
+      - {0x31B3B0, type: bss, vram: 0x80109F60, name: ovl_46_bss}
 
-  - dir: overlays/wrapper1
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x31B3B0
     vram: 0x801059A0
-    subsegments:
-      - [0x31B3B0, c,"overlay71_main"]
-      - [0x31B3E0, c,"overlay71"]
-      - [0x31B4F0, data, "overlay71_main"]
-
-  # Chilly Waters
-  - dir: overlays/board_chillywaters
-    type: code
-    overlay: True
+    dir: overlays/ovl_47_name
+    name: name_47
     exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x000
+    subsegments:
+      - [0x31B3B0, c]
+      - [0x31B4F0, data, 31B3B0] #80105AE0
+      - {0x31B510, type: bss, vram: 0x80105B00, name: ovl_47_bss}
+
+  - type: code
     start: 0x31B510
     vram: 0x801059A0
-    subsegments:
-      - [0x31B510, c,"chillywaters_main"]
-      - [0x31B540, c,"chillywaters"]
-      - [0x31B9F0, c,"chillywaters2"]
-      - [0x332DC0, data, "chillywaters_main"]
-      - [0x332DF0, data, "chillywaters2"]
-      # - [0x335440, rodata, "chillywaters2"]
-
-  # Deep Bloober Sea
-  - dir: overlays/board_deepbloobersea
-    type: code
-    overlay: True
+    dir: overlays/ovl_48_ChillyWaters
+    name: ChillyWaters
     exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x150
+    subsegments:
+      - [0x31B510, c]
+      - [0x31B540, c]
+      - [0x31B9F0, c]
+      - [0x332DC0, .data, 31B510] #8011D250
+      - [0x332DF0, data, 31B9F0]
+      - [0x3354B0, .rodata, 31B9F0] #8011F940
+      - {0x3355E0, type: bss, vram: 0x8011FA70, name: ovl_48_bss}
+
+  - type: code
     start: 0x3355E0
     vram: 0x801059A0
+    dir: overlays/ovl_49_DeepBlooberSea
+    name: DeepBlooberSea
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x140
     subsegments:
       - [0x3355E0, c]
       - [0x335610, c]
-      - [0x34C270, bin] # data
+      - [0x34C270, .data, 3355E0] #8011C630
+      - [0x34C2A0, data, 335610] #335610
+      - [0x34E7A0, .rodata, 335610] #8011EB60
+      - {0x34E810, type: bss, vram: 0x8011EBD0, name: ovl_49_bss}
 
-  # Spiny Desert
-  - dir: overlays/board_spinydesert
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x34E810
     vram: 0x801059A0
-    subsegments:
-      - [0x34E810, c,"spinydesert_main"]
-      - [0x34E840, c,"spinydesert"]
-      # Possible split at 0x34EB90 if similar to Chilly Waters.
-      - [0x364F50, data, "spinydesert_main"]
-      - [0x364F80, bin] # data
-
-  # Woody Woods
-  - dir: overlays/board_woodywoods
-    type: code
-    overlay: True
+    dir: overlays/ovl_4A_SpinyDesert
+    name: SpinyDesert
     exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x150
+    subsegments:
+      - [0x34E810, c]
+      - [0x34E840, c]
+      - [0x364F50, .data, 34E810] #8011C0E0
+      - [0x364F80, data, 34E840]
+      - [0x367780, .rodata, 34E840] #8011E910
+      - {0x367930, type: bss, vram: 0x8011EAC0, name: ovl_4A_bss}
+
+  - type: code
     start: 0x367930
     vram: 0x801059A0
+    dir: overlays/ovl_4B_WoodyWoods
+    name: WoodyWoods
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x130
     subsegments:
       - [0x367930, c]
       - [0x367960, c]
-      - [0x37D6A0, bin] # data
+      - [0x37D6A0, .data, 367930] #8011B710
+      - [0x37D6D0, data, 367960] #8011B710
+      - [0x37FDD0, .rodata, 367960] #8011DE40
+      - {0x37FF80, type: bss, vram: 0x8011DFF0, name: ovl_4B_bss}
 
-  # Creepy Cavern
-  - dir: overlays/board_creepycavern
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x37FF80
     vram: 0x801059A0
+    dir: overlays/ovl_4C_CreepyCavern
+    name: CreepyCavern
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x160
     subsegments:
       - [0x37FF80, c]
       - [0x37FFB0, c]
-      - [0x3975F0, bin] # data
+      - [0x3975F0, .data, 37FF80] #8011D010
+      - [0x397620, data, 37FFB0]
+      - [0x39AC70, .rodata, 37FFB0] #80120690
+      - {0x39AD20, type: bss, vram: 0x80120740, name: ovl_4C_bss}
 
-  # Waluigi's Island
-  - dir: overlays/board_waluigisisland
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x39AD20
     vram: 0x801059A0
+    dir: overlays/ovl_4D_WaluigisIsland
+    name: WaluigisIsland
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x140
     subsegments:
       - [0x39AD20, c]
       - [0x39AD50, c]
-      - [0x3B08D0, bin] # data
+      - [0x3B08D0, .data, 39AD20] #8011B550
+      - [0x3B0900, data, 39AD50]
+      - [0x3B3460, .rodata, 39AD50] #8011E0E0
+      - {0x3B35F0, type: bss, vram: 0x8011E270, name: ovl_4D_bss}
 
-  - dir: overlays/board_rulesmap
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3B35F0
     vram: 0x801059A0
+    dir: overlays/ovl_4E_name
+    name: name_4E
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x80
     subsegments:
       - [0x3B35F0, c]
-      - [0x3B3620, c]
-      - [0x3B9420, bin] # data
+      - [0x3B9420, data, 3B35F0] #8010B7D0
+      - [0x3B9590, .rodata, 3B35F0] #8010B940
+      - {0x3B9670, type: bss, vram: 0x8010BA20, name: ovl_4E_bss}
 
-  - dir: overlays/results_cutscene
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3B9670
     vram: 0x801059A0
+    dir: overlays/ovl_4F_name
+    name: name_4F
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xE0
     subsegments:
       - [0x3B9670, c]
-      - [0x3BFA00, c]
-      - [0x3C20B0, bin] # data
+      - [0x3C20B0, data, 3B9670] #8010E3E0
+      - [0x3C26A0, .rodata, 3B9670] #8010E9D0
+      - {0x3C27C0, type: bss, vram: 0x8010EAF0, name: ovl_4F_bss}
 
-  - dir: overlays/bowser_event
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3C27C0
     vram: 0x801059A0
+    dir: overlays/ovl_50_BowserEvent
+    name: BowserEvent
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x80
     subsegments:
       - [0x3C27C0, c]
-      - [0x3C6170, bin] # data
+      - [0x3C6170, data, 3C27C0] #80109350
+      - [0x3C62A0, .rodata, 3C27C0] #80109480
+      - {0x3C6310, type: bss, vram: 0x801094F0, name: ovl_50_bss}
 
-  - dir: overlays/last_5_turns
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3C6310
     vram: 0x801059A0
+    dir: overlays/ovl_51_name
+    name: name_51
+    subalign: 16
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x3C6310, c]
-      - [0x3C7DF0, bin] # data
+      - [0x3C7DF0, data, 3C6310] #80107480
+      - [0x3C7E80, .rodata, 3C6310]
+      - {0x3C7EC0, type: bss, vram: 0x80107550, name: ovl_51_bss}
 
-  - dir: overlays/mushroom_genie
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3C7EC0
     vram: 0x801059A0
+    dir: overlays/ovl_52_name
+    name: name_52
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xF0
     subsegments:
       - [0x3C7EC0, c]
-      - [0x3CA5F0, bin] # data
+      - [0x3CA5F0, data, 3C7EC0] #801080D0
+      - [0x3CA650, .rodata, 3C7EC0] #80108130
+      - {0x3CA800, type: bss, vram: 0x801082E0, name: ovl_52_bss}
 
-  - dir: overlays/chilly_waters_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3CA800
     vram: 0x801059A0
+    dir: overlays/ovl_53_name
+    name: name_53
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x20
     subsegments:
       - [0x3CA800, c]
-      - [0x3CDBD0, bin] # data
+      - [0x3CDBD0, data, 3CA800] #80108D70
+      - [0x3CDDE0, .rodata, 3CA800]
+      - {0x3CDEC0, type: bss, vram: 0x80109060, name: ovl_53_bss}
 
-  - dir: overlays/rule_map_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3CDEC0
     vram: 0x801059A0
+    dir: overlays/ovl_54_name
+    name: name_54
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x3CDEC0, c]
-      - [0x3CFAE0, bin] # data
+      - [0x3CFAE0, data, 3CDEC0] #801075C0
+      - [0x3CFC60, .rodata, 3CDEC0] #80107740
+      - {0x3CFC80, type: bss, vram: 0x80107760, name: ovl_54_bss}
 
-  - dir: overlays/detailed_results_main
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3CFC80
     vram: 0x801059A0
+    dir: overlays/ovl_55_name
+    name: name_55
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xB0
     subsegments:
       - [0x3CFC80, c]
-      - [0x3D3A90, bin] # data
+      - [0x3D3A90, data, 3CFC80] #801097B0
+      - [0x3D3B10, .rodata, 3CFC80] #80109830
+      - {0x3D3C80, type: bss, vram: 0x801099A0, name: ovl_55_bss}
 
-  # Character Animation Test
-  - dir: overlays/test_anim1
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3D3C80
     vram: 0x801059A0
-    subsegments:
-      - [0x3D3C80, c, test_anim1]
-      - [0x3D5160, bin, test_anim1] # data
-
-  - dir: overlays/test_anim2
-    type: code
-    overlay: True
+    dir: overlays/ovl_56_name
+    name: name_56
     exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x190
+    subsegments:
+      - [0x3D3C80, c]
+      - [0x3D5160, data, 3D3C80] #80106E80
+      - [0x3D5440, .rodata, 3D3C80] #80107160
+      - {0x3D5C30, type: bss, vram: 0x80107950, name: ovl_56_bss}
+
+  - type: code
     start: 0x3D5C30
     vram: 0x801059A0
+    dir: overlays/ovl_57_name
+    name: name_57
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1A0
     subsegments:
       - [0x3D5C30, c]
-      - [0x3D7040, bin] # data
+      - [0x3D7040, data, 3D5C30] #80106DB0
+      - [0x3D70A0, .rodata, 3D5C30] #80106E10
+      - {0x3D7150, type: bss, vram: 0x80106EC0, name: ovl_57_bss}
 
-  # Intro Screens
-  - dir: overlays/intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3D7150
     vram: 0x801059A0
-    subsegments:
-      - [0x3D7150, c,"intro_main"]
-      - [0x3D7180, c,"intro"]
-      - [0x3D7690, data, "intro_main"]
-      - [0x3D76B0, bin, "intro"]
-      #- [auto, all_bss]
-
-  - dir: overlays/test_save1
-    type: code
-    overlay: True
+    dir: overlays/ovl_58_name
+    name: name_58
     exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x10
+    subsegments:
+      - [0x3D7150, c]
+      - [0x3D7690, data, 3D7150] #80105EE0
+      - {0x3D76C0, type: bss, vram: 0x80105F10, name: ovl_58_bss}
+
+  - type: code
     start: 0x3D76C0
     vram: 0x801059A0
+    dir: overlays/ovl_59_name
+    name: name_59
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x30
     subsegments:
       - [0x3D76C0, c]
-      - [0x3D8680, bin] # data
+      - [0x3D8680, data, 3D76C0] #80106960
+      - [0x3D86B0, .rodata, 3D76C0] #80106990
+      - {0x3D8930, type: bss, vram: 0x80106C10, name: ovl_59_bss}
 
-  - dir: overlays/gate_guy_intro1
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3D8930
     vram: 0x801059A0
+    dir: overlays/ovl_5A_gate_guy_intro1
+    name: gate_guy_intro1
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0
     subsegments:
       - [0x3D8930, c]
       - [0x3D8960, c]
-      - [0x3D8A70, bin] # data
+      - [0x3D8A70, .data, 3D8930] #80105AE0
+      - [0x3D8A90, data, 3D8960]
+      - {0x3D8A90, type: bss, vram: 0x80105B00, name: ovl_5A_bss}
 
-  - dir: overlays/board_gate_guy
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3D8A90
     vram: 0x801059A0
+    dir: overlays/ovl_5B_board_gate_guy
+    name: board_gate_guy
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x50
     subsegments:
       - [0x3D8A90, c]
       - [0x3D8AC0, c]
-      - [0x3EB7D0, bin] # data
+      - [0x3EB7D0, .data, 3D8A90] #801186E0
+      - [0x3EB800, data, 3D8AC0]
+      - [0x3EBF50, .rodata, 3D8AC0] #80118E60
+      - {0x3EC560, type: bss, vram: 0x80119470, name: ovl_5B_bss}
 
-  - dir: overlays/board_arrowhead_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3EC560
     vram: 0x801059A0
+    dir: overlays/ovl_5C_board_arrowhead_intro
+    name: board_arrowhead_intro
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x3EC560, c]
       - [0x3EC590, c]
-      - [0x3FD130, bin] # data
+      - [0x3FD130, .data, 3EC560] #80116570
+      - [0x3FD160, data, 3EC590]
+      - [0x3FDC30, .rodata, 3EC590] #80117070
+      - {0x3FE1C0, type: bss, vram: 0x80117600, name: ovl_5C_bss}
 
-  - dir: overlays/board_pipesqueak_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x3FE1C0
     vram: 0x801059A0
+    dir: overlays/ovl_5D_board_pipesqueak_intro
+    name: board_pipesqueak_intro
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x50
     subsegments:
       - [0x3FE1C0, c]
       - [0x3FE1F0, c]
-      - [0x40FC20, bin] # data
+      - [0x40FC20, .data, 3FE1C0] #80117400
+      - [0x40FC50, data, 3FE1F0]
+      - [0x410340, .rodata, 3FE1F0] #80117B20
+      - {0x4108E0, type: bss, vram: 0x801180C0, name: ovl_5D_bss}
 
-  - dir: overlays/board_blowhard_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4108E0
     vram: 0x801059A0
+    dir: overlays/ovl_5E_board_blowhard_intro
+    name: board_blowhard_intro
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x4108E0, c]
       - [0x410910, c]
-      - [0x424BB0, bin] # data
+      - [0x424BB0, .data, 4108E0] #80119C70
+      - [0x424BE0, data, 410910]
+      - [0x426370, .rodata, 410910] #8011B430
+      - {0x426420, type: bss, vram: 0x8011B4E0, name: ovl_5E_bss}
 
-  - dir: overlays/board_mr_mover_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x426420
     vram: 0x801059A0
+    dir: overlays/ovl_5F_name
+    name: name_5F
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x426420, c]
-      - [0x426450, c]
-      - [0x436100, bin] # data
+      - [0x436100, data, 426420] #80115680
+      - [0x4368F0, .rodata, 426420] #80115E70
+      - {0x436E20, type: bss, vram: 0x801163A0, name: ovl_5F_bss}
 
-  - dir: overlays/board_backtrack_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x436E20
     vram: 0x801059A0
+    dir: overlays/ovl_60_name
+    name: name_60
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x50
     subsegments:
       - [0x436E20, c]
-      - [0x436E50, c]
-      - [0x445900, bin] # data
+      - [0x445900, data, 436E20] #80114480
+      - [0x445C20, .rodata, 436E20] #801147A0
+      - {0x4461B0, type: bss, vram: 0x80114D30, name: ovl_60_bss}
 
-  - dir: overlays/battle_rules_map_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4461B0
     vram: 0x801059A0
+    dir: overlays/ovl_61_name
+    name: name_61
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x4461B0, c]
-      - [0x4461E0, c]
-      - [0x4551C0, bin] # data
+      - [0x4551C0, data, 4461B0] #801149B0
+      - [0x455380, .rodata, 4461B0] #80114B70
+      - {0x4554C0, type: bss, vram: 0x80114CB0, name: ovl_61_bss}
 
-  - dir: overlays/results
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4554C0
     vram: 0x801059A0
+    dir: overlays/ovl_62_name
+    name: name_62
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xF0
     subsegments:
       - [0x4554C0, c]
-      - [0x45A700, c]
-      - [0x45CDB0, bin] # data
+      - [0x45CDB0, data, 4554C0] #8010D290
+      - [0x45D260, .rodata, 4554C0] #8010D740
+      - {0x45D380, type: bss, vram: 0x8010D860, name: ovl_62_bss}
 
-  - dir: overlays/detailed_results_battle
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x45D380
     vram: 0x801059A0
+    dir: overlays/ovl_63_name
+    name: name_63
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x90
     subsegments:
       - [0x45D380, c]
-      - [0x460610, bin] # data
+      - [0x460610, data, 45D380] #80108C30
+      - [0x460680, .rodata, 45D380] #80108CA0
+      - {0x460790, type: bss, vram: 0x80108DB0, name: ovl_63_bss}
 
-  - dir: overlays/gate_guy_intro2
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x460790
     vram: 0x801059A0
+    dir: overlays/ovl_64_name
+    name: name_64
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x20
     subsegments:
       - [0x460790, c]
-      - [0x463FF0, bin] # data
+      - [0x463FF0, data, 460790] #80109200
+      - [0x4642E0, .rodata, 460790] #801094F0
+      - {0x464360, type: bss, vram: 0x80109570, name: ovl_64_bss}
 
-  - dir: overlays/rules_map_intro
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x464360
     vram: 0x801059A0
+    dir: overlays/ovl_65_name
+    name: name_65
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x40
     subsegments:
       - [0x464360, c]
-      - [0x4672F0, bin] # data
+      - [0x4672F0, data, 464360] #80108930
+      - [0x467560, .rodata, 464360] #80108BA0
+      - {0x4675D0, type: bss, vram: 0x80108C10, name: ovl_65_bss}
 
-  - dir: overlays/test_save2
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4675D0
     vram: 0x801059A0
+    dir: overlays/ovl_66_name
+    name: name_66
+    subalign: 16
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x200
     subsegments:
       - [0x4675D0, c]
       - [0x467600, c]
-      - [0x468310, bin] # data
+      - [0x468310, .data, 4675D0] #801066E0
+      - [0x468320, .data, 467600]
+      - [0x468340, .rodata, 467600] #80106710
+      - {0x4684F0, type: bss, vram: 0x801068C0, name: ovl_66_bss}
 
-  - dir: overlays/overlay103
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4684F0
     vram: 0x801059A0
+    dir: overlays/ovl_67_name
+    name: name_67
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x10
     subsegments:
       - [0x4684F0, c]
-      - [0x468520, c]
-      - [0x468A70, bin] # data
+      - [0x468A70, data, 4684F0] #80105F20
+      - {0x468A90, type: bss, vram: 0x80105F40, name: ovl_67_bss}
 
-  - dir: overlays/overlay104
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x468A90
     vram: 0x801059A0
+    dir: overlays/ovl_68_name
+    name: name_68
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x110
     subsegments:
       - [0x468A90, c]
-      - [0x468AC0, c]
-      - [0x46BB50, c]
-      - [0x46CB70, bin] # data
+      - [0x46CB70, data, 468A90] #80109A80
+      - [0x46CBB0, .rodata, 468A90] #80109AC0
+      - {0x46CC10, type: bss, vram: 0x80109B20, name: ovl_68_bss}
 
-  - dir: overlays/battle_room
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x46CC10
     vram: 0x801059A0
+    dir: overlays/ovl_69_name
+    name: name_69
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1260
     subsegments:
       - [0x46CC10, c]
-      - [0x473130, c]
-      - [0x479470, c]
-      - [0x47D880, c]
-      - [0x47DD90, c]
-      - [0x480120, bin] # data
+      - [0x480120, data, 46CC10] #80118EB0
+      - [0x481670, .rodata, 46CC10] #8011A400
+      - {0x481970, type: bss, vram: 0x8011A700, name: ovl_69_bss}
 
-  - dir: overlays/chance_time
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x481970
     vram: 0x801059A0
+    dir: overlays/ovl_6A_name
+    name: name_6A
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x280
     subsegments:
       - [0x481970, c]
-      - [0x4822F0, c]
-      - [0x4832D0, c]
-      - [0x487F50, c]
-      - [0x48BAB0, bin] # data
+      - [0x48BAB0, data, 481970] #8010FAE0
+      - [0x48BBF0, .rodata, 481970] #8010FC20
+      - {0x48BE30, type: bss, vram: 0x8010FE60, name: ovl_6A_bss}
 
-  - dir: overlays/story_results_strength
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x48BE30
     vram: 0x801059A0
+    dir: overlays/ovl_6B_name
+    name: name_6B
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x410
     subsegments:
       - [0x48BE30, c]
-      - [0x48D950, c]
-      - [0x492250, c]
-      - [0x496990, c]
-      - [0x49AF10, bin] # data
+      - [0x49AF10, data, 48BE30] #80114A80
+      - [0x49B0D0, .rodata, 48BE30] #80114C40
+      - {0x49BD40, type: bss, vram: 0x801158B0, name: ovl_6B_bss}
 
-  - dir: overlays/story_results_peach
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x49BD40
     vram: 0x801059A0
+    dir: overlays/ovl_6C_name
+    name: name_6C
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x450
     subsegments:
       - [0x49BD40, c]
-      - [0x49DF30, c]
-      - [0x4A7540, c]
-      - [0x4AC200, c]
-      - [0x4B0E80, c]
-      - [0x4B1CC0, bin] # data
+      - [0x4B1CC0, data, 49BD40] #8011B920
+      - [0x4B2180, .rodata, 49BD40] #8011BDE0
+      - {0x4B29E0, type: bss, vram: 0x8011C640, name: ovl_6C_bss}
 
-  - dir: overlays/story_results_luigi
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4B29E0
     vram: 0x801059A0
+    dir: overlays/ovl_6D_name
+    name: name_6D
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x240
     subsegments:
       - [0x4B29E0, c]
-      - [0x4B4DC0, c]
-      - [0x4B9A30, c]
-      - [0x4C22A0, bin] # data
+      - [0x4C22A0, data, 4B29E0] #80115260
+      - [0x4C28C0, .rodata, 4B29E0] #80115880
+      - {0x4C2BD0, type: bss, vram: 0x80115B90, name: ovl_6D_bss}
 
-  - dir: overlays/story_results_110
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4C2BD0
     vram: 0x801059A0
+    dir: overlays/ovl_6E_name
+    name: name_6E
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2A0
     subsegments:
       - [0x4C2BD0, c]
-      - [0x4C47E0, c]
-      - [0x4C8050, c]
-      - [0x4CECF0, bin] # data
+      - [0x4CECF0, data, 4C2BD0] #80111AC0
+      - [0x4CEE40, .rodata, 4C2BD0] #80111C10
+      - {0x4CF350, type: bss, vram: 0x80112120, name: ovl_6E_bss}
 
-  - dir: overlays/story_results_111
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4CF350
     vram: 0x801059A0
+    dir: overlays/ovl_6F_name
+    name: name_6F
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x520
     subsegments:
       - [0x4CF350, c]
-      - [0x4D8E80, c]
-      - [0x4DE0E0, bin] # data
+      - [0x4DE0E0, data, 4CF350] #80114730
+      - [0x4DE250, .rodata, 4CF350] #801148A0
+      - {0x4DEB60, type: bss, vram: 0x801151B0, name: ovl_6F_bss}
 
-  # Mini-Game Instructions Screen
-  - dir: overlays/minigame_instructions
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4DEB60
     vram: 0x801059A0
+    dir: overlays/ovl_70_name
+    name: name_70
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1F0
     subsegments:
       - [0x4DEB60, c]
-      - [0x4E0630, c]
-      - [0x4E1510, c]
-      - [0x4E1CB0, c]
-      - [0x4E2670, c]
-      - [0x4E2C50, c]
-      - [0x4E3390, c]
-      - [0x4E4B50, c]
-      - [0x4E65C0, bin] # data
+      - [0x4E65C0, data, 4DEB60] #8010D400
+      - [0x4E6780, .rodata, 4DEB60] #8010D5C0
+      - {0x4E6DC0, type: bss, vram: 0x8010DC00, name: ovl_70_bss}
 
-  # Mini-Game Results Screen
-  - dir: overlays/minigame_results
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4E6DC0
     vram: 0x801059A0
+    dir: overlays/ovl_71_name
+    name: name_71
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x2F0
     subsegments:
       - [0x4E6DC0, c]
-      - [0x4E8F60, c]
-      - [0x4E9120, c]
-      - [0x4EB420, c]
-      - [0x4EBD50, c]
-      - [0x4EBF10, bin] # data
+      - [0x4EBF10, data, 4E6DC0] #8010AAF0
+      - [0x4EC0E0, .rodata, 4E6DC0] #8010ACC0
+      - {0x4EC1B0, type: bss, vram: 0x8010AD90, name: ovl_71_bss}
 
-  - dir: overlays/game_guy_results
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4EC1B0
     vram: 0x801059A0
+    dir: overlays/ovl_72_name
+    name: name_72
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x8A0
     subsegments:
       - [0x4EC1B0, c]
-      - [0x4ECDE0, c]
-      - [0x4EDCB0, c]
-      - [0x4F00D0, bin] # data
+      - [0x4F00D0, data, 4EC1B0] #801098C0
+      - [0x4F0170, .rodata, 4EC1B0] #80109960
+      - {0x4F01F0, type: bss, vram: 0x801099E0, name: ovl_72_bss}
 
-  - dir: overlays/battle_minigame_results
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4F01F0
     vram: 0x801059A0
+    dir: overlays/ovl_73_name
+    name: name_73
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x420
     subsegments:
       - [0x4F01F0, c]
-      - [0x4F1180, c]
-      - [0x4F36C0, bin] # data
+      - [0x4F36C0, data, 4F01F0] #80108E70
+      - [0x4F36F0, .rodata, 4F01F0] #80108EA0
+      - {0x4F3780, type: bss, vram: 0x80108F30, name: ovl_73_bss}
 
-  - dir: overlays/battle_results
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4F3780
     vram: 0x801059A0
+    dir: overlays/ovl_74_name
+    name: name_74
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x570
     subsegments:
       - [0x4F3780, c]
-      - [0x4F4980, c]
-      - [0x4F5AF0, c]
-      - [0x4F66B0, bin] # data
+      - [0x4F66B0, data, 4F3780] #801088D0
+      - [0x4F66D0, .rodata, 4F3780] #801088F0
+      - {0x4F6810, type: bss, vram: 0x80108A30, name: ovl_74_bss}
 
-  - dir: overlays/wrapper2
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4F6810
     vram: 0x801059A0
+    dir: overlays/ovl_75_name
+    name: name_75
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x000
     subsegments:
       - [0x4F6810, c]
-      - [0x4F69B0, bin] # data
+      - [0x4F69B0, .rodata, 4F6810] #80105B40
+      - {0x4F69F0, type: bss, vram: 0x80105B80, name: ovl_75_bss}
 
-  # Message Check
-  - dir: overlays/debug_message_check
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4F69F0
     vram: 0x801059A0
+    dir: overlays/ovl_76_name
+    name: name_76
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1D0
     subsegments:
       - [0x4F69F0, c]
-      - [0x4F7550, bin] # data
+      - [0x4F7550, data, 4F69F0] #80106500
+      - [0x4F7A30, .rodata, 4F69F0] #801069E0
+      - {0x4F7E90, type: bss, vram: 0x80106E40, name: ovl_76_bss}
 
-  # Castle Grounds
-  - dir: overlays/castle_grounds
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x4F7E90
     vram: 0x801059A0
+    dir: overlays/ovl_77_name
+    name: name_77
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x16E0
     subsegments:
       - [0x4F7E90, c]
-      - [0x4F7EC0, c]
-      - [0x4F8140, c]
-      - [0x501760, bin] # data
+      - [0x501760, data, 4F7E90] #8010F270
+      - [0x5018D0, .rodata, 4F7E90] #8010F3E0
+      - {0x501C00, type: bss, vram: 0x8010F710, name: ovl_77_bss}
 
-  # Configuring gameplay ("warp pipe" in MP1 terminology)
-  - dir: overlays/star_lift
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x501C00
     vram: 0x801059A0
+    dir: overlays/ovl_78_name
+    name: name_78
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1D0
     subsegments:
       - [0x501C00, c]
-      - [0x506F20, c]
-      - [0x508D50, c]
-      - [0x5092C0, c]
-      - [0x50B740, c]
-      - [0x513B70, c]
-      - [0x515670, bin] # data
+      - [0x515670, data, 501C00] #80119410
+      - [0x5167E0, .rodata, 501C00] #8011A580
+      - {0x516AE0, type: bss, vram: 0x8011A880, name: ovl_78_bss}
 
-  # Select save game screen
-  - dir: overlays/file_select
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x516AE0
     vram: 0x801059A0
+    dir: overlays/ovl_79_name
+    name: name_79
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1850
     subsegments:
       - [0x516AE0, c]
-      - [0x516B10, c]
-      - [0x516D30, c]
-      - [0x5238E0, bin] # data
+      - [0x5238E0, data, 516AE0] #801127A0
+      - [0x523B30, .rodata, 516AE0] #801129F0
+      - {0x523FD0, type: bss, vram: 0x80112E90, name: ovl_79_bss}
 
-  # Start Screen
-  - dir: overlays/start_screen
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x523FD0
     vram: 0x801059A0
+    dir: overlays/ovl_7A_name
+    name: name_7A
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x28C0
     subsegments:
       - [0x523FD0, c]
-      - [0x524000, c]
-      - [0x5242B0, c]
-      - [0x524820, c]
-      - [0x533180, bin] # data
+      - [0x533180, data, 523FD0] #80114B50
+      - [0x5332A0, .rodata, 523FD0] #80114C70
+      - {0x5334D0, type: bss, vram: 0x80114EA0, name: ovl_7A_bss}
 
-  - dir: overlays/inside_castle
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x5334D0
     vram: 0x801059A0
+    dir: overlays/ovl_7B_name
+    name: name_7B
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x1510
     subsegments:
       - [0x5334D0, c]
-      - [0x533500, c]
-      - [0x535A80, c]
-      - [0x53DCA0, c]
-      - [0x540FE0, bin] # data
+      - [0x540FE0, data, 5334D0] #801134B0
+      - [0x541550, .rodata, 5334D0] #80113A20
+      - {0x542220, type: bss, vram: 0x801146F0, name: ovl_7B_bss}
 
-  - dir: overlays/credits
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x542220
     vram: 0x801059A0
+    dir: overlays/ovl_7C_name
+    name: name_7C
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0xE0
     subsegments:
       - [0x542220, c]
-      - [0x5436A0, c]
-      - [0x543FC0, c]
-      - [0x544E70, c]
-      - [0x5486A0, c]
-      - [0x54CDB0, bin] # data
+      - [0x54CDB0, data, 542220] #80110530
+      - [0x54DA70, .rodata, 542220] #801111F0
+      - {0x54DD10, type: bss, vram: 0x80111490, name: ovl_7C_bss}
 
-  - dir: overlays/stamps
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  - type: code
     start: 0x54DD10
     vram: 0x801059A0
+    dir: overlays/ovl_7D_name
+    name: name_7D
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x60
     subsegments:
       - [0x54DD10, c]
-      - [0x54F360, c]
-      - [0x552C80, bin] # data
+      - [0x552C80, data, 54DD10] #8010A910
+      - [0x552F30, .rodata, 54DD10] #8010ABC0
+      - {0x552F50, type: bss, vram: 0x8010ABE0, name: ovl_7D_bss}
 
-  # - dir: overlays/overlay126
-  #   type: code
-  #   overlay: True
-  #   start: 0x552F50
-  #   vram: 0x801059A0
-  #   subsegments:
-  #     - [0x552F50, c]
-  #     - [0x552F50, bin] # data
-
-  - dir: overlays/test_menu2
-    type: code
-    overlay: True
-    exclusive_ram_id: minigame
+  #this segment is 0 in size, but we need it to populate _ovltbl correctly
+  - type: code
     start: 0x552F50
     vram: 0x801059A0
+    dir: overlays/ovl_7E_name
+    name: name_7E
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x000
     subsegments:
       - [0x552F50, c]
-      - [0x556240, bin] # data
+      - [0x552F50, data, 552F50] #801059A0
+      - {0x552F50, type: bss, vram: 0x801059A0, name: ovl_7E_bss}
 
-  - [0x00557620, bin, "bin_557620"]
+  - type: code
+    start: 0x552F50
+    vram: 0x801059A0
+    dir: overlays/ovl_7F_name
+    name: name_7F
+    exclusive_ram_id: minigame
+    symbol_name_format: $VRAM_$ROM_$SEG
+    bss_size: 0x220
+    subsegments:
+      - [0x552F50, c]
+      - [0x556240, data, 552F50] #80108C90
+      - {0x557620, type: bss, vram: 0x8010A070, name: ovl_7F_bss}
 
-  - [0x00557E20, bin, "bin_mainfs"]
-
-  - [0x01209850, bin, "bin_strings_jp"]
-  - [0x0121CAA0, bin, "bin_strings_en"]
-  - [0x012355C0, bin, "bin_strings_de"]
-  - [0x0124D440, bin, "bin_strings_fr"]
-  - [0x01261F90, bin, "bin_strings_it"]
-  - [0x012765F0, bin, "bin_strings_es"]
-
-  - [0x0128CC60, bin, "bin_hvq"]
-
-  - [0x01881C40, bin, "bin_audio_mbf0"]
-  - [0x01A56870, bin, "bin_audio_sbf0"]
-  - [0x01EFD040, bin, "bin_audio_fxd0"]
-  - [0x02000000]
+  - [0x557620, bin, unk_557620]
+  - [0x557E20, bin, mainfs]
+  - [0x1209850, bin, strings_jp]
+  - [0x121CAA0, bin, strings_en]
+  - [0x12355C0, bin, strings_de]
+  - [0x124D440, bin, strings_fr]
+  - [0x1261F90, bin, strings_it]
+  - [0x12765F0, bin, strings_es]
+  - [0x128CC60, bin, hvq_data]
+  - [0x1881C40, bin, audio_mbf0]
+  - [0x1A56870, bin, audio_sbf0]
+  - [0x1EFD040, bin, audio_fxd0]
+  - [0x2000000]

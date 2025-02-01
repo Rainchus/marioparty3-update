@@ -414,7 +414,8 @@ __rmonHitBreak = 0x800874A4;
 __rmonHitSpBreak = 0x80087580;
 __rmonHitCpuFault = 0x8008760C;
 rmonFindFaultedThreads = 0x80087638;
-
+__sqrtf = 0x80087B10; //rom:0x88710
+__sqrt = 0x80087B18; //rom:0x88718
 
 __osInitialize_autodetect = 0x8007F048;
 __osInitialize_emu = 0x8007F860;
@@ -522,7 +523,7 @@ guLookAtF = 0x80088210;
 guLookAt = 0x80079800;
 HuSqrtf = 0x800880E0;
 
-HuVecGetLengthSqr = 0x800880F4;
+multVecGetLengthSqr = 0x800880F0; //rom:0x88CF0
 HuVecGetLength = 0x80088120;
 HuVecNormalize = 0x80088150;
 HuVecDotProduct = 0x800881E0;
